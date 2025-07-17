@@ -1,0 +1,48 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"host/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 216,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : ".",
+			"paths" : 
+			[
+				{
+					"from" : "host/Clemens IIGS.app",
+					"to" : "Clemens IIGS.app/Contents/MacOS/Clemens IIGS"
+				}
+			],
+			"targetId" : "clemens_iigs::@cd6eabc83530c226c655",
+			"targetIndex" : 13,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "host",
+		"source" : "host"
+	}
+}

@@ -1,0 +1,135 @@
+------+------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+ Line | # File            Line | Line Type   | MX |  Reloc  | Size | Address   Object Code |  Source Code                                                      
+------+------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+    1 |  1 helloworld.s      1 | Directive   | ?? |         |   -1 | 00/FFFF               |             DSK   PRG.SYSTEM     
+    2 |  1 helloworld.s      2 | Directive   | ?? |         |   -1 | 00/FFFF               |             TYP   BIN            
+    3 |  1 helloworld.s      3 | Directive   | ?? |         |   -1 | 00/FFFF               |             mx    %11            
+    4 |  1 helloworld.s      4 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+    5 |  1 helloworld.s      5 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+    6 |  1 helloworld.s      6 | Directive   | ?? |         |   -1 | 00/FFFF               |             org   $2000          
+    7 |  1 helloworld.s      7 | Directive   | ?? |         |   -1 | 00/FFFF               |             xc                   
+    8 |  1 helloworld.s      8 | Directive   | ?? |         |   -1 | 00/FFFF               |             xc                   
+    9 |  1 helloworld.s      9 | Equivalence | ?? |         |   -1 | 00/FFFF               | PREAD       equ   $FB1E          
+   10 |  1 helloworld.s     10 | Equivalence | ?? |         |   -1 | 00/FFFF               | CLRSCR      equ   $FC58          
+   11 |  1 helloworld.s     11 | Equivalence | ?? |         |   -1 | 00/FFFF               | COUT        equ   $FDED          ; Apple II character out func.
+   12 |  1 helloworld.s     12 | Equivalence | ?? |         |   -1 | 00/FFFF               | COUTD       equ   $FDE2          
+   13 |  1 helloworld.s     13 | Equivalence | ?? |         |   -1 | 00/FFFF               | COUT1       EQU   $FDF0          
+   14 |  1 helloworld.s     14 | Equivalence | ?? |         |   -1 | 00/FFFF               | CTR         EQU   $08            
+   15 |  1 helloworld.s     15 | Equivalence | ?? |         |   -1 | 00/FFFF               | PTR         EQU   $06            
+   16 |  1 helloworld.s     16 | Equivalence | ?? |         |   -1 | 00/FFFF               | BASCLC      EQU   $FBC1          ; subroutine to position cursor
+   17 |  1 helloworld.s     17 | Equivalence | ?? |         |   -1 | 00/FFFF               | BASL        EQU   $28            
+   18 |  1 helloworld.s     18 | Equivalence | ?? |         |   -1 | 00/FFFF               | BASH        EQU   $29            
+   19 |  1 helloworld.s     19 | Equivalence | ?? |         |   -1 | 00/FFFF               | CV          EQU   $25            ; Cursor position
+   20 |  1 helloworld.s     20 | Equivalence | ?? |         |   -1 | 00/FFFF               | CH          EQU   $24            ;
+   21 |  1 helloworld.s     21 | Equivalence | ?? |         |   -1 | 00/FFFF               | WAIT        EQU   $FCA8          
+   22 |  1 helloworld.s     22 | Equivalence | ?? |         |   -1 | 00/FFFF               | CYCLE1      EQU   $2501          
+   23 |  1 helloworld.s     23 | Equivalence | ?? |         |   -1 | 00/FFFF               | CYCLE       EQU   $2500          
+   24 |  1 helloworld.s     24 | Equivalence | ?? |         |   -1 | 00/FFFF               | zpMsgAdr    EQU   $80            
+   25 |  1 helloworld.s     25 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   26 |  1 helloworld.s     26 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   27 |  1 helloworld.s     27 | Code        | ?? |         |   -1 | 00/FFFF : 00          | start       jsr   CLRSCR         
+   28 |  1 helloworld.s     28 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDX   #$00           
+   29 |  1 helloworld.s     29 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   $BF00          
+   30 |  1 helloworld.s     30 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             cmp   #$4c           
+   31 |  1 helloworld.s     31 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             beq   loopb          
+   32 |  1 helloworld.s     32 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   33 |  1 helloworld.s     33 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   34 |  1 helloworld.s     34 | Empty       | ?? |         |   -1 | 00/FFFF               | loopb                            
+   35 |  1 helloworld.s     35 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   #<msg2         
+   36 |  1 helloworld.s     36 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             STA   zpMsgAdr       
+   37 |  1 helloworld.s     37 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   #>msg2         
+   38 |  1 helloworld.s     38 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             STA   zpMsgAdr+1     
+   39 |  1 helloworld.s     39 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   40 |  1 helloworld.s     40 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDX   CYCLE          
+   41 |  1 helloworld.s     41 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             INX                  
+   42 |  1 helloworld.s     42 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             STX   CYCLE          
+   43 |  1 helloworld.s     43 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   CYCLE          
+   44 |  1 helloworld.s     44 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             cmp   #$09           
+   45 |  1 helloworld.s     45 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             bne   loopb          
+   46 |  1 helloworld.s     46 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   47 |  1 helloworld.s     47 | Code        | ?? |         |   -1 | 00/FFFF : 00          | loopa       LDX   #$00           
+   48 |  1 helloworld.s     48 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;JSR     dispMsg
+   49 |  1 helloworld.s     49 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;rts
+   50 |  1 helloworld.s     50 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   51 |  1 helloworld.s     51 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   #$03           ; load in A the line number
+   52 |  1 helloworld.s     52 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             JSR   BASCLC         
+   53 |  1 helloworld.s     53 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   #$C8           
+   54 |  1 helloworld.s     54 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDY   #$03           
+   55 |  1 helloworld.s     55 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             STA   (BASL),Y       
+   56 |  1 helloworld.s     56 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDX   #5             
+   57 |  1 helloworld.s     57 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             JSR   dispBis0       
+   58 |  1 helloworld.s     58 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             BRK                  
+   59 |  1 helloworld.s     59 | Empty       | ?? |         |   -1 | 00/FFFF               | dispBis0                         
+   60 |  1 helloworld.s     60 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   0              
+   61 |  1 helloworld.s     61 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             STA   CYCLE1         
+   62 |  1 helloworld.s     62 | Empty       | ?? |         |   -1 | 00/FFFF               | dispBis                          
+   63 |  1 helloworld.s     63 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDX   CYCLE1         
+   64 |  1 helloworld.s     64 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             INX                  
+   65 |  1 helloworld.s     65 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             STX   CYCLE1         
+   66 |  1 helloworld.s     66 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   CYCLE1         
+   67 |  1 helloworld.s     67 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   68 |  1 helloworld.s     68 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             cmp   CYCLE          
+   69 |  1 helloworld.s     69 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             beq   done           
+   70 |  1 helloworld.s     70 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             JSR   $FDDA          
+   71 |  1 helloworld.s     71 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   72 |  1 helloworld.s     72 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   #$BE           ;   ">"
+   73 |  1 helloworld.s     73 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             JSR   $FDED          
+   74 |  1 helloworld.s     74 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDX   #0             
+   75 |  1 helloworld.s     75 | Unknown    | ?? |         |   -1 | 00/FFFF               |             LDY#0                 
+   76 |  1 helloworld.s     76 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   (zpMsgAdr),Y   
+   77 |  1 helloworld.s     77 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;LDA msg,X               ; load initial char
+   78 |  1 helloworld.s     78 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   79 |  1 helloworld.s     79 | Empty       | ?? |         |   -1 | 00/FFFF               | dispBis1                         
+   80 |  1 helloworld.s     80 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             JSR   $FDED          ; cout
+   81 |  1 helloworld.s     81 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             INY                  
+   82 |  1 helloworld.s     82 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   (zpMsgAdr),Y   
+   83 |  1 helloworld.s     83 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             cmp   #$00           ; End of the string?
+   84 |  1 helloworld.s     84 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             beq   dispBis        
+   85 |  1 helloworld.s     85 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             jmp   dispBis1       
+   86 |  1 helloworld.s     86 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   87 |  1 helloworld.s     87 | Empty       | ?? |         |   -1 | 00/FFFF               | dispMsg                          
+   88 |  1 helloworld.s     88 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;JSR     Wait
+   89 |  1 helloworld.s     89 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   #$04           
+   90 |  1 helloworld.s     90 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             JSR   BASCLC         
+   91 |  1 helloworld.s     91 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   msg,x          ; Get the next character
+   92 |  1 helloworld.s     92 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             INY                  
+   93 |  1 helloworld.s     93 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             STA   (BASL),Y       
+   94 |  1 helloworld.s     94 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+   95 |  1 helloworld.s     95 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             cmp   #$00           ; End of the string?
+   96 |  1 helloworld.s     96 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             beq   done           ; ->Yes!
+   97 |  1 helloworld.s     97 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;jsr     COUT1          ; Print it out
+   98 |  1 helloworld.s     98 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             inx                  ; Move on to the next character
+   99 |  1 helloworld.s     99 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             jmp   dispMsg        ; And continue printing
+  100 |  1 helloworld.s    100 | Empty       | ?? |         |   -1 | 00/FFFF               | done                             
+  101 |  1 helloworld.s    101 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   $C000          ; Wait until a key is pressed
+  102 |  1 helloworld.s    102 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             BPL   done           
+  103 |  1 helloworld.s    103 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             BIT   $C010          
+  104 |  1 helloworld.s    104 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             jmp   start          
+  105 |  1 helloworld.s    105 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             rts                  ; All finished!
+  106 |  1 helloworld.s    106 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+  107 |  1 helloworld.s    107 | Empty       | ?? |         |   -1 | 00/FFFF               | Wait                             
+  108 |  1 helloworld.s    108 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;LDX     #$255
+  109 |  1 helloworld.s    109 | Empty       | ?? |         |   -1 | 00/FFFF               | Wait_1                           
+  110 |  1 helloworld.s    110 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             LDA   #$255          
+  111 |  1 helloworld.s    111 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             JSR   WAIT           
+  112 |  1 helloworld.s    112 | Code        | ?? |         |   -1 | 00/FFFF : 00          |             DEX                  
+  113 |  1 helloworld.s    113 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;CPX     #$0
+  114 |  1 helloworld.s    114 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;JMP     Wait_1
+  115 |  1 helloworld.s    115 | Comment     | ?? |         |   -1 | 00/FFFF               |             ;RTS
+  116 |  1 helloworld.s    116 | Empty       | ?? |         |   -1 | 00/FFFF               | msg                              
+  117 |  1 helloworld.s    117 | Data        | ?? |         |   -1 | 00/FFFF :             |             ASC   " This is the sound of sea"
+  118 |  1 helloworld.s    118 | Data        | ?? |         |   -1 | 00/FFFF :             |             dfb   $8D,$00        ; 8D for cariage return
+  119 |  1 helloworld.s    119 | Empty       | ?? |         |   -1 | 00/FFFF               | msg2                             
+  120 |  1 helloworld.s    120 | Data        | ?? |         |   -1 | 00/FFFF :             |             ASC   "Holly Shit"   
+  121 |  1 helloworld.s    121 | Data        | ?? |         |   -1 | 00/FFFF :             |             dfb   $8D,$00        ; 8D for cariage return
+  122 |  1 helloworld.s    122 | Empty       | ?? |         |   -1 | 00/FFFF               | noprodos                         
+  123 |  1 helloworld.s    123 | Data        | ?? |         |   -1 | 00/FFFF :             |             ASC   "No proDos"    
+  124 |  1 helloworld.s    124 | Data        | ?? |         |   -1 | 00/FFFF :             |             dfb   $8D,$00        
+  125 |  1 helloworld.s    125 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+  126 |  1 helloworld.s    126 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+  127 |  1 helloworld.s    127 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+  128 |  1 helloworld.s    128 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+  129 |  1 helloworld.s    129 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+  130 |  1 helloworld.s    130 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+  131 |  1 helloworld.s    131 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+------+------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------

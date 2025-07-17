@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20250717-2009-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.31.6"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="macOS"
+	Hostname="AMAQK9W4NHYJD"
+	OSRelease="15.5"
+	OSVersion="24F74"
+	OSPlatform="arm64"
+	Is64Bits="1"
+	VendorString="Apple"
+	VendorID="Apple"
+	FamilyID="0"
+	ModelID="0"
+	ModelName="Apple M2 Pro"
+	ProcessorCacheSize="131072"
+	NumberOfLogicalCPU="12"
+	NumberOfPhysicalCPU="12"
+	TotalVirtualMemory="1024"
+	TotalPhysicalMemory="32768"
+	LogicalProcessorsPerPhysical="12"
+	ProcessorClockFrequency="0"
+	>
+	<Testing>
+		<StartDateTime>Jul 17 22:14 CEST</StartDateTime>
+		<StartTestTime>1752783288</StartTestTime>
+		<TestList/>
+		<EndDateTime>Jul 17 22:14 CEST</EndDateTime>
+		<EndTestTime>1752783288</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

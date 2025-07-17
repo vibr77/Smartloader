@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libclemens_65816_serializer.a CMakeFiles/clemens_65816_serializer.dir/external/mpack.c.o CMakeFiles/clemens_65816_serializer.dir/serializer.c.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libclemens_65816_serializer.a

@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libclemens_disktypes.a CMakeFiles/clemens_disktypes.dir/clem_2img.c.o CMakeFiles/clemens_disktypes.dir/clem_disk.c.o CMakeFiles/clemens_disktypes.dir/clem_woz.c.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libclemens_disktypes.a

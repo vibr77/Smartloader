@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libclemens_65816.a CMakeFiles/clemens_65816.dir/clem_debug.c.o CMakeFiles/clemens_65816.dir/clem_mem.c.o CMakeFiles/clemens_65816.dir/emulator.c.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libclemens_65816.a

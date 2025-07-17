@@ -1,0 +1,542 @@
+[
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816.dir/clem_debug.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_debug.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_debug.c",
+  "output": "CMakeFiles/clemens_65816.dir/clem_debug.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816.dir/clem_mem.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_mem.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_mem.c",
+  "output": "CMakeFiles/clemens_65816.dir/clem_mem.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816.dir/emulator.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/emulator.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/emulator.c",
+  "output": "CMakeFiles/clemens_65816.dir/emulator.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_disktypes.dir/clem_2img.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_2img.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_2img.c",
+  "output": "CMakeFiles/clemens_disktypes.dir/clem_2img.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_disktypes.dir/clem_disk.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_disk.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_disk.c",
+  "output": "CMakeFiles/clemens_disktypes.dir/clem_disk.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_disktypes.dir/clem_woz.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_woz.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_woz.c",
+  "output": "CMakeFiles/clemens_disktypes.dir/clem_woz.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DCLEM_SAMPLE_APP  -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clem_disk_sample.dir/clem_disk.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_disk.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_disk.c",
+  "output": "CMakeFiles/clem_disk_sample.dir/clem_disk.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_adb.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_adb.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_adb.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_adb.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_audio.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_audio.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_audio.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_audio.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_drive.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_drive.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_drive.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_drive.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_drive35.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_drive35.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_drive35.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_drive35.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_iwm.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_iwm.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_iwm.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_iwm.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_locale.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_locale.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_locale.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_locale.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_mmio.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_mmio.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_mmio.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_mmio.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_rtc.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_rtc.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_rtc.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_rtc.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_scc.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_scc.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_scc.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_scc.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_smartport.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_smartport.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_smartport.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_smartport.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_timer.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_timer.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_timer.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_timer.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/clem_vgc.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_vgc.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_vgc.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/clem_vgc.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mmio.dir/emulator_mmio.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/emulator_mmio.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/emulator_mmio.c",
+  "output": "CMakeFiles/clemens_65816_mmio.dir/emulator_mmio.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_serializer.dir/external/mpack.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/mpack.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/mpack.c",
+  "output": "CMakeFiles/clemens_65816_serializer.dir/external/mpack.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_serializer.dir/serializer.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/serializer.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/serializer.c",
+  "output": "CMakeFiles/clemens_65816_serializer.dir/serializer.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_render.dir/external/mpack.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/mpack.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/mpack.c",
+  "output": "CMakeFiles/clemens_65816_render.dir/external/mpack.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_render.dir/render.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/render.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/render.c",
+  "output": "CMakeFiles/clemens_65816_render.dir/render.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_emulator.dir/app.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/app.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/app.c",
+  "output": "CMakeFiles/clemens_65816_emulator.dir/app.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_mpack_format.dir/external/mpack.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/mpack.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/mpack.c",
+  "output": "CMakeFiles/clemens_mpack_format.dir/external/mpack.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_mpack_format.dir/clem_mpack_format.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_mpack_format.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/clem_mpack_format.c",
+  "output": "CMakeFiles/clemens_mpack_format.dir/clem_mpack_format.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/external/unity",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/unity.dir/unity.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity/unity.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity/unity.c",
+  "output": "external/unity/CMakeFiles/unity.dir/unity.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc   -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clem_test_utils.dir/utils.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/utils.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/utils.c",
+  "output": "tests/CMakeFiles/clem_test_utils.dir/utils.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/test_adc.dir/cpu/test_adc.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/cpu/test_adc.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/cpu/test_adc.c",
+  "output": "tests/CMakeFiles/test_adc.dir/cpu/test_adc.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/test_emulate_minimal.dir/test_emulate_minimal.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_emulate_minimal.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_emulate_minimal.c",
+  "output": "tests/CMakeFiles/test_emulate_minimal.dir/test_emulate_minimal.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/test_gameport.dir/test_gameport.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_gameport.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_gameport.c",
+  "output": "tests/CMakeFiles/test_gameport.dir/test_gameport.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/test_mmio_video_switches.dir/test_mmio_video_switches.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_mmio_video_switches.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_mmio_video_switches.c",
+  "output": "tests/CMakeFiles/test_mmio_video_switches.dir/test_mmio_video_switches.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/test_disk_nib.dir/test_disk_nib.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_disk_nib.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_disk_nib.c",
+  "output": "tests/CMakeFiles/test_disk_nib.dir/test_disk_nib.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/test_disk_2img.dir/test_disk_2img.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_disk_2img.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_disk_2img.c",
+  "output": "tests/CMakeFiles/test_disk_2img.dir/test_disk_2img.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/test_disk_woz.dir/test_disk_woz.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_disk_woz.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_disk_woz.c",
+  "output": "tests/CMakeFiles/test_disk_woz.dir/test_disk_woz.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/tests",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DUNITY_INCLUDE_CONFIG_H -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/external/unity -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/test_scc.dir/test_scc.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_scc.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/tests/test_scc.c",
+  "output": "tests/CMakeFiles/test_scc.dir/test_scc.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/devices",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_serial_devices.dir/clem_peer.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/clem_peer.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/clem_peer.c",
+  "output": "devices/CMakeFiles/clemens_65816_serial_devices.dir/clem_peer.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/devices",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_smartport.dir/hddcard.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/hddcard.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/hddcard.c",
+  "output": "devices/CMakeFiles/clemens_65816_smartport.dir/hddcard.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/devices",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_smartport.dir/mockingboard.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/mockingboard.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/mockingboard.c",
+  "output": "devices/CMakeFiles/clemens_65816_smartport.dir/mockingboard.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/devices",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_smartport.dir/prodos_hdd32.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/prodos_hdd32.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/prodos_hdd32.c",
+  "output": "devices/CMakeFiles/clemens_65816_smartport.dir/prodos_hdd32.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/devices",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -o CMakeFiles/clemens_65816_mockingboard.dir/mockingboard.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/mockingboard.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/devices/mockingboard.c",
+  "output": "devices/CMakeFiles/clemens_65816_mockingboard.dir/mockingboard.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/cinek/ckdebug.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/cinek/ckdebug.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/cinek/ckdebug.c",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/cinek/ckdebug.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/cinek/buffer.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/cinek/buffer.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/cinek/buffer.cpp",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/cinek/buffer.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/cinek/encode.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/cinek/encode.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/cinek/encode.c",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/cinek/encode.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/ext/fmt/format.cc.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/fmt/format.cc",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/fmt/format.cc",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/ext/fmt/format.cc.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/ext/ini.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/ini.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/ini.c",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/ext/ini.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/ext/miniz.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/miniz.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/miniz.c",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/ext/miniz.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/ext/stb.c.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/stb.c",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/stb.c",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/ext/stb.c.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/ext/spdlog/spdlog.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/spdlog/spdlog.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/spdlog/spdlog.cpp",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/ext/spdlog/spdlog.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/ext/spdlog/async.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/spdlog/async.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/spdlog/async.cpp",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/ext/spdlog/async.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/ext/spdlog/color_sinks.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/spdlog/color_sinks.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/spdlog/color_sinks.cpp",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/ext/spdlog/color_sinks.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_shared.dir/ext/spdlog/file_sinks.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/spdlog/file_sinks.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/spdlog/file_sinks.cpp",
+  "output": "host/CMakeFiles/clemens_host_shared.dir/ext/spdlog/file_sinks.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_core.dir/core/clem_apple2gs.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_apple2gs.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_apple2gs.cpp",
+  "output": "host/CMakeFiles/clemens_host_core.dir/core/clem_apple2gs.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_core.dir/core/clem_disk_asset.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_disk_asset.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_disk_asset.cpp",
+  "output": "host/CMakeFiles/clemens_host_core.dir/core/clem_disk_asset.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_core.dir/core/clem_disk_utils.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_disk_utils.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_disk_utils.cpp",
+  "output": "host/CMakeFiles/clemens_host_core.dir/core/clem_disk_utils.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_core.dir/core/clem_prodos_disk.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_prodos_disk.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_prodos_disk.cpp",
+  "output": "host/CMakeFiles/clemens_host_core.dir/core/clem_prodos_disk.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_core.dir/core/clem_snapshot.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_snapshot.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_snapshot.cpp",
+  "output": "host/CMakeFiles/clemens_host_core.dir/core/clem_snapshot.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_host_core.dir/core/clem_storage_unit.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_storage_unit.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/core/clem_storage_unit.cpp",
+  "output": "host/CMakeFiles/clemens_host_core.dir/core/clem_storage_unit.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -x objective-c -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/platform/host_macos.m.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/platform/host_macos.m",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/platform/host_macos.m",
+  "output": "host/CMakeFiles/clemens_iigs.dir/platform/host_macos.m.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_host.mm.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_host.mm",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_host.mm",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_host.mm.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_assets.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_assets.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_assets.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_assets.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_asset_browser.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_asset_browser.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_asset_browser.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_asset_browser.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_audio.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_audio.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_audio.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_audio.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_display.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_display.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_display.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_display.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_backend.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_backend.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_backend.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_backend.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_command_queue.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_command_queue.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_command_queue.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_command_queue.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_configuration.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_configuration.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_configuration.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_configuration.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_debugger.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_debugger.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_debugger.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_debugger.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_file_browser.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_file_browser.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_file_browser.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_file_browser.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_frame_state.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_frame_state.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_frame_state.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_frame_state.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_front.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_front.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_front.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_front.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_host_app.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_host_app.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_host_app.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_host_app.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_host_utils.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_host_utils.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_host_utils.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_host_utils.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_imgui.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_imgui.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_imgui.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_imgui.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_interpreter.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_interpreter.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_interpreter.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_interpreter.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_l10n.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_l10n.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_l10n.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_l10n.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_preamble.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_preamble.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_preamble.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_preamble.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_program_trace.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_program_trace.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_program_trace.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_program_trace.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_ui_load_snapshot.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_ui_load_snapshot.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_ui_load_snapshot.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_ui_load_snapshot.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_ui_save_snapshot.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_ui_save_snapshot.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_ui_save_snapshot.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_ui_save_snapshot.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_ui_settings.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_ui_settings.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_ui_settings.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_ui_settings.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DCK3D_BACKEND_GL -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -F/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/clemens_iigs.dir/clem_startup_view.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_startup_view.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/clem_startup_view.cpp",
+  "output": "host/CMakeFiles/clemens_iigs.dir/clem_startup_view.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host/harness",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DJSON_NOEXCEPTION -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_test_harness.dir/main.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/harness/main.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/harness/main.cpp",
+  "output": "host/harness/CMakeFiles/clemens_test_harness.dir/main.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host/harness",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -DJSON_NOEXCEPTION -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG -DSPDLOG_COMPILED_LIB -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -Wno-missing-field-initializers -pedantic -o CMakeFiles/clemens_test_harness.dir/harness.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/harness/harness.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/harness/harness.cpp",
+  "output": "host/harness/CMakeFiles/clemens_test_harness.dir/harness.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host/ext/imgui",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/imgui.dir/imgui.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui.cpp",
+  "output": "host/ext/imgui/CMakeFiles/imgui.dir/imgui.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host/ext/imgui",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/imgui.dir/imgui_draw.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui_draw.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui_draw.cpp",
+  "output": "host/ext/imgui/CMakeFiles/imgui.dir/imgui_draw.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host/ext/imgui",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/imgui.dir/imgui_tables.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui_tables.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui_tables.cpp",
+  "output": "host/ext/imgui/CMakeFiles/imgui.dir/imgui_tables.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host/ext/imgui",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/imgui.dir/imgui_widgets.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui_widgets.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui_widgets.cpp",
+  "output": "host/ext/imgui/CMakeFiles/imgui.dir/imgui_widgets.cpp.o"
+},
+{
+  "directory": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/host/ext/imgui",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wall -Wextra -pedantic -fno-exceptions -fno-rtti -o CMakeFiles/imgui.dir/imgui_filedialog/ImGuiFileDialog.cpp.o -c /Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui_filedialog/ImGuiFileDialog.cpp",
+  "file": "/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio/dump/clemens_iigs-main/host/ext/imgui/imgui_filedialog/ImGuiFileDialog.cpp",
+  "output": "host/ext/imgui/CMakeFiles/imgui.dir/imgui_filedialog/ImGuiFileDialog.cpp.o"
+}
+]

@@ -1,0 +1,6 @@
+Merlin32 -V ~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/Merlin32_v1.2_b1/Library  ./helloworld.s
+
+cadius  CREATEVOLUME  blank.po blank 140KB -V
+cadius  CATALOG  blank.po
+cadius  ADDFILE blank.po /blank HelloWorld
+cadius  EXTRACTFILE  blank.po /blank/HelloWorld .
