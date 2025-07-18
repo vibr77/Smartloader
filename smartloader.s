@@ -245,43 +245,58 @@ testkeybloop
 
             
             lda zpImgIndx
-
-
-
             sta zpPrevImgIndx
             pla
+
             cmp #$8B
             bne testkeybloop_0
             
             ldx #$FF
             stx zpDispMask
-            
             jsr dispDataBlockImage
-            jsr decImageIndex
+
+            ldx zpImgIndx
+            cpx #00
+            bne testkeybloop_A
             
-            ;jmp testkeybloop_1
+            ldx #$7                         ; zpImgIndx =7 rolling to 0
+            stx zpImgIndx
+            jmp testkeybloop_2
+
+testkeybloop_A 
+            jsr decImageIndex
+            jmp testkeybloop_2
+
 testkeybloop_0            
             cmp #$8A
-            bne testkeybloop_1
+            bne testkeybloop
             
             lda zpImgIndx
-            cmp #$07
-            beq testkeybloop
+            
             ldx #$FF
             stx zpDispMask
             jsr dispDataBlockImage
+            ldx zpImgIndx
+            cpx #$07
+            bne testkeybloop_1
 
+            ldx #$0                         ; zpImgIndx =7 rolling to 0
+            stx zpImgIndx
+            jmp testkeybloop_2
+
+testkeybloop_1
+            
             jsr incImageIndex
 
-testkeybloop_1            
+testkeybloop_2            
             lda zpImgIndx
             ;jsr PRBYTE
             sbc #$09
-            bpl testkeybloop_2
+            bpl testkeybloop_3
             ;JSR *+3                    
             jsr padd1char
 
-testkeybloop_2
+testkeybloop_3
 
             ldy     #$0
             ldx     #$26
@@ -300,7 +315,7 @@ testkeybloop_2
             ;inx
             ;lda #$A0
 
-testkeybloop_3
+testkeybloop_4
             ;jsr COUT
             ;dex
             ;cpx #$0
@@ -498,7 +513,7 @@ title
             ASC     "SMARTLOADER"
             dfb     $00
 line
-            ASC     "__________________________________________________________
+            ASC     "__________________________________________________________"
             dfb     $00
 msg         
             ASC     "This is the sound of sea"
