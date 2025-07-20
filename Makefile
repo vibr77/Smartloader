@@ -9,7 +9,8 @@
 ######################################
 # target
 ######################################
-TARGET = PRG.SYSTEM
+#TARGET = PRG.SYSTEM
+TARGET = PRG.BIN
 CASM_SOURCES = smartloader.s 
 BUILD_DIR = build
 PO_FILE = blank.po
@@ -23,8 +24,9 @@ CP2_PATH=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/cp2_1
 CP2=cp2
 
 F_AUX=0x2000
-#F_TYPE=0x06
-F_TYPE=0xFF
+#F_AUX=0x0800
+F_TYPE=0x06
+#F_TYPE=0xFF
 
 
 ARG= -v
@@ -36,7 +38,7 @@ all:  | $(BUILD_DIR)
 	-mv $(TARGET) $(BUILD_DIR)/$(TARGET)
 	-mv $(TARGET)_Symbols.txt $(BUILD_DIR)/$(TARGET)_Symbols.txt
 	-make addfile
-	
+	-python3 dump_block_B0.py build/dump_b0.po ./build/smartloader.po
 	-open -a "Virtual ][.app"
 
 addfile:

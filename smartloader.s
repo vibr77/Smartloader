@@ -1,7 +1,8 @@
-    DSK PRG.SYSTEM
+    DSK PRG.BIN
     TYP BIN
     mx  %11
 
+DEBUG   =   0
 
             org       $2000
             xc
@@ -24,12 +25,12 @@ CV              EQU     $25                 ; Cursor position
 CH              EQU     $24                 ; 
 
 WAIT            EQU     $FCA8
-CYCLE1          EQU     $2501
-CYCLE           EQU     $2500
-CMD_BLK         EQU     $3000               ; Command Block
-SCRATCHPAD      EQU     $3100
-RES_BLK         EQU     $3200               ; Result for CMD
-RES_BLK2        EQU     $3300               ; Result for CMD
+;CYCLE1          EQU     $2501
+;CYCLE           EQU     $2500
+CMD_BLK         EQU     $2600               ; Command Block
+;SCRATCHPAD      EQU     $3100
+RES_BLK         EQU     $2800               ; Result for CMD
+RES_BLK2        EQU     $2900               ; Result for CMD
 
 MLI             EQU     $BF00              ; ProDOS system call
 CROUT           EQU     $FD8E              ; Monitor CROUT routine
@@ -39,10 +40,12 @@ myZP            EQU     $02
 
 
 cstMaxImgLen    EQU    #$10                 ; Constant Max Image Filename len
-cstLineOffset   EQU    #$02
+cstLineOffset   EQU    #$03
+cstMaxImgItem   EQU    #$07
 zpImgIndx       EQU    $85                  ; Current ImageIndex
 zpPrevImgIndx   EQU    $86
-zpDispMask      EQU    $87
+zpMaxImgIndx    EQU    $87
+zpDispMask      EQU    $88
 zpPtr1          EQU    $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen 
 zpPtr2          EQU    $83 
 
@@ -72,23 +75,140 @@ start
             inx
             stx     zpImgIndx
             stx     zpPrevImgIndx
+
+            ldx     #$07
+            stx     zpMaxImgIndx
  
-            jsr     loadImageNameToDataBlock
-            jsr     readKey
+            ldx     #$0F
+            ldy     #$00    
+            jsr     dispPositionCursor
+
+            ldx     #$FF                            ; add Inverse Mask
+            stx     zpDispMask                      ; store to zeropage       
+           
+            ldx     #<_title
+            ldy     #>_title
+            jsr     printMsg
+
+            ldx     #$22
+            ldy     #$17    
+            jsr     dispPositionCursor
+
+            ldx     #<_version
+            ldy     #>_version
+            jsr     printMsg
+
+            ldx     #$00
+            ldy     #$01    
+            jsr     dispPositionCursor
+
+            ldy     #$28
+            jsr     dispLine
+
+
+            ldx     #$00
+            ldy     #$15    
+            jsr     dispPositionCursor
+            
+            ldy     #$28
+            jsr     dispLine
+
+            ldx     #$0
+            ldy     #$17    
+            jsr     dispPositionCursor
+
+            ldx     #<_option
+            ldy     #>_option
+            jsr     printMsg
+
+
+            ;jsr     loadImageNameToDataBlock
+            ;jsr     writeCmdBlk
+            ;jsr     readKey
+refresh            
+            jsr     readBlock
+            lda     RES_BLK
+            cmp     #$20
+            bne     refresh_0                       ; Error to be diplayed
+
+            lda     RES_BLK+1                       
+            sta     zpMaxImgIndx 
+            ;BRK
+            ;jsr     readKey
             jsr     dispDataBlock
+            
             
             ldx     #$00                            ; init imgaIndex
             stx     zpImgIndx                       ; store to zeropage
-            ldx     #$3F                            ; add Inverse Mask
+            ldx     #$7F                            ; add Inverse Mask
             stx     zpDispMask                      ; store to zeropage
             jsr     dispDataBlockImage              ; disp current selection
 
-            jsr     testkeybloop
+            jsr     mainDispatch
             
-            jsr     checkDriveSlot
-            jsr     writeCmdBlk
-            brk
+            ;jsr     checkDriveSlot
+            ;jsr     writeCmdBlk
+            ;brk
+            jsr start
 
+refresh_0
+            jsr     dispErrorMsg
+            rts
+
+
+;   @Funct: setCommand
+;   @Param: X Command, Y Value
+;
+
+setCommand       
+            lda     #<CMD_BLK
+            sta     zpPtr1
+            
+            lda     #>CMD_BLK
+            sta     zpPtr1+1
+            txa
+            sta     CMD_BLK
+            
+            tya
+            sta     CMD_BLK+1
+
+            lda     #$00
+            ldy     #$01
+setCommand_0
+            iny
+            sta     (zpPtr1),Y
+            cpy     #$FF
+            bne     setCommand_0
+            lda     #<CMD_BLK
+            sta     zpPtr1
+            
+            lda     #>CMD_BLK
+            inc
+            sta     zpPtr1+1
+            ldy     #$00
+            lda     #$00
+setCommand_1
+            sta (zpPtr1),Y
+            cpy     #$FF
+            iny
+            bne     setCommand_1
+
+setCommand_2
+            jsr     MLI                         ; CALL PRODOS WRITE_BLOCK
+            dfb     $81
+            dfb     #<paramBLK_WR
+            dfb     #>paramBLK_WR
+            jsr     ERROR
+            rts
+
+dispLine
+            lda     #$DF
+            jsr     COUT
+            dey
+            bne dispLine
+            rts
+
+    DO DEBUG
 loadImageNameToDataBlock
             lda     #$00
             sta     zpImgIndx
@@ -107,10 +227,10 @@ loadImageNameToDataBlock_1
             ldx     calc_result_low
             stx     calc_2_low
 
-            ldx     #$00
+            ldx     #<RES_BLK
             stx     calc_1_low
 
-            ldx     #$32
+            ldx     #>RES_BLK
             stx     calc_1_high
 
             jsr     add_16B_16B
@@ -156,6 +276,7 @@ loadImageNameToDataBlock_4                      ; Move to the next imageIndex
 
 loadImageNameToDataBlock_5
             rts
+    FIN
 
 dispDataBlock
             lda     #$00
@@ -167,21 +288,18 @@ dispDataBlock_1
             jsr dispDataBlockImage
 
 dispDataBlock_2
+            ;lda zpImgIndx
+            inc zpImgIndx 
             lda zpImgIndx
-            inc 
-            sta zpImgIndx
-            cmp #$08
+            cmp zpMaxImgIndx
             bne dispDataBlock_1
-
             rts
-
 
 ;Display the name of the image on screen
 ;zpImgIndx contain the index
 ;zpDispMask  contains the display mode #FF normal, #3F inverted
-
-dispDataBlockImage
-            lda     zpImgIndx
+getImageAddr
+           
             ldx     #$10                        ; #10 -> 16 !!!
             stx     calc_1_low
             sta     calc_2_low
@@ -194,10 +312,11 @@ dispDataBlockImage
             ldx     calc_result_low
             stx     calc_2_low
 
-            ldx     #$00
+            ;ldx     #<RES_BLK
+            ldx     #$10                    ; we start at 0x2810 and not 0x2800 to keep 16 bytes of data 
             stx     calc_1_low
 
-            ldx     #$32
+            ldx     #>RES_BLK
             stx     calc_1_high
 
             jsr     add_16B_16B
@@ -205,6 +324,32 @@ dispDataBlockImage
             ldx     calc_result_low
             stx     zpPtr2
 
+            ldx     calc_result_high
+            stx     zpPtr2+1
+            rts
+
+dispErrorMsg
+
+            ldx     #$0F
+            ldy     #$00    
+            jsr     dispPositionCursor
+
+            ldx     #$FF                            ; add Inverse Mask
+            stx     zpDispMask                      ; store to zeropage       
+           
+            ldx     #<error_10
+            ldy     #>error_10
+
+            jsr     printMsg
+            jsr     readKey
+            rts
+            
+
+dispDataBlockImage
+            
+            lda     zpImgIndx
+            jsr     getImageAddr
+            
             lda     zpImgIndx
             
             adc     cstLineOffset                   ; position Cursor with line Offset
@@ -212,9 +357,11 @@ dispDataBlockImage
             ldx     #$0
             jsr     dispPositionCursor
 
-            lda     #$00
-            ldx     zpImgIndx
-            jsr     PrintUint16
+            ;lda     #$00
+            ;ldx     zpImgIndx
+            ;jsr     PrintUint16
+            lda     zpImgIndx
+            jsr     PRBYTE
 
             lda     #$BE                            ; ">"
             jsr     COUT                            ; print
@@ -234,129 +381,142 @@ dispDataBlockImage_1
             bne     dispDataBlockImage_1
             rts
 
-
-testkeybloop
-            jsr readKey
-            pha
-            ldy #$01
-            ldx #$26
-            jsr dispPositionCursor
-            jsr PRBYTE
-
+; Main process flow
+; Reading from the keyboard
+JMP_REBOOT
+            jmp     reboot
+JMP_REFRESH
+            jmp     refresh
+mainDispatch
+            jsr     readKey
             
-            lda zpImgIndx
-            sta zpPrevImgIndx
+            pha                                     ; Putting A containing the key value on the stack 
+            
+            ldy     #$00                            ; Display the Key value on the top right of the screen
+            ldx     #$06
+            jsr     dispPositionCursor
+            jsr     PRBYTE
+
+            lda     zpImgIndx
+            sta     zpPrevImgIndx
+            
             pla
+            cmp     #$D2                            ; KEY [R]
+            beq     JMP_REFRESH
 
-            cmp #$8B
-            bne testkeybloop_0
+            cmp     #$C2                            ; KEY [R]
+            beq     JMP_REBOOT
+
+            cmp     #$8D                            ; KEY [ENTER] / [RETURN] 
+            beq     mainDispatch_4            
             
-            ldx #$FF
-            stx zpDispMask
-            jsr dispDataBlockImage
-
-            ldx zpImgIndx
-            cpx #00
-            bne testkeybloop_A
+            cmp     #$8B                            ; KEY [UP]
+            bne     mainDispatch_0
             
-            ldx #$7                         ; zpImgIndx =7 rolling to 0
-            stx zpImgIndx
-            jmp testkeybloop_2
+            ldx     #$FF                            ; Change the current Image back to normal text
+            stx     zpDispMask
+            jsr     dispDataBlockImage
 
-testkeybloop_A 
-            jsr decImageIndex
-            jmp testkeybloop_2
-
-testkeybloop_0            
-            cmp #$8A
-            bne testkeybloop
-            
-            lda zpImgIndx
-            
-            ldx #$FF
-            stx zpDispMask
-            jsr dispDataBlockImage
-            ldx zpImgIndx
-            cpx #$07
-            bne testkeybloop_1
-
-            ldx #$0                         ; zpImgIndx =7 rolling to 0
-            stx zpImgIndx
-            jmp testkeybloop_2
-
-testkeybloop_1
-            
-            jsr incImageIndex
-
-testkeybloop_2            
-            lda zpImgIndx
-            ;jsr PRBYTE
-            sbc #$09
-            bpl testkeybloop_3
-            ;JSR *+3                    
-            jsr padd1char
-
-testkeybloop_3
-
-            ldy     #$0
-            ldx     #$26
-            jsr dispPositionCursor
-
-            lda     #$00
             ldx     zpImgIndx
-            jsr     PrintUint16
+            cpx     #00                             ; if current Index is 0 then roll to the end
+            bne     mainDispatch_A
             
-            ;ldy zpPrevImgIndx
-            ;ldx #$2
-            ;jsr dispPositionCursor
-            ;ldx cstMaxImgLen
-            ;inx
-            ;inx
-            ;inx
-            ;lda #$A0
+            ldx     zpMaxImgIndx                    ; zpImgIndx =7 rolling to 0
+            stx     zpImgIndx
+            jmp     mainDispatch_2
 
-testkeybloop_4
-            ;jsr COUT
-            ;dex
-            ;cpx #$0
-            ;bne testkeybloop_3
+mainDispatch_A 
+            jsr     decImageIndex                   ; decrement current Index
+            jmp     mainDispatch_2                  ; go the display part
 
-
-            ;ldy     zpImgIndx
-            ;ldx     #$02   
-            ;jsr     dispPositionCursor
-
-            ;lda     zpImgIndx           ; multiply by 2 for index of a DW 
-            ;asl     a
-            ;tax
-
-            ;lda     imageTable,x      ;Get low byte address
-            ;ldy     imageTable+1,x        ;Get high byte address
-            ;tax    
-            ;ldx     #<image_01
-            ;Ldy     #>image_01
+mainDispatch_0            
+            cmp     #$8A                            ; Key Down
+            bne     mainDispatch
             
-            ;jsr     dispImageFile
+            lda     zpImgIndx
+            
+            ldx     #$FF
+            stx     zpDispMask
+            jsr     dispDataBlockImage
+            ldx     zpImgIndx
+            cpx     zpMaxImgIndx                    ; TODO put this automatic from the stack
+            bne     mainDispatch_1
 
-            ldx #$3F
-            stx zpDispMask
-            jsr dispDataBlockImage
-            jmp     testkeybloop
+            ldx     #$0                             ; zpImgIndx =7 rolling to 0
+            stx     zpImgIndx
+            jmp     mainDispatch_2
+
+mainDispatch_1
+            jsr     incImageIndex                   ; increment current index
+
+mainDispatch_2            
+            lda     zpImgIndx
+            sbc     #$09
+            bpl     mainDispatch_3                 
+            jsr     padd1char
+
+mainDispatch_3
+            ldy     #$0
+            ldx     #$22
+            jsr     dispPositionCursor
+
+            ;lda     #$00
+            ;ldx     zpImgIndx
+            ;jsr     PrintUint16
+            lda     zpImgIndx
+            jsr     PRBYTE
+
+            lda     #$AF                            ; "/"
+            jsr     COUT
+            
+            lda     zpMaxImgIndx
+            jsr     PRBYTE
+            ;lda     #$00
+            ;ldx     zpMaxImgIndx
+            ;jsr     PrintUint16
+            
+            ldx     #$3F
+            stx     zpDispMask
+            jsr     dispDataBlockImage
+            jmp     mainDispatch
+
+mainDispatch_4 
+            jsr     CLRSCR
+
+            ldx     #$10
+            ldy     #$09    
+            jsr     dispPositionCursor
+            
+            ldx     #$FF
+            stx     zpDispMask
+
+            lda     zpImgIndx
+            jsr     getImageAddr
+
+            ldx     zpPtr2
+            ldy     zpPtr2+1
+
+            jsr     printMsg
+            ldx     #$01
+            ldy     zpImgIndx
+            jsr     setCommand
+            
+            jsr     readKey
+
             rts
 
 padd1char
             lda     #$A0              ; padding right by print space char
             jsr     COUT              ; display content of A
-            rts                     ; return to PC on stack
-
-
+            rts                       ; return to PC on stack
 
 incImageIndex
-            ldx zpImgIndx
-            cpx #$254
-            beq incImageIndex_0
+            ldx     zpImgIndx
+            cpx     #$255
+            beq     incImageIndex_0
             inx
-            stx zpImgIndx
+            stx     zpImgIndx
+
 incImageIndex_0
             rts
             
@@ -366,88 +526,50 @@ decImageIndex
             beq     decImageIndex_0
             dex                                 
             stx     zpImgIndx
+
 decImageIndex_0
             rts
             
 dispPositionCursor
             pha                                     ; push regA to stack
-            TYA     
-            STX     CH
-            JSR     CURPOS
+            tya     
+            stx     CH
+            jsr     CURPOS
             pla                                     ; pull regA from the stack
-            RTS
-
-dispImageFile
-
-            stx     zpPtr1                       ; must be at the begininng
-            Sty     zpPtr1+1
-
-            lda     #$00
-            ldx     zpImgIndx                       ; load X with current Image Index
-            jsr     PrintUint16                     ; print 16 unsigned integer A LOW, X HIGH
-
-            lda     #$BE                            ; ">"
-            jsr     COUT                           ; print
-
-            ldy     #0
-            lda     (zpPtr1),Y
-            ldx     #$3F
-            stx     zpDispMask
-
-dispImageFile_1
-            AND     zpDispMask
-            JSR     $FDED
-            INY
-            LDA     (zpPtr1),Y            ; indirect zeropage addressing pointing to current char
-            bne     dispImageFile_1
-dispImageFile_2
-            cpy     cstMaxImgLen
-            beq     dispImageFile_E
-            LDA     #$BE
-            JSR     $FDED
-            INY
-            jmp     dispImageFile_2
-dispImageFile_E
             rts
 
-printMsgInit
-            STX     zpPtr1
-            STY     zpPtr1+1
-            LDY     #0
-            LDA     (zpPtr1),Y
-
-            ;jsr    readKey
 printMsg
-            AND     #$3F
-            JSR     $FDED                   ; Char disp routine
-            INY                             ; increase char position
-            LDA     (zpPtr1),Y            ; indirect zeropage addressing pointing to current char
-            bne     printMsg                ; no need of cmp 00 is current char is not 00 then loop
-printMsgDone
-            jsr readKey
+            stx     zpPtr1
+            sty     zpPtr1+1
+            ldy     #0
+            lda     (zpPtr1),Y
+
+printMsg_0
+            and     zpDispMask
+            jsr     COUT                   ; Char disp routine
+            iny                             ; increase char position
+            lda     (zpPtr1),Y            ; indirect zeropage addressing pointing to current char
+            bne     printMsg_0                ; no need of cmp 00 is current char is not 00 then loo
             rts     
 
 writeCmdBlk
             
-            LDX     #$66
+            ;LDX     #$66
             LDA     #<RES_BLK
             STA     zpPtr1
             LDA     #>RES_BLK
             STA     zpPtr1+1
             LDY     0
-writeCmdBlk01
-            LDA     #$10
-            STA     (zpPtr1),Y
-            INY
-            cpy     255
-            bne     writeCmdBlk01
+
+writeCmdBlk_0
+   
             JSR     MLI
             DFB     $81
-            DFB     #<paramLst
-            DFB     #>paramLst
+            DFB     #<paramBLK_WR
+            DFB     #>paramBLK_WR
             jsr     ERROR
             jsr     readBlock
-            RTS
+            rts
 
 checkDriveSlot
             lda    $CFFF        ;reset all other I/O Select spaces
@@ -465,31 +587,43 @@ checkDriveSlot
             jsr    readKey
             rts
 
-
-
-ERROR
-            JSR  PRBYTE    ;Print error code
-            JSR  BELL      ;Ring the bell
-            JSR  CROUT     ;Print a carriage return
-            RTS
-readBlock
+ERROR    
+            pha
+            ldy     #$00                            ; Display the Key value on the top right of the screen
+            ldx     #$0
+            jsr     dispPositionCursor
             
+            lda     #$C5                            ; "/"
+            jsr     COUT
+
+            pla
+            jsr     PRBYTE    ;Print error code
+            jsr     BELL      ;Ring the bell
+            rts
+
+readBlock
+            LDA     #<RES_BLK
+            STA     zpPtr1
+            LDA     #>RES_BLK
+            STA     zpPtr1+1
+            LDA     #$00
             LDY     #$0
 
-readBlock01
-            LDA     #$20
+readBlock_01          
             STA     (zpPtr1),Y
             INY
-            cpy     255
-            bne     readBlock01
-            jsr     readKey
+            cpy     #$FF
+            bne     readBlock_01
+
+readBlock_02
             JSR     MLI
             DFB     $80
-            DFB     #<paramLst
-            DFB     #>paramLst
+            DFB     #<paramBLK_RD
+            DFB     #>paramBLK_RD
+
             jsr     ERROR
-            jmp     reboot
-            RTS
+            rts
+
 readKey
             LDA     $C000               ; Wait until a key is pressed
             BPL     readKey
@@ -499,42 +633,38 @@ readKey
 reboot
             jmp     #$C600
             rts
-Wait
-            ;LDX     #$255
-Wait_1              
-            LDA     #$255
-            JSR     WAIT
-            DEX
-            ;CPX     #$0
-            ;JMP     Wait_1
-            ;RTS
 
-title       
+_title       
             ASC     "SMARTLOADER"
             dfb     $00
-line
-            ASC     "__________________________________________________________"
+_version
+            ASC     "v0.26"
             dfb     $00
-msg         
-            ASC     "This is the sound of sea"
-            dfb     $8D,$00                       ; 8D for cariage return
-msg2
-            ASC     "Holly Shit"
-            dfb     $8D,$00                       ; 8D for cariage return
-noprodos
-            ASC     "No proDos"
-            dfb     $8D,$00
-prodos
-            ASC     "ProDos found"
-            dfb     $8D,$00
-paramLst
+_option 
+            ASC     "[R]EFRESH [B]OOT [S]ETTINGS"
+            dfb     $00
+
+error_10
+            ASC     "ERR 10 UNABLE TO GET DATA"
+            dfb     $00
+
+paramBLK_RD
             DFB      $03                    ; paramcnt =3
             DFB      $60                    ; slot number
-            DFB      $00
-            DFB      $32
+            DFB      #<RES_BLK
+            DFB      #>RES_BLK
             DFB      $B0
             DFB      $00
 
+paramBLK_WR
+            DFB      $03                    ; paramcnt =3
+            DFB      $60                    ; slot number
+            DFB      #<CMD_BLK
+            DFB      #>CMD_BLK
+            DFB      $B0
+            DFB      $00
+
+    DO DEBUG
 image_00
             ASC ".."
             dfb $00
@@ -562,11 +692,10 @@ image_07
             ASC     "PRODO.DSK"
             dfb     $00
 
-
 imageTable
             dw  image_00,image_01,image_01,image_02,image_03,image_04,image_05,image_06,image_07
-
-
+    ELSE
+    FIN
 ; Merlin32 include
             PUT     print_uint16_with_sp.s
             PUT     vibr_lib.s

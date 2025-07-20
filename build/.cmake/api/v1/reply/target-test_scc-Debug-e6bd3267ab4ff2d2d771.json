@@ -92,6 +92,10 @@
 	[
 		{
 			"backtrace" : 2,
+			"id" : "clemens_65816_serial_devices::@0b66dd025354e08ea917"
+		},
+		{
+			"backtrace" : 2,
 			"id" : "clemens_65816::@6890427a1f51a3e7e1df"
 		},
 		{
@@ -105,10 +109,6 @@
 		{
 			"backtrace" : 2,
 			"id" : "unity::@85c06e091258d6d47588"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "clemens_65816_serial_devices::@0b66dd025354e08ea917"
 		}
 	],
 	"id" : "test_scc::@a44f0ac069e85531cdee",

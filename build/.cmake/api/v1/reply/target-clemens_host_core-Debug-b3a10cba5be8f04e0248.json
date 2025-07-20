@@ -126,6 +126,18 @@
 	[
 		{
 			"backtrace" : 2,
+			"id" : "clemens_65816_smartport::@0b66dd025354e08ea917"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "clemens_65816_mockingboard::@0b66dd025354e08ea917"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "clemens_host_shared::@cd6eabc83530c226c655"
+		},
+		{
+			"backtrace" : 2,
 			"id" : "clemens_65816::@6890427a1f51a3e7e1df"
 		},
 		{
@@ -143,18 +155,6 @@
 		{
 			"backtrace" : 2,
 			"id" : "clemens_65816_render::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "clemens_65816_smartport::@0b66dd025354e08ea917"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "clemens_65816_mockingboard::@0b66dd025354e08ea917"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "clemens_host_shared::@cd6eabc83530c226c655"
 		}
 	],
 	"id" : "clemens_host_core::@cd6eabc83530c226c655",

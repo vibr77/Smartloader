@@ -1,0 +1,820 @@
+------+----------------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+ Line | # File                      Line | Line Type   | MX |  Reloc  | Size | Address   Object Code |  Source Code                                                      
+------+----------------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+    1 |  1          smartloader.s      1 | Directive   | 11 |         |    0 | 00/8000               |                       DSK   PRG.BIN           
+    2 |  1          smartloader.s      2 | Directive   | 11 |         |    0 | 00/8000               |                       TYP   BIN               
+    3 |  1          smartloader.s      3 | Directive   | 11 |         |    0 | 00/8000               |                       mx    %11               
+    4 |  1          smartloader.s      4 | Empty       | 11 |         |    0 | 00/8000               |                                               
+    5 |  1          smartloader.s      5 | Equivalence | 11 |         |    0 | 00/8000               | DEBUG                 =     0                 
+    6 |  1          smartloader.s      6 | Empty       | 11 |         |    0 | 00/8000               |                                               
+    7 |  1          smartloader.s      7 | Directive   | 11 |         |    0 | 00/8000               |                       org   $2000             
+    8 |  1          smartloader.s      8 | Directive   | 11 |         |    0 | 00/2000               |                       xc                      
+    9 |  1          smartloader.s      9 | Directive   | 11 |         |    0 | 00/2000               |                       xc                      
+   10 |  1          smartloader.s     10 | Equivalence | 11 |         |    0 | 00/2000               | BELL                  EQU   $FF3A             
+   11 |  1          smartloader.s     11 | Equivalence | 11 |         |    0 | 00/2000               | PREAD                 EQU   $FB1E             
+   12 |  1          smartloader.s     12 | Equivalence | 11 |         |    0 | 00/2000               | CLRSCR                EQU   $FC58             
+   13 |  1          smartloader.s     13 | Equivalence | 11 |         |    0 | 00/2000               | COUT                  EQU   $FDED             ; Apple II character out func.
+   14 |  1          smartloader.s     14 | Equivalence | 11 |         |    0 | 00/2000               | COUTD                 EQU   $FDE2             
+   15 |  1          smartloader.s     15 | Equivalence | 11 |         |    0 | 00/2000               | COUT1                 EQU   $FDF0             
+   16 |  1          smartloader.s     16 | Equivalence | 11 |         |    0 | 00/2000               | CTR                   EQU   $08               
+   17 |  1          smartloader.s     17 | Equivalence | 11 |         |    0 | 00/2000               | PTR                   EQU   $06               
+   18 |  1          smartloader.s     18 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   19 |  1          smartloader.s     19 | Equivalence | 11 |         |    0 | 00/2000               | CURPOS                EQU   $FB5B             
+   20 |  1          smartloader.s     20 | Equivalence | 11 |         |    0 | 00/2000               | BASCLC                EQU   $FBC1             ; subroutine to position cursor
+   21 |  1          smartloader.s     21 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   22 |  1          smartloader.s     22 | Equivalence | 11 |         |    0 | 00/2000               | BASL                  EQU   $28               
+   23 |  1          smartloader.s     23 | Equivalence | 11 |         |    0 | 00/2000               | BASH                  EQU   $29               
+   24 |  1          smartloader.s     24 | Equivalence | 11 |         |    0 | 00/2000               | CV                    EQU   $25               ; Cursor position
+   25 |  1          smartloader.s     25 | Equivalence | 11 |         |    0 | 00/2000               | CH                    EQU   $24               ;
+   26 |  1          smartloader.s     26 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   27 |  1          smartloader.s     27 | Equivalence | 11 |         |    0 | 00/2000               | WAIT                  EQU   $FCA8             
+   28 |  1          smartloader.s     28 | Comment     | 11 |         |    0 | 00/2000               | ;CYCLE1          EQU     $2501
+   29 |  1          smartloader.s     29 | Comment     | 11 |         |    0 | 00/2000               | ;CYCLE           EQU     $2500
+   30 |  1          smartloader.s     30 | Equivalence | 11 |         |    0 | 00/2000               | CMD_BLK               EQU   $2600             ; Command Block
+   31 |  1          smartloader.s     31 | Comment     | 11 |         |    0 | 00/2000               | ;SCRATCHPAD      EQU     $3100
+   32 |  1          smartloader.s     32 | Equivalence | 11 |         |    0 | 00/2000               | RES_BLK               EQU   $2800             ; Result for CMD
+   33 |  1          smartloader.s     33 | Equivalence | 11 |         |    0 | 00/2000               | RES_BLK2              EQU   $2900             ; Result for CMD
+   34 |  1          smartloader.s     34 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   35 |  1          smartloader.s     35 | Equivalence | 11 |         |    0 | 00/2000               | MLI                   EQU   $BF00             ; ProDOS system call
+   36 |  1          smartloader.s     36 | Equivalence | 11 |         |    0 | 00/2000               | CROUT                 EQU   $FD8E             ; Monitor CROUT routine
+   37 |  1          smartloader.s     37 | Equivalence | 11 |         |    0 | 00/2000               | PRBYTE                EQU   $FDDA             ; Monitor PRBYTE routine
+   38 |  1          smartloader.s     38 | Equivalence | 11 |         |    0 | 00/2000               | IORTS                 EQU   $FF58             
+   39 |  1          smartloader.s     39 | Equivalence | 11 |         |    0 | 00/2000               | myZP                  EQU   $02               
+   40 |  1          smartloader.s     40 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   41 |  1          smartloader.s     41 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   42 |  1          smartloader.s     42 | Equivalence | 11 |         |    0 | 00/2000               | cstMaxImgLen          EQU   #$10              ; Constant Max Image Filename len
+   43 |  1          smartloader.s     43 | Equivalence | 11 |         |    0 | 00/2000               | cstLineOffset         EQU   #$03              
+   44 |  1          smartloader.s     44 | Equivalence | 11 |         |    0 | 00/2000               | cstMaxImgItem         EQU   #$07              
+   45 |  1          smartloader.s     45 | Equivalence | 11 |         |    0 | 00/2000               | zpImgIndx             EQU   $85               ; Current ImageIndex
+   46 |  1          smartloader.s     46 | Equivalence | 11 |         |    0 | 00/2000               | zpPrevImgIndx         EQU   $86               
+   47 |  1          smartloader.s     47 | Equivalence | 11 |         |    0 | 00/2000               | zpMaxImgIndx          EQU   $87               
+   48 |  1          smartloader.s     48 | Equivalence | 11 |         |    0 | 00/2000               | zpDispMask            EQU   $88               
+   49 |  1          smartloader.s     49 | Equivalence | 11 |         |    0 | 00/2000               | zpPtr1                EQU   $80               ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen
+   50 |  1          smartloader.s     50 | Equivalence | 11 |         |    0 | 00/2000               | zpPtr2                EQU   $83               
+   51 |  1          smartloader.s     51 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   52 |  1          smartloader.s     52 | Empty       | 11 |         |    0 | 00/2000               | start                                         
+   53 |  1          smartloader.s     53 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   54 |  1          smartloader.s     54 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   55 |  1          smartloader.s     55 | Comment     | 11 |         |    0 | 00/2000               |             ;----------------------------------------------
+   56 |  1          smartloader.s     56 | Comment     | 11 |         |    0 | 00/2000               |             ; Clear Screen
+   57 |  1          smartloader.s     57 | Comment     | 11 |         |    0 | 00/2000               |             ;----------------------------------------------
+   58 |  1          smartloader.s     58 | Empty       | 11 |         |    0 | 00/2000               |                                               
+   59 |  1          smartloader.s     59 | Code        | 11 |         |    3 | 00/2000 : 20 58 FC    |                       jsr   {$FC58}           
+   60 |  1          smartloader.s     60 | Empty       | 11 |         |    0 | 00/2003               |                                               
+   61 |  1          smartloader.s     61 | Comment     | 11 |         |    0 | 00/2003               |             ;----------------------------------------------
+   62 |  1          smartloader.s     62 | Comment     | 11 |         |    0 | 00/2003               |             ; Check PRODOS
+   63 |  1          smartloader.s     63 | Comment     | 11 |         |    0 | 00/2003               |             ;----------------------------------------------
+   64 |  1          smartloader.s     64 | Empty       | 11 |         |    0 | 00/2003               |                                               
+   65 |  1          smartloader.s     65 | Code        | 11 |         |    2 | 00/2003 : A2 01       |                       ldx   #$01              
+   66 |  1          smartloader.s     66 | Comment     | 11 |         |    0 | 00/2005               |             ;lda     $BF00
+   67 |  1          smartloader.s     67 | Comment     | 11 |         |    0 | 00/2005               |             ;cmp     #$4c
+   68 |  1          smartloader.s     68 | Comment     | 11 |         |    0 | 00/2005               |             ;bne     loopb                                   ; TO BE CHANGED
+   69 |  1          smartloader.s     69 | Empty       | 11 |         |    0 | 00/2005               |                                               
+   70 |  1          smartloader.s     70 | Comment     | 11 |         |    0 | 00/2005               |             ;---------------------------------------------
+   71 |  1          smartloader.s     71 | Comment     | 11 |         |    0 | 00/2005               |             ;   VAR INIT
+   72 |  1          smartloader.s     72 | Comment     | 11 |         |    0 | 00/2005               |             ;---------------------------------------------
+   73 |  1          smartloader.s     73 | Empty       | 11 |         |    0 | 00/2005               |                                               
+   74 |  1          smartloader.s     74 | Code        | 11 |         |    2 | 00/2005 : A2 00       |                       ldx   #$00              
+   75 |  1          smartloader.s     75 | Code        | 11 |         |    1 | 00/2007 : E8          |                       inx                     
+   76 |  1          smartloader.s     76 | Code        | 11 |         |    2 | 00/2008 : 86 85       |                       stx   {$85}             
+   77 |  1          smartloader.s     77 | Code        | 11 |         |    2 | 00/200A : 86 86       |                       stx   {$86}             
+   78 |  1          smartloader.s     78 | Empty       | 11 |         |    0 | 00/200C               |                                               
+   79 |  1          smartloader.s     79 | Code        | 11 |         |    2 | 00/200C : A2 07       |                       ldx   #$07              
+   80 |  1          smartloader.s     80 | Code        | 11 |         |    2 | 00/200E : 86 87       |                       stx   {$87}             
+   81 |  1          smartloader.s     81 | Empty       | 11 |         |    0 | 00/2010               |                                               
+   82 |  1          smartloader.s     82 | Code        | 11 |         |    2 | 00/2010 : A2 0F       |                       ldx   #$0F              
+   83 |  1          smartloader.s     83 | Code        | 11 |         |    2 | 00/2012 : A0 00       |                       ldy   #$00              
+   84 |  1          smartloader.s     84 | Code        | 11 |         |    3 | 00/2014 : 20 03 22    |                       jsr   dispPositionCursor
+   85 |  1          smartloader.s     85 | Empty       | 11 |         |    0 | 00/2017               |                                               
+   86 |  1          smartloader.s     86 | Code        | 11 |         |    2 | 00/2017 : A2 FF       |                       ldx   #$FF              ; add Inverse Mask
+   87 |  1          smartloader.s     87 | Code        | 11 |         |    2 | 00/2019 : 86 88       |                       stx   {$88}             ; store to zeropage
+   88 |  1          smartloader.s     88 | Empty       | 11 |         |    0 | 00/201B               |                                               
+   89 |  1          smartloader.s     89 | Code        | 11 |         |    2 | 00/201B : A2 8C       |                       ldx   #<_title          
+   90 |  1          smartloader.s     90 | Code        | 11 |         |    2 | 00/201D : A0 22       |                       ldy   #>_title          
+   91 |  1          smartloader.s     91 | Code        | 11 |         |    3 | 00/201F : 20 0C 22    |                       jsr   printMsg          
+   92 |  1          smartloader.s     92 | Empty       | 11 |         |    0 | 00/2022               |                                               
+   93 |  1          smartloader.s     93 | Code        | 11 |         |    2 | 00/2022 : A2 22       |                       ldx   #$22              
+   94 |  1          smartloader.s     94 | Code        | 11 |         |    2 | 00/2024 : A0 17       |                       ldy   #$17              
+   95 |  1          smartloader.s     95 | Code        | 11 |         |    3 | 00/2026 : 20 03 22    |                       jsr   dispPositionCursor
+   96 |  1          smartloader.s     96 | Empty       | 11 |         |    0 | 00/2029               |                                               
+   97 |  1          smartloader.s     97 | Code        | 11 |         |    2 | 00/2029 : A2 98       |                       ldx   #<_version        
+   98 |  1          smartloader.s     98 | Code        | 11 |         |    2 | 00/202B : A0 22       |                       ldy   #>_version        
+   99 |  1          smartloader.s     99 | Code        | 11 |         |    3 | 00/202D : 20 0C 22    |                       jsr   printMsg          
+  100 |  1          smartloader.s    100 | Empty       | 11 |         |    0 | 00/2030               |                                               
+  101 |  1          smartloader.s    101 | Code        | 11 |         |    2 | 00/2030 : A2 00       |                       ldx   #$00              
+  102 |  1          smartloader.s    102 | Code        | 11 |         |    2 | 00/2032 : A0 01       |                       ldy   #$01              
+  103 |  1          smartloader.s    103 | Code        | 11 |         |    3 | 00/2034 : 20 03 22    |                       jsr   dispPositionCursor
+  104 |  1          smartloader.s    104 | Empty       | 11 |         |    0 | 00/2037               |                                               
+  105 |  1          smartloader.s    105 | Code        | 11 |         |    2 | 00/2037 : A0 28       |                       ldy   #$28              
+  106 |  1          smartloader.s    106 | Code        | 11 |         |    3 | 00/2039 : 20 B6 20    |                       jsr   dispLine          
+  107 |  1          smartloader.s    107 | Empty       | 11 |         |    0 | 00/203C               |                                               
+  108 |  1          smartloader.s    108 | Empty       | 11 |         |    0 | 00/203C               |                                               
+  109 |  1          smartloader.s    109 | Code        | 11 |         |    2 | 00/203C : A2 00       |                       ldx   #$00              
+  110 |  1          smartloader.s    110 | Code        | 11 |         |    2 | 00/203E : A0 15       |                       ldy   #$15              
+  111 |  1          smartloader.s    111 | Code        | 11 |         |    3 | 00/2040 : 20 03 22    |                       jsr   dispPositionCursor
+  112 |  1          smartloader.s    112 | Empty       | 11 |         |    0 | 00/2043               |                                               
+  113 |  1          smartloader.s    113 | Code        | 11 |         |    2 | 00/2043 : A0 28       |                       ldy   #$28              
+  114 |  1          smartloader.s    114 | Code        | 11 |         |    3 | 00/2045 : 20 B6 20    |                       jsr   dispLine          
+  115 |  1          smartloader.s    115 | Empty       | 11 |         |    0 | 00/2048               |                                               
+  116 |  1          smartloader.s    116 | Code        | 11 |         |    2 | 00/2048 : A2 00       |                       ldx   #$0               
+  117 |  1          smartloader.s    117 | Code        | 11 |         |    2 | 00/204A : A0 17       |                       ldy   #$17              
+  118 |  1          smartloader.s    118 | Code        | 11 |         |    3 | 00/204C : 20 03 22    |                       jsr   dispPositionCursor
+  119 |  1          smartloader.s    119 | Empty       | 11 |         |    0 | 00/204F               |                                               
+  120 |  1          smartloader.s    120 | Code        | 11 |         |    2 | 00/204F : A2 9E       |                       ldx   #<_option         
+  121 |  1          smartloader.s    121 | Code        | 11 |         |    2 | 00/2051 : A0 22       |                       ldy   #>_option         
+  122 |  1          smartloader.s    122 | Code        | 11 |         |    3 | 00/2053 : 20 0C 22    |                       jsr   printMsg          
+  123 |  1          smartloader.s    123 | Empty       | 11 |         |    0 | 00/2056               |                                               
+  124 |  1          smartloader.s    124 | Empty       | 11 |         |    0 | 00/2056               |                                               
+  125 |  1          smartloader.s    125 | Comment     | 11 |         |    0 | 00/2056               |             ;jsr     loadImageNameToDataBlock
+  126 |  1          smartloader.s    126 | Comment     | 11 |         |    0 | 00/2056               |             ;jsr     writeCmdBlk
+  127 |  1          smartloader.s    127 | Comment     | 11 |         |    0 | 00/2056               |             ;jsr     readKey
+  128 |  1          smartloader.s    128 | Empty       | 11 |         |    0 | 00/2056               | refresh                                       
+  129 |  1          smartloader.s    129 | Code        | 11 |         |    3 | 00/2056 : 20 62 22    |                       jsr   readBlock         
+  130 |  1          smartloader.s    130 | Code        | 11 |         |    3 | 00/2059 : AD 00 28    |                       lda   {$2800}           
+  131 |  1          smartloader.s    131 | Code        | 11 |         |    2 | 00/205C : C9 20       |                       cmp   #$20              
+  132 |  1          smartloader.s    132 | Code        | 11 |         |    2 | 00/205E : D0 19       |                       bne   refresh_0         ; Error to be diplayed
+  133 |  1          smartloader.s    133 | Empty       | 11 |         |    0 | 00/2060               |                                               
+  134 |  1          smartloader.s    134 | Code        | 11 |         |    3 | 00/2060 : AD 01 28    |                       lda   {$2800}+1         
+  135 |  1          smartloader.s    135 | Code        | 11 |         |    2 | 00/2063 : 85 87       |                       sta   {$87}             
+  136 |  1          smartloader.s    136 | Comment     | 11 |         |    0 | 00/2065               |             ;BRK
+  137 |  1          smartloader.s    137 | Comment     | 11 |         |    0 | 00/2065               |             ;jsr     readKey
+  138 |  1          smartloader.s    138 | Code        | 11 |         |    3 | 00/2065 : 20 BF 20    |                       jsr   dispDataBlock     
+  139 |  1          smartloader.s    139 | Empty       | 11 |         |    0 | 00/2068               |                                               
+  140 |  1          smartloader.s    140 | Empty       | 11 |         |    0 | 00/2068               |                                               
+  141 |  1          smartloader.s    141 | Code        | 11 |         |    2 | 00/2068 : A2 00       |                       ldx   #$00              ; init imgaIndex
+  142 |  1          smartloader.s    142 | Code        | 11 |         |    2 | 00/206A : 86 85       |                       stx   {$85}             ; store to zeropage
+  143 |  1          smartloader.s    143 | Code        | 11 |         |    2 | 00/206C : A2 7F       |                       ldx   #$7F              ; add Inverse Mask
+  144 |  1          smartloader.s    144 | Code        | 11 |         |    2 | 00/206E : 86 88       |                       stx   {$88}             ; store to zeropage
+  145 |  1          smartloader.s    145 | Code        | 11 |         |    3 | 00/2070 : 20 0E 21    |                       jsr   dispDataBlockImage; disp current selection
+  146 |  1          smartloader.s    146 | Empty       | 11 |         |    0 | 00/2073               |                                               
+  147 |  1          smartloader.s    147 | Code        | 11 |         |    3 | 00/2073 : 20 41 21    |                       jsr   mainDispatch      
+  148 |  1          smartloader.s    148 | Empty       | 11 |         |    0 | 00/2076               |                                               
+  149 |  1          smartloader.s    149 | Comment     | 11 |         |    0 | 00/2076               |             ;jsr     checkDriveSlot
+  150 |  1          smartloader.s    150 | Comment     | 11 |         |    0 | 00/2076               |             ;jsr     writeCmdBlk
+  151 |  1          smartloader.s    151 | Comment     | 11 |         |    0 | 00/2076               |             ;brk
+  152 |  1          smartloader.s    152 | Code        | 11 |         |    3 | 00/2076 : 20 00 20    |                       jsr   start             
+  153 |  1          smartloader.s    153 | Empty       | 11 |         |    0 | 00/2079               |                                               
+  154 |  1          smartloader.s    154 | Empty       | 11 |         |    0 | 00/2079               | refresh_0                                     
+  155 |  1          smartloader.s    155 | Code        | 11 |         |    3 | 00/2079 : 20 F8 20    |                       jsr   dispErrorMsg      
+  156 |  1          smartloader.s    156 | Code        | 11 |         |    1 | 00/207C : 60          |                       rts                     
+  157 |  1          smartloader.s    157 | Empty       | 11 |         |    0 | 00/207D               |                                               
+  158 |  1          smartloader.s    158 | Empty       | 11 |         |    0 | 00/207D               |                                               
+  159 |  1          smartloader.s    159 | Comment     | 11 |         |    0 | 00/207D               | ;   @Funct: setCommand
+  160 |  1          smartloader.s    160 | Comment     | 11 |         |    0 | 00/207D               | ;   @Param: X Command, Y Value
+  161 |  1          smartloader.s    161 | Comment     | 11 |         |    0 | 00/207D               | ;
+  162 |  1          smartloader.s    162 | Empty       | 11 |         |    0 | 00/207D               |                                               
+  163 |  1          smartloader.s    163 | Empty       | 11 |         |    0 | 00/207D               | setCommand                                    
+  164 |  1          smartloader.s    164 | Code        | 11 |         |    2 | 00/207D : A9 00       |                       lda   #<{$2600}         
+  165 |  1          smartloader.s    165 | Code        | 11 |         |    2 | 00/207F : 85 80       |                       sta   {$80}             
+  166 |  1          smartloader.s    166 | Empty       | 11 |         |    0 | 00/2081               |                                               
+  167 |  1          smartloader.s    167 | Code        | 11 |         |    2 | 00/2081 : A9 26       |                       lda   #>{$2600}         
+  168 |  1          smartloader.s    168 | Code        | 11 |         |    2 | 00/2083 : 85 81       |                       sta   {$80}+1           
+  169 |  1          smartloader.s    169 | Code        | 11 |         |    1 | 00/2085 : 8A          |                       txa                     
+  170 |  1          smartloader.s    170 | Code        | 11 |         |    3 | 00/2086 : 8D 00 26    |                       sta   {$2600}           
+  171 |  1          smartloader.s    171 | Empty       | 11 |         |    0 | 00/2089               |                                               
+  172 |  1          smartloader.s    172 | Code        | 11 |         |    1 | 00/2089 : 98          |                       tya                     
+  173 |  1          smartloader.s    173 | Code        | 11 |         |    3 | 00/208A : 8D 01 26    |                       sta   {$2600}+1         
+  174 |  1          smartloader.s    174 | Empty       | 11 |         |    0 | 00/208D               |                                               
+  175 |  1          smartloader.s    175 | Code        | 11 |         |    2 | 00/208D : A9 00       |                       lda   #$00              
+  176 |  1          smartloader.s    176 | Code        | 11 |         |    2 | 00/208F : A0 01       |                       ldy   #$01              
+  177 |  1          smartloader.s    177 | Empty       | 11 |         |    0 | 00/2091               | setCommand_0                                  
+  178 |  1          smartloader.s    178 | Code        | 11 |         |    1 | 00/2091 : C8          |                       iny                     
+  179 |  1          smartloader.s    179 | Code        | 11 |         |    2 | 00/2092 : 91 80       |                       sta   ({$80}),Y         
+  180 |  1          smartloader.s    180 | Code        | 11 |         |    2 | 00/2094 : C0 FF       |                       cpy   #$FF              
+  181 |  1          smartloader.s    181 | Code        | 11 |         |    2 | 00/2096 : D0 F9       |                       bne   setCommand_0      
+  182 |  1          smartloader.s    182 | Code        | 11 |         |    2 | 00/2098 : A9 00       |                       lda   #<{$2600}         
+  183 |  1          smartloader.s    183 | Code        | 11 |         |    2 | 00/209A : 85 80       |                       sta   {$80}             
+  184 |  1          smartloader.s    184 | Empty       | 11 |         |    0 | 00/209C               |                                               
+  185 |  1          smartloader.s    185 | Code        | 11 |         |    2 | 00/209C : A9 26       |                       lda   #>{$2600}         
+  186 |  1          smartloader.s    186 | Code        | 11 |         |    1 | 00/209E : 1A          |                       inc                     
+  187 |  1          smartloader.s    187 | Code        | 11 |         |    2 | 00/209F : 85 81       |                       sta   {$80}+1           
+  188 |  1          smartloader.s    188 | Code        | 11 |         |    2 | 00/20A1 : A0 00       |                       ldy   #$00              
+  189 |  1          smartloader.s    189 | Code        | 11 |         |    2 | 00/20A3 : A9 00       |                       lda   #$00              
+  190 |  1          smartloader.s    190 | Empty       | 11 |         |    0 | 00/20A5               | setCommand_1                                  
+  191 |  1          smartloader.s    191 | Code        | 11 |         |    2 | 00/20A5 : 91 80       |                       sta   ({$80}),Y         
+  192 |  1          smartloader.s    192 | Code        | 11 |         |    2 | 00/20A7 : C0 FF       |                       cpy   #$FF              
+  193 |  1          smartloader.s    193 | Code        | 11 |         |    1 | 00/20A9 : C8          |                       iny                     
+  194 |  1          smartloader.s    194 | Code        | 11 |         |    2 | 00/20AA : D0 F9       |                       bne   setCommand_1      
+  195 |  1          smartloader.s    195 | Empty       | 11 |         |    0 | 00/20AC               |                                               
+  196 |  1          smartloader.s    196 | Empty       | 11 |         |    0 | 00/20AC               | setCommand_2                                  
+  197 |  1          smartloader.s    197 | Code        | 11 |         |    3 | 00/20AC : 20 00 BF    |                       jsr   {$BF00}           ; CALL PRODOS WRITE_BLOCK
+  198 |  1          smartloader.s    198 | Data        | 11 |         |    1 | 00/20AF : 81          |                       dfb   $81               
+  199 |  1          smartloader.s    199 | Data        | 11 |         |    1 | 00/20B0 : DA          |                       dfb   #<paramBLK_WR     
+  200 |  1          smartloader.s    200 | Data        | 11 |         |    1 | 00/20B1 : 22          |                       dfb   #>paramBLK_WR     
+  201 |  1          smartloader.s    201 | Code        | 11 |         |    3 | 00/20B2 : 20 4D 22    |                       jsr   ERROR             
+  202 |  1          smartloader.s    202 | Code        | 11 |         |    1 | 00/20B5 : 60          |                       rts                     
+  203 |  1          smartloader.s    203 | Empty       | 11 |         |    0 | 00/20B6               |                                               
+  204 |  1          smartloader.s    204 | Empty       | 11 |         |    0 | 00/20B6               | dispLine                                      
+  205 |  1          smartloader.s    205 | Code        | 11 |         |    2 | 00/20B6 : A9 DF       |                       lda   #$DF              
+  206 |  1          smartloader.s    206 | Code        | 11 |         |    3 | 00/20B8 : 20 ED FD    |                       jsr   {$FDED}           
+  207 |  1          smartloader.s    207 | Code        | 11 |         |    1 | 00/20BB : 88          |                       dey                     
+  208 |  1          smartloader.s    208 | Code        | 11 |         |    2 | 00/20BC : D0 F8       |                       bne   dispLine          
+  209 |  1          smartloader.s    209 | Code        | 11 |         |    1 | 00/20BE : 60          |                       rts                     
+  210 |  1          smartloader.s    210 | Empty       | 11 |         |    0 | 00/20BF               |                                               
+  211 |  1          smartloader.s    211 | Directive   | 11 |         |    0 | 00/20BF               |                       DO    {0}               
+  212 |  1          smartloader.s    279 | Directive   | 11 |         |    0 | 00/20BF               |                       FIN                     
+  213 |  1          smartloader.s    280 | Empty       | 11 |         |    0 | 00/20BF               |                                               
+  214 |  1          smartloader.s    281 | Empty       | 11 |         |    0 | 00/20BF               | dispDataBlock                                 
+  215 |  1          smartloader.s    282 | Code        | 11 |         |    2 | 00/20BF : A9 00       |                       lda   #$00              
+  216 |  1          smartloader.s    283 | Code        | 11 |         |    2 | 00/20C1 : 85 85       |                       sta   {$85}             
+  217 |  1          smartloader.s    284 | Code        | 11 |         |    2 | 00/20C3 : A2 FF       |                       ldx   #$FF              
+  218 |  1          smartloader.s    285 | Code        | 11 |         |    2 | 00/20C5 : 86 88       |                       stx   {$88}             
+  219 |  1          smartloader.s    286 | Empty       | 11 |         |    0 | 00/20C7               |                                               
+  220 |  1          smartloader.s    287 | Empty       | 11 |         |    0 | 00/20C7               | dispDataBlock_1                               
+  221 |  1          smartloader.s    288 | Code        | 11 |         |    3 | 00/20C7 : 20 0E 21    |                       jsr   dispDataBlockImage
+  222 |  1          smartloader.s    289 | Empty       | 11 |         |    0 | 00/20CA               |                                               
+  223 |  1          smartloader.s    290 | Empty       | 11 |         |    0 | 00/20CA               | dispDataBlock_2                               
+  224 |  1          smartloader.s    291 | Comment     | 11 |         |    0 | 00/20CA               |             ;lda zpImgIndx
+  225 |  1          smartloader.s    292 | Code        | 11 |         |    2 | 00/20CA : E6 85       |                       inc   {$85}             
+  226 |  1          smartloader.s    293 | Code        | 11 |         |    2 | 00/20CC : A5 85       |                       lda   {$85}             
+  227 |  1          smartloader.s    294 | Code        | 11 |         |    2 | 00/20CE : C5 87       |                       cmp   {$87}             
+  228 |  1          smartloader.s    295 | Code        | 11 |         |    2 | 00/20D0 : D0 F5       |                       bne   dispDataBlock_1   
+  229 |  1          smartloader.s    296 | Code        | 11 |         |    1 | 00/20D2 : 60          |                       rts                     
+  230 |  1          smartloader.s    297 | Empty       | 11 |         |    0 | 00/20D3               |                                               
+  231 |  1          smartloader.s    298 | Comment     | 11 |         |    0 | 00/20D3               | ;Display the name of the image on screen
+  232 |  1          smartloader.s    299 | Comment     | 11 |         |    0 | 00/20D3               | ;zpImgIndx contain the index
+  233 |  1          smartloader.s    300 | Comment     | 11 |         |    0 | 00/20D3               | ;zpDispMask  contains the display mode #FF normal, #3F inverted
+  234 |  1          smartloader.s    301 | Empty       | 11 |         |    0 | 00/20D3               | getImageAddr                                  
+  235 |  1          smartloader.s    302 | Empty       | 11 |         |    0 | 00/20D3               |                                               
+  236 |  1          smartloader.s    303 | Code        | 11 |         |    2 | 00/20D3 : A2 10       |                       ldx   #$10              ; #10 -> 16 !!!
+  237 |  1          smartloader.s    304 | Code        | 11 |         |    2 | 00/20D5 : 86 90       |                       stx   {$90}             
+  238 |  1          smartloader.s    305 | Code        | 11 |         |    2 | 00/20D7 : 85 92       |                       sta   {$92}             
+  239 |  1          smartloader.s    306 | Empty       | 11 |         |    0 | 00/20D9               |                                               
+  240 |  1          smartloader.s    307 | Code        | 11 |         |    3 | 00/20D9 : 20 75 23    |                       jsr   mult_8B_8B        
+  241 |  1          smartloader.s    308 | Empty       | 11 |         |    0 | 00/20DC               |                                               
+  242 |  1          smartloader.s    309 | Code        | 11 |         |    2 | 00/20DC : A6 95       |                       ldx   {$95}             
+  243 |  1          smartloader.s    310 | Code        | 11 |         |    2 | 00/20DE : 86 93       |                       stx   {$93}             
+  244 |  1          smartloader.s    311 | Empty       | 11 |         |    0 | 00/20E0               |                                               
+  245 |  1          smartloader.s    312 | Code        | 11 |         |    2 | 00/20E0 : A6 94       |                       ldx   {$94}             
+  246 |  1          smartloader.s    313 | Code        | 11 |         |    2 | 00/20E2 : 86 92       |                       stx   {$92}             
+  247 |  1          smartloader.s    314 | Empty       | 11 |         |    0 | 00/20E4               |                                               
+  248 |  1          smartloader.s    315 | Comment     | 11 |         |    0 | 00/20E4               |             ;ldx     #<RES_BLK
+  249 |  1          smartloader.s    316 | Code        | 11 |         |    2 | 00/20E4 : A2 10       |                       ldx   #$10              ; we start at 0x2810 and not 0x2800 to keep 16 bytes of data
+  250 |  1          smartloader.s    317 | Code        | 11 |         |    2 | 00/20E6 : 86 90       |                       stx   {$90}             
+  251 |  1          smartloader.s    318 | Empty       | 11 |         |    0 | 00/20E8               |                                               
+  252 |  1          smartloader.s    319 | Code        | 11 |         |    2 | 00/20E8 : A2 28       |                       ldx   #>{$2800}         
+  253 |  1          smartloader.s    320 | Code        | 11 |         |    2 | 00/20EA : 86 91       |                       stx   {$91}             
+  254 |  1          smartloader.s    321 | Empty       | 11 |         |    0 | 00/20EC               |                                               
+  255 |  1          smartloader.s    322 | Code        | 11 |         |    3 | 00/20EC : 20 67 23    |                       jsr   add_16B_16B       
+  256 |  1          smartloader.s    323 | Empty       | 11 |         |    0 | 00/20EF               |                                               
+  257 |  1          smartloader.s    324 | Code        | 11 |         |    2 | 00/20EF : A6 94       |                       ldx   {$94}             
+  258 |  1          smartloader.s    325 | Code        | 11 |         |    2 | 00/20F1 : 86 83       |                       stx   {$83}             
+  259 |  1          smartloader.s    326 | Empty       | 11 |         |    0 | 00/20F3               |                                               
+  260 |  1          smartloader.s    327 | Code        | 11 |         |    2 | 00/20F3 : A6 95       |                       ldx   {$95}             
+  261 |  1          smartloader.s    328 | Code        | 11 |         |    2 | 00/20F5 : 86 84       |                       stx   {$83}+1           
+  262 |  1          smartloader.s    329 | Code        | 11 |         |    1 | 00/20F7 : 60          |                       rts                     
+  263 |  1          smartloader.s    330 | Empty       | 11 |         |    0 | 00/20F8               |                                               
+  264 |  1          smartloader.s    331 | Empty       | 11 |         |    0 | 00/20F8               | dispErrorMsg                                  
+  265 |  1          smartloader.s    332 | Empty       | 11 |         |    0 | 00/20F8               |                                               
+  266 |  1          smartloader.s    333 | Code        | 11 |         |    2 | 00/20F8 : A2 0F       |                       ldx   #$0F              
+  267 |  1          smartloader.s    334 | Code        | 11 |         |    2 | 00/20FA : A0 00       |                       ldy   #$00              
+  268 |  1          smartloader.s    335 | Code        | 11 |         |    3 | 00/20FC : 20 03 22    |                       jsr   dispPositionCursor
+  269 |  1          smartloader.s    336 | Empty       | 11 |         |    0 | 00/20FF               |                                               
+  270 |  1          smartloader.s    337 | Code        | 11 |         |    2 | 00/20FF : A2 FF       |                       ldx   #$FF              ; add Inverse Mask
+  271 |  1          smartloader.s    338 | Code        | 11 |         |    2 | 00/2101 : 86 88       |                       stx   {$88}             ; store to zeropage
+  272 |  1          smartloader.s    339 | Empty       | 11 |         |    0 | 00/2103               |                                               
+  273 |  1          smartloader.s    340 | Code        | 11 |         |    2 | 00/2103 : A2 BA       |                       ldx   #<error_10        
+  274 |  1          smartloader.s    341 | Code        | 11 |         |    2 | 00/2105 : A0 22       |                       ldy   #>error_10        
+  275 |  1          smartloader.s    342 | Empty       | 11 |         |    0 | 00/2107               |                                               
+  276 |  1          smartloader.s    343 | Code        | 11 |         |    3 | 00/2107 : 20 0C 22    |                       jsr   printMsg          
+  277 |  1          smartloader.s    344 | Code        | 11 |         |    3 | 00/210A : 20 7F 22    |                       jsr   readKey           
+  278 |  1          smartloader.s    345 | Code        | 11 |         |    1 | 00/210D : 60          |                       rts                     
+  279 |  1          smartloader.s    346 | Empty       | 11 |         |    0 | 00/210E               |                                               
+  280 |  1          smartloader.s    347 | Empty       | 11 |         |    0 | 00/210E               |                                               
+  281 |  1          smartloader.s    348 | Empty       | 11 |         |    0 | 00/210E               | dispDataBlockImage                            
+  282 |  1          smartloader.s    349 | Empty       | 11 |         |    0 | 00/210E               |                                               
+  283 |  1          smartloader.s    350 | Code        | 11 |         |    2 | 00/210E : A5 85       |                       lda   {$85}             
+  284 |  1          smartloader.s    351 | Code        | 11 |         |    3 | 00/2110 : 20 D3 20    |                       jsr   getImageAddr      
+  285 |  1          smartloader.s    352 | Empty       | 11 |         |    0 | 00/2113               |                                               
+  286 |  1          smartloader.s    353 | Code        | 11 |         |    2 | 00/2113 : A5 85       |                       lda   {$85}             
+  287 |  1          smartloader.s    354 | Empty       | 11 |         |    0 | 00/2115               |                                               
+  288 |  1          smartloader.s    355 | Code        | 11 |         |    2 | 00/2115 : 69 03       |                       adc   {#$03}            ; position Cursor with line Offset
+  289 |  1          smartloader.s    356 | Code        | 11 |         |    1 | 00/2117 : A8          |                       tay                     
+  290 |  1          smartloader.s    357 | Code        | 11 |         |    2 | 00/2118 : A2 00       |                       ldx   #$0               
+  291 |  1          smartloader.s    358 | Code        | 11 |         |    3 | 00/211A : 20 03 22    |                       jsr   dispPositionCursor
+  292 |  1          smartloader.s    359 | Empty       | 11 |         |    0 | 00/211D               |                                               
+  293 |  1          smartloader.s    360 | Comment     | 11 |         |    0 | 00/211D               |             ;lda     #$00
+  294 |  1          smartloader.s    361 | Comment     | 11 |         |    0 | 00/211D               |             ;ldx     zpImgIndx
+  295 |  1          smartloader.s    362 | Comment     | 11 |         |    0 | 00/211D               |             ;jsr     PrintUint16
+  296 |  1          smartloader.s    363 | Code        | 11 |         |    2 | 00/211D : A5 85       |                       lda   {$85}             
+  297 |  1          smartloader.s    364 | Code        | 11 |         |    3 | 00/211F : 20 DA FD    |                       jsr   {$FDDA}           
+  298 |  1          smartloader.s    365 | Empty       | 11 |         |    0 | 00/2122               |                                               
+  299 |  1          smartloader.s    366 | Code        | 11 |         |    2 | 00/2122 : A9 BE       |                       lda   #$BE              ; ">"
+  300 |  1          smartloader.s    367 | Code        | 11 |         |    3 | 00/2124 : 20 ED FD    |                       jsr   {$FDED}           ; print
+  301 |  1          smartloader.s    368 | Empty       | 11 |         |    0 | 00/2127               |                                               
+  302 |  1          smartloader.s    369 | Code        | 11 |         |    2 | 00/2127 : A9 A0       |                       lda   #$A0              ; " "
+  303 |  1          smartloader.s    370 | Code        | 11 |         |    3 | 00/2129 : 20 ED FD    |                       jsr   {$FDED}           ; print
+  304 |  1          smartloader.s    371 | Empty       | 11 |         |    0 | 00/212C               |                                               
+  305 |  1          smartloader.s    372 | Code        | 11 |         |    2 | 00/212C : A0 00       |                       ldy   #$00              
+  306 |  1          smartloader.s    373 | Code        | 11 |         |    2 | 00/212E : B1 83       |                       lda   ({$83}),Y         
+  307 |  1          smartloader.s    374 | Empty       | 11 |         |    0 | 00/2130               |                                               
+  308 |  1          smartloader.s    375 | Empty       | 11 |         |    0 | 00/2130               |                                               
+  309 |  1          smartloader.s    376 | Empty       | 11 |         |    0 | 00/2130               | dispDataBlockImage_1                          
+  310 |  1          smartloader.s    377 | Code        | 11 |         |    2 | 00/2130 : 25 88       |                       and   {$88}             
+  311 |  1          smartloader.s    378 | Code        | 11 |         |    3 | 00/2132 : 20 ED FD    |                       jsr   $FDED             
+  312 |  1          smartloader.s    379 | Code        | 11 |         |    1 | 00/2135 : C8          |                       iny                     
+  313 |  1          smartloader.s    380 | Code        | 11 |         |    2 | 00/2136 : B1 83       |                       lda   ({$83}),Y         ; indirect zeropage addressing pointing to current char
+  314 |  1          smartloader.s    381 | Code        | 11 |         |    2 | 00/2138 : D0 F6       |                       bne   dispDataBlockImage_1
+  315 |  1          smartloader.s    382 | Code        | 11 |         |    1 | 00/213A : 60          |                       rts                     
+  316 |  1          smartloader.s    383 | Empty       | 11 |         |    0 | 00/213B               |                                               
+  317 |  1          smartloader.s    384 | Comment     | 11 |         |    0 | 00/213B               | ; Main process flow
+  318 |  1          smartloader.s    385 | Comment     | 11 |         |    0 | 00/213B               | ; Reading from the keyboard
+  319 |  1          smartloader.s    386 | Empty       | 11 |         |    0 | 00/213B               | JMP_REBOOT                                    
+  320 |  1          smartloader.s    387 | Code        | 11 |         |    3 | 00/213B : 4C 88 22    |                       jmp   reboot            
+  321 |  1          smartloader.s    388 | Empty       | 11 |         |    0 | 00/213E               | JMP_REFRESH                                   
+  322 |  1          smartloader.s    389 | Code        | 11 |         |    3 | 00/213E : 4C 56 20    |                       jmp   refresh           
+  323 |  1          smartloader.s    390 | Empty       | 11 |         |    0 | 00/2141               | mainDispatch                                  
+  324 |  1          smartloader.s    391 | Code        | 11 |         |    3 | 00/2141 : 20 7F 22    |                       jsr   readKey           
+  325 |  1          smartloader.s    392 | Empty       | 11 |         |    0 | 00/2144               |                                               
+  326 |  1          smartloader.s    393 | Code        | 11 |         |    1 | 00/2144 : 48          |                       pha                     ; Putting A containing the key value on the stack
+  327 |  1          smartloader.s    394 | Empty       | 11 |         |    0 | 00/2145               |                                               
+  328 |  1          smartloader.s    395 | Code        | 11 |         |    2 | 00/2145 : A0 00       |                       ldy   #$00              ; Display the Key value on the top right of the screen
+  329 |  1          smartloader.s    396 | Code        | 11 |         |    2 | 00/2147 : A2 06       |                       ldx   #$06              
+  330 |  1          smartloader.s    397 | Code        | 11 |         |    3 | 00/2149 : 20 03 22    |                       jsr   dispPositionCursor
+  331 |  1          smartloader.s    398 | Code        | 11 |         |    3 | 00/214C : 20 DA FD    |                       jsr   {$FDDA}           
+  332 |  1          smartloader.s    399 | Empty       | 11 |         |    0 | 00/214F               |                                               
+  333 |  1          smartloader.s    400 | Code        | 11 |         |    2 | 00/214F : A5 85       |                       lda   {$85}             
+  334 |  1          smartloader.s    401 | Code        | 11 |         |    2 | 00/2151 : 85 86       |                       sta   {$86}             
+  335 |  1          smartloader.s    402 | Empty       | 11 |         |    0 | 00/2153               |                                               
+  336 |  1          smartloader.s    403 | Code        | 11 |         |    1 | 00/2153 : 68          |                       pla                     
+  337 |  1          smartloader.s    404 | Code        | 11 |         |    2 | 00/2154 : C9 D2       |                       cmp   #$D2              ; KEY [R]
+  338 |  1          smartloader.s    405 | Code        | 11 |         |    2 | 00/2156 : F0 E6       |                       beq   JMP_REFRESH       
+  339 |  1          smartloader.s    406 | Empty       | 11 |         |    0 | 00/2158               |                                               
+  340 |  1          smartloader.s    407 | Code        | 11 |         |    2 | 00/2158 : C9 C2       |                       cmp   #$C2              ; KEY [R]
+  341 |  1          smartloader.s    408 | Code        | 11 |         |    2 | 00/215A : F0 DF       |                       beq   JMP_REBOOT        
+  342 |  1          smartloader.s    409 | Empty       | 11 |         |    0 | 00/215C               |                                               
+  343 |  1          smartloader.s    410 | Code        | 11 |         |    2 | 00/215C : C9 8D       |                       cmp   #$8D              ; KEY [ENTER] / [RETURN]
+  344 |  1          smartloader.s    411 | Code        | 11 |         |    2 | 00/215E : F0 64       |                       beq   mainDispatch_4    
+  345 |  1          smartloader.s    412 | Empty       | 11 |         |    0 | 00/2160               |                                               
+  346 |  1          smartloader.s    413 | Code        | 11 |         |    2 | 00/2160 : C9 8B       |                       cmp   #$8B              ; KEY [UP]
+  347 |  1          smartloader.s    414 | Code        | 11 |         |    2 | 00/2162 : D0 1A       |                       bne   mainDispatch_0    
+  348 |  1          smartloader.s    415 | Empty       | 11 |         |    0 | 00/2164               |                                               
+  349 |  1          smartloader.s    416 | Code        | 11 |         |    2 | 00/2164 : A2 FF       |                       ldx   #$FF              ; Change the current Image back to normal text
+  350 |  1          smartloader.s    417 | Code        | 11 |         |    2 | 00/2166 : 86 88       |                       stx   {$88}             
+  351 |  1          smartloader.s    418 | Code        | 11 |         |    3 | 00/2168 : 20 0E 21    |                       jsr   dispDataBlockImage
+  352 |  1          smartloader.s    419 | Empty       | 11 |         |    0 | 00/216B               |                                               
+  353 |  1          smartloader.s    420 | Code        | 11 |         |    2 | 00/216B : A6 85       |                       ldx   {$85}             
+  354 |  1          smartloader.s    421 | Code        | 11 |         |    2 | 00/216D : E0 00       |                       cpx   #00               ; if current Index is 0 then roll to the end
+  355 |  1          smartloader.s    422 | Code        | 11 |         |    2 | 00/216F : D0 07       |                       bne   mainDispatch_A    
+  356 |  1          smartloader.s    423 | Empty       | 11 |         |    0 | 00/2171               |                                               
+  357 |  1          smartloader.s    424 | Code        | 11 |         |    2 | 00/2171 : A6 87       |                       ldx   {$87}             ; zpImgIndx =7 rolling to 0
+  358 |  1          smartloader.s    425 | Code        | 11 |         |    2 | 00/2173 : 86 85       |                       stx   {$85}             
+  359 |  1          smartloader.s    426 | Code        | 11 |         |    3 | 00/2175 : 4C 9B 21    |                       jmp   mainDispatch_2    
+  360 |  1          smartloader.s    427 | Empty       | 11 |         |    0 | 00/2178               |                                               
+  361 |  1          smartloader.s    428 | Empty       | 11 |         |    0 | 00/2178               | mainDispatch_A                                
+  362 |  1          smartloader.s    429 | Code        | 11 |         |    3 | 00/2178 : 20 F9 21    |                       jsr   decImageIndex     ; decrement current Index
+  363 |  1          smartloader.s    430 | Code        | 11 |         |    3 | 00/217B : 4C 9B 21    |                       jmp   mainDispatch_2    ; go the display part
+  364 |  1          smartloader.s    431 | Empty       | 11 |         |    0 | 00/217E               |                                               
+  365 |  1          smartloader.s    432 | Empty       | 11 |         |    0 | 00/217E               | mainDispatch_0                                
+  366 |  1          smartloader.s    433 | Code        | 11 |         |    2 | 00/217E : C9 8A       |                       cmp   #$8A              ; Key Down
+  367 |  1          smartloader.s    434 | Code        | 11 |         |    2 | 00/2180 : D0 BF       |                       bne   mainDispatch      
+  368 |  1          smartloader.s    435 | Empty       | 11 |         |    0 | 00/2182               |                                               
+  369 |  1          smartloader.s    436 | Code        | 11 |         |    2 | 00/2182 : A5 85       |                       lda   {$85}             
+  370 |  1          smartloader.s    437 | Empty       | 11 |         |    0 | 00/2184               |                                               
+  371 |  1          smartloader.s    438 | Code        | 11 |         |    2 | 00/2184 : A2 FF       |                       ldx   #$FF              
+  372 |  1          smartloader.s    439 | Code        | 11 |         |    2 | 00/2186 : 86 88       |                       stx   {$88}             
+  373 |  1          smartloader.s    440 | Code        | 11 |         |    3 | 00/2188 : 20 0E 21    |                       jsr   dispDataBlockImage
+  374 |  1          smartloader.s    441 | Code        | 11 |         |    2 | 00/218B : A6 85       |                       ldx   {$85}             
+  375 |  1          smartloader.s    442 | Code        | 11 |         |    2 | 00/218D : E4 87       |                       cpx   {$87}             ; TODO put this automatic from the stack
+  376 |  1          smartloader.s    443 | Code        | 11 |         |    2 | 00/218F : D0 07       |                       bne   mainDispatch_1    
+  377 |  1          smartloader.s    444 | Empty       | 11 |         |    0 | 00/2191               |                                               
+  378 |  1          smartloader.s    445 | Code        | 11 |         |    2 | 00/2191 : A2 00       |                       ldx   #$0               ; zpImgIndx =7 rolling to 0
+  379 |  1          smartloader.s    446 | Code        | 11 |         |    2 | 00/2193 : 86 85       |                       stx   {$85}             
+  380 |  1          smartloader.s    447 | Code        | 11 |         |    3 | 00/2195 : 4C 9B 21    |                       jmp   mainDispatch_2    
+  381 |  1          smartloader.s    448 | Empty       | 11 |         |    0 | 00/2198               |                                               
+  382 |  1          smartloader.s    449 | Empty       | 11 |         |    0 | 00/2198               | mainDispatch_1                                
+  383 |  1          smartloader.s    450 | Code        | 11 |         |    3 | 00/2198 : 20 EF 21    |                       jsr   incImageIndex     ; increment current index
+  384 |  1          smartloader.s    451 | Empty       | 11 |         |    0 | 00/219B               |                                               
+  385 |  1          smartloader.s    452 | Empty       | 11 |         |    0 | 00/219B               | mainDispatch_2                                
+  386 |  1          smartloader.s    453 | Code        | 11 |         |    2 | 00/219B : A5 85       |                       lda   {$85}             
+  387 |  1          smartloader.s    454 | Code        | 11 |         |    2 | 00/219D : E9 09       |                       sbc   #$09              
+  388 |  1          smartloader.s    455 | Code        | 11 |         |    2 | 00/219F : 10 03       |                       bpl   mainDispatch_3    
+  389 |  1          smartloader.s    456 | Code        | 11 |         |    3 | 00/21A1 : 20 E9 21    |                       jsr   padd1char         
+  390 |  1          smartloader.s    457 | Empty       | 11 |         |    0 | 00/21A4               |                                               
+  391 |  1          smartloader.s    458 | Empty       | 11 |         |    0 | 00/21A4               | mainDispatch_3                                
+  392 |  1          smartloader.s    459 | Code        | 11 |         |    2 | 00/21A4 : A0 00       |                       ldy   #$0               
+  393 |  1          smartloader.s    460 | Code        | 11 |         |    2 | 00/21A6 : A2 22       |                       ldx   #$22              
+  394 |  1          smartloader.s    461 | Code        | 11 |         |    3 | 00/21A8 : 20 03 22    |                       jsr   dispPositionCursor
+  395 |  1          smartloader.s    462 | Empty       | 11 |         |    0 | 00/21AB               |                                               
+  396 |  1          smartloader.s    463 | Comment     | 11 |         |    0 | 00/21AB               |             ;lda     #$00
+  397 |  1          smartloader.s    464 | Comment     | 11 |         |    0 | 00/21AB               |             ;ldx     zpImgIndx
+  398 |  1          smartloader.s    465 | Comment     | 11 |         |    0 | 00/21AB               |             ;jsr     PrintUint16
+  399 |  1          smartloader.s    466 | Code        | 11 |         |    2 | 00/21AB : A5 85       |                       lda   {$85}             
+  400 |  1          smartloader.s    467 | Code        | 11 |         |    3 | 00/21AD : 20 DA FD    |                       jsr   {$FDDA}           
+  401 |  1          smartloader.s    468 | Empty       | 11 |         |    0 | 00/21B0               |                                               
+  402 |  1          smartloader.s    469 | Code        | 11 |         |    2 | 00/21B0 : A9 AF       |                       lda   #$AF              ; "/"
+  403 |  1          smartloader.s    470 | Code        | 11 |         |    3 | 00/21B2 : 20 ED FD    |                       jsr   {$FDED}           
+  404 |  1          smartloader.s    471 | Empty       | 11 |         |    0 | 00/21B5               |                                               
+  405 |  1          smartloader.s    472 | Code        | 11 |         |    2 | 00/21B5 : A5 87       |                       lda   {$87}             
+  406 |  1          smartloader.s    473 | Code        | 11 |         |    3 | 00/21B7 : 20 DA FD    |                       jsr   {$FDDA}           
+  407 |  1          smartloader.s    474 | Comment     | 11 |         |    0 | 00/21BA               |             ;lda     #$00
+  408 |  1          smartloader.s    475 | Comment     | 11 |         |    0 | 00/21BA               |             ;ldx     zpMaxImgIndx
+  409 |  1          smartloader.s    476 | Comment     | 11 |         |    0 | 00/21BA               |             ;jsr     PrintUint16
+  410 |  1          smartloader.s    477 | Empty       | 11 |         |    0 | 00/21BA               |                                               
+  411 |  1          smartloader.s    478 | Code        | 11 |         |    2 | 00/21BA : A2 3F       |                       ldx   #$3F              
+  412 |  1          smartloader.s    479 | Code        | 11 |         |    2 | 00/21BC : 86 88       |                       stx   {$88}             
+  413 |  1          smartloader.s    480 | Code        | 11 |         |    3 | 00/21BE : 20 0E 21    |                       jsr   dispDataBlockImage
+  414 |  1          smartloader.s    481 | Code        | 11 |         |    3 | 00/21C1 : 4C 41 21    |                       jmp   mainDispatch      
+  415 |  1          smartloader.s    482 | Empty       | 11 |         |    0 | 00/21C4               |                                               
+  416 |  1          smartloader.s    483 | Empty       | 11 |         |    0 | 00/21C4               | mainDispatch_4                                
+  417 |  1          smartloader.s    484 | Code        | 11 |         |    3 | 00/21C4 : 20 58 FC    |                       jsr   {$FC58}           
+  418 |  1          smartloader.s    485 | Empty       | 11 |         |    0 | 00/21C7               |                                               
+  419 |  1          smartloader.s    486 | Code        | 11 |         |    2 | 00/21C7 : A2 10       |                       ldx   #$10              
+  420 |  1          smartloader.s    487 | Code        | 11 |         |    2 | 00/21C9 : A0 09       |                       ldy   #$09              
+  421 |  1          smartloader.s    488 | Code        | 11 |         |    3 | 00/21CB : 20 03 22    |                       jsr   dispPositionCursor
+  422 |  1          smartloader.s    489 | Empty       | 11 |         |    0 | 00/21CE               |                                               
+  423 |  1          smartloader.s    490 | Code        | 11 |         |    2 | 00/21CE : A2 FF       |                       ldx   #$FF              
+  424 |  1          smartloader.s    491 | Code        | 11 |         |    2 | 00/21D0 : 86 88       |                       stx   {$88}             
+  425 |  1          smartloader.s    492 | Empty       | 11 |         |    0 | 00/21D2               |                                               
+  426 |  1          smartloader.s    493 | Code        | 11 |         |    2 | 00/21D2 : A5 85       |                       lda   {$85}             
+  427 |  1          smartloader.s    494 | Code        | 11 |         |    3 | 00/21D4 : 20 D3 20    |                       jsr   getImageAddr      
+  428 |  1          smartloader.s    495 | Empty       | 11 |         |    0 | 00/21D7               |                                               
+  429 |  1          smartloader.s    496 | Code        | 11 |         |    2 | 00/21D7 : A6 83       |                       ldx   {$83}             
+  430 |  1          smartloader.s    497 | Code        | 11 |         |    2 | 00/21D9 : A4 84       |                       ldy   {$83}+1           
+  431 |  1          smartloader.s    498 | Empty       | 11 |         |    0 | 00/21DB               |                                               
+  432 |  1          smartloader.s    499 | Code        | 11 |         |    3 | 00/21DB : 20 0C 22    |                       jsr   printMsg          
+  433 |  1          smartloader.s    500 | Code        | 11 |         |    2 | 00/21DE : A2 01       |                       ldx   #$01              
+  434 |  1          smartloader.s    501 | Code        | 11 |         |    2 | 00/21E0 : A4 85       |                       ldy   {$85}             
+  435 |  1          smartloader.s    502 | Code        | 11 |         |    3 | 00/21E2 : 20 7D 20    |                       jsr   setCommand        
+  436 |  1          smartloader.s    503 | Empty       | 11 |         |    0 | 00/21E5               |                                               
+  437 |  1          smartloader.s    504 | Code        | 11 |         |    3 | 00/21E5 : 20 7F 22    |                       jsr   readKey           
+  438 |  1          smartloader.s    505 | Empty       | 11 |         |    0 | 00/21E8               |                                               
+  439 |  1          smartloader.s    506 | Code        | 11 |         |    1 | 00/21E8 : 60          |                       rts                     
+  440 |  1          smartloader.s    507 | Empty       | 11 |         |    0 | 00/21E9               |                                               
+  441 |  1          smartloader.s    508 | Empty       | 11 |         |    0 | 00/21E9               | padd1char                                     
+  442 |  1          smartloader.s    509 | Code        | 11 |         |    2 | 00/21E9 : A9 A0       |                       lda   #$A0              ; padding right by print space char
+  443 |  1          smartloader.s    510 | Code        | 11 |         |    3 | 00/21EB : 20 ED FD    |                       jsr   {$FDED}           ; display content of A
+  444 |  1          smartloader.s    511 | Code        | 11 |         |    1 | 00/21EE : 60          |                       rts                     ; return to PC on stack
+  445 |  1          smartloader.s    512 | Empty       | 11 |         |    0 | 00/21EF               |                                               
+  446 |  1          smartloader.s    513 | Empty       | 11 |         |    0 | 00/21EF               | incImageIndex                                 
+  447 |  1          smartloader.s    514 | Code        | 11 |         |    2 | 00/21EF : A6 85       |                       ldx   {$85}             
+  448 |  1          smartloader.s    515 | Code        | 11 |         |    2 | 00/21F1 : E0 55       |                       cpx   #$255             
+  449 |  1          smartloader.s    516 | Code        | 11 |         |    2 | 00/21F3 : F0 03       |                       beq   incImageIndex_0   
+  450 |  1          smartloader.s    517 | Code        | 11 |         |    1 | 00/21F5 : E8          |                       inx                     
+  451 |  1          smartloader.s    518 | Code        | 11 |         |    2 | 00/21F6 : 86 85       |                       stx   {$85}             
+  452 |  1          smartloader.s    519 | Empty       | 11 |         |    0 | 00/21F8               |                                               
+  453 |  1          smartloader.s    520 | Empty       | 11 |         |    0 | 00/21F8               | incImageIndex_0                               
+  454 |  1          smartloader.s    521 | Code        | 11 |         |    1 | 00/21F8 : 60          |                       rts                     
+  455 |  1          smartloader.s    522 | Empty       | 11 |         |    0 | 00/21F9               |                                               
+  456 |  1          smartloader.s    523 | Empty       | 11 |         |    0 | 00/21F9               | decImageIndex                                 
+  457 |  1          smartloader.s    524 | Code        | 11 |         |    2 | 00/21F9 : A6 85       |                       ldx   {$85}             
+  458 |  1          smartloader.s    525 | Code        | 11 |         |    2 | 00/21FB : E0 00       |                       cpx   #$0               
+  459 |  1          smartloader.s    526 | Code        | 11 |         |    2 | 00/21FD : F0 03       |                       beq   decImageIndex_0   
+  460 |  1          smartloader.s    527 | Code        | 11 |         |    1 | 00/21FF : CA          |                       dex                     
+  461 |  1          smartloader.s    528 | Code        | 11 |         |    2 | 00/2200 : 86 85       |                       stx   {$85}             
+  462 |  1          smartloader.s    529 | Empty       | 11 |         |    0 | 00/2202               |                                               
+  463 |  1          smartloader.s    530 | Empty       | 11 |         |    0 | 00/2202               | decImageIndex_0                               
+  464 |  1          smartloader.s    531 | Code        | 11 |         |    1 | 00/2202 : 60          |                       rts                     
+  465 |  1          smartloader.s    532 | Empty       | 11 |         |    0 | 00/2203               |                                               
+  466 |  1          smartloader.s    533 | Empty       | 11 |         |    0 | 00/2203               | dispPositionCursor                            
+  467 |  1          smartloader.s    534 | Code        | 11 |         |    1 | 00/2203 : 48          |                       pha                     ; push regA to stack
+  468 |  1          smartloader.s    535 | Code        | 11 |         |    1 | 00/2204 : 98          |                       tya                     
+  469 |  1          smartloader.s    536 | Code        | 11 |         |    2 | 00/2205 : 86 24       |                       stx   {$24}             
+  470 |  1          smartloader.s    537 | Code        | 11 |         |    3 | 00/2207 : 20 5B FB    |                       jsr   {$FB5B}           
+  471 |  1          smartloader.s    538 | Code        | 11 |         |    1 | 00/220A : 68          |                       pla                     ; pull regA from the stack
+  472 |  1          smartloader.s    539 | Code        | 11 |         |    1 | 00/220B : 60          |                       rts                     
+  473 |  1          smartloader.s    540 | Empty       | 11 |         |    0 | 00/220C               |                                               
+  474 |  1          smartloader.s    541 | Empty       | 11 |         |    0 | 00/220C               | printMsg                                      
+  475 |  1          smartloader.s    542 | Code        | 11 |         |    2 | 00/220C : 86 80       |                       stx   {$80}             
+  476 |  1          smartloader.s    543 | Code        | 11 |         |    2 | 00/220E : 84 81       |                       sty   {$80}+1           
+  477 |  1          smartloader.s    544 | Code        | 11 |         |    2 | 00/2210 : A0 00       |                       ldy   #0                
+  478 |  1          smartloader.s    545 | Code        | 11 |         |    2 | 00/2212 : B1 80       |                       lda   ({$80}),Y         
+  479 |  1          smartloader.s    546 | Empty       | 11 |         |    0 | 00/2214               |                                               
+  480 |  1          smartloader.s    547 | Empty       | 11 |         |    0 | 00/2214               | printMsg_0                                    
+  481 |  1          smartloader.s    548 | Code        | 11 |         |    2 | 00/2214 : 25 88       |                       and   {$88}             
+  482 |  1          smartloader.s    549 | Code        | 11 |         |    3 | 00/2216 : 20 ED FD    |                       jsr   {$FDED}           ; Char disp routine
+  483 |  1          smartloader.s    550 | Code        | 11 |         |    1 | 00/2219 : C8          |                       iny                     ; increase char position
+  484 |  1          smartloader.s    551 | Code        | 11 |         |    2 | 00/221A : B1 80       |                       lda   ({$80}),Y         ; indirect zeropage addressing pointing to current char
+  485 |  1          smartloader.s    552 | Code        | 11 |         |    2 | 00/221C : D0 F6       |                       bne   printMsg_0        ; no need of cmp 00 is current char is not 00 then loo
+  486 |  1          smartloader.s    553 | Code        | 11 |         |    1 | 00/221E : 60          |                       rts                     
+  487 |  1          smartloader.s    554 | Empty       | 11 |         |    0 | 00/221F               |                                               
+  488 |  1          smartloader.s    555 | Empty       | 11 |         |    0 | 00/221F               | writeCmdBlk                                   
+  489 |  1          smartloader.s    556 | Empty       | 11 |         |    0 | 00/221F               |                                               
+  490 |  1          smartloader.s    557 | Comment     | 11 |         |    0 | 00/221F               |             ;LDX     #$66
+  491 |  1          smartloader.s    558 | Code        | 11 |         |    2 | 00/221F : A9 00       |                       LDA   #<{$2800}         
+  492 |  1          smartloader.s    559 | Code        | 11 |         |    2 | 00/2221 : 85 80       |                       STA   {$80}             
+  493 |  1          smartloader.s    560 | Code        | 11 |         |    2 | 00/2223 : A9 28       |                       LDA   #>{$2800}         
+  494 |  1          smartloader.s    561 | Code        | 11 |         |    2 | 00/2225 : 85 81       |                       STA   {$80}+1           
+  495 |  1          smartloader.s    562 | Code        | 11 |         |    2 | 00/2227 : A4 00       |                       LDY   0                 
+  496 |  1          smartloader.s    563 | Empty       | 11 |         |    0 | 00/2229               |                                               
+  497 |  1          smartloader.s    564 | Empty       | 11 |         |    0 | 00/2229               | writeCmdBlk_0                                 
+  498 |  1          smartloader.s    565 | Empty       | 11 |         |    0 | 00/2229               |                                               
+  499 |  1          smartloader.s    566 | Code        | 11 |         |    3 | 00/2229 : 20 00 BF    |                       JSR   {$BF00}           
+  500 |  1          smartloader.s    567 | Data        | 11 |         |    1 | 00/222C : 81          |                       DFB   $81               
+  501 |  1          smartloader.s    568 | Data        | 11 |         |    1 | 00/222D : DA          |                       DFB   #<paramBLK_WR     
+  502 |  1          smartloader.s    569 | Data        | 11 |         |    1 | 00/222E : 22          |                       DFB   #>paramBLK_WR     
+  503 |  1          smartloader.s    570 | Code        | 11 |         |    3 | 00/222F : 20 4D 22    |                       jsr   ERROR             
+  504 |  1          smartloader.s    571 | Code        | 11 |         |    3 | 00/2232 : 20 62 22    |                       jsr   readBlock         
+  505 |  1          smartloader.s    572 | Code        | 11 |         |    1 | 00/2235 : 60          |                       rts                     
+  506 |  1          smartloader.s    573 | Empty       | 11 |         |    0 | 00/2236               |                                               
+  507 |  1          smartloader.s    574 | Empty       | 11 |         |    0 | 00/2236               | checkDriveSlot                                
+  508 |  1          smartloader.s    575 | Code        | 11 |         |    3 | 00/2236 : AD FF CF    |                       lda   $CFFF             ;reset all other I/O Select spaces
+  509 |  1          smartloader.s    576 | Code        | 11 |         |    3 | 00/2239 : 20 58 FF    |                       jsr   {$FF58}           ;call my own c800 space
+  510 |  1          smartloader.s    577 | Code        | 11 |         |    1 | 00/223C : BA          |                       tsx                     
+  511 |  1          smartloader.s    578 | Code        | 11 |         |    3 | 00/223D : BD 00 01    |                       lda   $100,x            
+  512 |  1          smartloader.s    579 | Code        | 11 |         |    2 | 00/2240 : 85 03       |                       sta   {$02}+1           
+  513 |  1          smartloader.s    580 | Code        | 11 |         |    1 | 00/2242 : 0A          |                       ASL   A                 
+  514 |  1          smartloader.s    581 | Code        | 11 |         |    1 | 00/2243 : 0A          |                       ASL   A                 
+  515 |  1          smartloader.s    582 | Code        | 11 |         |    1 | 00/2244 : 0A          |                       ASL   A                 
+  516 |  1          smartloader.s    583 | Code        | 11 |         |    1 | 00/2245 : 0A          |                       ASL   A                 
+  517 |  1          smartloader.s    584 | Code        | 11 |         |    1 | 00/2246 : AA          |                       TAX                     
+  518 |  1          smartloader.s    585 | Code        | 11 |         |    2 | 00/2247 : 86 02       |                       STX   {$02}             
+  519 |  1          smartloader.s    586 | Empty       | 11 |         |    0 | 00/2249               |                                               
+  520 |  1          smartloader.s    587 | Code        | 11 |         |    3 | 00/2249 : 20 7F 22    |                       jsr   readKey           
+  521 |  1          smartloader.s    588 | Code        | 11 |         |    1 | 00/224C : 60          |                       rts                     
+  522 |  1          smartloader.s    589 | Empty       | 11 |         |    0 | 00/224D               |                                               
+  523 |  1          smartloader.s    590 | Empty       | 11 |         |    0 | 00/224D               | ERROR                                         
+  524 |  1          smartloader.s    591 | Code        | 11 |         |    1 | 00/224D : 48          |                       pha                     
+  525 |  1          smartloader.s    592 | Code        | 11 |         |    2 | 00/224E : A0 00       |                       ldy   #$00              ; Display the Key value on the top right of the screen
+  526 |  1          smartloader.s    593 | Code        | 11 |         |    2 | 00/2250 : A2 00       |                       ldx   #$0               
+  527 |  1          smartloader.s    594 | Code        | 11 |         |    3 | 00/2252 : 20 03 22    |                       jsr   dispPositionCursor
+  528 |  1          smartloader.s    595 | Empty       | 11 |         |    0 | 00/2255               |                                               
+  529 |  1          smartloader.s    596 | Code        | 11 |         |    2 | 00/2255 : A9 C5       |                       lda   #$C5              ; "/"
+  530 |  1          smartloader.s    597 | Code        | 11 |         |    3 | 00/2257 : 20 ED FD    |                       jsr   {$FDED}           
+  531 |  1          smartloader.s    598 | Empty       | 11 |         |    0 | 00/225A               |                                               
+  532 |  1          smartloader.s    599 | Code        | 11 |         |    1 | 00/225A : 68          |                       pla                     
+  533 |  1          smartloader.s    600 | Code        | 11 |         |    3 | 00/225B : 20 DA FD    |                       jsr   {$FDDA}           ;Print error code
+  534 |  1          smartloader.s    601 | Code        | 11 |         |    3 | 00/225E : 20 3A FF    |                       jsr   {$FF3A}           ;Ring the bell
+  535 |  1          smartloader.s    602 | Code        | 11 |         |    1 | 00/2261 : 60          |                       rts                     
+  536 |  1          smartloader.s    603 | Empty       | 11 |         |    0 | 00/2262               |                                               
+  537 |  1          smartloader.s    604 | Empty       | 11 |         |    0 | 00/2262               | readBlock                                     
+  538 |  1          smartloader.s    605 | Code        | 11 |         |    2 | 00/2262 : A9 00       |                       LDA   #<{$2800}         
+  539 |  1          smartloader.s    606 | Code        | 11 |         |    2 | 00/2264 : 85 80       |                       STA   {$80}             
+  540 |  1          smartloader.s    607 | Code        | 11 |         |    2 | 00/2266 : A9 28       |                       LDA   #>{$2800}         
+  541 |  1          smartloader.s    608 | Code        | 11 |         |    2 | 00/2268 : 85 81       |                       STA   {$80}+1           
+  542 |  1          smartloader.s    609 | Code        | 11 |         |    2 | 00/226A : A9 00       |                       LDA   #$00              
+  543 |  1          smartloader.s    610 | Code        | 11 |         |    2 | 00/226C : A0 00       |                       LDY   #$0               
+  544 |  1          smartloader.s    611 | Empty       | 11 |         |    0 | 00/226E               |                                               
+  545 |  1          smartloader.s    612 | Empty       | 11 |         |    0 | 00/226E               | readBlock_01                                  
+  546 |  1          smartloader.s    613 | Code        | 11 |         |    2 | 00/226E : 91 80       |                       STA   ({$80}),Y         
+  547 |  1          smartloader.s    614 | Code        | 11 |         |    1 | 00/2270 : C8          |                       INY                     
+  548 |  1          smartloader.s    615 | Code        | 11 |         |    2 | 00/2271 : C0 FF       |                       cpy   #$FF              
+  549 |  1          smartloader.s    616 | Code        | 11 |         |    2 | 00/2273 : D0 F9       |                       bne   readBlock_01      
+  550 |  1          smartloader.s    617 | Empty       | 11 |         |    0 | 00/2275               |                                               
+  551 |  1          smartloader.s    618 | Empty       | 11 |         |    0 | 00/2275               | readBlock_02                                  
+  552 |  1          smartloader.s    619 | Code        | 11 |         |    3 | 00/2275 : 20 00 BF    |                       JSR   {$BF00}           
+  553 |  1          smartloader.s    620 | Data        | 11 |         |    1 | 00/2278 : 80          |                       DFB   $80               
+  554 |  1          smartloader.s    621 | Data        | 11 |         |    1 | 00/2279 : D4          |                       DFB   #<paramBLK_RD     
+  555 |  1          smartloader.s    622 | Data        | 11 |         |    1 | 00/227A : 22          |                       DFB   #>paramBLK_RD     
+  556 |  1          smartloader.s    623 | Empty       | 11 |         |    0 | 00/227B               |                                               
+  557 |  1          smartloader.s    624 | Code        | 11 |         |    3 | 00/227B : 20 4D 22    |                       jsr   ERROR             
+  558 |  1          smartloader.s    625 | Code        | 11 |         |    1 | 00/227E : 60          |                       rts                     
+  559 |  1          smartloader.s    626 | Empty       | 11 |         |    0 | 00/227F               |                                               
+  560 |  1          smartloader.s    627 | Empty       | 11 |         |    0 | 00/227F               | readKey                                       
+  561 |  1          smartloader.s    628 | Code        | 11 |         |    3 | 00/227F : AD 00 C0    |                       LDA   $C000             ; Wait until a key is pressed
+  562 |  1          smartloader.s    629 | Code        | 11 |         |    2 | 00/2282 : 10 FB       |                       BPL   readKey           
+  563 |  1          smartloader.s    630 | Code        | 11 |         |    3 | 00/2284 : 2C 10 C0    |                       BIT   $C010             
+  564 |  1          smartloader.s    631 | Code        | 11 |         |    1 | 00/2287 : 60          |                       rts                     
+  565 |  1          smartloader.s    632 | Empty       | 11 |         |    0 | 00/2288               |                                               
+  566 |  1          smartloader.s    633 | Empty       | 11 |         |    0 | 00/2288               | reboot                                        
+  567 |  1          smartloader.s    634 | Code        | 11 |         |    3 | 00/2288 : 4C 00 C6    |                       jmp   #$C600            
+  568 |  1          smartloader.s    635 | Code        | 11 |         |    1 | 00/228B : 60          |                       rts                     
+  569 |  1          smartloader.s    636 | Empty       | 11 |         |    0 | 00/228C               |                                               
+  570 |  1          smartloader.s    637 | Empty       | 11 |         |    0 | 00/228C               | _title                                        
+  571 |  1          smartloader.s    638 | Data        | 11 |         |   11 | 00/228C : D3 CD C1 D2 |                       ASC   "SMARTLOADER"     
+      |                                  |             |    |         |      |           D4 CC CF C1 |
+      |                                  |             |    |         |      |           C4 C5 D2    |
+  572 |  1          smartloader.s    639 | Data        | 11 |         |    1 | 00/2297 : 00          |                       dfb   $00               
+  573 |  1          smartloader.s    640 | Empty       | 11 |         |    0 | 00/2298               | _version                                      
+  574 |  1          smartloader.s    641 | Data        | 11 |         |    5 | 00/2298 : F6 B0 AE B2 |                       ASC   "v0.26"           
+      |                                  |             |    |         |      |           B6          |
+  575 |  1          smartloader.s    642 | Data        | 11 |         |    1 | 00/229D : 00          |                       dfb   $00               
+  576 |  1          smartloader.s    643 | Empty       | 11 |         |    0 | 00/229E               | _option                                       
+  577 |  1          smartloader.s    644 | Data        | 11 |         |   27 | 00/229E : DB D2 DD C5 |                       ASC   "[R]EFRESH [B]OOT [S]ETTINGS"
+      |                                  |             |    |         |      |           C6 D2 C5 D3 |
+      |                                  |             |    |         |      |           C8 A0 DB C2 |
+      |                                  |             |    |         |      |           DD CF CF D4 |
+      |                                  |             |    |         |      |           A0 DB D3 DD |
+      |                                  |             |    |         |      |           C5 D4 D4 C9 |
+      |                                  |             |    |         |      |           CE C7 D3    |
+  578 |  1          smartloader.s    645 | Data        | 11 |         |    1 | 00/22B9 : 00          |                       dfb   $00               
+  579 |  1          smartloader.s    646 | Empty       | 11 |         |    0 | 00/22BA               |                                               
+  580 |  1          smartloader.s    647 | Empty       | 11 |         |    0 | 00/22BA               | error_10                                      
+  581 |  1          smartloader.s    648 | Data        | 11 |         |   25 | 00/22BA : C5 D2 D2 A0 |                       ASC   "ERR 10 UNABLE TO GET DATA"
+      |                                  |             |    |         |      |           B1 B0 A0 D5 |
+      |                                  |             |    |         |      |           CE C1 C2 CC |
+      |                                  |             |    |         |      |           C5 A0 D4 CF |
+      |                                  |             |    |         |      |           A0 C7 C5 D4 |
+      |                                  |             |    |         |      |           A0 C4 C1 D4 |
+      |                                  |             |    |         |      |           C1          |
+  582 |  1          smartloader.s    649 | Data        | 11 |         |    1 | 00/22D3 : 00          |                       dfb   $00               
+  583 |  1          smartloader.s    650 | Empty       | 11 |         |    0 | 00/22D4               |                                               
+  584 |  1          smartloader.s    651 | Empty       | 11 |         |    0 | 00/22D4               | paramBLK_RD                                   
+  585 |  1          smartloader.s    652 | Data        | 11 |         |    1 | 00/22D4 : 03          |                       DFB   $03               ; paramcnt =3
+  586 |  1          smartloader.s    653 | Data        | 11 |         |    1 | 00/22D5 : 60          |                       DFB   $60               ; slot number
+  587 |  1          smartloader.s    654 | Data        | 11 |         |    1 | 00/22D6 : 00          |                       DFB   #<{$2800}         
+  588 |  1          smartloader.s    655 | Data        | 11 |         |    1 | 00/22D7 : 28          |                       DFB   #>{$2800}         
+  589 |  1          smartloader.s    656 | Data        | 11 |         |    1 | 00/22D8 : B0          |                       DFB   $B0               
+  590 |  1          smartloader.s    657 | Data        | 11 |         |    1 | 00/22D9 : 00          |                       DFB   $00               
+  591 |  1          smartloader.s    658 | Empty       | 11 |         |    0 | 00/22DA               |                                               
+  592 |  1          smartloader.s    659 | Empty       | 11 |         |    0 | 00/22DA               | paramBLK_WR                                   
+  593 |  1          smartloader.s    660 | Data        | 11 |         |    1 | 00/22DA : 03          |                       DFB   $03               ; paramcnt =3
+  594 |  1          smartloader.s    661 | Data        | 11 |         |    1 | 00/22DB : 60          |                       DFB   $60               ; slot number
+  595 |  1          smartloader.s    662 | Data        | 11 |         |    1 | 00/22DC : 00          |                       DFB   #<{$2600}         
+  596 |  1          smartloader.s    663 | Data        | 11 |         |    1 | 00/22DD : 26          |                       DFB   #>{$2600}         
+  597 |  1          smartloader.s    664 | Data        | 11 |         |    1 | 00/22DE : B0          |                       DFB   $B0               
+  598 |  1          smartloader.s    665 | Data        | 11 |         |    1 | 00/22DF : 00          |                       DFB   $00               
+  599 |  1          smartloader.s    666 | Empty       | 11 |         |    0 | 00/22E0               |                                               
+  600 |  1          smartloader.s    667 | Directive   | 11 |         |    0 | 00/22E0               |                       DO    {0}               
+  601 |  1          smartloader.s    697 | Directive   | 11 |         |    0 | 00/22E0               |                       ELSE                    
+  602 |  1          smartloader.s    698 | Directive   | 11 |         |    0 | 00/22E0               |                       FIN                     
+  603 |  1          smartloader.s    699 | Comment     | 11 |         |    0 | 00/22E0               | ; Merlin32 include
+  604 |  1          smartloader.s    700 | Directive   | 11 |         |    0 | 00/22E0               |                       PUT   print_uint16_with_sp.s
+  605 |  2 print_uint16_with_sp.s      1 | Comment     | 11 |         |    0 | 00/22E0               | ; Michael Pohoreski
+  606 |  2 print_uint16_with_sp.s      2 | Comment     | 11 |         |    0 | 00/22E0               | ; https://github.com/Michaelangel007/apple2_print_uint16
+  607 |  2 print_uint16_with_sp.s      3 | Comment     | 11 |         |    0 | 00/22E0               | ; Optimized from printm
+  608 |  2 print_uint16_with_sp.s      4 | Comment     | 11 |         |    0 | 00/22E0               | ; Thanks to qkumba for optimizations
+  609 |  2 print_uint16_with_sp.s      5 | Comment     | 11 |         |    0 | 00/22E0               | ; Thanks to Gids for nudging a zero-page version
+  610 |  2 print_uint16_with_sp.s      6 | Empty       | 11 |         |    0 | 00/22E0               |                                               
+  611 |  2 print_uint16_with_sp.s      7 | Comment     | 11 |         |    0 | 00/22E0               | ; F8 ROM Entry Points
+  612 |  2 print_uint16_with_sp.s      8 | Equivalence | 11 |         |    0 | 00/22E0               | PRHEXZ                =     $FDE5             
+  613 |  2 print_uint16_with_sp.s      9 | Equivalence | 11 |         |    0 | 00/22E0               | SCRN2                 =     $F879             
+  614 |  2 print_uint16_with_sp.s     10 | Empty       | 11 |         |    0 | 00/22E0               |                                               
+  615 |  2 print_uint16_with_sp.s     11 | Comment     | 11 |         |    0 | 00/22E0               | ; Print unsigned 16-bit integer
+  616 |  2 print_uint16_with_sp.s     12 | Comment     | 11 |         |    0 | 00/22E0               | ; A=High byte
+  617 |  2 print_uint16_with_sp.s     13 | Comment     | 11 |         |    0 | 00/22E0               | ; X=Low  byte
+  618 |  2 print_uint16_with_sp.s     14 | Comment     | 11 |         |    0 | 00/22E0               | ; Also see: Applesoft LINPRT @ ED24
+  619 |  2 print_uint16_with_sp.s     15 | Comment     | 11 |         |    0 | 00/22E0               | ; ======================================================================
+  620 |  2 print_uint16_with_sp.s     16 | Empty       | 11 |         |    0 | 00/22E0               | PrintUint16                                   
+  621 |  2 print_uint16_with_sp.s     17 | Code        | 11 |         |    2 | 00/22E0 : A0 00       |                       LDY   #0                ;                         S=F3
+  622 |  2 print_uint16_with_sp.s     18 | Code        | 11 |         |    1 | 00/22E2 : 48          |                       PHA                     ; S+5 = _temp+1 = $105,X  S=F1
+  623 |  2 print_uint16_with_sp.s     19 | Code        | 11 |         |    1 | 00/22E3 : DA          |                       PHX                     ; S+4 = _temp+0 = $104,X  S=F2
+  624 |  2 print_uint16_with_sp.s     20 | Code        | 11 |         |    1 | 00/22E4 : 5A          |                       PHY                     ; S+3 = _bcd[2] = $103,X  S=F0
+  625 |  2 print_uint16_with_sp.s     21 | Code        | 11 |         |    1 | 00/22E5 : 5A          |                       PHY                     ; S+2 = _bcd[1] = $102,X  S=EF
+  626 |  2 print_uint16_with_sp.s     22 | Code        | 11 |         |    1 | 00/22E6 : 5A          |                       PHY                     ; S+1 = _bcd[0] = $101,X  S=EE
+  627 |  2 print_uint16_with_sp.s     23 | Empty       | 11 |         |    0 | 00/22E7               |                                               
+  628 |  2 print_uint16_with_sp.s     24 | Empty       | 11 |         |    0 | 00/22E7               | Dec2BCD                                       
+  629 |  2 print_uint16_with_sp.s     25 | Code        | 11 |         |    2 | 00/22E7 : A0 10       |                       LDY   #16               ; 16 bits
+  630 |  2 print_uint16_with_sp.s     26 | Code        | 11 |         |    1 | 00/22E9 : F8          |                       SED                     ; "Double Dabble"
+  631 |  2 print_uint16_with_sp.s     27 | Empty       | 11 |         |    0 | 00/22EA               | _Dec2BCD                                      ; https://en.wikipedia.org/wiki/Double_dabble
+  632 |  2 print_uint16_with_sp.s     28 | Code        | 11 |         |    1 | 00/22EA : BA          |                       TSX                     ;                         X=EE
+  633 |  2 print_uint16_with_sp.s     29 | Code        | 11 |         |    3 | 00/22EB : 8E 09 23    |                       STX   _BCDbegin+1       ; *** SELF-MODIFYING
+  634 |  2 print_uint16_with_sp.s     30 | Empty       | 11 |         |    0 | 00/22EE               |                                               
+  635 |  2 print_uint16_with_sp.s     31 | Comment     | 11 |         |    0 | 00/22EE               | ;       ASL _temp+0     ;     abcd efgh | ijkl mnop |
+  636 |  2 print_uint16_with_sp.s     32 | Comment     | 11 |         |    0 | 00/22EE               | ;       ROL _temp+1     ; C=a bcde fghi | jklm nop0 |
+  637 |  2 print_uint16_with_sp.s     33 | Comment     | 11 |         |    0 | 00/22EE               | ;                       ; Bit 7654_3210 | 7654_3210 |
+  638 |  2 print_uint16_with_sp.s     34 | Code        | 11 |         |    3 | 00/22EE : 1E 04 01    |                       ASL   $104,X            ; _temp+0
+  639 |  2 print_uint16_with_sp.s     35 | Code        | 11 |         |    3 | 00/22F1 : 3E 05 01    |                       ROL   $105,X            ; _temp+1
+  640 |  2 print_uint16_with_sp.s     36 | Empty       | 11 |         |    0 | 00/22F4               |                                               
+  641 |  2 print_uint16_with_sp.s     37 | Comment     | 11 |         |    0 | 00/22F4               | ;       LDX #$FD        ; $00-$FD=-3 bcd[0] bcd[1] bcd[2] bcd[3]
+  642 |  2 print_uint16_with_sp.s     38 | Empty       | 11 |         |    0 | 00/22F4               | _DoubleDabble                                 ;              Y=FD   Y=FE   Y=FF   Y=00
+  643 |  2 print_uint16_with_sp.s     39 | Code        | 11 |         |    3 | 00/22F4 : 20 15 23    |                       JSR   Dabble            ;                         X=EF
+  644 |  2 print_uint16_with_sp.s     40 | Code        | 11 |         |    3 | 00/22F7 : 20 15 23    |                       JSR   Dabble            ;                         X=F0
+  645 |  2 print_uint16_with_sp.s     41 | Code        | 11 |         |    3 | 00/22FA : 20 15 23    |                       JSR   Dabble            ;                         X=F1
+  646 |  2 print_uint16_with_sp.s     42 | Code        | 11 |         |    1 | 00/22FD : 88          |                       DEY                     
+  647 |  2 print_uint16_with_sp.s     43 | Code        | 11 |         |    2 | 00/22FE : D0 EA       |                       BNE   _Dec2BCD          
+  648 |  2 print_uint16_with_sp.s     44 | Empty       | 11 |         |    0 | 00/2300               |                                               
+  649 |  2 print_uint16_with_sp.s     45 | Code        | 11 |         |    1 | 00/2300 : D8          |                       CLD                     ; Y=0 = output length
+  650 |  2 print_uint16_with_sp.s     46 | Empty       | 11 |         |    0 | 00/2301               |                                               
+  651 |  2 print_uint16_with_sp.s     47 | Empty       | 11 |         |    0 | 00/2301               | BCD2Chars                                     
+  652 |  2 print_uint16_with_sp.s     48 | Code        | 11 |         |    3 | 00/2301 : BD 00 01    |                       LDA   $100,X            ; X=F1, 1F1 -> bcd[2]
+  653 |  2 print_uint16_with_sp.s     49 | Code        | 11 |         |    3 | 00/2304 : 20 20 23    |                       JSR   HexA              ; print 0, 1, or 2 hex digits
+  654 |  2 print_uint16_with_sp.s     50 | Code        | 11 |         |    1 | 00/2307 : CA          |                       DEX                     
+  655 |  2 print_uint16_with_sp.s     51 | Empty       | 11 |         |    0 | 00/2308               | _BCDbegin                                     
+  656 |  2 print_uint16_with_sp.s     52 | Code        | 11 |         |    2 | 00/2308 : E0 00       |                       CPX   #00               ; *** SELF-MODIFIED  X == EE ?
+  657 |  2 print_uint16_with_sp.s     53 | Code        | 11 |         |    2 | 00/230A : D0 F5       |                       BNE   BCD2Chars         
+  658 |  2 print_uint16_with_sp.s     54 | Empty       | 11 |         |    0 | 00/230C               |                                               
+  659 |  2 print_uint16_with_sp.s     55 | Comment     | 11 |         |    0 | 00/230C               | ; Safe to restore stack now since we are done with vars
+  660 |  2 print_uint16_with_sp.s     56 | Code        | 11 |         |    1 | 00/230C : 8A          |                       TXA                     
+  661 |  2 print_uint16_with_sp.s     57 | Code        | 11 |         |    2 | 00/230D : 69 04       |                       ADC   #$04              ; C=1 from CPX #EE
+  662 |  2 print_uint16_with_sp.s     58 | Code        | 11 |         |    1 | 00/230F : AA          |                       TAX                     
+  663 |  2 print_uint16_with_sp.s     59 | Code        | 11 |         |    1 | 00/2310 : 9A          |                       TXS                     
+  664 |  2 print_uint16_with_sp.s     60 | Empty       | 11 |         |    0 | 00/2311               |                                               
+  665 |  2 print_uint16_with_sp.s     61 | Code        | 11 |         |    1 | 00/2311 : 98          |                       TYA                     ; Handle special case input = $0000 of no output
+  666 |  2 print_uint16_with_sp.s     62 | Code        | 11 |         |    2 | 00/2312 : F0 19       |                       BEQ   _HaveLeadingDigit 
+  667 |  2 print_uint16_with_sp.s     63 | Empty       | 11 |         |    0 | 00/2314               | _PrintDone                                    
+  668 |  2 print_uint16_with_sp.s     64 | Code        | 11 |         |    1 | 00/2314 : 60          |                       RTS                     
+  669 |  2 print_uint16_with_sp.s     65 | Empty       | 11 |         |    0 | 00/2315               | Dabble                                        
+  670 |  2 print_uint16_with_sp.s     66 | Code        | 11 |         |    3 | 00/2315 : BD 01 01    |                       LDA   $101,X            ; bcd,X
+  671 |  2 print_uint16_with_sp.s     67 | Code        | 11 |         |    3 | 00/2318 : 7D 01 01    |                       ADC   $101,X            
+  672 |  2 print_uint16_with_sp.s     68 | Code        | 11 |         |    3 | 00/231B : 9D 01 01    |                       STA   $101,X            
+  673 |  2 print_uint16_with_sp.s     69 | Code        | 11 |         |    1 | 00/231E : E8          |                       INX                     
+  674 |  2 print_uint16_with_sp.s     70 | Code        | 11 |         |    1 | 00/231F : 60          |                       RTS                     
+  675 |  2 print_uint16_with_sp.s     71 | Empty       | 11 |         |    0 | 00/2320               |                                               
+  676 |  2 print_uint16_with_sp.s     72 | Comment     | 11 |         |    0 | 00/2320               | ; Converts A to high ASCII digits, prints as they become available
+  677 |  2 print_uint16_with_sp.s     73 | Comment     | 11 |         |    0 | 00/2320               | ; @return: A will be bottom nibble in high ASCII
+  678 |  2 print_uint16_with_sp.s     74 | Empty       | 11 |         |    0 | 00/2320               | HexA                                          
+  679 |  2 print_uint16_with_sp.s     75 | Code        | 11 |         |    1 | 00/2320 : 48          |                       PHA                     
+  680 |  2 print_uint16_with_sp.s     76 | Code        | 11 |         |    3 | 00/2321 : 20 7B F8    |                       JSR   {$F879}+2         ; LSR x4 == 0>> 4
+  681 |  2 print_uint16_with_sp.s     77 | Code        | 11 |         |    3 | 00/2324 : 20 2A 23    |                       JSR   _HexNib           
+  682 |  2 print_uint16_with_sp.s     78 | Code        | 11 |         |    1 | 00/2327 : 68          |                       PLA                     
+  683 |  2 print_uint16_with_sp.s     79 | Code        | 11 |         |    2 | 00/2328 : 29 0F       |                       AND   #$F               
+  684 |  2 print_uint16_with_sp.s     80 | Empty       | 11 |         |    0 | 00/232A               | _HexNib                                       
+  685 |  2 print_uint16_with_sp.s     81 | Code        | 11 |         |    2 | 00/232A : D0 01       |                       BNE   _HaveLeadingDigit ; If have leading zero and no output yet ...
+  686 |  2 print_uint16_with_sp.s     82 | Code        | 11 |         |    1 | 00/232C : 88          |                       DEY                     ; ... then skip storing it
+  687 |  2 print_uint16_with_sp.s     83 | Empty       | 11 |         |    0 | 00/232D               |                                               
+  688 |  2 print_uint16_with_sp.s     84 | Empty       | 11 |         |    0 | 00/232D               | _HaveLeadingDigit                             
+  689 |  2 print_uint16_with_sp.s     85 | Code        | 11 |         |    1 | 00/232D : C8          |                       INY                     ; Y = output string length
+  690 |  2 print_uint16_with_sp.s     86 | Code        | 11 |         |    2 | 00/232E : F0 E4       |                       BEQ   _PrintDone        
+  691 |  2 print_uint16_with_sp.s     87 | Code        | 11 |         |    3 | 00/2330 : 4C E5 FD    |                       JMP   {$FDE5}           
+  692 |  2 print_uint16_with_sp.s     88 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  693 |  2 print_uint16_with_sp.s     89 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  694 |  1          smartloader.s    701 | Directive   | 11 |         |    0 | 00/2333               |                       PUT   vibr_lib.s        
+  695 |  3             vibr_lib.s      1 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  696 |  3             vibr_lib.s      2 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  697 |  3             vibr_lib.s      3 | Equivalence | 11 |         |    0 | 00/2333               | calc_1_low            EQU   $90               
+  698 |  3             vibr_lib.s      4 | Equivalence | 11 |         |    0 | 00/2333               | calc_1_high           EQU   $91               
+  699 |  3             vibr_lib.s      5 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  700 |  3             vibr_lib.s      6 | Equivalence | 11 |         |    0 | 00/2333               | calc_2_low            EQU   $92               
+  701 |  3             vibr_lib.s      7 | Equivalence | 11 |         |    0 | 00/2333               | calc_2_high           EQU   $93               
+  702 |  3             vibr_lib.s      8 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  703 |  3             vibr_lib.s      9 | Equivalence | 11 |         |    0 | 00/2333               | calc_result_low       EQU   $94               ;
+  704 |  3             vibr_lib.s     10 | Equivalence | 11 |         |    0 | 00/2333               | calc_result_high      EQU   $95               ;
+  705 |  3             vibr_lib.s     11 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  706 |  3             vibr_lib.s     12 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  707 |  3             vibr_lib.s     13 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  708 |  3             vibr_lib.s     14 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  709 |  3             vibr_lib.s     15 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  710 |  3             vibr_lib.s     16 | Empty       | 11 |         |    0 | 00/2333               |                                               
+  711 |  3             vibr_lib.s     17 | Empty       | 11 |         |    0 | 00/2333               | add16test                                     
+  712 |  3             vibr_lib.s     18 | Code        | 11 |         |    2 | 00/2333 : A9 02       |                       lda   #$02              ; adding 02FF & 00EE => should give
+  713 |  3             vibr_lib.s     19 | Code        | 11 |         |    2 | 00/2335 : 85 91       |                       sta   {$91}             
+  714 |  3             vibr_lib.s     20 | Empty       | 11 |         |    0 | 00/2337               |                                               
+  715 |  3             vibr_lib.s     21 | Code        | 11 |         |    2 | 00/2337 : A9 FF       |                       lda   #$ff              
+  716 |  3             vibr_lib.s     22 | Code        | 11 |         |    2 | 00/2339 : 85 90       |                       sta   {$90}             
+  717 |  3             vibr_lib.s     23 | Empty       | 11 |         |    0 | 00/233B               |                                               
+  718 |  3             vibr_lib.s     24 | Code        | 11 |         |    2 | 00/233B : A9 00       |                       lda   #$00              
+  719 |  3             vibr_lib.s     25 | Code        | 11 |         |    2 | 00/233D : 85 93       |                       sta   {$93}             
+  720 |  3             vibr_lib.s     26 | Empty       | 11 |         |    0 | 00/233F               |                                               
+  721 |  3             vibr_lib.s     27 | Code        | 11 |         |    2 | 00/233F : A9 EE       |                       lda   #$ee              
+  722 |  3             vibr_lib.s     28 | Code        | 11 |         |    2 | 00/2341 : 85 92       |                       sta   {$92}             
+  723 |  3             vibr_lib.s     29 | Empty       | 11 |         |    0 | 00/2343               |                                               
+  724 |  3             vibr_lib.s     30 | Code        | 11 |         |    3 | 00/2343 : 20 67 23    |                       jsr   add_16B_16B       
+  725 |  3             vibr_lib.s     31 | Code        | 11 |         |    3 | 00/2346 : 20 7F 22    |                       jsr   readKey           
+  726 |  3             vibr_lib.s     32 | Code        | 11 |         |    1 | 00/2349 : 60          |                       rts                     
+  727 |  3             vibr_lib.s     33 | Empty       | 11 |         |    0 | 00/234A               |                                               
+  728 |  3             vibr_lib.s     34 | Empty       | 11 |         |    0 | 00/234A               | mul8test                                      
+  729 |  3             vibr_lib.s     35 | Code        | 11 |         |    2 | 00/234A : A9 02       |                       lda   #$02              ; adding 02FF & 00EE => should give
+  730 |  3             vibr_lib.s     36 | Code        | 11 |         |    2 | 00/234C : 85 90       |                       sta   {$90}             
+  731 |  3             vibr_lib.s     37 | Empty       | 11 |         |    0 | 00/234E               |                                               
+  732 |  3             vibr_lib.s     38 | Code        | 11 |         |    2 | 00/234E : A9 FF       |                       lda   #$ff              
+  733 |  3             vibr_lib.s     39 | Code        | 11 |         |    2 | 00/2350 : 85 92       |                       sta   {$92}             
+  734 |  3             vibr_lib.s     40 | Empty       | 11 |         |    0 | 00/2352               |                                               
+  735 |  3             vibr_lib.s     41 | Code        | 11 |         |    3 | 00/2352 : 20 75 23    |                       jsr   mult_8B_8B        
+  736 |  3             vibr_lib.s     42 | Empty       | 11 |         |    0 | 00/2355               |                                               
+  737 |  3             vibr_lib.s     43 | Code        | 11 |         |    3 | 00/2355 : 20 7F 22    |                       jsr   readKey           
+  738 |  3             vibr_lib.s     44 | Empty       | 11 |         |    0 | 00/2358               |                                               
+  739 |  3             vibr_lib.s     45 | Code        | 11 |         |    1 | 00/2358 : 60          |                       rts                     
+  740 |  3             vibr_lib.s     46 | Empty       | 11 |         |    0 | 00/2359               |                                               
+  741 |  3             vibr_lib.s     47 | Empty       | 11 |         |    0 | 00/2359               |                                               
+  742 |  3             vibr_lib.s     48 | Empty       | 11 |         |    0 | 00/2359               |                                               
+  743 |  3             vibr_lib.s     49 | Empty       | 11 |         |    0 | 00/2359               |                                               
+  744 |  3             vibr_lib.s     50 | Empty       | 11 |         |    0 | 00/2359               |                                               
+  745 |  3             vibr_lib.s     51 | Empty       | 11 |         |    0 | 00/2359               | add_8B_8B                                     
+  746 |  3             vibr_lib.s     52 | Code        | 11 |         |    1 | 00/2359 : 18          |                       clc                     ;
+  747 |  3             vibr_lib.s     53 | Code        | 11 |         |    2 | 00/235A : A5 90       |                       lda   {$90}             
+  748 |  3             vibr_lib.s     54 | Code        | 11 |         |    2 | 00/235C : 65 92       |                       adc   {$92}             
+  749 |  3             vibr_lib.s     55 | Empty       | 11 |         |    0 | 00/235E               |                                               
+  750 |  3             vibr_lib.s     56 | Code        | 11 |         |    2 | 00/235E : 85 94       |                       sta   {$94}             
+  751 |  3             vibr_lib.s     57 | Code        | 11 |         |    2 | 00/2360 : A5 95       |                       lda   {$95}             
+  752 |  3             vibr_lib.s     58 | Code        | 11 |         |    2 | 00/2362 : 69 00       |                       adc   #$00              
+  753 |  3             vibr_lib.s     59 | Code        | 11 |         |    2 | 00/2364 : 85 95       |                       sta   {$95}             
+  754 |  3             vibr_lib.s     60 | Code        | 11 |         |    1 | 00/2366 : 60          |                       rts                     
+  755 |  3             vibr_lib.s     61 | Empty       | 11 |         |    0 | 00/2367               |                                               
+  756 |  3             vibr_lib.s     62 | Empty       | 11 |         |    0 | 00/2367               | add_16B_16B                                   
+  757 |  3             vibr_lib.s     63 | Code        | 11 |         |    1 | 00/2367 : 18          |                       clc                     
+  758 |  3             vibr_lib.s     64 | Code        | 11 |         |    2 | 00/2368 : A5 90       |                       lda   {$90}             
+  759 |  3             vibr_lib.s     65 | Code        | 11 |         |    2 | 00/236A : 65 92       |                       adc   {$92}             
+  760 |  3             vibr_lib.s     66 | Empty       | 11 |         |    0 | 00/236C               |                                               
+  761 |  3             vibr_lib.s     67 | Code        | 11 |         |    2 | 00/236C : 85 94       |                       sta   {$94}             
+  762 |  3             vibr_lib.s     68 | Empty       | 11 |         |    0 | 00/236E               |                                               
+  763 |  3             vibr_lib.s     69 | Code        | 11 |         |    2 | 00/236E : A5 91       |                       lda   {$91}             
+  764 |  3             vibr_lib.s     70 | Code        | 11 |         |    2 | 00/2370 : 65 93       |                       adc   {$93}             
+  765 |  3             vibr_lib.s     71 | Empty       | 11 |         |    0 | 00/2372               |                                               
+  766 |  3             vibr_lib.s     72 | Code        | 11 |         |    2 | 00/2372 : 85 95       |                       sta   {$95}             
+  767 |  3             vibr_lib.s     73 | Code        | 11 |         |    1 | 00/2374 : 60          |                       rts                     
+  768 |  3             vibr_lib.s     74 | Empty       | 11 |         |    0 | 00/2375               |                                               
+  769 |  3             vibr_lib.s     75 | Empty       | 11 |         |    0 | 00/2375               |                                               
+  770 |  3             vibr_lib.s     76 | Empty       | 11 |         |    0 | 00/2375               |                                               
+  771 |  3             vibr_lib.s     77 | Empty       | 11 |         |    0 | 00/2375               |                                               
+  772 |  3             vibr_lib.s     78 | Comment     | 11 |         |    0 | 00/2375               | ; ***************************************************************************************
+  773 |  3             vibr_lib.s     79 | Comment     | 11 |         |    0 | 00/2375               | ; On Entry:
+  774 |  3             vibr_lib.s     80 | Comment     | 11 |         |    0 | 00/2375               | ;   factor1: multiplier
+  775 |  3             vibr_lib.s     81 | Comment     | 11 |         |    0 | 00/2375               | ;   factor2: multiplicand
+  776 |  3             vibr_lib.s     82 | Comment     | 11 |         |    0 | 00/2375               | ; On Exit:
+  777 |  3             vibr_lib.s     83 | Comment     | 11 |         |    0 | 00/2375               | ;   factor1: low byte of product
+  778 |  3             vibr_lib.s     84 | Comment     | 11 |         |    0 | 00/2375               | ;   A:       high byte of product
+  779 |  3             vibr_lib.s     85 | Empty       | 11 |         |    0 | 00/2375               | mult_8B_8B                                    
+  780 |  3             vibr_lib.s     86 | Code        | 11 |         |    2 | 00/2375 : A9 00       |                       lda   #0                
+  781 |  3             vibr_lib.s     87 | Code        | 11 |         |    2 | 00/2377 : A2 08       |                       ldx   #8                
+  782 |  3             vibr_lib.s     88 | Code        | 11 |         |    2 | 00/2379 : 46 90       |                       lsr   {$90}             
+  783 |  3             vibr_lib.s     89 | Empty       | 11 |         |    0 | 00/237B               |                                               
+  784 |  3             vibr_lib.s     90 | Empty       | 11 |         |    0 | 00/237B               | mult_8B_8B_loop                               
+  785 |  3             vibr_lib.s     91 | Code        | 11 |         |    2 | 00/237B : 90 03       |                       bcc   mult_8B_8B_noadd  
+  786 |  3             vibr_lib.s     92 | Code        | 11 |         |    1 | 00/237D : 18          |                       clc                     
+  787 |  3             vibr_lib.s     93 | Code        | 11 |         |    2 | 00/237E : 65 92       |                       adc   {$92}             
+  788 |  3             vibr_lib.s     94 | Empty       | 11 |         |    0 | 00/2380               | mult_8B_8B_noadd                              
+  789 |  3             vibr_lib.s     95 | Code        | 11 |         |    1 | 00/2380 : 6A          |                       ror                     
+  790 |  3             vibr_lib.s     96 | Code        | 11 |         |    2 | 00/2381 : 66 90       |                       ror   {$90}             
+  791 |  3             vibr_lib.s     97 | Empty       | 11 |         |    0 | 00/2383               |                                               
+  792 |  3             vibr_lib.s     98 | Code        | 11 |         |    1 | 00/2383 : CA          |                       dex                     
+  793 |  3             vibr_lib.s     99 | Code        | 11 |         |    2 | 00/2384 : D0 F5       |                       bne   mult_8B_8B_loop   
+  794 |  3             vibr_lib.s    100 | Code        | 11 |         |    2 | 00/2386 : 85 95       |                       sta   {$95}             
+  795 |  3             vibr_lib.s    101 | Code        | 11 |         |    2 | 00/2388 : A5 90       |                       lda   {$90}             
+  796 |  3             vibr_lib.s    102 | Code        | 11 |         |    2 | 00/238A : 85 94       |                       sta   {$94}             
+  797 |  3             vibr_lib.s    103 | Comment     | 11 |         |    0 | 00/238C               | ;    sta factor2
+  798 |  3             vibr_lib.s    104 | Code        | 11 |         |    1 | 00/238C : 60          |                       rts                     
+  799 |  1          smartloader.s    702 | Empty       | 11 |         |    0 | 00/238D               |                                               
+  800 |  1          smartloader.s    703 | Empty       | 11 |         |    0 | 00/238D               |                                               
+  801 |  1          smartloader.s    704 | Empty       | 11 |         |    0 | 00/238D               |                                               
+------+----------------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
