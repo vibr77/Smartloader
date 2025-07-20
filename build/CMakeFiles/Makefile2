@@ -404,9 +404,9 @@ CMakeFiles/clemens_65816_mmio.dir/clean:
 # Target rules for target CMakeFiles/clemens_65816_serializer.dir
 
 # All Build rule for target.
+CMakeFiles/clemens_65816_serializer.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 CMakeFiles/clemens_65816_serializer.dir/all: CMakeFiles/clemens_65816.dir/all
 CMakeFiles/clemens_65816_serializer.dir/all: CMakeFiles/clemens_disktypes.dir/all
-CMakeFiles/clemens_65816_serializer.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clemens_65816_serializer.dir/build.make CMakeFiles/clemens_65816_serializer.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clemens_65816_serializer.dir/build.make CMakeFiles/clemens_65816_serializer.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/CMakeFiles --progress-num=27,28 "Built target clemens_65816_serializer"
@@ -438,9 +438,9 @@ CMakeFiles/clemens_65816_serializer.dir/clean:
 # Target rules for target CMakeFiles/clemens_65816_render.dir
 
 # All Build rule for target.
+CMakeFiles/clemens_65816_render.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 CMakeFiles/clemens_65816_render.dir/all: CMakeFiles/clemens_65816.dir/all
 CMakeFiles/clemens_65816_render.dir/all: CMakeFiles/clemens_disktypes.dir/all
-CMakeFiles/clemens_65816_render.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clemens_65816_render.dir/build.make CMakeFiles/clemens_65816_render.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clemens_65816_render.dir/build.make CMakeFiles/clemens_65816_render.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/CMakeFiles --progress-num=22,23,24 "Built target clemens_65816_render"
@@ -472,9 +472,9 @@ CMakeFiles/clemens_65816_render.dir/clean:
 # Target rules for target CMakeFiles/clemens_65816_emulator.dir
 
 # All Build rule for target.
+CMakeFiles/clemens_65816_emulator.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 CMakeFiles/clemens_65816_emulator.dir/all: CMakeFiles/clemens_65816.dir/all
 CMakeFiles/clemens_65816_emulator.dir/all: CMakeFiles/clemens_disktypes.dir/all
-CMakeFiles/clemens_65816_emulator.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clemens_65816_emulator.dir/build.make CMakeFiles/clemens_65816_emulator.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clemens_65816_emulator.dir/build.make CMakeFiles/clemens_65816_emulator.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/CMakeFiles --progress-num=7,8 "Built target clemens_65816_emulator"
@@ -668,9 +668,9 @@ tests/CMakeFiles/test_emulate_minimal.dir/clean:
 # Target rules for target tests/CMakeFiles/test_gameport.dir
 
 # All Build rule for target.
+tests/CMakeFiles/test_gameport.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 tests/CMakeFiles/test_gameport.dir/all: CMakeFiles/clemens_65816.dir/all
 tests/CMakeFiles/test_gameport.dir/all: CMakeFiles/clemens_disktypes.dir/all
-tests/CMakeFiles/test_gameport.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 tests/CMakeFiles/test_gameport.dir/all: external/unity/CMakeFiles/unity.dir/all
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gameport.dir/build.make tests/CMakeFiles/test_gameport.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gameport.dir/build.make tests/CMakeFiles/test_gameport.dir/build
@@ -703,9 +703,9 @@ tests/CMakeFiles/test_gameport.dir/clean:
 # Target rules for target tests/CMakeFiles/test_mmio_video_switches.dir
 
 # All Build rule for target.
+tests/CMakeFiles/test_mmio_video_switches.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 tests/CMakeFiles/test_mmio_video_switches.dir/all: CMakeFiles/clemens_65816.dir/all
 tests/CMakeFiles/test_mmio_video_switches.dir/all: CMakeFiles/clemens_disktypes.dir/all
-tests/CMakeFiles/test_mmio_video_switches.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 tests/CMakeFiles/test_mmio_video_switches.dir/all: external/unity/CMakeFiles/unity.dir/all
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_mmio_video_switches.dir/build.make tests/CMakeFiles/test_mmio_video_switches.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_mmio_video_switches.dir/build.make tests/CMakeFiles/test_mmio_video_switches.dir/build
@@ -840,11 +840,11 @@ tests/CMakeFiles/test_disk_woz.dir/clean:
 # Target rules for target tests/CMakeFiles/test_scc.dir
 
 # All Build rule for target.
-tests/CMakeFiles/test_scc.dir/all: devices/CMakeFiles/clemens_65816_serial_devices.dir/all
+tests/CMakeFiles/test_scc.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 tests/CMakeFiles/test_scc.dir/all: CMakeFiles/clemens_65816.dir/all
 tests/CMakeFiles/test_scc.dir/all: CMakeFiles/clemens_disktypes.dir/all
-tests/CMakeFiles/test_scc.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 tests/CMakeFiles/test_scc.dir/all: external/unity/CMakeFiles/unity.dir/all
+tests/CMakeFiles/test_scc.dir/all: devices/CMakeFiles/clemens_65816_serial_devices.dir/all
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_scc.dir/build.make tests/CMakeFiles/test_scc.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_scc.dir/build.make tests/CMakeFiles/test_scc.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/CMakeFiles --progress-num=97,98 "Built target test_scc"
@@ -876,9 +876,9 @@ tests/CMakeFiles/test_scc.dir/clean:
 # Target rules for target devices/CMakeFiles/clemens_65816_smartport.dir
 
 # All Build rule for target.
+devices/CMakeFiles/clemens_65816_smartport.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 devices/CMakeFiles/clemens_65816_smartport.dir/all: CMakeFiles/clemens_65816.dir/all
 devices/CMakeFiles/clemens_65816_smartport.dir/all: CMakeFiles/clemens_disktypes.dir/all
-devices/CMakeFiles/clemens_65816_smartport.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 devices/CMakeFiles/clemens_65816_smartport.dir/all: CMakeFiles/clemens_65816_serializer.dir/all
 	$(MAKE) $(MAKESILENT) -f devices/CMakeFiles/clemens_65816_smartport.dir/build.make devices/CMakeFiles/clemens_65816_smartport.dir/depend
 	$(MAKE) $(MAKESILENT) -f devices/CMakeFiles/clemens_65816_smartport.dir/build.make devices/CMakeFiles/clemens_65816_smartport.dir/build
@@ -911,9 +911,9 @@ devices/CMakeFiles/clemens_65816_smartport.dir/clean:
 # Target rules for target devices/CMakeFiles/clemens_65816_mockingboard.dir
 
 # All Build rule for target.
+devices/CMakeFiles/clemens_65816_mockingboard.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 devices/CMakeFiles/clemens_65816_mockingboard.dir/all: CMakeFiles/clemens_65816.dir/all
 devices/CMakeFiles/clemens_65816_mockingboard.dir/all: CMakeFiles/clemens_disktypes.dir/all
-devices/CMakeFiles/clemens_65816_mockingboard.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 devices/CMakeFiles/clemens_65816_mockingboard.dir/all: CMakeFiles/clemens_65816_serializer.dir/all
 	$(MAKE) $(MAKESILENT) -f devices/CMakeFiles/clemens_65816_mockingboard.dir/build.make devices/CMakeFiles/clemens_65816_mockingboard.dir/depend
 	$(MAKE) $(MAKESILENT) -f devices/CMakeFiles/clemens_65816_mockingboard.dir/build.make devices/CMakeFiles/clemens_65816_mockingboard.dir/build
@@ -946,9 +946,9 @@ devices/CMakeFiles/clemens_65816_mockingboard.dir/clean:
 # Target rules for target devices/CMakeFiles/clemens_65816_serial_devices.dir
 
 # All Build rule for target.
+devices/CMakeFiles/clemens_65816_serial_devices.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 devices/CMakeFiles/clemens_65816_serial_devices.dir/all: CMakeFiles/clemens_65816.dir/all
 devices/CMakeFiles/clemens_65816_serial_devices.dir/all: CMakeFiles/clemens_disktypes.dir/all
-devices/CMakeFiles/clemens_65816_serial_devices.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
 	$(MAKE) $(MAKESILENT) -f devices/CMakeFiles/clemens_65816_serial_devices.dir/build.make devices/CMakeFiles/clemens_65816_serial_devices.dir/depend
 	$(MAKE) $(MAKESILENT) -f devices/CMakeFiles/clemens_65816_serial_devices.dir/build.make devices/CMakeFiles/clemens_65816_serial_devices.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/CMakeFiles --progress-num=25,26 "Built target clemens_65816_serial_devices"
@@ -1012,14 +1012,14 @@ host/CMakeFiles/clemens_host_shared.dir/clean:
 # Target rules for target host/CMakeFiles/clemens_host_core.dir
 
 # All Build rule for target.
+host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
+host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_65816.dir/all
+host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_disktypes.dir/all
+host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_65816_serializer.dir/all
+host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_65816_render.dir/all
 host/CMakeFiles/clemens_host_core.dir/all: devices/CMakeFiles/clemens_65816_smartport.dir/all
 host/CMakeFiles/clemens_host_core.dir/all: devices/CMakeFiles/clemens_65816_mockingboard.dir/all
 host/CMakeFiles/clemens_host_core.dir/all: host/CMakeFiles/clemens_host_shared.dir/all
-host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_65816.dir/all
-host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_disktypes.dir/all
-host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
-host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_65816_serializer.dir/all
-host/CMakeFiles/clemens_host_core.dir/all: CMakeFiles/clemens_65816_render.dir/all
 	$(MAKE) $(MAKESILENT) -f host/CMakeFiles/clemens_host_core.dir/build.make host/CMakeFiles/clemens_host_core.dir/depend
 	$(MAKE) $(MAKESILENT) -f host/CMakeFiles/clemens_host_core.dir/build.make host/CMakeFiles/clemens_host_core.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/CMakeFiles --progress-num=36,37,38,39,40,41 "Built target clemens_host_core"
@@ -1051,15 +1051,15 @@ host/CMakeFiles/clemens_host_core.dir/clean:
 # Target rules for target host/CMakeFiles/clemens_iigs.dir
 
 # All Build rule for target.
+host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
+host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_65816.dir/all
+host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_disktypes.dir/all
+host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_65816_serializer.dir/all
+host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_65816_render.dir/all
 host/CMakeFiles/clemens_iigs.dir/all: devices/CMakeFiles/clemens_65816_smartport.dir/all
 host/CMakeFiles/clemens_iigs.dir/all: devices/CMakeFiles/clemens_65816_mockingboard.dir/all
 host/CMakeFiles/clemens_iigs.dir/all: host/CMakeFiles/clemens_host_shared.dir/all
 host/CMakeFiles/clemens_iigs.dir/all: host/CMakeFiles/clemens_host_core.dir/all
-host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_65816.dir/all
-host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_disktypes.dir/all
-host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
-host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_65816_serializer.dir/all
-host/CMakeFiles/clemens_iigs.dir/all: CMakeFiles/clemens_65816_render.dir/all
 host/CMakeFiles/clemens_iigs.dir/all: host/ext/imgui/CMakeFiles/imgui.dir/all
 	$(MAKE) $(MAKESILENT) -f host/CMakeFiles/clemens_iigs.dir/build.make host/CMakeFiles/clemens_iigs.dir/depend
 	$(MAKE) $(MAKESILENT) -f host/CMakeFiles/clemens_iigs.dir/build.make host/CMakeFiles/clemens_iigs.dir/build
@@ -1092,15 +1092,15 @@ host/CMakeFiles/clemens_iigs.dir/clean:
 # Target rules for target host/harness/CMakeFiles/clemens_test_harness.dir
 
 # All Build rule for target.
+host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
+host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_65816.dir/all
+host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_disktypes.dir/all
+host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_65816_serializer.dir/all
+host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_65816_render.dir/all
 host/harness/CMakeFiles/clemens_test_harness.dir/all: devices/CMakeFiles/clemens_65816_smartport.dir/all
 host/harness/CMakeFiles/clemens_test_harness.dir/all: devices/CMakeFiles/clemens_65816_mockingboard.dir/all
 host/harness/CMakeFiles/clemens_test_harness.dir/all: host/CMakeFiles/clemens_host_shared.dir/all
 host/harness/CMakeFiles/clemens_test_harness.dir/all: host/CMakeFiles/clemens_host_core.dir/all
-host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_65816.dir/all
-host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_disktypes.dir/all
-host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_65816_mmio.dir/all
-host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_65816_serializer.dir/all
-host/harness/CMakeFiles/clemens_test_harness.dir/all: CMakeFiles/clemens_65816_render.dir/all
 	$(MAKE) $(MAKESILENT) -f host/harness/CMakeFiles/clemens_test_harness.dir/build.make host/harness/CMakeFiles/clemens_test_harness.dir/depend
 	$(MAKE) $(MAKESILENT) -f host/harness/CMakeFiles/clemens_test_harness.dir/build.make host/harness/CMakeFiles/clemens_test_harness.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/vincent.besson/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader/build/CMakeFiles --progress-num=75,76,77,78 "Built target clemens_test_harness"

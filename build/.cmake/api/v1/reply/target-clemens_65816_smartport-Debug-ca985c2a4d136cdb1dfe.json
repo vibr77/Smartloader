@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "devices/libclemens_65816_mockingboard.a"
+			"path" : "devices/libclemens_65816_smartport.a"
 		}
 	],
 	"backtrace" : 1,
@@ -26,13 +26,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 14,
+				"line" : 6,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 17,
+				"line" : 11,
 				"parent" : 0
 			}
 		]
@@ -64,12 +64,18 @@
 			},
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1,
+				2
 			]
 		}
 	],
 	"dependencies" : 
 	[
+		{
+			"backtrace" : 2,
+			"id" : "clemens_65816_mmio::@6890427a1f51a3e7e1df"
+		},
 		{
 			"backtrace" : 2,
 			"id" : "clemens_65816::@6890427a1f51a3e7e1df"
@@ -80,16 +86,12 @@
 		},
 		{
 			"backtrace" : 2,
-			"id" : "clemens_65816_mmio::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
 			"id" : "clemens_65816_serializer::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "clemens_65816_mockingboard::@0b66dd025354e08ea917",
-	"name" : "clemens_65816_mockingboard",
-	"nameOnDisk" : "libclemens_65816_mockingboard.a",
+	"id" : "clemens_65816_smartport::@0b66dd025354e08ea917",
+	"name" : "clemens_65816_smartport",
+	"nameOnDisk" : "libclemens_65816_smartport.a",
 	"paths" : 
 	{
 		"build" : "devices",
@@ -101,7 +103,9 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1,
+				2
 			]
 		}
 	],
@@ -110,7 +114,19 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "devices/hddcard.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "devices/mockingboard.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "devices/prodos_hdd32.c",
 			"sourceGroupIndex" : 0
 		}
 	],

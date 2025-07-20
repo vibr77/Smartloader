@@ -7,6 +7,17 @@ DEBUG   =   0
             org       $2000
             xc
             xc
+
+; Image item length is 24
+; Image first Char is type 1=> Directory 0=> Normal Image
+; Byte 1: Command Byte 2: Value
+;    0x1 Process item, Value: ID of the Item 
+;    0x2 Page : Value 0x0 Refresh same Page, Value 0xFE Previous Page, Value 0x01 Next Page,
+
+; Result 
+    Bye 01:
+
+
 BELL            EQU     $FF3A     
 PREAD           EQU     $FB1E
 CLRSCR          EQU     $FC58
@@ -23,12 +34,11 @@ BASL            EQU     $28
 BASH            EQU     $29
 CV              EQU     $25                 ; Cursor position
 CH              EQU     $24                 ; 
+INVFLG          EQU     $32
 
 WAIT            EQU     $FCA8
-;CYCLE1          EQU     $2501
-;CYCLE           EQU     $2500
+
 CMD_BLK         EQU     $2600               ; Command Block
-;SCRATCHPAD      EQU     $3100
 RES_BLK         EQU     $2800               ; Result for CMD
 RES_BLK2        EQU     $2900               ; Result for CMD
 
@@ -45,7 +55,8 @@ cstMaxImgItem   EQU    #$07
 zpImgIndx       EQU    $85                  ; Current ImageIndex
 zpPrevImgIndx   EQU    $86
 zpMaxImgIndx    EQU    $87
-zpDispMask      EQU    $88
+zpPageImgIndx   EQU    $88 
+zpDispMask      EQU    $32
 zpPtr1          EQU    $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen 
 zpPtr2          EQU    $83 
 
@@ -179,21 +190,22 @@ setCommand_0
             sta     (zpPtr1),Y
             cpy     #$FF
             bne     setCommand_0
-            lda     #<CMD_BLK
-            sta     zpPtr1
-            
-            lda     #>CMD_BLK
-            inc
-            sta     zpPtr1+1
+            ldy     #<CMD_BLK
+            sty     zpPtr1
+        
+            ldy     #>CMD_BLK
+            iny
+            sty     zpPtr1+1
             ldy     #$00
-            lda     #$00
-setCommand_1
+            lda     #$FF
+setCommand_1                                    ; write 00 to clean up the block 
             sta (zpPtr1),Y
             cpy     #$FF
             iny
             bne     setCommand_1
 
 setCommand_2
+            
             jsr     MLI                         ; CALL PRODOS WRITE_BLOCK
             dfb     $81
             dfb     #<paramBLK_WR
@@ -285,6 +297,7 @@ dispDataBlock
             stx     zpDispMask
 
 dispDataBlock_1
+            jsr dispClearLineImage
             jsr dispDataBlockImage
 
 dispDataBlock_2
@@ -345,6 +358,47 @@ dispErrorMsg
             rts
             
 
+dispClearLineImage
+            lda     zpImgIndx
+            adc     cstLineOffset                   ; position Cursor with line Offset
+            tay 
+            ldx     #$0
+            jsr     dispPositionCursor
+            lda     #$A0                            ; space
+            ldy     #$00
+dispClearLineImage_0
+            jsr     COUT
+            iny     
+            cpy     #$13
+            bne     dispClearLineImage_0
+            rts
+
+dispImageAttr
+            ldy     #$00
+            lda     (zpPtr2),Y
+            cmp     #$01
+            bne     dispImageAttr_0
+            lda     #$BC                            ; "<"
+            jsr     COUT1                            ; print
+            lda     #$C4                            ; "D"
+            jsr     COUT1                            ; print
+            lda     #$BE                            ; ">"
+            jsr     COUT1                            ; print
+            lda     #$A0                            ; "SPC"
+            jsr     COUT1                            ; print
+            rts
+dispImageAttr_0
+            lda     #$A0                            ; "SPC"
+            jsr     COUT1                            ; print
+            lda     #$A0                            ; "SPC"
+            jsr     COUT1                            ; print
+            lda     #$A0                            ; "SPC"
+            jsr     COUT1                            ; print
+            lda     #$A0                            ; "SPC"
+            jsr     COUT1                            ; print
+
+            rts
+
 dispDataBlockImage
             
             lda     zpImgIndx
@@ -363,19 +417,21 @@ dispDataBlockImage
             lda     zpImgIndx
             jsr     PRBYTE
 
-            lda     #$BE                            ; ">"
+            lda     #$A0                            ; "SPC"
             jsr     COUT                            ; print
 
-            lda     #$A0                            ; " "
-            jsr     COUT                            ; print
+            jsr     dispImageAttr
 
-            ldy     #$00
+            ;lda     #$A0                            ; " "
+            ;jsr     COUT                            ; print
+
+            ldy     #$01                              ; we start at 1 instead of 0 cause first char indicate type of file
             lda     (zpPtr2),Y
             
 
 dispDataBlockImage_1
-            and     zpDispMask
-            jsr     $FDED
+            ;and     zpDispMask
+            jsr     COUT1
             iny
             lda     (zpPtr2),Y                      ; indirect zeropage addressing pointing to current char
             bne     dispDataBlockImage_1
@@ -494,6 +550,7 @@ mainDispatch_4
             jsr     getImageAddr
 
             ldx     zpPtr2
+            inx                             ; the first char is the type of the item will not display it     
             ldy     zpPtr2+1
 
             jsr     printMsg
@@ -501,7 +558,8 @@ mainDispatch_4
             ldy     zpImgIndx
             jsr     setCommand
             
-            jsr     readKey
+            ;jsr     readKey
+            jsr     start
 
             rts
 
@@ -545,31 +603,12 @@ printMsg
             lda     (zpPtr1),Y
 
 printMsg_0
-            and     zpDispMask
-            jsr     COUT                   ; Char disp routine
+            ;and     zpDispMask
+            jsr     COUT1                   ; Char disp routine
             iny                             ; increase char position
             lda     (zpPtr1),Y            ; indirect zeropage addressing pointing to current char
             bne     printMsg_0                ; no need of cmp 00 is current char is not 00 then loo
             rts     
-
-writeCmdBlk
-            
-            ;LDX     #$66
-            LDA     #<RES_BLK
-            STA     zpPtr1
-            LDA     #>RES_BLK
-            STA     zpPtr1+1
-            LDY     0
-
-writeCmdBlk_0
-   
-            JSR     MLI
-            DFB     $81
-            DFB     #<paramBLK_WR
-            DFB     #>paramBLK_WR
-            jsr     ERROR
-            jsr     readBlock
-            rts
 
 checkDriveSlot
             lda    $CFFF        ;reset all other I/O Select spaces
@@ -598,7 +637,7 @@ ERROR
 
             pla
             jsr     PRBYTE    ;Print error code
-            jsr     BELL      ;Ring the bell
+            ;jsr     BELL      ;Ring the bell
             rts
 
 readBlock
@@ -638,7 +677,7 @@ _title
             ASC     "SMARTLOADER"
             dfb     $00
 _version
-            ASC     "v0.26"
+            ASC     "v0.31"
             dfb     $00
 _option 
             ASC     "[R]EFRESH [B]OOT [S]ETTINGS"
@@ -661,7 +700,7 @@ paramBLK_WR
             DFB      $60                    ; slot number
             DFB      #<CMD_BLK
             DFB      #>CMD_BLK
-            DFB      $B0
+            DFB      $A8                    ; 1st Block on track 23 0x17 Physical sector 0 & 2, Warning has to be on a different track than RD block
             DFB      $00
 
     DO DEBUG
