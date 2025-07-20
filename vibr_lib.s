@@ -10,7 +10,27 @@ calc_result_low      EQU $94         ;
 calc_result_high     EQU $95         ;
 
 
-
+hex2dec    
+    LDX    #0    ; en A le nombre en hexadécimal
+    LDY    #0
+    CMP    #200    ; j'ajoute la gestion de 200
+    BCC    hexCENTAINE
+    INX        ; 240 - 100 = 140
+    SBC    #100    ; c'est voulu pour passer une fois après
+hexCENTAINE    
+    CMP    #100
+    BCC    hexDIZAINE
+    INX
+    SBC    #100
+    BNE    hexCENTAINE
+hexDIZAINE    
+    CMP    #10
+    BCC    hexEND
+    INY
+    SBC    #10
+    BNE    hexDIZAINE
+hexEND
+    RTS
 
 
 

@@ -264,49 +264,49 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "clemens_65816_emulator::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-clemens_65816_emulator-Debug-3fac331035b578b5a621.json",
+					"jsonFile" : "target-clemens_65816_emulator-Debug-3a12ac1db2af6635dad8.json",
 					"name" : "clemens_65816_emulator",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "clemens_65816_mmio::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-clemens_65816_mmio-Debug-f2dc1d8557abe7dee9f6.json",
+					"jsonFile" : "target-clemens_65816_mmio-Debug-1413dfa71d19250b2941.json",
 					"name" : "clemens_65816_mmio",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "clemens_65816_mockingboard::@0b66dd025354e08ea917",
-					"jsonFile" : "target-clemens_65816_mockingboard-Debug-3899b2a6e3b01d4d05bb.json",
+					"jsonFile" : "target-clemens_65816_mockingboard-Debug-d80960ea0aa721538af2.json",
 					"name" : "clemens_65816_mockingboard",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "clemens_65816_render::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-clemens_65816_render-Debug-3056f4b154652fba6b23.json",
+					"jsonFile" : "target-clemens_65816_render-Debug-0956c6a7cffdd8bb9bf9.json",
 					"name" : "clemens_65816_render",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "clemens_65816_serial_devices::@0b66dd025354e08ea917",
-					"jsonFile" : "target-clemens_65816_serial_devices-Debug-948aceb300457f569753.json",
+					"jsonFile" : "target-clemens_65816_serial_devices-Debug-969dba544df429ed2cd4.json",
 					"name" : "clemens_65816_serial_devices",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "clemens_65816_serializer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-clemens_65816_serializer-Debug-92a2ac941a31529167ae.json",
+					"jsonFile" : "target-clemens_65816_serializer-Debug-7d029807f4588d0c75dc.json",
 					"name" : "clemens_65816_serializer",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "clemens_65816_smartport::@0b66dd025354e08ea917",
-					"jsonFile" : "target-clemens_65816_smartport-Debug-ca985c2a4d136cdb1dfe.json",
+					"jsonFile" : "target-clemens_65816_smartport-Debug-c64d02285f770f0f5a76.json",
 					"name" : "clemens_65816_smartport",
 					"projectIndex" : 0
 				},
@@ -320,7 +320,7 @@
 				{
 					"directoryIndex" : 4,
 					"id" : "clemens_host_core::@cd6eabc83530c226c655",
-					"jsonFile" : "target-clemens_host_core-Debug-9da87730e4b7c83d59ff.json",
+					"jsonFile" : "target-clemens_host_core-Debug-a7211880312e791840c3.json",
 					"name" : "clemens_host_core",
 					"projectIndex" : 2
 				},
@@ -334,7 +334,7 @@
 				{
 					"directoryIndex" : 4,
 					"id" : "clemens_iigs::@cd6eabc83530c226c655",
-					"jsonFile" : "target-clemens_iigs-Debug-ef0ebca16565caea0cce.json",
+					"jsonFile" : "target-clemens_iigs-Debug-9f5715479b10b6dc4463.json",
 					"name" : "clemens_iigs",
 					"projectIndex" : 2
 				},
@@ -348,7 +348,7 @@
 				{
 					"directoryIndex" : 5,
 					"id" : "clemens_test_harness::@24d9109062fc62897563",
-					"jsonFile" : "target-clemens_test_harness-Debug-954b9bbf39c1c6948cbb.json",
+					"jsonFile" : "target-clemens_test_harness-Debug-bde7ea19e0279c2c9315.json",
 					"name" : "clemens_test_harness",
 					"projectIndex" : 3
 				},
@@ -397,21 +397,21 @@
 				{
 					"directoryIndex" : 2,
 					"id" : "test_gameport::@a44f0ac069e85531cdee",
-					"jsonFile" : "target-test_gameport-Debug-8d905d0c4ec625da6ac4.json",
+					"jsonFile" : "target-test_gameport-Debug-09b8e653991a0b0925fb.json",
 					"name" : "test_gameport",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "test_mmio_video_switches::@a44f0ac069e85531cdee",
-					"jsonFile" : "target-test_mmio_video_switches-Debug-91b627690b44c611a901.json",
+					"jsonFile" : "target-test_mmio_video_switches-Debug-52f2d777ff51fed5016d.json",
 					"name" : "test_mmio_video_switches",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "test_scc::@a44f0ac069e85531cdee",
-					"jsonFile" : "target-test_scc-Debug-b5a3d4b4a1a97fa63cdf.json",
+					"jsonFile" : "target-test_scc-Debug-c806ae9c7371e9950b05.json",
 					"name" : "test_scc",
 					"projectIndex" : 1
 				},
