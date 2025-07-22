@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libclemens_65816_serial_devices.a CMakeFiles/clemens_65816_serial_devices.dir/clem_peer.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libclemens_65816_serial_devices.a

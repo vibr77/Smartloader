@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libclem_test_utils.a CMakeFiles/clem_test_utils.dir/utils.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libclem_test_utils.a

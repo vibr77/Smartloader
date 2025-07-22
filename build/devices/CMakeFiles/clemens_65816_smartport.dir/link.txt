@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libclemens_65816_smartport.a CMakeFiles/clemens_65816_smartport.dir/hddcard.c.o CMakeFiles/clemens_65816_smartport.dir/mockingboard.c.o CMakeFiles/clemens_65816_smartport.dir/prodos_hdd32.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libclemens_65816_smartport.a

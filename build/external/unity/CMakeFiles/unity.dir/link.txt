@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libunity.a CMakeFiles/unity.dir/unity.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libunity.a

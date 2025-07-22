@@ -9,8 +9,8 @@
 ######################################
 # target
 ######################################
-#TARGET = PRG.SYSTEM
-TARGET = PRG.BIN
+TARGET = PRG.SYSTEM
+#TARGET = PRG.BIN
 CASM_SOURCES = smartloader.s 
 BUILD_DIR = build
 PO_FILE = blank.po
@@ -24,9 +24,9 @@ CP2_PATH=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/cp2_1
 CP2=cp2
 
 F_AUX=0x2000
-#F_AUX=0x0800
-F_TYPE=0x06
-#F_TYPE=0xFF
+
+#F_TYPE=0x06
+F_TYPE=0xFF
 
 
 ARG= -v

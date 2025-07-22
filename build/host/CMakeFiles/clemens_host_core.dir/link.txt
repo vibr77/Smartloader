@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libclemens_host_core.a CMakeFiles/clemens_host_core.dir/core/clem_apple2gs.cpp.o CMakeFiles/clemens_host_core.dir/core/clem_disk_asset.cpp.o CMakeFiles/clemens_host_core.dir/core/clem_disk_utils.cpp.o CMakeFiles/clemens_host_core.dir/core/clem_prodos_disk.cpp.o CMakeFiles/clemens_host_core.dir/core/clem_snapshot.cpp.o CMakeFiles/clemens_host_core.dir/core/clem_storage_unit.cpp.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libclemens_host_core.a

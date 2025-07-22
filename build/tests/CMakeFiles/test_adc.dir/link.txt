@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/cc -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/test_adc.dir/cpu/test_adc.c.o -o test_adc  ../libclemens_65816.a ../external/unity/libunity.a

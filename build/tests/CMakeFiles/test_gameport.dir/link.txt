@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/cc -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/test_gameport.dir/test_gameport.c.o -o test_gameport  ../libclemens_65816_mmio.a ../external/unity/libunity.a ../libclemens_65816.a ../libclemens_disktypes.a

@@ -1,4 +1,4 @@
-    DSK PRG.BIN
+    DSK PRG.SYSTEM
     TYP BIN
     mx  %11
 
@@ -8,11 +8,19 @@ DEBUG   =   0
             xc
             xc
 
+; DSK PRG.SYSTEM
+;cadius  DELETEFILE blank.po BASIC.SYSTEM
+
+;DSK PRG.BIN
+;cadius  ADDFILE blank.po blank BASIC.SYSTEM
+;cp2 sa blank.po type=0xFF,aux=0x2000 BASIC.SYSTEM
+
 ; Image item length is 24
 ; Image first Char is type 1=> Directory 0=> Normal Image
 ; Byte 1: Command Byte 2: Value
-;    0x1 Process item, Value: ID of the Item 
-;    0x2 Page : Value 0x0 Refresh same Page, Value 0xFE Previous Page, Value 0x01 Next Page,
+;    0x01 Process Directory item, Value: ID of the Item 
+;    0x02 Process Image item :
+;     0x03 Value 0x0 Refresh same Page, Value 0xFE Previous Page, Value 0x01 Next Page,
 
 ; Result 
 ;    Byte 0  : status code
@@ -35,18 +43,16 @@ BASCLC          EQU     $FBC1               ; subroutine to position cursor
 BASL            EQU     $28
 BASH            EQU     $29
 CV              EQU     $25                 ; Cursor position
-CH              EQU     $24                 ; 
-INVFLG          EQU     $32
+CH              EQU     $24                 
 
 WAIT            EQU     $FCA8
 
 CMD_BLK         EQU     $2600               ; Command Block
-RES_BLK         EQU     $2800               ; Result for CMD
-RES_BLK2        EQU     $2900               ; Result for CMD
+RES_BLK         EQU     $2800               ; Result  Block
 
-MLI             EQU     $BF00              ; ProDOS system call
-CROUT           EQU     $FD8E              ; Monitor CROUT routine
-PRBYTE          EQU     $FDDA              ; Monitor PRBYTE routine
+MLI             EQU     $BF00               ; ProDOS system call
+CROUT           EQU     $FD8E               ; Print Carriage return 
+PRBYTE          EQU     $FDDA               ; Print Hex Byte
 IORTS           EQU     $FF58
 myZP            EQU     $02
 
@@ -54,66 +60,53 @@ myZP            EQU     $02
 cstMaxImgLen    EQU    #$10                 ; Constant Max Image Filename len
 cstLineOffset   EQU    #$03
 cstMaxImgItem   EQU    #$07
+
 zpImgIndx       EQU    $85                  ; Current ImageIndex
 zpPrevImgIndx   EQU    $86
 zpMaxImgIndx    EQU    $87
 zpPageImgIndx   EQU    $88 
-zpDispMask      EQU    $32
+
+zpDispMask      EQU    $32                  ; INVERTED 0x7F NORMAL 0xFF
+
 zpPtr1          EQU    $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen 
 zpPtr2          EQU    $83 
+diskSlot        EQU    $70
+
+LOC0            EQU     $00
+LOC1            EQU     $01
 
 start       
-
 
     ;----------------------------------------------
     ; Clear Screen
     ;----------------------------------------------
     
     jsr     CLRSCR
-    ;lda     #$F3
-    ;and     #$DF
-    ;jsr     COUT
-    ;lda     #$73
-
-    ;jsr     COUT
-    ;jsr     readKey
-    ;jsr     hex2dec
-    ;pha
-    ;tya
-    ;ora     #"0"
-    ;jsr     COUT
-    ;pla
-    ;ora     #"0"
-    ;jsr     COUT
-    ;brk
-    ;jsr     readKey
-    ;----------------------------------------------
-    ; Check PRODOS
-    ;----------------------------------------------
     
-    ldx     #$01
-    ;lda     $BF00
-    ;cmp     #$4c
-    ;bne     loopb                                   ; TO BE CHANGED
-    
+ 
     ;---------------------------------------------
     ;   VAR INIT
     ;---------------------------------------------
     
     ldx     #$00
-    inx
+    
     stx     zpImgIndx
     stx     zpPrevImgIndx
-
-    ldx     #$07
     stx     zpMaxImgIndx
+
+    ;jsr     getDriveSlot
+
+    ;---------------------------------------------
+    ;   MAIN SCREEN MASK INIT
+    ;---------------------------------------------
+start_0
 
     ldx     #$0F
     ldy     #$00    
     jsr     dispPositionCursor
 
-    ldx     #$FF                            ; add Inverse Mask
-    stx     zpDispMask                      ; store to zeropage       
+    ldx     #$FF                                        ; Normal charset
+    stx     zpDispMask                                  ; store to zeropage       
     
     ldx     #<_title
     ldy     #>_title
@@ -145,7 +138,7 @@ start
     ldy     #$16    
     jsr     dispPositionCursor
 
-    lda     #"D"
+    lda     #"D"                            ; display DIR:/
     jsr     COUT1
      lda     #"I"
     jsr     COUT1
@@ -153,7 +146,7 @@ start
     jsr     COUT1
     lda     #":"
     jsr     COUT1
-     lda     #"/"
+    lda     #"/"
     jsr     COUT1
 
     ldx     #$0
@@ -164,22 +157,33 @@ start
     ldy     #>_option
     jsr     printMsg
 
+    ;---------------------------------------------
+    ;   MAIN SCREEN DATA REQUEST
+    ;---------------------------------------------
 
-    ;jsr     loadImageNameToDataBlock
-    ;jsr     writeCmdBlk
-    ;jsr     readKey
+    ldx #$00                                ; the first write command is not working...
+    ldy #$00                                ; so issue a fake request
+    jsr setCommand                          ; this should be fine 
+
+
 refresh            
     jsr     readBlock
     lda     RES_BLK
     cmp     #$20
     bne     refresh_0                       ; Error to be diplayed
 
-    lda     RES_BLK+1                       
+    lda     RES_BLK+1
+                         
     sta     zpMaxImgIndx 
-    ;BRK
-    ;jsr     readKey
     jsr     dispDataBlock
-    
+
+    ldx     #$04
+    ldy     #$16    
+    jsr     dispPositionCursor
+
+    ldx     #$02
+    ldy     #>RES_BLK
+    jsr     printMsg
     
     ldx     #$00                            ; init imgaIndex
     stx     zpImgIndx                       ; store to zeropage
@@ -188,12 +192,8 @@ refresh
     stx     zpDispMask                      ; store to zeropage
     
     jsr     dispDataBlockImage              ; disp current selection
-
     jsr     mainDispatch
     
-    ;jsr     checkDriveSlot
-    ;jsr     writeCmdBlk
-    ;brk
     jsr start
 
 refresh_0
@@ -201,50 +201,77 @@ refresh_0
     rts
 
 
+getDriveSlot
+    ldx     #$00
+    stx     diskSlot                ;Init DiskSlot to 0
+    lda     #$c8                    ;load hi slot +1
+	stx     LOC0                    ;SETPG3 must return X=0
+	sta     LOC1                    ;set ptr H
+getDriveSlot_1       
+	ldy     #$07                    ;Y is byte ptr
+	dec     LOC1
+	lda     LOC1
+	cmp     #$c0                    ;at last slot yet?
+	beq     getDriveSlot_3          ;yes and it cant be a disk
+	sta     diskSlot                ;Store the current DriveSlot
+getDriveSlot_2      
+	lda     (LOC0),y                ;fetch a slot byte
+	cmp     DISKID-1,y              ;is it a disk ??
+	bne     getDriveSlot_1          ;no so next slot down
+	dey
+	dey                             ;yes so check next byte
+	bpl     getDriveSlot_2          ;until 4 checked
+getDriveSlot_3
+	rts
+
 ;   @Funct: setCommand
 ;   @Param: X Command, Y Value
-;
+
 
 setCommand       
-    lda     #<CMD_BLK
+    lda     #<CMD_BLK                           ; Storing CMD_BLK address to zpPtr1
     sta     zpPtr1
     
     lda     #>CMD_BLK
     sta     zpPtr1+1
-    txa
+
+    txa                                         ; Command: X -> Byte0 of CMD_BLK 
     sta     CMD_BLK
     
     tya
-    sta     CMD_BLK+1
+    sta     CMD_BLK+1                           ; Value: Y -> Byte1 of CMD_BLK 
 
-    lda     #$00
-    ldy     #$01
-setCommand_0
+    lda     #$00                                ; A -> 00 to wipe remaining block data
+    ldy     #$01                                ; start at offset 1, it will be incremented so Byte 2
+
+setCommand_0                                    ; Wipe the content of CMD_BLK 2x256 Bytes
     iny
     sta     (zpPtr1),Y
     cpy     #$FF
     bne     setCommand_0
+    
     ldy     #<CMD_BLK
     sty     zpPtr1
 
     ldy     #>CMD_BLK
     iny
     sty     zpPtr1+1
+    
     ldy     #$00
-    lda     #$FF
+    lda     #$00
 
-setCommand_1                                    ; write 00 to clean up the block 
+setCommand_1                                    ; write 00 to clean up the 2nd 256 Bytes
     sta (zpPtr1),Y
     cpy     #$FF
     iny
     bne     setCommand_1
 
 setCommand_2      
-    jsr     MLI                         ; CALL PRODOS WRITE_BLOCK
+    jsr     MLI                                 ; CALL PRODOS WRITE_BLOCK 
     dfb     $81
     dfb     #<paramBLK_WR
     dfb     #>paramBLK_WR
-    jsr     ERROR
+    jsr     dispCommandProdosReturnCode
     rts
 
 dispLine
@@ -252,87 +279,6 @@ dispLine
     jsr     COUT
     dey
     bne dispLine
-    rts
-
-    DO DEBUG
-loadImageNameToDataBlock
-    lda     #$00
-    sta     zpImgIndx
-
-loadImageNameToDataBlock_1
-            
-    ldx     #$10                        ; #10 -> 16 !!!
-    stx     calc_1_low
-    sta     calc_2_low
-    
-    jsr     mult_8B_8B
-
-    ldx     calc_result_high
-    stx     calc_2_high
-
-    ldx     calc_result_low
-    stx     calc_2_low
-
-    ldx     #<RES_BLK
-    stx     calc_1_low
-
-    ldx     #>RES_BLK
-    stx     calc_1_high
-
-    jsr     add_16B_16B
-
-    ldx     calc_result_low
-    stx     zpPtr2
-
-    ldx     calc_result_high
-    stx     zpPtr2+1                    ; at this stage we should have the rigth destination address in zpPtr2
-
-    lda     zpImgIndx
-    asl     a
-    tax
-
-    lda     imageTable,x                 ; Get low byte address
-    ldy     imageTable+1,x               ; Get high byte address
-
-    sta     zpPtr1                       ; must be at the begininng
-    sty     zpPtr1+1
-
-    ldy     #0
-    lda     (zpPtr1),y
-            
-
-loadImageNameToDataBlock_2                      ; copy char to dest addr char starting at $3200 + 16*ImageIndex
-    sta     (zpPtr2),y 
-    iny 
-    lda     (zpPtr1),y 
-    bne     loadImageNameToDataBlock_2
-
-loadImageNameToDataBlock_3                      ; complement to 16
-    sta     (zpPtr2),y
-    iny     
-    cpy     cstMaxImgLen
-    bne     loadImageNameToDataBlock_3         
-    
-loadImageNameToDataBlock_4                      ; Move to the next imageIndex
-    lda     zpImgIndx
-    inc     a
-    sta     zpImgIndx
-    cmp     #$08
-    bne     loadImageNameToDataBlock_1
-
-loadImageNameToDataBlock_5
-    rts
-    FIN
-
-str2UpperCase
-    pha
-    sbc     #$E0
-    bcs     str2UpperCase_1
-    pla
-    rts
-str2UpperCase_1
-    pla
-    and     #$DF
     rts
 
 dispDataBlock
@@ -349,19 +295,17 @@ dispDataBlock_2
     inc zpImgIndx 
     lda zpImgIndx
     
-    cmp zpMaxImgIndx
-    bne dispDataBlock_1
+    sbc zpMaxImgIndx
+    bcc dispDataBlock_1
 
-    jsr dispClearLineImage
-    jsr dispDataBlockImage
-    
+    ;jsr dispClearLineImage
+    ;jsr dispDataBlockImage
     rts
 
 ;Display the name of the image on screen
 ;zpImgIndx contain the index
 ;zpDispMask  contains the display mode #FF normal, #3F inverted
-getImageAddr
-           
+getImageAddr      
     ldx     #$18                        ; #18 -> 24 !!!
     stx     calc_1_low
     sta     calc_2_low
@@ -375,7 +319,7 @@ getImageAddr
     stx     calc_2_low
 
     ;ldx     #<RES_BLK
-    ldx     #$20                    ; we start at 0x2810 and not 0x2800 to keep 32 bytes of data 
+    ldx     #$20                                ; we start at 0x2820 and not 0x2800 to keep 32 bytes of data
     stx     calc_1_low
 
     ldx     #>RES_BLK
@@ -427,22 +371,22 @@ dispImageAttr
     lda     (zpPtr2),Y
     cmp     #$01
     bne     dispImageAttr_0
-    lda     #$BC                            ; "<"
-    jsr     COUT1                            ; print
+    ;lda     #$BC                            ; "<"
+    ;jsr     COUT1                            ; print
     lda     #$C4                            ; "D"
     jsr     COUT1                            ; print
-    lda     #$BE                            ; ">"
-    jsr     COUT1                            ; print
+    ;lda     #$BE                            ; ">"
+    ;jsr     COUT1                            ; print
     lda     #$A0                            ; "SPC"
     jsr     COUT1                            ; print
     rts
 
 dispImageAttr_0
-    lda     #$A0                            ; "SPC"
-    jsr     COUT1                            ; print
-    lda     #$A0                            ; "SPC"
-    jsr     COUT1                            ; print
-    lda     #$A0                            ; "SPC"
+    ;lda     #$A0                            ; "SPC"
+    ;jsr     COUT1                            ; print
+    ;lda     #$A0                            ; "SPC"
+    ;jsr     COUT1                            ; print
+    lda     #$AD                            ; "SPC"
     jsr     COUT1                            ; print
     lda     #$A0                            ; "SPC"
     jsr     COUT1                            ; print
@@ -461,11 +405,11 @@ dispDataBlockImage
     ldx     #$0
     jsr     dispPositionCursor
 
-    lda     zpImgIndx
-    jsr     printInt8
+    ;lda     zpImgIndx
+    ;jsr     printInt8
 
-    lda     #$A0                            ; "SPC"
-    jsr     COUT1                            ; print
+    ;lda     #$A0                            ; "SPC"
+    ;jsr     COUT1                            ; print
 
     jsr     dispImageAttr
 
@@ -484,8 +428,12 @@ dispDataBlockImage_1
 dispDataBlockImage_2
     iny
     jsr     COUT1
-    cpy     #$18
-    bne     dispDataBlockImage_2
+    pha
+    tya
+    sbc     #$18
+    pla
+    ;cpy     #$18
+    bcc     dispDataBlockImage_2
     rts
 
 ; Main process flow
@@ -536,6 +484,7 @@ mainDispatch
     bne     mainDispatch_A
     
     ldx     zpMaxImgIndx                    ; zpImgIndx =7 rolling to 0
+    dex
     stx     zpImgIndx
     jmp     mainDispatch_2
 
@@ -553,6 +502,7 @@ mainDispatch_0
     stx     zpDispMask
     jsr     dispDataBlockImage
     ldx     zpImgIndx
+    inx
     cpx     zpMaxImgIndx                    ; TODO put this automatic from the stack
     bne     mainDispatch_1
 
@@ -583,6 +533,9 @@ mainDispatch_3
     jsr     COUT
     
     lda     zpMaxImgIndx
+    tax
+    dex
+    txa  
     jsr     printInt8
     
     ;lda     #$00
@@ -597,7 +550,7 @@ mainDispatch_3
 mainDispatch_4 
     jsr     CLRSCR
 
-    ldx     #$10
+    ldx     #$05
     ldy     #$09    
     jsr     dispPositionCursor
     
@@ -605,20 +558,45 @@ mainDispatch_4
     stx     zpDispMask
 
     lda     zpImgIndx
-    jsr     getImageAddr
+    jsr     getImageAddr                        ; get the selected item address in the read data block 
 
-    ldx     zpPtr2
-    inx                             ; the first char is the type of the item will not display it     
+    ldx     zpPtr2                              ; zpPtr2 contains the address of the image address
+    inx                                         ; the first char is the type of the item will not display it     
     ldy     zpPtr2+1
 
     jsr     printMsg
+
+    ldy     #$00
+    lda     (zpPtr2),y                            ; A contains the type selected item
+
+    cmp     #$01                                ; it is a directory    
+    beq     mainDispatch_setCommandDirectory
+
+    cmp     #$00                                ; it is a file
+    beq     mainDispatch_setCommandFile
+
+mainDispatch_setCommandDirectory
     ldx     #$01
     ldy     zpImgIndx
     jsr     setCommand
-    
-    ;jsr     readKey
     jsr     start
 
+mainDispatch_setCommandFile
+    ldx     #$02
+    ldy     zpImgIndx
+    jsr     setCommand
+
+    jsr     readBlock
+    lda     RES_BLK
+    cmp     #$22
+    bne     mainDispatch_setCommandFile_err
+    jmp     #$C600                                    ; TODO put this variable according to the slot
+    rts
+
+mainDispatch_setCommandFile_err       
+    jsr dispErrorMsg
+    jsr readKey
+    jmp start
     rts
 
 printInt8                           ; value in A
@@ -668,6 +646,7 @@ printMsg
     sty     zpPtr1+1
     ldy     #0
     lda     (zpPtr1),Y
+    beq     printMsg_1
     jsr     str2UpperCase
 
 printMsg_0
@@ -677,6 +656,7 @@ printMsg_0
     lda     (zpPtr1),Y                      ; indirect zeropage addressing pointing to current char
     jsr     str2UpperCase
     bne     printMsg_0                      ; no need of cmp 00 is current char is not 00 then loo
+printMsg_1
     rts     
 
 checkDriveSlot
@@ -695,13 +675,13 @@ checkDriveSlot
     jsr    readKey
     rts
 
-ERROR    
+dispCommandProdosReturnCode    
     pha
     ldy     #$00                            ; Display the Key value on the top right of the screen
     ldx     #$0
     jsr     dispPositionCursor
     
-    lda     #$C5                            ; "/"
+    lda     #$C5                            ; "E"
     jsr     COUT
 
     pla
@@ -729,7 +709,7 @@ readBlock_02
     DFB     #<paramBLK_RD
     DFB     #>paramBLK_RD
 
-    jsr     ERROR
+    jsr     dispCommandProdosReturnCode
     rts
 
 readKey
@@ -746,7 +726,7 @@ _title
     ASC     "SMARTLOADER"
     dfb     $00
 _version
-    ASC     "v0.31"
+    ASC     "v0.33"
     dfb     $00
 _option 
             ASC     "[R]EFRESH [B]OOT [S]ETTINGS"
@@ -756,6 +736,7 @@ error_10
             ASC     "ERR 10 UNABLE TO GET DATA"
             dfb     $00
 
+DISKID      dfb   $20,$ff,$00,$ff,$03,$ff,$3c
 
 paramBLK_RD
     DFB      $03                    ; paramcnt =3
@@ -773,38 +754,6 @@ paramBLK_WR
     DFB      $A8                    ; 1st Block on track 23 0x17 Physical sector 0 & 2, Warning has to be on a different track than RD block
     DFB      $00
 
-    DO DEBUG
-image_00
-    ASC ".."
-    dfb $00
-image_01      
-            ASC     "ARKANOID.WOZ"
-            dfb     $00
-image_02
-            ASC     "ZAXXON.WOZ"
-            dfb     $00
-image_03      
-            ASC     "PAINTSHOP.DSK"
-            dfb     $00
-image_04      
-            ASC     "CHOPLIFTER.DSK"
-            dfb     $00
-
-image_05      
-            ASC     "LODE RUNNER.DSK"
-            dfb     $00
-
-image_06      
-            ASC     "COMMANDO.DSK"
-            dfb     $00
-image_07      
-            ASC     "PRODO.DSK"
-            dfb     $00
-
-imageTable
-            dw  image_00,image_01,image_01,image_02,image_03,image_04,image_05,image_06,image_07
-    ELSE
-    FIN
 ; Merlin32 include
     PUT     print_uint16_with_sp.s
     PUT     vibr_lib.s

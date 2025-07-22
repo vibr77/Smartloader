@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libclemens_65816_render.a CMakeFiles/clemens_65816_render.dir/external/mpack.c.o CMakeFiles/clemens_65816_render.dir/render.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libclemens_65816_render.a
