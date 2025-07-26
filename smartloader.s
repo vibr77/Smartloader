@@ -24,9 +24,11 @@ DEBUG   =   0
 
 ; Result 
 ;    Byte 0  : status code
-;    Byte 1  : Number of Item in the page
-;    Byte 2  : Current Directory 23 Byte
-;    Bytes 26 : 0x0
+;    Byte 1  : Item count in the page
+;    Byte 2  : Current Page
+;    Byte 3  : Max Page
+;    Byte 4  : Current Directory 23 Byte
+;    Bytes 27 : 0x0
 
 BELL            EQU     $FF3A     
 PREAD           EQU     $FB1E
@@ -59,21 +61,24 @@ myZP            EQU     $02
 
 cstMaxImgLen    EQU    #$10                 ; Constant Max Image Filename len
 cstLineOffset   EQU    #$03
-cstMaxImgItem   EQU    #$07
+cstMaxItemPPage EQU    #$10                 ; 16 item per page 
 
 zpImgIndx       EQU    $85                  ; Current ImageIndex
 zpPrevImgIndx   EQU    $86
 zpMaxImgIndx    EQU    $87
-zpPageImgIndx   EQU    $88 
+
+zpPageIndx      EQU    $88 
+zpMaxPageIndx   EQU    $89
 
 zpDispMask      EQU    $32                  ; INVERTED 0x7F NORMAL 0xFF
 
 zpPtr1          EQU    $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen 
 zpPtr2          EQU    $83 
+
 diskSlot        EQU    $70
 
-LOC0            EQU     $00
-LOC1            EQU     $01
+LOC0            EQU    $00
+LOC1            EQU    $01
 
 start       
 
@@ -94,11 +99,32 @@ start
     stx     zpPrevImgIndx
     stx     zpMaxImgIndx
 
+    stx     zpPageIndx
+    stx     zpMaxPageIndx
+
+
+
+
+    ldx     #$0
+    stx     calc_1_high
+    stx     calc_2_high
+    ldx     #$31
+    stx     calc_1_low
+    ldx     #$03
+    stx     calc_2_low
+    jsr     div_16B_16B
+
     ;jsr     getDriveSlot
+    ;lda     #$09
+    ;sta     CURTRK
+    ;lda     #$08
+    ;sta     DESTRK
+    ;jsr     armmove
 
     ;---------------------------------------------
     ;   MAIN SCREEN MASK INIT
     ;---------------------------------------------
+
 start_0
 
     ldx     #$0F
@@ -168,20 +194,38 @@ start_0
 
 refresh            
     jsr     readBlock
+
+    ;----------------------------------------------
+    ; MOVE THE HEAD
+    ;----------------------------------------------
+    jsr     getDriveSlot
+    
+    lda     #$16                            ; Move the head so in case of Reading error the SmartDisk will recompute the reading content of the sdcard
+    sta     CURTRK
+    lda     #$17
+    sta     DESTRK
+    jsr     armmove
+
     lda     RES_BLK
     cmp     #$20
     bne     refresh_0                       ; Error to be diplayed
 
-    lda     RES_BLK+1
-                         
+    lda     RES_BLK+1                  
     sta     zpMaxImgIndx 
+
+    lda     RES_BLK+2
+    sta     zpPageIndx
+
+    lda     RES_BLK+3
+    sta     zpMaxPageIndx
+
     jsr     dispDataBlock
 
-    ldx     #$04
+    ldx     #$04                            ; Display Current Dir
     ldy     #$16    
     jsr     dispPositionCursor
 
-    ldx     #$02
+    ldx     #$04                            ; Data start at index 4 of RES_BLK
     ldy     #>RES_BLK
     jsr     printMsg
     
@@ -438,42 +482,61 @@ dispDataBlockImage_2
 
 ; Main process flow
 ; Reading from the keyboard
-JMP_REBOOT
-            jmp     reboot
-JMP_REFRESH
-            jmp     refresh
-mainDispatch
-    jsr     readKey
-    
-    pha                                     ; Putting A containing the key value on the stack 
-    
-    ldy     #$00                            ; Display the Key value on the top right of the screen
-    ldx     #$06
-    jsr     dispPositionCursor
-    
-    ldx     #$FF                            ; add Inverse Mask    
-    stx     zpDispMask   
 
-    jsr     PRBYTE
+pNextPage
     
-    ldx     #$7F                            ; add Inverse Mask
-    stx     zpDispMask   
-
-    lda     zpImgIndx
-    sta     zpPrevImgIndx
+    ; we need to do a bit of computation
+    ; currentpage * 16 + 16 > Maxitem ?
+    ; if yes index zpPageIndex
+    ; if not go to zpPageIndex = 0 
     
-    pla
-    cmp     #$D2                            ; KEY [R]
-    beq     JMP_REFRESH
-
-    cmp     #$C2                            ; KEY [R]
-    beq     JMP_REBOOT
-
-    cmp     #$8D                            ; KEY [ENTER] / [RETURN] 
-    beq     mainDispatch_4            
+    ldx zpPageIndx
+    cpx zpMaxPageIndx
+    beq pNextPage_1
     
-    cmp     #$8B                            ; KEY [UP]
-    bne     mainDispatch_0
+    lda     zpPageIndx
+    sbc     zpMaxImgIndx
+    bcc     pNextPage_0        ;   the result is negative
+    
+    inc     zpPageIndx
+    ldx     #$11
+    ldy     zpPageIndx
+    jsr     setCommand
+    jsr     start
+    
+    rts
+pNextPage_0                     ; we are reaching the max number of page, looping to 0
+    ldx     #$11
+    ldy     #$00
+    sty     zpPageIndx
+    
+    jsr     setCommand
+    jsr     start
+pNextPage_1
+    jmp mainDispatch
+    
+pPreviousPage
+
+    ldx zpPageIndx
+    beq pPreviousPage_0
+    dec zpPageIndx
+    rts
+
+pPreviousPage_0                 
+                                           
+    ldx zpPageIndx
+    cpx zpMaxPageIndx
+    bne pPreviousPage_1
+
+    ldx #$11
+    ldy zpMaxPageIndx
+    jsr setCommand
+    jsr start
+
+pPreviousPage_1
+    jmp mainDispatch
+
+pKeyUp
     
     ldx     #$FF                            ; Change the current Image back to normal text
     stx     zpDispMask
@@ -481,21 +544,18 @@ mainDispatch
 
     ldx     zpImgIndx
     cpx     #00                             ; if current Index is 0 then roll to the end
-    bne     mainDispatch_A
+    bne     pKeyUp_0
     
     ldx     zpMaxImgIndx                    ; zpImgIndx =7 rolling to 0
     dex
     stx     zpImgIndx
     jmp     mainDispatch_2
 
-mainDispatch_A 
+pKeyUp_0
     jsr     decImageIndex                   ; decrement current Index
-    jmp     mainDispatch_2                  ; go the display part
+    jmp     mainDispatch_2
 
-mainDispatch_0            
-    cmp     #$8A                            ; Key Down
-    bne     mainDispatch
-    
+pKeydown
     lda     zpImgIndx
     
     ldx     #$FF
@@ -504,50 +564,18 @@ mainDispatch_0
     ldx     zpImgIndx
     inx
     cpx     zpMaxImgIndx                    ; TODO put this automatic from the stack
-    bne     mainDispatch_1
+    bne     pKeydown_0
 
     ldx     #$0                             ; zpImgIndx =7 rolling to 0
     stx     zpImgIndx
     jmp     mainDispatch_2
 
-mainDispatch_1
-    jsr     incImageIndex                   ; increment current index
+pKeydown_0
+    jsr     incImageIndex
+    jmp     mainDispatch_2
 
-mainDispatch_2            
-    lda     zpImgIndx
-    sbc     #$09
-    bpl     mainDispatch_3                 
+pSelectItem
 
-mainDispatch_3
-    ldy     #$0
-    ldx     #$22
-    jsr     dispPositionCursor
-
-    ;lda     #$00
-    ;ldx     zpImgIndx
-    ;jsr     PrintUint16
-    lda     zpImgIndx
-    jsr     printInt8
-
-    lda     #$AF                            ; "/"
-    jsr     COUT
-    
-    lda     zpMaxImgIndx
-    tax
-    dex
-    txa  
-    jsr     printInt8
-    
-    ;lda     #$00
-    ;ldx     zpMaxImgIndx
-    ;jsr     PrintUint16
-    
-    ldx     #$3F
-    stx     zpDispMask
-    jsr     dispDataBlockImage
-    jmp     mainDispatch
-
-mainDispatch_4 
     jsr     CLRSCR
 
     ldx     #$05
@@ -570,18 +598,18 @@ mainDispatch_4
     lda     (zpPtr2),y                            ; A contains the type selected item
 
     cmp     #$01                                ; it is a directory    
-    beq     mainDispatch_setCommandDirectory
+    beq     pSelectItem_setCommandDirectory
 
     cmp     #$00                                ; it is a file
-    beq     mainDispatch_setCommandFile
+    beq     pSelectItem_setCommandFile
 
-mainDispatch_setCommandDirectory
-    ldx     #$01
+pSelectItem_setCommandDirectory
+    ldx     #$10
     ldy     zpImgIndx
     jsr     setCommand
     jsr     start
 
-mainDispatch_setCommandFile
+pSelectItem_setCommandFile
     ldx     #$02
     ldy     zpImgIndx
     jsr     setCommand
@@ -589,28 +617,165 @@ mainDispatch_setCommandFile
     jsr     readBlock
     lda     RES_BLK
     cmp     #$22
-    bne     mainDispatch_setCommandFile_err
+    bne     pSelectItem_setCommandFile_err
     jmp     #$C600                                    ; TODO put this variable according to the slot
     rts
 
-mainDispatch_setCommandFile_err       
+pSelectItem_setCommandFile_err       
     jsr dispErrorMsg
     jsr readKey
     jmp start
-    rts
 
-printInt8                           ; value in A
-    ;pha
+mainDispatch_selectItem
+    jmp     pSelectItem
+
+mainDispatch_reboot
+    jmp     reboot
+
+mainDispatch_refresh
+    jmp     refresh
+
+mainDispatch_nextPage
+    jmp     pNextPage
+
+mainDispatch_previousPage
+    jmp     pPreviousPage
+
+mainDispatch_keyDown
+    jmp     pKeydown
+
+mainDispatch_keyUp
+    jmp     pKeyUp
+
+mainDispatch
+    jsr     readKey
+    jsr     mainDispatch_disp
+    
+    cmp     #$D2                            ; KEY [R]
+    beq     mainDispatch_refresh
+
+    cmp     #$C2                            ; KEY [R]
+    beq     mainDispatch_reboot
+
+    cmp     #$95
+    beq     mainDispatch_nextPage           ; KEY right arrow
+
+    cmp     #$88
+    beq     mainDispatch_previousPage       ; KEY left arrow
+
+    cmp     #$8D                            ; KEY [ENTER] / [RETURN] 
+    beq     mainDispatch_selectItem            
+    
+    cmp     #$8B                            ; KEY [UP]
+    beq     mainDispatch_keyUp
+    
+    cmp     #$8A
+    beq     mainDispatch_keyDown
+    
+    jmp     mainDispatch
+
+mainDispatch_disp                                           ; Putting A containing the key value on the stack 
+    pha
+    ldy     #$00                            ; Display the Key value on the top right of the screen
+    ldx     #$06
+    jsr     dispPositionCursor
+    
+    ldx     #$FF                            ; add Inverse Mask    
+    stx     zpDispMask   
+
+    jsr     PRBYTE
+    
+    ldx     #$7F                            ; add Inverse Mask
+    stx     zpDispMask   
+
+    lda     zpImgIndx
+    sta     zpPrevImgIndx
+    pla
+    rts
+            
+    ;lda     zpImgIndx
+    ;sbc     #$09
+    ;bpl     mainDispatch_3                 
+
+mainDispatch_2
+    ldy     #$0
+    ldx     #$22
+    jsr     dispPositionCursor
+
+    lda     zpImgIndx
+    jsr     printInt8
+
+    lda     #"/"                            ; "/"
+    jsr     COUT
+    
+    lda     zpMaxImgIndx
+    tax
+    dex
+    txa  
+    jsr     printInt8
+    
+    ldy     #$0
+    ldx     #$1B
+    jsr     dispPositionCursor
+
+    lda     #"P"
+    jsr     COUT
+
+    lda     zpPageIndx
+    jsr     printInt8_NoPad
+
+    lda     #"/"
+    jsr     COUT
+
+    lda     zpMaxPageIndx
+    jsr     printInt8_NoPad
+    
+    ldx     #$3F
+    stx     zpDispMask
+    jsr     dispDataBlockImage
+    jmp     mainDispatch
+
+;--------------------------------------------------------
+; Value is in A
+; printInt8_NoPad does not print dizaine number if 0
+; printInt8_SpcPad print " " if dizaine equal 0
+; printInt8 print double digit number
+;---------------------------------------------------------
+printInt8_NoPad
     jsr     hex2dec
     pha
     tya
+    beq     printInt8_1  
     ora     #"0"
     jsr     COUT1
+    jmp     printInt8_1
     
+printInt8_SpcPad                           ; value in A
+    jsr     hex2dec
+    pha
+    tya
+    beq     printInt8_SPC  
+    ora     #"0"
+    jsr     COUT1
+    jmp     printInt8_1
+
+printInt8                       ; value in A
+    jsr     hex2dec
+    pha
+    tya  
+    ora     #"0"
+    jsr     COUT1
+    jmp     printInt8_1
+
+printInt8_SPC
+    lda  #" "
+    jsr  COUT1
+
+printInt8_1
     pla
     ora     #"0"
     jsr     COUT1
-    ;pla
+
     rts
 
 incImageIndex
@@ -726,8 +891,9 @@ _title
     ASC     "SMARTLOADER"
     dfb     $00
 _version
-    ASC     "v0.33"
+    ASC     "v0.34"
     dfb     $00
+    
 _option 
             ASC     "[R]EFRESH [B]OOT [S]ETTINGS"
             dfb     $00
@@ -757,6 +923,7 @@ paramBLK_WR
 ; Merlin32 include
     PUT     print_uint16_with_sp.s
     PUT     vibr_lib.s
+    PUT     armmove.s
 
 
 	

@@ -130,3 +130,30 @@ mult_8B_8B_noadd
     sta calc_result_low
 ;    sta factor2
     rts
+
+; reminder on result
+; quotient calc1
+
+div_16B_16B
+    LDA #0      ;Initialize REM to 0
+    STA calc_result_high
+    STA calc_result_low
+    LDX #16     ;There are 16 bits in NUM1
+div_l1      
+    ASL calc_1_high    ;Shift hi bit of NUM1 into REM
+    ROL calc_1_low  ;(vacating the lo bit, which will be used for the quotient)
+    ROL calc_result_high
+    ROL calc_result_low
+    LDA calc_result_high
+    SEC         ;Trial subtraction
+    SBC calc_2_high
+    TAY
+    LDA calc_result_low
+    SBC calc_2_low
+    BCC div_l2      ;Did subtraction succeed?
+    STA calc_result_low   ;If yes, save it
+    STY calc_result_high
+    INC calc_1_high    ;and record a 1 in the quotient
+div_l2
+    DEX
+    BNE div_l1
