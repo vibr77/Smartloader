@@ -15,6 +15,11 @@ DEBUG   =   0
 ;cadius  ADDFILE blank.po blank BASIC.SYSTEM
 ;cp2 sa blank.po type=0xFF,aux=0x2000 BASIC.SYSTEM
 
+
+; ChangeLog
+; 27.07.2025 v0.36
+;   + diskslot was fixed to slot 6, detect right disk slot 
+
 ; Image item length is 24
 ; Image first Char is type 1=> Directory 0=> Normal Image
 ; Byte 1: Command Byte 2: Value
@@ -80,6 +85,11 @@ diskSlot        EQU    $70
 LOC0            EQU    $00
 LOC1            EQU    $01
 
+bootUp
+    ldx #$00                                ; the first write command is not working...
+    ldy #$00                                ; so issue a fake request
+    jsr setCommand                          ; this should be fine 
+
 start       
 
     ;----------------------------------------------
@@ -102,17 +112,16 @@ start
     stx     zpPageIndx
     stx     zpMaxPageIndx
 
-
-
-
-    ldx     #$0
-    stx     calc_1_high
-    stx     calc_2_high
-    ldx     #$31
-    stx     calc_1_low
-    ldx     #$03
-    stx     calc_2_low
-    jsr     div_16B_16B
+    jsr     getDriveSlot
+    
+    ;ldx     #$0
+    ;stx     calc_1_high
+    ;stx     calc_2_high
+    ;ldx     #$31
+    ;stx     calc_1_low
+    ;ldx     #$03
+    ;stx     calc_2_low
+    ;jsr     div_16B_16B
 
     ;jsr     getDriveSlot
     ;lda     #$09
@@ -187,10 +196,6 @@ start_0
     ;   MAIN SCREEN DATA REQUEST
     ;---------------------------------------------
 
-    ldx #$00                                ; the first write command is not working...
-    ldy #$00                                ; so issue a fake request
-    jsr setCommand                          ; this should be fine 
-
 
 refresh            
     jsr     readBlock
@@ -198,8 +203,8 @@ refresh
     ;----------------------------------------------
     ; MOVE THE HEAD
     ;----------------------------------------------
-    jsr     getDriveSlot
     
+    jsr     wait
     lda     #$16                            ; Move the head so in case of Reading error the SmartDisk will recompute the reading content of the sdcard
     sta     CURTRK
     lda     #$17
@@ -266,7 +271,18 @@ getDriveSlot_2
 	dey                             ;yes so check next byte
 	bpl     getDriveSlot_2          ;until 4 checked
 getDriveSlot_3
-	rts
+	lda     diskSlot
+    and     #$0F
+    asl     a
+    asl     a
+    asl     a
+    asl     a
+    sta     diskSlot
+    sta     paramBLK_RD+1
+    sta     paramBLK_WR+1
+
+
+    rts
 
 ;   @Funct: setCommand
 ;   @Param: X Command, Y Value
@@ -341,9 +357,31 @@ dispDataBlock_2
     
     sbc zpMaxImgIndx
     bcc dispDataBlock_1
+    rts
 
-    ;jsr dispClearLineImage
-    ;jsr dispDataBlockImage
+; based on the current page compute the final indx
+
+getImgPageIndx
+    lda     zpPageIndx                                  ; Take the current page index
+    sta     calc_1_low      
+
+    lda     #$10                                        ; 0x10 -> 16
+    sta     calc_2_low
+
+    jsr     mult_8B_8B                                  ; Multiply current page index by 16
+    ldx     calc_result_low
+    stx     calc_1_low
+
+    ldx     zpImgIndx                                   ; 
+    stx     calc_2_low
+
+    ldx     #$00
+    stx     calc_2_high
+    stx     calc_1_high
+
+    jsr     add_16B_16B                                 ; Add the current image index to the result of multiply
+    lda     calc_result_low
+    
     rts
 
 ;Display the name of the image on screen
@@ -415,21 +453,16 @@ dispImageAttr
     lda     (zpPtr2),Y
     cmp     #$01
     bne     dispImageAttr_0
-    ;lda     #$BC                            ; "<"
-    ;jsr     COUT1                            ; print
+
     lda     #$C4                            ; "D"
     jsr     COUT1                            ; print
-    ;lda     #$BE                            ; ">"
-    ;jsr     COUT1                            ; print
+ 
     lda     #$A0                            ; "SPC"
     jsr     COUT1                            ; print
     rts
 
 dispImageAttr_0
-    ;lda     #$A0                            ; "SPC"
-    ;jsr     COUT1                            ; print
-    ;lda     #$A0                            ; "SPC"
-    ;jsr     COUT1                            ; print
+
     lda     #$AD                            ; "SPC"
     jsr     COUT1                            ; print
     lda     #$A0                            ; "SPC"
@@ -448,13 +481,6 @@ dispDataBlockImage
     tay 
     ldx     #$0
     jsr     dispPositionCursor
-
-    ;lda     zpImgIndx
-    ;jsr     printInt8
-
-    ;lda     #$A0                            ; "SPC"
-    ;jsr     COUT1                            ; print
-
     jsr     dispImageAttr
 
     ldy     #$01                              ; we start at 1 instead of 0 cause first char indicate type of file
@@ -476,7 +502,7 @@ dispDataBlockImage_2
     tya
     sbc     #$18
     pla
-    ;cpy     #$18
+
     bcc     dispDataBlockImage_2
     rts
 
@@ -484,57 +510,53 @@ dispDataBlockImage_2
 ; Reading from the keyboard
 
 pNextPage
-    
-    ; we need to do a bit of computation
-    ; currentpage * 16 + 16 > Maxitem ?
-    ; if yes index zpPageIndex
-    ; if not go to zpPageIndex = 0 
-    
-    ldx zpPageIndx
+    ldx zpPageIndx                              
     cpx zpMaxPageIndx
-    beq pNextPage_1
-    
-    lda     zpPageIndx
-    sbc     zpMaxImgIndx
-    bcc     pNextPage_0        ;   the result is negative
-    
+    beq pNextPage_0                                     ; check if current page is the last page
+      
     inc     zpPageIndx
-    ldx     #$11
+    ldx     #$11                                        ; Command 0x11 is to change currentPath page Index
     ldy     zpPageIndx
     jsr     setCommand
-    jsr     start
     
-    rts
-pNextPage_0                     ; we are reaching the max number of page, looping to 0
-    ldx     #$11
-    ldy     #$00
+    jmp     start
+    
+pNextPage_0
+    ldx     zpPageIndx 
+    beq     pNextPage_1                                 ; current Page Index == MaxPage Index, check if current Index ==0 then do nothing
+    
+    ldx     #$11                                        ; otherwise let loop to index 0 and send the command
+    ldy     #$00                                        ; Command 0x11 is to change currentPath page Index
     sty     zpPageIndx
-    
     jsr     setCommand
-    jsr     start
+    
+    jmp     start                                       ; send the Command and loop back to start
+
 pNextPage_1
     jmp mainDispatch
     
 pPreviousPage
-
     ldx zpPageIndx
-    beq pPreviousPage_0
-    dec zpPageIndx
-    rts
-
-pPreviousPage_0                 
-                                           
+    beq pPreviousPage_0                                 ; Current page Index is 0 so let loop MaxPageIndex 
+    dec zpPageIndx                                      ; current page index is not 0 => decrease
+    
+    ldx #$11                                            ; Command 0x11 is to change currentPath page Index
+    ldy zpPageIndx
+    jsr setCommand                                      ; send the Command and loop back to start
+    jmp start
+    
+pPreviousPage_0                                                      
     ldx zpPageIndx
     cpx zpMaxPageIndx
-    bne pPreviousPage_1
-
-    ldx #$11
+    beq pPreviousPage_1                                 ; Compage current page Index with MaxPageIndx
+                                                        ; if both equal then do nothing otherwize move to last page Index (maxPageIndx)
+    ldx #$11                                            ; Command 0x11 is to change currentPath page Index
     ldy zpMaxPageIndx
-    jsr setCommand
-    jsr start
+    jsr setCommand                                      ; send the Command and loop back to start
+    jmp start
 
 pPreviousPage_1
-    jmp mainDispatch
+    jmp mainDispatch                                    ; loop back to mainDispatch
 
 pKeyUp
     
@@ -585,7 +607,13 @@ pSelectItem
     ldx     #$FF
     stx     zpDispMask
 
-    lda     zpImgIndx
+    jsr     getImgPageIndx
+    jsr     printInt8
+
+    lda     #" "
+    jsr     COUT1
+
+    lda     zpImgIndx     
     jsr     getImageAddr                        ; get the selected item address in the read data block 
 
     ldx     zpPtr2                              ; zpPtr2 contains the address of the image address
@@ -604,23 +632,30 @@ pSelectItem
     beq     pSelectItem_setCommandFile
 
 pSelectItem_setCommandDirectory
+    
+    jsr     getImgPageIndx
+    tay     
     ldx     #$10
-    ldy     zpImgIndx
     jsr     setCommand
-    jsr     start
+    
+    jmp     start
 
 pSelectItem_setCommandFile
+
+    jsr     getImgPageIndx
+    tay
     ldx     #$02
-    ldy     zpImgIndx
     jsr     setCommand
 
-    jsr     readBlock
-    lda     RES_BLK
-    cmp     #$22
-    bne     pSelectItem_setCommandFile_err
+    ;jsr     readBlock
+    ;lda     RES_BLK
+    ;cmp     #$22
+    ;bne     pSelectItem_setCommandFile_err
+    
+    ;Lets go Straight 
+    jsr     wait
     jmp     #$C600                                    ; TODO put this variable according to the slot
-    rts
-
+    
 pSelectItem_setCommandFile_err       
     jsr dispErrorMsg
     jsr readKey
@@ -773,9 +808,10 @@ printInt8_SPC
 
 printInt8_1
     pla
+    pha
     ora     #"0"
     jsr     COUT1
-
+    pla
     rts
 
 incImageIndex
@@ -891,7 +927,7 @@ _title
     ASC     "SMARTLOADER"
     dfb     $00
 _version
-    ASC     "v0.34"
+    ASC     "v0.36"
     dfb     $00
     
 _option 

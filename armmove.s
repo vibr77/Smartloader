@@ -31,7 +31,7 @@ loop
 done
 	rts
 phase
-	ora SLOT					; add slot to phase
+	ora diskSlot					; add slot to phase
 	tax							;
 	LDA DRVSM1,x 				; turn on phase
 	jsr wait 					; wait arm to settle
@@ -48,7 +48,7 @@ table
 DRVSM0	EQU	$C080
 DRVSM1	EQU	$C081
 
-SLOT 	dfb $60
+
 CURTRK 	dfb $00
 DESTRK	dfb $00
 DELTA	dfb $00
