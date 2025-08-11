@@ -52,10 +52,6 @@ all:  | $(BUILD_DIR)
 	$(PYTHON) scp_addFakeDataBlock.py $(BUILD_DIR)/$(TARGET).dsk 16
 	-open -a "Virtual ][.app"
 	
-
-
-
-
 clean:
 	-rm -fR $(BUILD_DIR)
 
