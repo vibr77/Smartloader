@@ -1,0 +1,1050 @@
+------+------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+ Line | # File            Line | Line Type   | MX |  Reloc  | Size | Address   Object Code |  Source Code                                                      
+------+------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+    1 |  1 main_T0S09.s      1 | Directive   | 11 |         |    0 | 00/8000               |                                  DSK   smartloader_s09.bin  
+    2 |  1 main_T0S09.s      2 | Directive   | 11 |         |    0 | 00/8000               |                                  TYP   BIN                  
+    3 |  1 main_T0S09.s      3 | Directive   | 11 |         |    0 | 00/8000               |                                  mx    %11                  
+    4 |  1 main_T0S09.s      4 | Empty       | 11 |         |    0 | 00/8000               |                                                             
+    5 |  1 main_T0S09.s      5 | Equivalence | 11 |         |    0 | 00/8000               | DEBUG                            =     0                    
+    6 |  1 main_T0S09.s      6 | Empty       | 11 |         |    0 | 00/8000               |                                                             
+    7 |  1 main_T0S09.s      7 | Directive   | 11 |         |    0 | 00/8000               |                                  org   $4000                
+    8 |  1 main_T0S09.s      8 | Directive   | 11 |         |    0 | 00/4000               |                                  xc                         
+    9 |  1 main_T0S09.s      9 | Directive   | 11 |         |    0 | 00/4000               |                                  xc                         
+   10 |  1 main_T0S09.s     10 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   11 |  1 main_T0S09.s     11 | Equivalence | 11 |         |    0 | 00/4000               | BELL                             EQU   $FF3A                
+   12 |  1 main_T0S09.s     12 | Equivalence | 11 |         |    0 | 00/4000               | PREAD                            EQU   $FB1E                
+   13 |  1 main_T0S09.s     13 | Equivalence | 11 |         |    0 | 00/4000               | CLRSCR                           EQU   $FC58                
+   14 |  1 main_T0S09.s     14 | Equivalence | 11 |         |    0 | 00/4000               | COUT                             EQU   $FDED                ; Apple II character out func.
+   15 |  1 main_T0S09.s     15 | Equivalence | 11 |         |    0 | 00/4000               | COUTD                            EQU   $FDE2                
+   16 |  1 main_T0S09.s     16 | Equivalence | 11 |         |    0 | 00/4000               | COUT1                            EQU   $FDF0                
+   17 |  1 main_T0S09.s     17 | Equivalence | 11 |         |    0 | 00/4000               | CTR                              EQU   $08                  
+   18 |  1 main_T0S09.s     18 | Equivalence | 11 |         |    0 | 00/4000               | PTR                              EQU   $06                  
+   19 |  1 main_T0S09.s     19 | Equivalence | 11 |         |    0 | 00/4000               | PRBYTE                           EQU   $FDDA                
+   20 |  1 main_T0S09.s     20 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   21 |  1 main_T0S09.s     21 | Equivalence | 11 |         |    0 | 00/4000               | CURPOS                           EQU   $FB5B                
+   22 |  1 main_T0S09.s     22 | Equivalence | 11 |         |    0 | 00/4000               | BASCLC                           EQU   $FBC1                ; subroutine to position cursor
+   23 |  1 main_T0S09.s     23 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   24 |  1 main_T0S09.s     24 | Equivalence | 11 |         |    0 | 00/4000               | BASL                             EQU   $28                  
+   25 |  1 main_T0S09.s     25 | Equivalence | 11 |         |    0 | 00/4000               | BASH                             EQU   $29                  
+   26 |  1 main_T0S09.s     26 | Equivalence | 11 |         |    0 | 00/4000               | CV                               EQU   $25                  ; Cursor position
+   27 |  1 main_T0S09.s     27 | Equivalence | 11 |         |    0 | 00/4000               | CH                               EQU   $24                  
+   28 |  1 main_T0S09.s     28 | Equivalence | 11 |         |    0 | 00/4000               | RWTS                             EQU   $BD00                
+   29 |  1 main_T0S09.s     29 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   30 |  1 main_T0S09.s     30 | Equivalence | 11 |         |    0 | 00/4000               | printMsg                         EQU   $08D5                
+   31 |  1 main_T0S09.s     31 | Equivalence | 11 |         |    0 | 00/4000               | dispPositionCursor               EQU   $08B8                
+   32 |  1 main_T0S09.s     32 | Equivalence | 11 |         |    0 | 00/4000               | str2UpperCase                    EQU   $08CA                ; shift to uppercase
+   33 |  1 main_T0S09.s     33 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   34 |  1 main_T0S09.s     34 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   35 |  1 main_T0S09.s     35 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   36 |  1 main_T0S09.s     36 | Comment     | 11 |         |    0 | 00/4000               |     ;----------------------------------------------
+   37 |  1 main_T0S09.s     37 | Comment     | 11 |         |    0 | 00/4000               |     ; Zero Page & CST definition
+   38 |  1 main_T0S09.s     38 | Comment     | 11 |         |    0 | 00/4000               |     ;----------------------------------------------
+   39 |  1 main_T0S09.s     39 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   40 |  1 main_T0S09.s     40 | Equivalence | 11 |         |    0 | 00/4000               | CMD_BLK                          EQU   $2000                ; Command Block
+   41 |  1 main_T0S09.s     41 | Equivalence | 11 |         |    0 | 00/4000               | RES_BLK                          EQU   $2100                ; Result  Block
+   42 |  1 main_T0S09.s     42 | Equivalence | 11 |         |    0 | 00/4000               | RES_BLK_P2                       EQU   $2200                ; Result  Block
+   43 |  1 main_T0S09.s     43 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   44 |  1 main_T0S09.s     44 | Equivalence | 11 |         |    0 | 00/4000               | cstMaxImgLen                     EQU   #$10                 ; Constant Max Image Filename len
+   45 |  1 main_T0S09.s     45 | Equivalence | 11 |         |    0 | 00/4000               | cstLineOffset                    EQU   #$04                 
+   46 |  1 main_T0S09.s     46 | Equivalence | 11 |         |    0 | 00/4000               | cstMaxItemPPage                  EQU   #$10                 ; 16 item per page
+   47 |  1 main_T0S09.s     47 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   48 |  1 main_T0S09.s     48 | Equivalence | 11 |         |    0 | 00/4000               | zpImgIndx                        EQU   $85                  ; Current ImageIndex
+   49 |  1 main_T0S09.s     49 | Equivalence | 11 |         |    0 | 00/4000               | zpPrevImgIndx                    EQU   $86                  
+   50 |  1 main_T0S09.s     50 | Equivalence | 11 |         |    0 | 00/4000               | zpMaxImgIndx                     EQU   $87                  
+   51 |  1 main_T0S09.s     51 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   52 |  1 main_T0S09.s     52 | Equivalence | 11 |         |    0 | 00/4000               | zpPageIndx                       EQU   $88                  
+   53 |  1 main_T0S09.s     53 | Equivalence | 11 |         |    0 | 00/4000               | zpMaxPageIndx                    EQU   $89                  
+   54 |  1 main_T0S09.s     54 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   55 |  1 main_T0S09.s     55 | Equivalence | 11 |         |    0 | 00/4000               | zpDispMask                       EQU   $32                  ; INVERTED 0x7F NORMAL 0xFF
+   56 |  1 main_T0S09.s     56 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   57 |  1 main_T0S09.s     57 | Equivalence | 11 |         |    0 | 00/4000               | zpPtr1                           EQU   $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen
+   58 |  1 main_T0S09.s     58 | Equivalence | 11 |         |    0 | 00/4000               | zpPtr2                           EQU   $83                  
+   59 |  1 main_T0S09.s     59 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   60 |  1 main_T0S09.s     60 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   61 |  1 main_T0S09.s     61 | Comment     | 11 |         |    0 | 00/4000               |     ;----------------------------------------------
+   62 |  1 main_T0S09.s     62 | Comment     | 11 |         |    0 | 00/4000               |     ; Init
+   63 |  1 main_T0S09.s     63 | Comment     | 11 |         |    0 | 00/4000               |     ;----------------------------------------------
+   64 |  1 main_T0S09.s     64 | Empty       | 11 |         |    0 | 00/4000               | init                                                        
+   65 |  1 main_T0S09.s     65 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   66 |  1 main_T0S09.s     66 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   67 |  1 main_T0S09.s     67 | Empty       | 11 |         |    0 | 00/4000               |                                                             
+   68 |  1 main_T0S09.s     68 | Empty       | 11 |         |    0 | 00/4000               | init_value                                                  
+   69 |  1 main_T0S09.s     69 | Code        | 11 |         |    2 | 00/4000 : A2 00       |                                  ldx   #$00                 
+   70 |  1 main_T0S09.s     70 | Empty       | 11 |         |    0 | 00/4002               |                                                             
+   71 |  1 main_T0S09.s     71 | Code        | 11 |         |    2 | 00/4002 : 86 85       |                                  stx   {$85}                
+   72 |  1 main_T0S09.s     72 | Code        | 11 |         |    2 | 00/4004 : 86 86       |                                  stx   {$86}                
+   73 |  1 main_T0S09.s     73 | Code        | 11 |         |    2 | 00/4006 : 86 87       |                                  stx   {$87}                
+   74 |  1 main_T0S09.s     74 | Empty       | 11 |         |    0 | 00/4008               |                                                             
+   75 |  1 main_T0S09.s     75 | Code        | 11 |         |    2 | 00/4008 : 86 88       |                                  stx   {$88}                
+   76 |  1 main_T0S09.s     76 | Code        | 11 |         |    2 | 00/400A : 86 89       |                                  stx   {$89}                
+   77 |  1 main_T0S09.s     77 | Empty       | 11 |         |    0 | 00/400C               |                                                             
+   78 |  1 main_T0S09.s     78 | Empty       | 11 |         |    0 | 00/400C               | init_disp                                                   
+   79 |  1 main_T0S09.s     79 | Empty       | 11 |         |    0 | 00/400C               |                                                             
+   80 |  1 main_T0S09.s     80 | Code        | 11 |         |    2 | 00/400C : A2 00       |                                  ldx   #$00                 
+   81 |  1 main_T0S09.s     81 | Code        | 11 |         |    2 | 00/400E : A0 16       |                                  ldy   #$16                 
+   82 |  1 main_T0S09.s     82 | Code        | 11 |         |    3 | 00/4010 : 20 B8 08    |                                  jsr   {$08B8}              
+   83 |  1 main_T0S09.s     83 | Empty       | 11 |         |    0 | 00/4013               |                                                             
+   84 |  1 main_T0S09.s     84 | Code        | 11 |         |    2 | 00/4013 : A2 39       |                                  ldx   #<_path              
+   85 |  1 main_T0S09.s     85 | Code        | 11 |         |    2 | 00/4015 : A0 44       |                                  ldy   #>_path              
+   86 |  1 main_T0S09.s     86 | Code        | 11 |         |    3 | 00/4017 : 20 D5 08    |                                  jsr   {$08D5}              
+   87 |  1 main_T0S09.s     87 | Empty       | 11 |         |    0 | 00/401A               |                                                             
+   88 |  1 main_T0S09.s     88 | Code        | 11 |         |    2 | 00/401A : A2 00       |                                  ldx   #$0                  
+   89 |  1 main_T0S09.s     89 | Code        | 11 |         |    2 | 00/401C : A0 17       |                                  ldy   #$17                 
+   90 |  1 main_T0S09.s     90 | Code        | 11 |         |    3 | 00/401E : 20 B8 08    |                                  jsr   {$08B8}              
+   91 |  1 main_T0S09.s     91 | Empty       | 11 |         |    0 | 00/4021               |                                                             
+   92 |  1 main_T0S09.s     92 | Code        | 11 |         |    2 | 00/4021 : A2 4A       |                                  ldx   #<_option            
+   93 |  1 main_T0S09.s     93 | Code        | 11 |         |    2 | 00/4023 : A0 44       |                                  ldy   #>_option            
+   94 |  1 main_T0S09.s     94 | Code        | 11 |         |    3 | 00/4025 : 20 D5 08    |                                  jsr   {$08D5}              
+   95 |  1 main_T0S09.s     95 | Empty       | 11 |         |    0 | 00/4028               |                                                             
+   96 |  1 main_T0S09.s     96 | Empty       | 11 |         |    0 | 00/4028               |                                                             
+   97 |  1 main_T0S09.s     97 | Empty       | 11 |         |    0 | 00/4028               | refresh                                                     
+   98 |  1 main_T0S09.s     98 | Comment     | 11 |         |    0 | 00/4028               |             ;jmp     testR
+   99 |  1 main_T0S09.s     99 | Code        | 11 |         |    3 | 00/4028 : 20 93 43    |                                  jsr   readDataBlock        
+  100 |  1 main_T0S09.s    100 | Code        | 11 |         |    3 | 00/402B : 20 98 40    |                                  jsr   dispRWTSReturnCode   
+  101 |  1 main_T0S09.s    101 | Empty       | 11 |         |    0 | 00/402E               |                                                             
+  102 |  1 main_T0S09.s    102 | Code        | 11 |         |    3 | 00/402E : AD 00 21    |                                  lda   {$2100}              ; First Bytes of RES_BLK indicate the return status code
+  103 |  1 main_T0S09.s    103 | Code        | 11 |         |    2 | 00/4031 : C9 20       |                                  cmp   #$20                 ; If not 20 then raise an error
+  104 |  1 main_T0S09.s    104 | Code        | 11 |         |    2 | 00/4033 : D0 24       |                                  bne   refresh_err          ; Error to be diplayed
+  105 |  1 main_T0S09.s    105 | Empty       | 11 |         |    0 | 00/4035               |                                                             
+  106 |  1 main_T0S09.s    106 | Code        | 11 |         |    3 | 00/4035 : AD 01 21    |                                  lda   {$2100}+1            ; init zeroPage values
+  107 |  1 main_T0S09.s    107 | Code        | 11 |         |    2 | 00/4038 : 85 87       |                                  sta   {$87}                
+  108 |  1 main_T0S09.s    108 | Empty       | 11 |         |    0 | 00/403A               |                                                             
+  109 |  1 main_T0S09.s    109 | Code        | 11 |         |    3 | 00/403A : AD 02 21    |                                  lda   {$2100}+2            
+  110 |  1 main_T0S09.s    110 | Code        | 11 |         |    2 | 00/403D : 85 88       |                                  sta   {$88}                
+  111 |  1 main_T0S09.s    111 | Empty       | 11 |         |    0 | 00/403F               |                                                             
+  112 |  1 main_T0S09.s    112 | Code        | 11 |         |    3 | 00/403F : AD 03 21    |                                  lda   {$2100}+3            
+  113 |  1 main_T0S09.s    113 | Code        | 11 |         |    2 | 00/4042 : 85 89       |                                  sta   {$89}                
+  114 |  1 main_T0S09.s    114 | Empty       | 11 |         |    0 | 00/4044               |                                                             
+  115 |  1 main_T0S09.s    115 | Empty       | 11 |         |    0 | 00/4044               | refresh_0                                                   ; Display all image on screen
+  116 |  1 main_T0S09.s    116 | Code        | 11 |         |    3 | 00/4044 : 20 0D 41    |                                  jsr   dispDataBlockImage   ; Display 1 line
+  117 |  1 main_T0S09.s    117 | Code        | 11 |         |    2 | 00/4047 : E6 85       |                                  inc   {$85}                
+  118 |  1 main_T0S09.s    118 | Code        | 11 |         |    2 | 00/4049 : A5 85       |                                  lda   {$85}                
+  119 |  1 main_T0S09.s    119 | Code        | 11 |         |    2 | 00/404B : C5 87       |                                  cmp   {$87}                
+  120 |  1 main_T0S09.s    120 | Code        | 11 |         |    2 | 00/404D : D0 F5       |                                  bne   refresh_0            ; if not the end of the page loop
+  121 |  1 main_T0S09.s    121 | Code        | 11 |         |    2 | 00/404F : A9 00       |                                  lda   #$0                  
+  122 |  1 main_T0S09.s    122 | Code        | 11 |         |    2 | 00/4051 : 85 85       |                                  sta   {$85}                
+  123 |  1 main_T0S09.s    123 | Empty       | 11 |         |    0 | 00/4053               |                                                             
+  124 |  1 main_T0S09.s    124 | Empty       | 11 |         |    0 | 00/4053               | refresh_1                                                   
+  125 |  1 main_T0S09.s    125 | Code        | 11 |         |    3 | 00/4053 : 20 CF 43    |                                  jsr   seekDrive            
+  126 |  1 main_T0S09.s    126 | Code        | 11 |         |    3 | 00/4056 : 4C A6 42    |                                  jmp   mainDispatch         
+  127 |  1 main_T0S09.s    127 | Empty       | 11 |         |    0 | 00/4059               |                                                             
+  128 |  1 main_T0S09.s    128 | Empty       | 11 |         |    0 | 00/4059               |                                                             
+  129 |  1 main_T0S09.s    129 | Empty       | 11 |         |    0 | 00/4059               |                                                             
+  130 |  1 main_T0S09.s    130 | Empty       | 11 |         |    0 | 00/4059               | refresh_err                                                 
+  131 |  1 main_T0S09.s    131 | Code        | 11 |         |    2 | 00/4059 : A9 02       |                                  lda   #<_error_10          
+  132 |  1 main_T0S09.s    132 | Code        | 11 |         |    2 | 00/405B : 85 83       |                                  sta   {$83}                
+  133 |  1 main_T0S09.s    133 | Code        | 11 |         |    2 | 00/405D : A9 44       |                                  lda   #>_error_10          
+  134 |  1 main_T0S09.s    134 | Code        | 11 |         |    2 | 00/405F : 85 84       |                                  sta   {$83}+1              
+  135 |  1 main_T0S09.s    135 | Code        | 11 |         |    3 | 00/4061 : 20 67 40    |                                  jsr   dispErrorMessage     ;
+  136 |  1 main_T0S09.s    136 | Code        | 11 |         |    3 | 00/4064 : 4C 28 40    |                                  jmp   refresh              
+  137 |  1 main_T0S09.s    137 | Empty       | 11 |         |    0 | 00/4067               |                                                             
+  138 |  1 main_T0S09.s    138 | Empty       | 11 |         |    0 | 00/4067               |                                                             
+  139 |  1 main_T0S09.s    139 | Empty       | 11 |         |    0 | 00/4067               |                                                             
+  140 |  1 main_T0S09.s    140 | Comment     | 11 |         |    0 | 00/4067               | ;-----------------------------------------------------------------------------
+  141 |  1 main_T0S09.s    141 | Comment     | 11 |         |    0 | 00/4067               | ; Routine: dispErrorMessage                                       
+  142 |  1 main_T0S09.s    142 | Comment     | 11 |         |    0 | 00/4067               | ; Description: display an error message on the screen and wait for keypress
+  143 |  1 main_T0S09.s    143 | Comment     | 11 |         |    0 | 00/4067               | ; Input: zpPtr2 pointing to the right error message
+  144 |  1 main_T0S09.s    144 | Comment     | 11 |         |    0 | 00/4067               | ; output: nothing  
+  145 |  1 main_T0S09.s    145 | Comment     | 11 |         |    0 | 00/4067               | ;-----------------------------------------------------------------------------
+  146 |  1 main_T0S09.s    146 | Empty       | 11 |         |    0 | 00/4067               |                                                             
+  147 |  1 main_T0S09.s    147 | Empty       | 11 |         |    0 | 00/4067               | dispErrorMessage                                            
+  148 |  1 main_T0S09.s    148 | Code        | 11 |         |    3 | 00/4067 : 20 AD 40    |                                  jsr   dispClearCenterBlock ; Start clearing the central block
+  149 |  1 main_T0S09.s    149 | Empty       | 11 |         |    0 | 00/406A               |                                                             
+  150 |  1 main_T0S09.s    150 | Code        | 11 |         |    2 | 00/406A : A2 08       |                                  ldx   #$08                 
+  151 |  1 main_T0S09.s    151 | Code        | 11 |         |    2 | 00/406C : A0 08       |                                  ldy   #$08                 
+  152 |  1 main_T0S09.s    152 | Code        | 11 |         |    3 | 00/406E : 20 B8 08    |                                  jsr   {$08B8}              
+  153 |  1 main_T0S09.s    153 | Empty       | 11 |         |    0 | 00/4071               |                                                             
+  154 |  1 main_T0S09.s    154 | Code        | 11 |         |    2 | 00/4071 : A2 FB       |                                  ldx   #<_error             
+  155 |  1 main_T0S09.s    155 | Code        | 11 |         |    2 | 00/4073 : A0 43       |                                  ldy   #>_error             
+  156 |  1 main_T0S09.s    156 | Code        | 11 |         |    3 | 00/4075 : 20 D5 08    |                                  jsr   {$08D5}              
+  157 |  1 main_T0S09.s    157 | Empty       | 11 |         |    0 | 00/4078               |                                                             
+  158 |  1 main_T0S09.s    158 | Code        | 11 |         |    2 | 00/4078 : A2 08       |                                  ldx   #$08                 
+  159 |  1 main_T0S09.s    159 | Code        | 11 |         |    2 | 00/407A : A0 0A       |                                  ldy   #$0A                 
+  160 |  1 main_T0S09.s    160 | Code        | 11 |         |    3 | 00/407C : 20 B8 08    |                                  jsr   {$08B8}              
+  161 |  1 main_T0S09.s    161 | Empty       | 11 |         |    0 | 00/407F               |                                                             
+  162 |  1 main_T0S09.s    162 | Code        | 11 |         |    2 | 00/407F : A6 83       |                                  ldx   {$83}                
+  163 |  1 main_T0S09.s    163 | Code        | 11 |         |    2 | 00/4081 : A4 84       |                                  ldy   {$83}+1              
+  164 |  1 main_T0S09.s    164 | Code        | 11 |         |    3 | 00/4083 : 20 D5 08    |                                  jsr   {$08D5}              
+  165 |  1 main_T0S09.s    165 | Empty       | 11 |         |    0 | 00/4086               |                                                             
+  166 |  1 main_T0S09.s    166 | Code        | 11 |         |    2 | 00/4086 : A2 08       |                                  ldx   #$08                 
+  167 |  1 main_T0S09.s    167 | Code        | 11 |         |    2 | 00/4088 : A0 0D       |                                  ldy   #$0D                 
+  168 |  1 main_T0S09.s    168 | Code        | 11 |         |    3 | 00/408A : 20 B8 08    |                                  jsr   {$08B8}              
+  169 |  1 main_T0S09.s    169 | Empty       | 11 |         |    0 | 00/408D               |                                                             
+  170 |  1 main_T0S09.s    170 | Code        | 11 |         |    2 | 00/408D : A2 1D       |                                  ldx   #<_pressanykey       
+  171 |  1 main_T0S09.s    171 | Code        | 11 |         |    2 | 00/408F : A0 44       |                                  ldy   #>_pressanykey       
+  172 |  1 main_T0S09.s    172 | Code        | 11 |         |    3 | 00/4091 : 20 D5 08    |                                  jsr   {$08D5}              
+  173 |  1 main_T0S09.s    173 | Empty       | 11 |         |    0 | 00/4094               |                                                             
+  174 |  1 main_T0S09.s    174 | Code        | 11 |         |    3 | 00/4094 : 20 E9 43    |                                  jsr   readKey              ; wait for keypress
+  175 |  1 main_T0S09.s    175 | Code        | 11 |         |    1 | 00/4097 : 60          |                                  rts                        ; return to caller
+  176 |  1 main_T0S09.s    176 | Empty       | 11 |         |    0 | 00/4098               |                                                             
+  177 |  1 main_T0S09.s    177 | Empty       | 11 |         |    0 | 00/4098               |                                                             
+  178 |  1 main_T0S09.s    178 | Empty       | 11 |         |    0 | 00/4098               | dispRWTSReturnCode                                          
+  179 |  1 main_T0S09.s    179 | Code        | 11 |         |    1 | 00/4098 : 48          |                                  pha                        
+  180 |  1 main_T0S09.s    180 | Code        | 11 |         |    2 | 00/4099 : A0 00       |                                  ldy   #$0                  ; Display the Key value on the top right of the screen
+  181 |  1 main_T0S09.s    181 | Code        | 11 |         |    2 | 00/409B : A2 00       |                                  ldx   #$0                  
+  182 |  1 main_T0S09.s    182 | Code        | 11 |         |    3 | 00/409D : 20 B8 08    |                                  jsr   {$08B8}              
+  183 |  1 main_T0S09.s    183 | Empty       | 11 |         |    0 | 00/40A0               |                                                             
+  184 |  1 main_T0S09.s    184 | Code        | 11 |         |    2 | 00/40A0 : A9 C5       |                                  lda   #$C5                 ; "E"
+  185 |  1 main_T0S09.s    185 | Code        | 11 |         |    3 | 00/40A2 : 20 ED FD    |                                  jsr   {$FDED}              
+  186 |  1 main_T0S09.s    186 | Code        | 11 |         |    3 | 00/40A5 : AD 73 44    |                                  lda   ioRet                
+  187 |  1 main_T0S09.s    187 | Code        | 11 |         |    3 | 00/40A8 : 20 DA FD    |                                  jsr   {$FDDA}              ;Print error code
+  188 |  1 main_T0S09.s    188 | Empty       | 11 |         |    0 | 00/40AB               |                                                             
+  189 |  1 main_T0S09.s    189 | Code        | 11 |         |    1 | 00/40AB : 68          |                                  pla                        
+  190 |  1 main_T0S09.s    190 | Empty       | 11 |         |    0 | 00/40AC               |                                                             
+  191 |  1 main_T0S09.s    191 | Code        | 11 |         |    1 | 00/40AC : 60          |                                  rts                        
+  192 |  1 main_T0S09.s    192 | Empty       | 11 |         |    0 | 00/40AD               |                                                             
+  193 |  1 main_T0S09.s    193 | Comment     | 11 |         |    0 | 00/40AD               | ;-----------------------------------------------------------------------------
+  194 |  1 main_T0S09.s    194 | Comment     | 11 |         |    0 | 00/40AD               | ; Routine: dispClearCenterBlock                                       
+  195 |  1 main_T0S09.s    195 | Comment     | 11 |         |    0 | 00/40AD               | ; Description: Clear out the center of the screen (list of image)
+  196 |  1 main_T0S09.s    196 | Comment     | 11 |         |    0 | 00/40AD               | ; Input: nothing
+  197 |  1 main_T0S09.s    197 | Comment     | 11 |         |    0 | 00/40AD               | ; output: nothing  
+  198 |  1 main_T0S09.s    198 | Comment     | 11 |         |    0 | 00/40AD               | ;-----------------------------------------------------------------------------
+  199 |  1 main_T0S09.s    199 | Empty       | 11 |         |    0 | 00/40AD               | dispClearCenterBlock                                        
+  200 |  1 main_T0S09.s    200 | Code        | 11 |         |    2 | 00/40AD : A2 FF       |                                  ldx   #$FF                 
+  201 |  1 main_T0S09.s    201 | Code        | 11 |         |    2 | 00/40AF : 86 32       |                                  stx   {$32}                
+  202 |  1 main_T0S09.s    202 | Code        | 11 |         |    2 | 00/40B1 : A9 00       |                                  lda   #$0                  
+  203 |  1 main_T0S09.s    203 | Empty       | 11 |         |    0 | 00/40B3               | dispClearCenterBlock_0                                      
+  204 |  1 main_T0S09.s    204 | Code        | 11 |         |    3 | 00/40B3 : 20 D7 40    |                                  jsr   dispClearLineImage   
+  205 |  1 main_T0S09.s    205 | Code        | 11 |         |    1 | 00/40B6 : AA          |                                  tax                        
+  206 |  1 main_T0S09.s    206 | Code        | 11 |         |    1 | 00/40B7 : E8          |                                  inx                        
+  207 |  1 main_T0S09.s    207 | Code        | 11 |         |    1 | 00/40B8 : 8A          |                                  txa                        
+  208 |  1 main_T0S09.s    208 | Code        | 11 |         |    2 | 00/40B9 : C9 0F       |                                  cmp   #$0f                 
+  209 |  1 main_T0S09.s    209 | Code        | 11 |         |    2 | 00/40BB : D0 F6       |                                  bne   dispClearCenterBlock_0
+  210 |  1 main_T0S09.s    210 | Code        | 11 |         |    1 | 00/40BD : 60          |                                  rts                        
+  211 |  1 main_T0S09.s    211 | Empty       | 11 |         |    0 | 00/40BE               |                                                             
+  212 |  1 main_T0S09.s    212 | Empty       | 11 |         |    0 | 00/40BE               | dispDataBlock                                               
+  213 |  1 main_T0S09.s    213 | Code        | 11 |         |    2 | 00/40BE : A9 00       |                                  lda   #$00                 
+  214 |  1 main_T0S09.s    214 | Code        | 11 |         |    2 | 00/40C0 : 85 85       |                                  sta   {$85}                
+  215 |  1 main_T0S09.s    215 | Code        | 11 |         |    2 | 00/40C2 : A2 FF       |                                  ldx   #$FF                 
+  216 |  1 main_T0S09.s    216 | Code        | 11 |         |    2 | 00/40C4 : 86 32       |                                  stx   {$32}                
+  217 |  1 main_T0S09.s    217 | Empty       | 11 |         |    0 | 00/40C6               |                                                             
+  218 |  1 main_T0S09.s    218 | Empty       | 11 |         |    0 | 00/40C6               | dispDataBlock_1                                             
+  219 |  1 main_T0S09.s    219 | Code        | 11 |         |    2 | 00/40C6 : A5 85       |                                  lda   {$85}                
+  220 |  1 main_T0S09.s    220 | Code        | 11 |         |    3 | 00/40C8 : 20 D7 40    |                                  jsr   dispClearLineImage   
+  221 |  1 main_T0S09.s    221 | Code        | 11 |         |    3 | 00/40CB : 20 0D 41    |                                  jsr   dispDataBlockImage   
+  222 |  1 main_T0S09.s    222 | Empty       | 11 |         |    0 | 00/40CE               |                                                             
+  223 |  1 main_T0S09.s    223 | Empty       | 11 |         |    0 | 00/40CE               | dispDataBlock_2                                             
+  224 |  1 main_T0S09.s    224 | Code        | 11 |         |    2 | 00/40CE : E6 85       |                                  inc   {$85}                
+  225 |  1 main_T0S09.s    225 | Code        | 11 |         |    2 | 00/40D0 : A5 85       |                                  lda   {$85}                
+  226 |  1 main_T0S09.s    226 | Empty       | 11 |         |    0 | 00/40D2               |                                                             
+  227 |  1 main_T0S09.s    227 | Code        | 11 |         |    2 | 00/40D2 : E5 87       |                                  sbc   {$87}                
+  228 |  1 main_T0S09.s    228 | Code        | 11 |         |    2 | 00/40D4 : 90 F0       |                                  bcc   dispDataBlock_1      
+  229 |  1 main_T0S09.s    229 | Code        | 11 |         |    1 | 00/40D6 : 60          |                                  rts                        
+  230 |  1 main_T0S09.s    230 | Empty       | 11 |         |    0 | 00/40D7               |                                                             
+  231 |  1 main_T0S09.s    231 | Comment     | 11 |         |    0 | 00/40D7               | ;-----------------------------------------------------------------------------
+  232 |  1 main_T0S09.s    232 | Comment     | 11 |         |    0 | 00/40D7               | ; Routine: dispClearLineImage
+  233 |  1 main_T0S09.s    233 | Comment     | 11 |         |    0 | 00/40D7               | ; Description: Clear out one line of text with an line offset of cstLineOffset
+  234 |  1 main_T0S09.s    234 | Comment     | 11 |         |    0 | 00/40D7               | ; Input: A with the line number
+  235 |  1 main_T0S09.s    235 | Comment     | 11 |         |    0 | 00/40D7               | ; output: nothing  
+  236 |  1 main_T0S09.s    236 | Comment     | 11 |         |    0 | 00/40D7               | ;-----------------------------------------------------------------------------
+  237 |  1 main_T0S09.s    237 | Empty       | 11 |         |    0 | 00/40D7               |                                                             
+  238 |  1 main_T0S09.s    238 | Empty       | 11 |         |    0 | 00/40D7               | dispClearLineImage                                          
+  239 |  1 main_T0S09.s    239 | Code        | 11 |         |    1 | 00/40D7 : 48          |                                  pha                        ; push A on stack
+  240 |  1 main_T0S09.s    240 | Code        | 11 |         |    1 | 00/40D8 : 18          |                                  clc                        ; clear the carry before doing adds
+  241 |  1 main_T0S09.s    241 | Code        | 11 |         |    2 | 00/40D9 : 69 04       |                                  adc   {#$04}               ; Add line offset constant
+  242 |  1 main_T0S09.s    242 | Code        | 11 |         |    1 | 00/40DB : A8          |                                  tay                        ; prepare X & Y for dispPositionCursor
+  243 |  1 main_T0S09.s    243 | Code        | 11 |         |    2 | 00/40DC : A2 00       |                                  ldx   #$0                  
+  244 |  1 main_T0S09.s    244 | Code        | 11 |         |    3 | 00/40DE : 20 B8 08    |                                  jsr   {$08B8}              
+  245 |  1 main_T0S09.s    245 | Code        | 11 |         |    2 | 00/40E1 : A9 A0       |                                  lda   #$A0                 ; space
+  246 |  1 main_T0S09.s    246 | Code        | 11 |         |    2 | 00/40E3 : A2 00       |                                  ldx   #$00                 ; Position 0
+  247 |  1 main_T0S09.s    247 | Empty       | 11 |         |    0 | 00/40E5               |                                                             
+  248 |  1 main_T0S09.s    248 | Empty       | 11 |         |    0 | 00/40E5               | dispClearLineImage_0                                        
+  249 |  1 main_T0S09.s    249 | Code        | 11 |         |    3 | 00/40E5 : 20 ED FD    |                                  jsr   {$FDED}              ; Print space (contained in A)
+  250 |  1 main_T0S09.s    250 | Code        | 11 |         |    1 | 00/40E8 : E8          |                                  inx                        ; increment X
+  251 |  1 main_T0S09.s    251 | Code        | 11 |         |    2 | 00/40E9 : E0 22       |                                  cpx   #$22                 ; 22-> 34
+  252 |  1 main_T0S09.s    252 | Code        | 11 |         |    2 | 00/40EB : D0 F8       |                                  bne   dispClearLineImage_0 ; Not equal we clear out the line
+  253 |  1 main_T0S09.s    253 | Code        | 11 |         |    1 | 00/40ED : 68          |                                  pla                        ; restore A from stack
+  254 |  1 main_T0S09.s    254 | Code        | 11 |         |    1 | 00/40EE : 60          |                                  rts                        ; return to caller
+  255 |  1 main_T0S09.s    255 | Empty       | 11 |         |    0 | 00/40EF               |                                                             
+  256 |  1 main_T0S09.s    256 | Empty       | 11 |         |    0 | 00/40EF               | dispImageAttr                                               
+  257 |  1 main_T0S09.s    257 | Code        | 11 |         |    2 | 00/40EF : A0 00       |                                  ldy   #$00                 
+  258 |  1 main_T0S09.s    258 | Code        | 11 |         |    2 | 00/40F1 : B1 83       |                                  lda   ({$83}),Y            
+  259 |  1 main_T0S09.s    259 | Code        | 11 |         |    2 | 00/40F3 : C9 01       |                                  cmp   #$01                 
+  260 |  1 main_T0S09.s    260 | Code        | 11 |         |    2 | 00/40F5 : D0 0B       |                                  bne   dispImageAttr_0      
+  261 |  1 main_T0S09.s    261 | Empty       | 11 |         |    0 | 00/40F7               |                                                             
+  262 |  1 main_T0S09.s    262 | Code        | 11 |         |    2 | 00/40F7 : A9 C4       |                                  lda   #$C4                 ; "D"
+  263 |  1 main_T0S09.s    263 | Code        | 11 |         |    3 | 00/40F9 : 20 F0 FD    |                                  jsr   {$FDF0}              ; print
+  264 |  1 main_T0S09.s    264 | Empty       | 11 |         |    0 | 00/40FC               |                                                             
+  265 |  1 main_T0S09.s    265 | Code        | 11 |         |    2 | 00/40FC : A9 A0       |                                  lda   #$A0                 ; "SPC"
+  266 |  1 main_T0S09.s    266 | Code        | 11 |         |    3 | 00/40FE : 20 F0 FD    |                                  jsr   {$FDF0}              ; print
+  267 |  1 main_T0S09.s    267 | Code        | 11 |         |    1 | 00/4101 : 60          |                                  rts                        
+  268 |  1 main_T0S09.s    268 | Empty       | 11 |         |    0 | 00/4102               |                                                             
+  269 |  1 main_T0S09.s    269 | Empty       | 11 |         |    0 | 00/4102               | dispImageAttr_0                                             
+  270 |  1 main_T0S09.s    270 | Empty       | 11 |         |    0 | 00/4102               |                                                             
+  271 |  1 main_T0S09.s    271 | Code        | 11 |         |    2 | 00/4102 : A9 AD       |                                  lda   #$AD                 ; "SPC"
+  272 |  1 main_T0S09.s    272 | Code        | 11 |         |    3 | 00/4104 : 20 F0 FD    |                                  jsr   {$FDF0}              ; print
+  273 |  1 main_T0S09.s    273 | Code        | 11 |         |    2 | 00/4107 : A9 A0       |                                  lda   #$A0                 ; "SPC"
+  274 |  1 main_T0S09.s    274 | Code        | 11 |         |    3 | 00/4109 : 20 F0 FD    |                                  jsr   {$FDF0}              ; print
+  275 |  1 main_T0S09.s    275 | Code        | 11 |         |    1 | 00/410C : 60          |                                  rts                        
+  276 |  1 main_T0S09.s    276 | Empty       | 11 |         |    0 | 00/410D               |                                                             
+  277 |  1 main_T0S09.s    277 | Empty       | 11 |         |    0 | 00/410D               | dispDataBlockImage                                          
+  278 |  1 main_T0S09.s    278 | Empty       | 11 |         |    0 | 00/410D               |                                                             
+  279 |  1 main_T0S09.s    279 | Code        | 11 |         |    2 | 00/410D : A5 85       |                                  lda   {$85}                
+  280 |  1 main_T0S09.s    280 | Code        | 11 |         |    3 | 00/410F : 20 5B 41    |                                  jsr   getImageAddr         
+  281 |  1 main_T0S09.s    281 | Empty       | 11 |         |    0 | 00/4112               |                                                             
+  282 |  1 main_T0S09.s    282 | Code        | 11 |         |    2 | 00/4112 : A5 85       |                                  lda   {$85}                
+  283 |  1 main_T0S09.s    283 | Empty       | 11 |         |    0 | 00/4114               |                                                             
+  284 |  1 main_T0S09.s    284 | Code        | 11 |         |    2 | 00/4114 : 69 04       |                                  adc   {#$04}               ; position Cursor with line Offset
+  285 |  1 main_T0S09.s    285 | Code        | 11 |         |    1 | 00/4116 : A8          |                                  tay                        
+  286 |  1 main_T0S09.s    286 | Code        | 11 |         |    2 | 00/4117 : A2 00       |                                  ldx   #$0                  
+  287 |  1 main_T0S09.s    287 | Code        | 11 |         |    3 | 00/4119 : 20 B8 08    |                                  jsr   {$08B8}              
+  288 |  1 main_T0S09.s    288 | Code        | 11 |         |    3 | 00/411C : 20 EF 40    |                                  jsr   dispImageAttr        
+  289 |  1 main_T0S09.s    289 | Empty       | 11 |         |    0 | 00/411F               |                                                             
+  290 |  1 main_T0S09.s    290 | Code        | 11 |         |    2 | 00/411F : A0 01       |                                  ldy   #$01                 ; we start at 1 instead of 0 cause first char indicate type of file
+  291 |  1 main_T0S09.s    291 | Code        | 11 |         |    2 | 00/4121 : B1 83       |                                  lda   ({$83}),Y            
+  292 |  1 main_T0S09.s    292 | Empty       | 11 |         |    0 | 00/4123               |                                                             
+  293 |  1 main_T0S09.s    293 | Empty       | 11 |         |    0 | 00/4123               |                                                             
+  294 |  1 main_T0S09.s    294 | Empty       | 11 |         |    0 | 00/4123               | dispDataBlockImage_1                                        
+  295 |  1 main_T0S09.s    295 | Code        | 11 |         |    3 | 00/4123 : 20 CA 08    |                                  jsr   {$08CA}              ; shift to uppercase
+  296 |  1 main_T0S09.s    296 | Code        | 11 |         |    3 | 00/4126 : 20 F0 FD    |                                  jsr   {$FDF0}              
+  297 |  1 main_T0S09.s    297 | Code        | 11 |         |    1 | 00/4129 : C8          |                                  iny                        
+  298 |  1 main_T0S09.s    298 | Code        | 11 |         |    2 | 00/412A : B1 83       |                                  lda   ({$83}),Y            ; indirect zeropage addressing pointing to current char
+  299 |  1 main_T0S09.s    299 | Code        | 11 |         |    2 | 00/412C : D0 F5       |                                  bne   dispDataBlockImage_1 
+  300 |  1 main_T0S09.s    300 | Code        | 11 |         |    2 | 00/412E : A9 A0       |                                  lda   #$A0                 ; SPACE
+  301 |  1 main_T0S09.s    301 | Empty       | 11 |         |    0 | 00/4130               |                                                             
+  302 |  1 main_T0S09.s    302 | Empty       | 11 |         |    0 | 00/4130               | dispDataBlockImage_2                                        
+  303 |  1 main_T0S09.s    303 | Code        | 11 |         |    1 | 00/4130 : C8          |                                  iny                        
+  304 |  1 main_T0S09.s    304 | Code        | 11 |         |    3 | 00/4131 : 20 F0 FD    |                                  jsr   {$FDF0}              
+  305 |  1 main_T0S09.s    305 | Code        | 11 |         |    1 | 00/4134 : 48          |                                  pha                        
+  306 |  1 main_T0S09.s    306 | Code        | 11 |         |    1 | 00/4135 : 98          |                                  tya                        
+  307 |  1 main_T0S09.s    307 | Code        | 11 |         |    2 | 00/4136 : E9 18       |                                  sbc   #$18                 
+  308 |  1 main_T0S09.s    308 | Code        | 11 |         |    1 | 00/4138 : 68          |                                  pla                        
+  309 |  1 main_T0S09.s    309 | Empty       | 11 |         |    0 | 00/4139               |                                                             
+  310 |  1 main_T0S09.s    310 | Code        | 11 |         |    2 | 00/4139 : 90 F5       |                                  bcc   dispDataBlockImage_2 
+  311 |  1 main_T0S09.s    311 | Code        | 11 |         |    1 | 00/413B : 60          |                                  rts                        
+  312 |  1 main_T0S09.s    312 | Empty       | 11 |         |    0 | 00/413C               |                                                             
+  313 |  1 main_T0S09.s    313 | Empty       | 11 |         |    0 | 00/413C               |                                                             
+  314 |  1 main_T0S09.s    314 | Empty       | 11 |         |    0 | 00/413C               | getImgPageIndx                                              
+  315 |  1 main_T0S09.s    315 | Code        | 11 |         |    2 | 00/413C : A5 88       |                                  lda   {$88}                ; Take the current page index
+  316 |  1 main_T0S09.s    316 | Code        | 11 |         |    2 | 00/413E : 85 90       |                                  sta   {$90}                
+  317 |  1 main_T0S09.s    317 | Empty       | 11 |         |    0 | 00/4140               |                                                             
+  318 |  1 main_T0S09.s    318 | Code        | 11 |         |    2 | 00/4140 : A9 10       |                                  lda   #$10                 ; 0x10 -> 16
+  319 |  1 main_T0S09.s    319 | Code        | 11 |         |    2 | 00/4142 : 85 92       |                                  sta   {$92}                
+  320 |  1 main_T0S09.s    320 | Empty       | 11 |         |    0 | 00/4144               |                                                             
+  321 |  1 main_T0S09.s    321 | Code        | 11 |         |    3 | 00/4144 : 20 DB 44    |                                  jsr   mult_8B_8B           ; Multiply current page index by 16
+  322 |  1 main_T0S09.s    322 | Code        | 11 |         |    2 | 00/4147 : A6 94       |                                  ldx   {$94}                
+  323 |  1 main_T0S09.s    323 | Code        | 11 |         |    2 | 00/4149 : 86 90       |                                  stx   {$90}                
+  324 |  1 main_T0S09.s    324 | Empty       | 11 |         |    0 | 00/414B               |                                                             
+  325 |  1 main_T0S09.s    325 | Code        | 11 |         |    2 | 00/414B : A6 85       |                                  ldx   {$85}                ;
+  326 |  1 main_T0S09.s    326 | Code        | 11 |         |    2 | 00/414D : 86 92       |                                  stx   {$92}                
+  327 |  1 main_T0S09.s    327 | Empty       | 11 |         |    0 | 00/414F               |                                                             
+  328 |  1 main_T0S09.s    328 | Code        | 11 |         |    2 | 00/414F : A2 00       |                                  ldx   #$00                 
+  329 |  1 main_T0S09.s    329 | Code        | 11 |         |    2 | 00/4151 : 86 93       |                                  stx   {$93}                
+  330 |  1 main_T0S09.s    330 | Code        | 11 |         |    2 | 00/4153 : 86 91       |                                  stx   {$91}                
+  331 |  1 main_T0S09.s    331 | Empty       | 11 |         |    0 | 00/4155               |                                                             
+  332 |  1 main_T0S09.s    332 | Code        | 11 |         |    3 | 00/4155 : 20 CD 44    |                                  jsr   add_16B_16B          ; Add the current image index to the result of multiply
+  333 |  1 main_T0S09.s    333 | Code        | 11 |         |    2 | 00/4158 : A5 94       |                                  lda   {$94}                
+  334 |  1 main_T0S09.s    334 | Empty       | 11 |         |    0 | 00/415A               |                                                             
+  335 |  1 main_T0S09.s    335 | Code        | 11 |         |    1 | 00/415A : 60          |                                  rts                        
+  336 |  1 main_T0S09.s    336 | Comment     | 11 |         |    0 | 00/415B               | ;Display the name of the image on screen
+  337 |  1 main_T0S09.s    337 | Comment     | 11 |         |    0 | 00/415B               | ;zpImgIndx contain the index
+  338 |  1 main_T0S09.s    338 | Comment     | 11 |         |    0 | 00/415B               | ;zpDispMask  contains the display mode #FF normal, #3F inverted
+  339 |  1 main_T0S09.s    339 | Empty       | 11 |         |    0 | 00/415B               | getImageAddr                                                
+  340 |  1 main_T0S09.s    340 | Code        | 11 |         |    2 | 00/415B : A2 18       |                                  ldx   #$18                 ; #18 -> 24 !!!
+  341 |  1 main_T0S09.s    341 | Code        | 11 |         |    2 | 00/415D : 86 90       |                                  stx   {$90}                
+  342 |  1 main_T0S09.s    342 | Code        | 11 |         |    2 | 00/415F : 85 92       |                                  sta   {$92}                
+  343 |  1 main_T0S09.s    343 | Empty       | 11 |         |    0 | 00/4161               |                                                             
+  344 |  1 main_T0S09.s    344 | Code        | 11 |         |    3 | 00/4161 : 20 DB 44    |                                  jsr   mult_8B_8B           
+  345 |  1 main_T0S09.s    345 | Empty       | 11 |         |    0 | 00/4164               |                                                             
+  346 |  1 main_T0S09.s    346 | Code        | 11 |         |    2 | 00/4164 : A6 95       |                                  ldx   {$95}                
+  347 |  1 main_T0S09.s    347 | Code        | 11 |         |    2 | 00/4166 : 86 93       |                                  stx   {$93}                
+  348 |  1 main_T0S09.s    348 | Empty       | 11 |         |    0 | 00/4168               |                                                             
+  349 |  1 main_T0S09.s    349 | Code        | 11 |         |    2 | 00/4168 : A6 94       |                                  ldx   {$94}                
+  350 |  1 main_T0S09.s    350 | Code        | 11 |         |    2 | 00/416A : 86 92       |                                  stx   {$92}                
+  351 |  1 main_T0S09.s    351 | Empty       | 11 |         |    0 | 00/416C               |                                                             
+  352 |  1 main_T0S09.s    352 | Comment     | 11 |         |    0 | 00/416C               |         ;ldx     #<RES_BLK
+  353 |  1 main_T0S09.s    353 | Code        | 11 |         |    2 | 00/416C : A2 20       |                                  ldx   #$20                 ; we start at 0x2820 and not 0x2800 to keep 32 bytes of data
+  354 |  1 main_T0S09.s    354 | Code        | 11 |         |    2 | 00/416E : 86 90       |                                  stx   {$90}                
+  355 |  1 main_T0S09.s    355 | Empty       | 11 |         |    0 | 00/4170               |                                                             
+  356 |  1 main_T0S09.s    356 | Code        | 11 |         |    2 | 00/4170 : A2 21       |                                  ldx   #>{$2100}            
+  357 |  1 main_T0S09.s    357 | Code        | 11 |         |    2 | 00/4172 : 86 91       |                                  stx   {$91}                
+  358 |  1 main_T0S09.s    358 | Empty       | 11 |         |    0 | 00/4174               |                                                             
+  359 |  1 main_T0S09.s    359 | Code        | 11 |         |    3 | 00/4174 : 20 CD 44    |                                  jsr   add_16B_16B          
+  360 |  1 main_T0S09.s    360 | Empty       | 11 |         |    0 | 00/4177               |                                                             
+  361 |  1 main_T0S09.s    361 | Code        | 11 |         |    2 | 00/4177 : A6 94       |                                  ldx   {$94}                
+  362 |  1 main_T0S09.s    362 | Code        | 11 |         |    2 | 00/4179 : 86 83       |                                  stx   {$83}                
+  363 |  1 main_T0S09.s    363 | Empty       | 11 |         |    0 | 00/417B               |                                                             
+  364 |  1 main_T0S09.s    364 | Code        | 11 |         |    2 | 00/417B : A6 95       |                                  ldx   {$95}                
+  365 |  1 main_T0S09.s    365 | Code        | 11 |         |    2 | 00/417D : 86 84       |                                  stx   {$83}+1              
+  366 |  1 main_T0S09.s    366 | Code        | 11 |         |    1 | 00/417F : 60          |                                  rts                        
+  367 |  1 main_T0S09.s    367 | Empty       | 11 |         |    0 | 00/4180               |                                                             
+  368 |  1 main_T0S09.s    368 | Empty       | 11 |         |    0 | 00/4180               |                                                             
+  369 |  1 main_T0S09.s    369 | Empty       | 11 |         |    0 | 00/4180               | setCommand                                                  
+  370 |  1 main_T0S09.s    370 | Code        | 11 |         |    2 | 00/4180 : A9 00       |                                  lda   #<{$2000}            ; Storing CMD_BLK address to zpPtr1
+  371 |  1 main_T0S09.s    371 | Code        | 11 |         |    2 | 00/4182 : 85 80       |                                  sta   {$80}                
+  372 |  1 main_T0S09.s    372 | Empty       | 11 |         |    0 | 00/4184               |                                                             
+  373 |  1 main_T0S09.s    373 | Code        | 11 |         |    2 | 00/4184 : A9 20       |                                  lda   #>{$2000}            
+  374 |  1 main_T0S09.s    374 | Code        | 11 |         |    2 | 00/4186 : 85 81       |                                  sta   {$80}+1              
+  375 |  1 main_T0S09.s    375 | Empty       | 11 |         |    0 | 00/4188               |                                                             
+  376 |  1 main_T0S09.s    376 | Code        | 11 |         |    1 | 00/4188 : 8A          |                                  txa                        ; Command: X -> Byte0 of CMD_BLK
+  377 |  1 main_T0S09.s    377 | Code        | 11 |         |    3 | 00/4189 : 8D 00 20    |                                  sta   {$2000}              
+  378 |  1 main_T0S09.s    378 | Empty       | 11 |         |    0 | 00/418C               |                                                             
+  379 |  1 main_T0S09.s    379 | Code        | 11 |         |    1 | 00/418C : 98          |                                  tya                        
+  380 |  1 main_T0S09.s    380 | Code        | 11 |         |    3 | 00/418D : 8D 01 20    |                                  sta   {$2000}+1            ; Value: Y -> Byte1 of CMD_BLK
+  381 |  1 main_T0S09.s    381 | Empty       | 11 |         |    0 | 00/4190               |                                                             
+  382 |  1 main_T0S09.s    382 | Code        | 11 |         |    2 | 00/4190 : A9 00       |                                  lda   #$00                 ; A -> 00 to wipe remaining block data
+  383 |  1 main_T0S09.s    383 | Code        | 11 |         |    2 | 00/4192 : A0 01       |                                  ldy   #$01                 ; start at offset 1, it will be incremented so Byte 2
+  384 |  1 main_T0S09.s    384 | Empty       | 11 |         |    0 | 00/4194               |                                                             
+  385 |  1 main_T0S09.s    385 | Empty       | 11 |         |    0 | 00/4194               | setCommand_0                                                ; Wipe the content of CMD_BLK 2x256 Bytes
+  386 |  1 main_T0S09.s    386 | Code        | 11 |         |    1 | 00/4194 : C8          |                                  iny                        
+  387 |  1 main_T0S09.s    387 | Code        | 11 |         |    2 | 00/4195 : 91 80       |                                  sta   ({$80}),Y            
+  388 |  1 main_T0S09.s    388 | Code        | 11 |         |    2 | 00/4197 : C0 FF       |                                  cpy   #$FF                 
+  389 |  1 main_T0S09.s    389 | Code        | 11 |         |    2 | 00/4199 : D0 F9       |                                  bne   setCommand_0         
+  390 |  1 main_T0S09.s    390 | Empty       | 11 |         |    0 | 00/419B               |                                                             
+  391 |  1 main_T0S09.s    391 | Code        | 11 |         |    2 | 00/419B : A0 00       |                                  ldy   #<{$2000}            
+  392 |  1 main_T0S09.s    392 | Code        | 11 |         |    2 | 00/419D : 84 80       |                                  sty   {$80}                
+  393 |  1 main_T0S09.s    393 | Empty       | 11 |         |    0 | 00/419F               |                                                             
+  394 |  1 main_T0S09.s    394 | Code        | 11 |         |    2 | 00/419F : A0 20       |                                  ldy   #>{$2000}            
+  395 |  1 main_T0S09.s    395 | Code        | 11 |         |    1 | 00/41A1 : C8          |                                  iny                        
+  396 |  1 main_T0S09.s    396 | Code        | 11 |         |    2 | 00/41A2 : 84 81       |                                  sty   {$80}+1              
+  397 |  1 main_T0S09.s    397 | Empty       | 11 |         |    0 | 00/41A4               |                                                             
+  398 |  1 main_T0S09.s    398 | Code        | 11 |         |    2 | 00/41A4 : A0 00       |                                  ldy   #$00                 
+  399 |  1 main_T0S09.s    399 | Code        | 11 |         |    2 | 00/41A6 : A9 00       |                                  lda   #$00                 
+  400 |  1 main_T0S09.s    400 | Empty       | 11 |         |    0 | 00/41A8               |                                                             
+  401 |  1 main_T0S09.s    401 | Empty       | 11 |         |    0 | 00/41A8               | setCommand_1                                                ; write 00 to clean up the 2nd 256 Bytes
+  402 |  1 main_T0S09.s    402 | Code        | 11 |         |    2 | 00/41A8 : 91 80       |                                  sta   ({$80}),Y            
+  403 |  1 main_T0S09.s    403 | Code        | 11 |         |    2 | 00/41AA : C0 FF       |                                  cpy   #$FF                 
+  404 |  1 main_T0S09.s    404 | Code        | 11 |         |    1 | 00/41AC : C8          |                                  iny                        
+  405 |  1 main_T0S09.s    405 | Code        | 11 |         |    2 | 00/41AD : D0 F9       |                                  bne   setCommand_1         
+  406 |  1 main_T0S09.s    406 | Empty       | 11 |         |    0 | 00/41AF               |                                                             
+  407 |  1 main_T0S09.s    407 | Empty       | 11 |         |    0 | 00/41AF               | setCommand_2                                                
+  408 |  1 main_T0S09.s    408 | Code        | 11 |         |    3 | 00/41AF : 20 B8 43    |                                  jsr   writeDataBlock       
+  409 |  1 main_T0S09.s    409 | Empty       | 11 |         |    0 | 00/41B2               |                                                             
+  410 |  1 main_T0S09.s    410 | Comment     | 11 |         |    0 | 00/41B2               |         ;jsr     dispCommandProdosReturnCode
+  411 |  1 main_T0S09.s    411 | Code        | 11 |         |    1 | 00/41B2 : 60          |                                  rts                        
+  412 |  1 main_T0S09.s    412 | Empty       | 11 |         |    0 | 00/41B3               |                                                             
+  413 |  1 main_T0S09.s    413 | Empty       | 11 |         |    0 | 00/41B3               | pNextPage                                                   
+  414 |  1 main_T0S09.s    414 | Code        | 11 |         |    2 | 00/41B3 : A6 88       |                                  ldx   {$88}                
+  415 |  1 main_T0S09.s    415 | Code        | 11 |         |    2 | 00/41B5 : E4 89       |                                  cpx   {$89}                
+  416 |  1 main_T0S09.s    416 | Code        | 11 |         |    2 | 00/41B7 : F0 0C       |                                  beq   pNextPage_0          ; check if current page is the last page
+  417 |  1 main_T0S09.s    417 | Empty       | 11 |         |    0 | 00/41B9               |                                                             
+  418 |  1 main_T0S09.s    418 | Code        | 11 |         |    2 | 00/41B9 : E6 88       |                                  inc   {$88}                
+  419 |  1 main_T0S09.s    419 | Code        | 11 |         |    2 | 00/41BB : A2 11       |                                  ldx   #$11                 ; Command 0x11 is to change currentPath page Index
+  420 |  1 main_T0S09.s    420 | Code        | 11 |         |    2 | 00/41BD : A4 88       |                                  ldy   {$88}                
+  421 |  1 main_T0S09.s    421 | Code        | 11 |         |    3 | 00/41BF : 20 80 41    |                                  jsr   setCommand           
+  422 |  1 main_T0S09.s    422 | Empty       | 11 |         |    0 | 00/41C2               |                                                             
+  423 |  1 main_T0S09.s    423 | Code        | 11 |         |    3 | 00/41C2 : 4C 28 40    |                                  jmp   refresh              
+  424 |  1 main_T0S09.s    424 | Empty       | 11 |         |    0 | 00/41C5               |                                                             
+  425 |  1 main_T0S09.s    425 | Empty       | 11 |         |    0 | 00/41C5               | pNextPage_0                                                 
+  426 |  1 main_T0S09.s    426 | Code        | 11 |         |    2 | 00/41C5 : A6 88       |                                  ldx   {$88}                
+  427 |  1 main_T0S09.s    427 | Code        | 11 |         |    2 | 00/41C7 : F0 0C       |                                  beq   pNextPage_1          ; current Page Index == MaxPage Index, check if current Index ==0 then do nothing
+  428 |  1 main_T0S09.s    428 | Empty       | 11 |         |    0 | 00/41C9               |                                                             
+  429 |  1 main_T0S09.s    429 | Code        | 11 |         |    2 | 00/41C9 : A2 11       |                                  ldx   #$11                 ; otherwise let loop to index 0 and send the command
+  430 |  1 main_T0S09.s    430 | Code        | 11 |         |    2 | 00/41CB : A0 00       |                                  ldy   #$00                 ; Command 0x11 is to change currentPath page Index
+  431 |  1 main_T0S09.s    431 | Code        | 11 |         |    2 | 00/41CD : 84 88       |                                  sty   {$88}                
+  432 |  1 main_T0S09.s    432 | Code        | 11 |         |    3 | 00/41CF : 20 80 41    |                                  jsr   setCommand           
+  433 |  1 main_T0S09.s    433 | Empty       | 11 |         |    0 | 00/41D2               |                                                             
+  434 |  1 main_T0S09.s    434 | Code        | 11 |         |    3 | 00/41D2 : 4C 28 40    |                                  jmp   refresh              ; send the Command and loop back to start
+  435 |  1 main_T0S09.s    435 | Empty       | 11 |         |    0 | 00/41D5               |                                                             
+  436 |  1 main_T0S09.s    436 | Empty       | 11 |         |    0 | 00/41D5               | pNextPage_1                                                 
+  437 |  1 main_T0S09.s    437 | Code        | 11 |         |    3 | 00/41D5 : 4C A6 42    |                                  jmp   mainDispatch         
+  438 |  1 main_T0S09.s    438 | Empty       | 11 |         |    0 | 00/41D8               |                                                             
+  439 |  1 main_T0S09.s    439 | Empty       | 11 |         |    0 | 00/41D8               | pPreviousPage                                               
+  440 |  1 main_T0S09.s    440 | Code        | 11 |         |    2 | 00/41D8 : A6 88       |                                  ldx   {$88}                
+  441 |  1 main_T0S09.s    441 | Code        | 11 |         |    2 | 00/41DA : F0 0C       |                                  beq   pPreviousPage_0      ; Current page Index is 0 so let loop MaxPageIndex
+  442 |  1 main_T0S09.s    442 | Code        | 11 |         |    2 | 00/41DC : C6 88       |                                  dec   {$88}                ; current page index is not 0 => decrease
+  443 |  1 main_T0S09.s    443 | Empty       | 11 |         |    0 | 00/41DE               |                                                             
+  444 |  1 main_T0S09.s    444 | Code        | 11 |         |    2 | 00/41DE : A2 11       |                                  ldx   #$11                 ; Command 0x11 is to change currentPath page Index
+  445 |  1 main_T0S09.s    445 | Code        | 11 |         |    2 | 00/41E0 : A4 88       |                                  ldy   {$88}                
+  446 |  1 main_T0S09.s    446 | Code        | 11 |         |    3 | 00/41E2 : 20 80 41    |                                  jsr   setCommand           ; send the Command and loop back to start
+  447 |  1 main_T0S09.s    447 | Code        | 11 |         |    3 | 00/41E5 : 4C 28 40    |                                  jmp   refresh              
+  448 |  1 main_T0S09.s    448 | Empty       | 11 |         |    0 | 00/41E8               |                                                             
+  449 |  1 main_T0S09.s    449 | Empty       | 11 |         |    0 | 00/41E8               | pPreviousPage_0                                             
+  450 |  1 main_T0S09.s    450 | Code        | 11 |         |    2 | 00/41E8 : A6 88       |                                  ldx   {$88}                
+  451 |  1 main_T0S09.s    451 | Code        | 11 |         |    2 | 00/41EA : E4 89       |                                  cpx   {$89}                
+  452 |  1 main_T0S09.s    452 | Code        | 11 |         |    2 | 00/41EC : F0 0A       |                                  beq   pPreviousPage_1      ; Compage current page Index with MaxPageIndx
+  453 |  1 main_T0S09.s    453 | Comment     | 11 |         |    0 | 00/41EE               |                                                         ; if both equal then do nothing otherwize move to last page Index (maxPageIndx)
+  454 |  1 main_T0S09.s    454 | Code        | 11 |         |    2 | 00/41EE : A2 11       |                                  ldx   #$11                 ; Command 0x11 is to change currentPath page Index
+  455 |  1 main_T0S09.s    455 | Code        | 11 |         |    2 | 00/41F0 : A4 89       |                                  ldy   {$89}                
+  456 |  1 main_T0S09.s    456 | Code        | 11 |         |    3 | 00/41F2 : 20 80 41    |                                  jsr   setCommand           ; send the Command and loop back to start
+  457 |  1 main_T0S09.s    457 | Code        | 11 |         |    3 | 00/41F5 : 4C 28 40    |                                  jmp   refresh              
+  458 |  1 main_T0S09.s    458 | Empty       | 11 |         |    0 | 00/41F8               |                                                             
+  459 |  1 main_T0S09.s    459 | Empty       | 11 |         |    0 | 00/41F8               | pPreviousPage_1                                             
+  460 |  1 main_T0S09.s    460 | Code        | 11 |         |    3 | 00/41F8 : 4C A6 42    |                                  jmp   mainDispatch         ; loop back to mainDispatch
+  461 |  1 main_T0S09.s    461 | Empty       | 11 |         |    0 | 00/41FB               |                                                             
+  462 |  1 main_T0S09.s    462 | Empty       | 11 |         |    0 | 00/41FB               | pKeyUp                                                      
+  463 |  1 main_T0S09.s    463 | Empty       | 11 |         |    0 | 00/41FB               |                                                             
+  464 |  1 main_T0S09.s    464 | Code        | 11 |         |    2 | 00/41FB : A2 FF       |                                  ldx   #$FF                 ; Change the current Image back to normal text
+  465 |  1 main_T0S09.s    465 | Code        | 11 |         |    2 | 00/41FD : 86 32       |                                  stx   {$32}                
+  466 |  1 main_T0S09.s    466 | Code        | 11 |         |    3 | 00/41FF : 20 0D 41    |                                  jsr   dispDataBlockImage   
+  467 |  1 main_T0S09.s    467 | Empty       | 11 |         |    0 | 00/4202               |                                                             
+  468 |  1 main_T0S09.s    468 | Code        | 11 |         |    2 | 00/4202 : A6 85       |                                  ldx   {$85}                
+  469 |  1 main_T0S09.s    469 | Code        | 11 |         |    2 | 00/4204 : E0 00       |                                  cpx   #00                  ; if current Index is 0 then roll to the end
+  470 |  1 main_T0S09.s    470 | Code        | 11 |         |    2 | 00/4206 : D0 08       |                                  bne   pKeyUp_0             
+  471 |  1 main_T0S09.s    471 | Empty       | 11 |         |    0 | 00/4208               |                                                             
+  472 |  1 main_T0S09.s    472 | Code        | 11 |         |    2 | 00/4208 : A6 87       |                                  ldx   {$87}                ; zpImgIndx =7 rolling to 0
+  473 |  1 main_T0S09.s    473 | Code        | 11 |         |    1 | 00/420A : CA          |                                  dex                        
+  474 |  1 main_T0S09.s    474 | Code        | 11 |         |    2 | 00/420B : 86 85       |                                  stx   {$85}                
+  475 |  1 main_T0S09.s    475 | Code        | 11 |         |    3 | 00/420D : 4C E4 42    |                                  jmp   mainDispatch_2       
+  476 |  1 main_T0S09.s    476 | Empty       | 11 |         |    0 | 00/4210               |                                                             
+  477 |  1 main_T0S09.s    477 | Empty       | 11 |         |    0 | 00/4210               | pKeyUp_0                                                    
+  478 |  1 main_T0S09.s    478 | Code        | 11 |         |    3 | 00/4210 : 20 65 43    |                                  jsr   decImageIndex        ; decrement current Index
+  479 |  1 main_T0S09.s    479 | Code        | 11 |         |    3 | 00/4213 : 4C E4 42    |                                  jmp   mainDispatch_2       
+  480 |  1 main_T0S09.s    480 | Empty       | 11 |         |    0 | 00/4216               |                                                             
+  481 |  1 main_T0S09.s    481 | Empty       | 11 |         |    0 | 00/4216               | pKeydown                                                    
+  482 |  1 main_T0S09.s    482 | Code        | 11 |         |    2 | 00/4216 : A5 85       |                                  lda   {$85}                
+  483 |  1 main_T0S09.s    483 | Empty       | 11 |         |    0 | 00/4218               |                                                             
+  484 |  1 main_T0S09.s    484 | Code        | 11 |         |    2 | 00/4218 : A2 FF       |                                  ldx   #$FF                 
+  485 |  1 main_T0S09.s    485 | Code        | 11 |         |    2 | 00/421A : 86 32       |                                  stx   {$32}                
+  486 |  1 main_T0S09.s    486 | Code        | 11 |         |    3 | 00/421C : 20 0D 41    |                                  jsr   dispDataBlockImage   
+  487 |  1 main_T0S09.s    487 | Code        | 11 |         |    2 | 00/421F : A6 85       |                                  ldx   {$85}                
+  488 |  1 main_T0S09.s    488 | Code        | 11 |         |    1 | 00/4221 : E8          |                                  inx                        
+  489 |  1 main_T0S09.s    489 | Code        | 11 |         |    2 | 00/4222 : E4 87       |                                  cpx   {$87}                ; TODO put this automatic from the stack
+  490 |  1 main_T0S09.s    490 | Code        | 11 |         |    2 | 00/4224 : D0 07       |                                  bne   pKeydown_0           
+  491 |  1 main_T0S09.s    491 | Empty       | 11 |         |    0 | 00/4226               |                                                             
+  492 |  1 main_T0S09.s    492 | Code        | 11 |         |    2 | 00/4226 : A2 00       |                                  ldx   #$0                  ; zpImgIndx =7 rolling to 0
+  493 |  1 main_T0S09.s    493 | Code        | 11 |         |    2 | 00/4228 : 86 85       |                                  stx   {$85}                
+  494 |  1 main_T0S09.s    494 | Code        | 11 |         |    3 | 00/422A : 4C E4 42    |                                  jmp   mainDispatch_2       
+  495 |  1 main_T0S09.s    495 | Empty       | 11 |         |    0 | 00/422D               |                                                             
+  496 |  1 main_T0S09.s    496 | Empty       | 11 |         |    0 | 00/422D               | pKeydown_0                                                  
+  497 |  1 main_T0S09.s    497 | Code        | 11 |         |    3 | 00/422D : 20 5B 43    |                                  jsr   incImageIndex        
+  498 |  1 main_T0S09.s    498 | Code        | 11 |         |    3 | 00/4230 : 4C E4 42    |                                  jmp   mainDispatch_2       
+  499 |  1 main_T0S09.s    499 | Empty       | 11 |         |    0 | 00/4233               |                                                             
+  500 |  1 main_T0S09.s    500 | Empty       | 11 |         |    0 | 00/4233               | pSelectItem                                                 
+  501 |  1 main_T0S09.s    501 | Code        | 11 |         |    2 | 00/4233 : A2 FF       |                                  ldx   #$FF                 
+  502 |  1 main_T0S09.s    502 | Code        | 11 |         |    2 | 00/4235 : 86 32       |                                  stx   {$32}                
+  503 |  1 main_T0S09.s    503 | Empty       | 11 |         |    0 | 00/4237               |                                                             
+  504 |  1 main_T0S09.s    504 | Code        | 11 |         |    3 | 00/4237 : 20 AD 40    |                                  jsr   dispClearCenterBlock 
+  505 |  1 main_T0S09.s    505 | Empty       | 11 |         |    0 | 00/423A               |                                                             
+  506 |  1 main_T0S09.s    506 | Code        | 11 |         |    2 | 00/423A : A2 08       |                                  ldx   #$08                 
+  507 |  1 main_T0S09.s    507 | Code        | 11 |         |    2 | 00/423C : A0 08       |                                  ldy   #$08                 
+  508 |  1 main_T0S09.s    508 | Code        | 11 |         |    3 | 00/423E : 20 B8 08    |                                  jsr   {$08B8}              
+  509 |  1 main_T0S09.s    509 | Empty       | 11 |         |    0 | 00/4241               |                                                             
+  510 |  1 main_T0S09.s    510 | Code        | 11 |         |    2 | 00/4241 : A2 F2       |                                  ldx   #<_loading           
+  511 |  1 main_T0S09.s    511 | Code        | 11 |         |    2 | 00/4243 : A0 43       |                                  ldy   #>_loading           
+  512 |  1 main_T0S09.s    512 | Code        | 11 |         |    3 | 00/4245 : 20 D5 08    |                                  jsr   {$08D5}              
+  513 |  1 main_T0S09.s    513 | Empty       | 11 |         |    0 | 00/4248               |                                                             
+  514 |  1 main_T0S09.s    514 | Code        | 11 |         |    2 | 00/4248 : A2 08       |                                  ldx   #$08                 
+  515 |  1 main_T0S09.s    515 | Code        | 11 |         |    2 | 00/424A : A0 0A       |                                  ldy   #$0A                 
+  516 |  1 main_T0S09.s    516 | Code        | 11 |         |    3 | 00/424C : 20 B8 08    |                                  jsr   {$08B8}              
+  517 |  1 main_T0S09.s    517 | Empty       | 11 |         |    0 | 00/424F               |                                                             
+  518 |  1 main_T0S09.s    518 | Code        | 11 |         |    3 | 00/424F : 20 3C 41    |                                  jsr   getImgPageIndx       
+  519 |  1 main_T0S09.s    519 | Code        | 11 |         |    3 | 00/4252 : 20 40 43    |                                  jsr   printInt8            
+  520 |  1 main_T0S09.s    520 | Empty       | 11 |         |    0 | 00/4255               |                                                             
+  521 |  1 main_T0S09.s    521 | Code        | 11 |         |    2 | 00/4255 : A9 A0       |                                  lda   #" "                 
+  522 |  1 main_T0S09.s    522 | Code        | 11 |         |    3 | 00/4257 : 20 F0 FD    |                                  jsr   {$FDF0}              
+  523 |  1 main_T0S09.s    523 | Empty       | 11 |         |    0 | 00/425A               |                                                             
+  524 |  1 main_T0S09.s    524 | Code        | 11 |         |    2 | 00/425A : A5 85       |                                  lda   {$85}                
+  525 |  1 main_T0S09.s    525 | Code        | 11 |         |    3 | 00/425C : 20 5B 41    |                                  jsr   getImageAddr         ; get the selected item address in the read data block
+  526 |  1 main_T0S09.s    526 | Empty       | 11 |         |    0 | 00/425F               |                                                             
+  527 |  1 main_T0S09.s    527 | Code        | 11 |         |    2 | 00/425F : A6 83       |                                  ldx   {$83}                ; zpPtr2 contains the address of the image address
+  528 |  1 main_T0S09.s    528 | Code        | 11 |         |    1 | 00/4261 : E8          |                                  inx                        ; the first char is the type of the item will not display it
+  529 |  1 main_T0S09.s    529 | Code        | 11 |         |    2 | 00/4262 : A4 84       |                                  ldy   {$83}+1              
+  530 |  1 main_T0S09.s    530 | Empty       | 11 |         |    0 | 00/4264               |                                                             
+  531 |  1 main_T0S09.s    531 | Code        | 11 |         |    3 | 00/4264 : 20 D5 08    |                                  jsr   {$08D5}              
+  532 |  1 main_T0S09.s    532 | Empty       | 11 |         |    0 | 00/4267               |                                                             
+  533 |  1 main_T0S09.s    533 | Code        | 11 |         |    2 | 00/4267 : A0 00       |                                  ldy   #$00                 
+  534 |  1 main_T0S09.s    534 | Code        | 11 |         |    2 | 00/4269 : B1 83       |                                  lda   ({$83}),y            ; A contains the type selected item
+  535 |  1 main_T0S09.s    535 | Empty       | 11 |         |    0 | 00/426B               |                                                             
+  536 |  1 main_T0S09.s    536 | Code        | 11 |         |    2 | 00/426B : C9 01       |                                  cmp   #$01                 ; it is a directory
+  537 |  1 main_T0S09.s    537 | Code        | 11 |         |    2 | 00/426D : F0 04       |                                  beq   pSelectItem_setCommandDirectory
+  538 |  1 main_T0S09.s    538 | Empty       | 11 |         |    0 | 00/426F               |                                                             
+  539 |  1 main_T0S09.s    539 | Code        | 11 |         |    2 | 00/426F : C9 00       |                                  cmp   #$00                 ; it is a file
+  540 |  1 main_T0S09.s    540 | Code        | 11 |         |    2 | 00/4271 : F0 0C       |                                  beq   pSelectItem_setCommandFile
+  541 |  1 main_T0S09.s    541 | Empty       | 11 |         |    0 | 00/4273               |                                                             
+  542 |  1 main_T0S09.s    542 | Empty       | 11 |         |    0 | 00/4273               | pSelectItem_setCommandDirectory                             
+  543 |  1 main_T0S09.s    543 | Empty       | 11 |         |    0 | 00/4273               |                                                             
+  544 |  1 main_T0S09.s    544 | Code        | 11 |         |    3 | 00/4273 : 20 3C 41    |                                  jsr   getImgPageIndx       
+  545 |  1 main_T0S09.s    545 | Code        | 11 |         |    1 | 00/4276 : A8          |                                  tay                        
+  546 |  1 main_T0S09.s    546 | Code        | 11 |         |    2 | 00/4277 : A2 10       |                                  ldx   #$10                 
+  547 |  1 main_T0S09.s    547 | Code        | 11 |         |    3 | 00/4279 : 20 80 41    |                                  jsr   setCommand           
+  548 |  1 main_T0S09.s    548 | Empty       | 11 |         |    0 | 00/427C               |                                                             
+  549 |  1 main_T0S09.s    549 | Code        | 11 |         |    3 | 00/427C : 4C 28 40    |                                  jmp   refresh              
+  550 |  1 main_T0S09.s    550 | Empty       | 11 |         |    0 | 00/427F               |                                                             
+  551 |  1 main_T0S09.s    551 | Empty       | 11 |         |    0 | 00/427F               | pSelectItem_setCommandFile                                  
+  552 |  1 main_T0S09.s    552 | Empty       | 11 |         |    0 | 00/427F               |                                                             
+  553 |  1 main_T0S09.s    553 | Code        | 11 |         |    3 | 00/427F : 20 3C 41    |                                  jsr   getImgPageIndx       
+  554 |  1 main_T0S09.s    554 | Code        | 11 |         |    1 | 00/4282 : A8          |                                  tay                        
+  555 |  1 main_T0S09.s    555 | Code        | 11 |         |    2 | 00/4283 : A2 02       |                                  ldx   #$02                 
+  556 |  1 main_T0S09.s    556 | Code        | 11 |         |    3 | 00/4285 : 20 80 41    |                                  jsr   setCommand           
+  557 |  1 main_T0S09.s    557 | Empty       | 11 |         |    0 | 00/4288               |                                                             
+  558 |  1 main_T0S09.s    558 | Comment     | 11 |         |    0 | 00/4288               |     ;Lets go Straight 
+  559 |  1 main_T0S09.s    559 | Comment     | 11 |         |    0 | 00/4288               |     ;jsr     wait
+  560 |  1 main_T0S09.s    560 | Code        | 11 |         |    3 | 00/4288 : 4C 00 C6    |                                  jmp   #$C600               ; TODO put this variable according to the slot
+  561 |  1 main_T0S09.s    561 | Empty       | 11 |         |    0 | 00/428B               |                                                             
+  562 |  1 main_T0S09.s    562 | Empty       | 11 |         |    0 | 00/428B               | pSelectItem_setCommandFile_err                              
+  563 |  1 main_T0S09.s    563 | Comment     | 11 |         |    0 | 00/428B               |     ;jsr dispErrorMsg
+  564 |  1 main_T0S09.s    564 | Code        | 11 |         |    3 | 00/428B : 20 E9 43    |                                  jsr   readKey              
+  565 |  1 main_T0S09.s    565 | Code        | 11 |         |    3 | 00/428E : 4C 28 40    |                                  jmp   refresh              
+  566 |  1 main_T0S09.s    566 | Empty       | 11 |         |    0 | 00/4291               |                                                             
+  567 |  1 main_T0S09.s    567 | Empty       | 11 |         |    0 | 00/4291               | mainDispatch_selectItem                                     
+  568 |  1 main_T0S09.s    568 | Code        | 11 |         |    3 | 00/4291 : 4C 33 42    |                                  jmp   pSelectItem          
+  569 |  1 main_T0S09.s    569 | Empty       | 11 |         |    0 | 00/4294               |                                                             
+  570 |  1 main_T0S09.s    570 | Empty       | 11 |         |    0 | 00/4294               | mainDispatch_reboot                                         
+  571 |  1 main_T0S09.s    571 | Code        | 11 |         |    3 | 00/4294 : 4C 6F 43    |                                  jmp   reboot               
+  572 |  1 main_T0S09.s    572 | Empty       | 11 |         |    0 | 00/4297               |                                                             
+  573 |  1 main_T0S09.s    573 | Empty       | 11 |         |    0 | 00/4297               | mainDispatch_refresh                                        
+  574 |  1 main_T0S09.s    574 | Code        | 11 |         |    3 | 00/4297 : 4C 28 40    |                                  jmp   refresh              
+  575 |  1 main_T0S09.s    575 | Empty       | 11 |         |    0 | 00/429A               |                                                             
+  576 |  1 main_T0S09.s    576 | Empty       | 11 |         |    0 | 00/429A               | mainDispatch_nextPage                                       
+  577 |  1 main_T0S09.s    577 | Code        | 11 |         |    3 | 00/429A : 4C B3 41    |                                  jmp   pNextPage            
+  578 |  1 main_T0S09.s    578 | Empty       | 11 |         |    0 | 00/429D               |                                                             
+  579 |  1 main_T0S09.s    579 | Empty       | 11 |         |    0 | 00/429D               | mainDispatch_previousPage                                   
+  580 |  1 main_T0S09.s    580 | Code        | 11 |         |    3 | 00/429D : 4C D8 41    |                                  jmp   pPreviousPage        
+  581 |  1 main_T0S09.s    581 | Empty       | 11 |         |    0 | 00/42A0               |                                                             
+  582 |  1 main_T0S09.s    582 | Empty       | 11 |         |    0 | 00/42A0               | mainDispatch_keyDown                                        
+  583 |  1 main_T0S09.s    583 | Code        | 11 |         |    3 | 00/42A0 : 4C 16 42    |                                  jmp   pKeydown             
+  584 |  1 main_T0S09.s    584 | Empty       | 11 |         |    0 | 00/42A3               |                                                             
+  585 |  1 main_T0S09.s    585 | Empty       | 11 |         |    0 | 00/42A3               | mainDispatch_keyUp                                          
+  586 |  1 main_T0S09.s    586 | Code        | 11 |         |    3 | 00/42A3 : 4C FB 41    |                                  jmp   pKeyUp               
+  587 |  1 main_T0S09.s    587 | Empty       | 11 |         |    0 | 00/42A6               |                                                             
+  588 |  1 main_T0S09.s    588 | Empty       | 11 |         |    0 | 00/42A6               | mainDispatch                                                
+  589 |  1 main_T0S09.s    589 | Code        | 11 |         |    3 | 00/42A6 : 20 E9 43    |                                  jsr   readKey              
+  590 |  1 main_T0S09.s    590 | Code        | 11 |         |    3 | 00/42A9 : 20 CB 42    |                                  jsr   mainDispatch_disp    
+  591 |  1 main_T0S09.s    591 | Empty       | 11 |         |    0 | 00/42AC               |                                                             
+  592 |  1 main_T0S09.s    592 | Code        | 11 |         |    2 | 00/42AC : C9 D2       |                                  cmp   #$D2                 ; KEY [R]
+  593 |  1 main_T0S09.s    593 | Code        | 11 |         |    2 | 00/42AE : F0 E7       |                                  beq   mainDispatch_refresh 
+  594 |  1 main_T0S09.s    594 | Empty       | 11 |         |    0 | 00/42B0               |                                                             
+  595 |  1 main_T0S09.s    595 | Code        | 11 |         |    2 | 00/42B0 : C9 C2       |                                  cmp   #$C2                 ; KEY [R]
+  596 |  1 main_T0S09.s    596 | Code        | 11 |         |    2 | 00/42B2 : F0 E0       |                                  beq   mainDispatch_reboot  
+  597 |  1 main_T0S09.s    597 | Empty       | 11 |         |    0 | 00/42B4               |                                                             
+  598 |  1 main_T0S09.s    598 | Code        | 11 |         |    2 | 00/42B4 : C9 95       |                                  cmp   #$95                 
+  599 |  1 main_T0S09.s    599 | Code        | 11 |         |    2 | 00/42B6 : F0 E2       |                                  beq   mainDispatch_nextPage; KEY right arrow
+  600 |  1 main_T0S09.s    600 | Empty       | 11 |         |    0 | 00/42B8               |                                                             
+  601 |  1 main_T0S09.s    601 | Code        | 11 |         |    2 | 00/42B8 : C9 88       |                                  cmp   #$88                 
+  602 |  1 main_T0S09.s    602 | Code        | 11 |         |    2 | 00/42BA : F0 E1       |                                  beq   mainDispatch_previousPage; KEY left arrow
+  603 |  1 main_T0S09.s    603 | Empty       | 11 |         |    0 | 00/42BC               |                                                             
+  604 |  1 main_T0S09.s    604 | Code        | 11 |         |    2 | 00/42BC : C9 8D       |                                  cmp   #$8D                 ; KEY [ENTER] / [RETURN]
+  605 |  1 main_T0S09.s    605 | Code        | 11 |         |    2 | 00/42BE : F0 D1       |                                  beq   mainDispatch_selectItem
+  606 |  1 main_T0S09.s    606 | Empty       | 11 |         |    0 | 00/42C0               |                                                             
+  607 |  1 main_T0S09.s    607 | Code        | 11 |         |    2 | 00/42C0 : C9 8B       |                                  cmp   #$8B                 ; KEY [UP]
+  608 |  1 main_T0S09.s    608 | Code        | 11 |         |    2 | 00/42C2 : F0 DF       |                                  beq   mainDispatch_keyUp   
+  609 |  1 main_T0S09.s    609 | Empty       | 11 |         |    0 | 00/42C4               |                                                             
+  610 |  1 main_T0S09.s    610 | Code        | 11 |         |    2 | 00/42C4 : C9 8A       |                                  cmp   #$8A                 
+  611 |  1 main_T0S09.s    611 | Code        | 11 |         |    2 | 00/42C6 : F0 D8       |                                  beq   mainDispatch_keyDown 
+  612 |  1 main_T0S09.s    612 | Empty       | 11 |         |    0 | 00/42C8               |                                                             
+  613 |  1 main_T0S09.s    613 | Code        | 11 |         |    3 | 00/42C8 : 4C A6 42    |                                  jmp   mainDispatch         
+  614 |  1 main_T0S09.s    614 | Empty       | 11 |         |    0 | 00/42CB               |                                                             
+  615 |  1 main_T0S09.s    615 | Empty       | 11 |         |    0 | 00/42CB               | mainDispatch_disp                                           ; Putting A containing the key value on the stack
+  616 |  1 main_T0S09.s    616 | Code        | 11 |         |    1 | 00/42CB : 48          |                                  pha                        
+  617 |  1 main_T0S09.s    617 | Code        | 11 |         |    2 | 00/42CC : A0 00       |                                  ldy   #$00                 ; Display the Key value on the top right of the screen
+  618 |  1 main_T0S09.s    618 | Code        | 11 |         |    2 | 00/42CE : A2 06       |                                  ldx   #$06                 
+  619 |  1 main_T0S09.s    619 | Code        | 11 |         |    3 | 00/42D0 : 20 B8 08    |                                  jsr   {$08B8}              
+  620 |  1 main_T0S09.s    620 | Empty       | 11 |         |    0 | 00/42D3               |                                                             
+  621 |  1 main_T0S09.s    621 | Code        | 11 |         |    2 | 00/42D3 : A2 FF       |                                  ldx   #$FF                 ; add Inverse Mask
+  622 |  1 main_T0S09.s    622 | Code        | 11 |         |    2 | 00/42D5 : 86 32       |                                  stx   {$32}                
+  623 |  1 main_T0S09.s    623 | Empty       | 11 |         |    0 | 00/42D7               |                                                             
+  624 |  1 main_T0S09.s    624 | Code        | 11 |         |    3 | 00/42D7 : 20 DA FD    |                                  jsr   {$FDDA}              
+  625 |  1 main_T0S09.s    625 | Empty       | 11 |         |    0 | 00/42DA               |                                                             
+  626 |  1 main_T0S09.s    626 | Code        | 11 |         |    2 | 00/42DA : A2 7F       |                                  ldx   #$7F                 ; add Inverse Mask
+  627 |  1 main_T0S09.s    627 | Code        | 11 |         |    2 | 00/42DC : 86 32       |                                  stx   {$32}                
+  628 |  1 main_T0S09.s    628 | Empty       | 11 |         |    0 | 00/42DE               |                                                             
+  629 |  1 main_T0S09.s    629 | Code        | 11 |         |    2 | 00/42DE : A5 85       |                                  lda   {$85}                
+  630 |  1 main_T0S09.s    630 | Code        | 11 |         |    2 | 00/42E0 : 85 86       |                                  sta   {$86}                
+  631 |  1 main_T0S09.s    631 | Code        | 11 |         |    1 | 00/42E2 : 68          |                                  pla                        
+  632 |  1 main_T0S09.s    632 | Code        | 11 |         |    1 | 00/42E3 : 60          |                                  rts                        
+  633 |  1 main_T0S09.s    633 | Empty       | 11 |         |    0 | 00/42E4               |                                                             
+  634 |  1 main_T0S09.s    634 | Comment     | 11 |         |    0 | 00/42E4               |     ;lda     zpImgIndx
+  635 |  1 main_T0S09.s    635 | Comment     | 11 |         |    0 | 00/42E4               |     ;sbc     #$09
+  636 |  1 main_T0S09.s    636 | Comment     | 11 |         |    0 | 00/42E4               |     ;bpl     mainDispatch_3                 
+  637 |  1 main_T0S09.s    637 | Empty       | 11 |         |    0 | 00/42E4               |                                                             
+  638 |  1 main_T0S09.s    638 | Empty       | 11 |         |    0 | 00/42E4               | mainDispatch_2                                              
+  639 |  1 main_T0S09.s    639 | Code        | 11 |         |    2 | 00/42E4 : A0 00       |                                  ldy   #$0                  
+  640 |  1 main_T0S09.s    640 | Code        | 11 |         |    2 | 00/42E6 : A2 22       |                                  ldx   #$22                 
+  641 |  1 main_T0S09.s    641 | Code        | 11 |         |    3 | 00/42E8 : 20 B8 08    |                                  jsr   {$08B8}              
+  642 |  1 main_T0S09.s    642 | Empty       | 11 |         |    0 | 00/42EB               |                                                             
+  643 |  1 main_T0S09.s    643 | Code        | 11 |         |    2 | 00/42EB : A5 85       |                                  lda   {$85}                
+  644 |  1 main_T0S09.s    644 | Code        | 11 |         |    3 | 00/42ED : 20 40 43    |                                  jsr   printInt8            
+  645 |  1 main_T0S09.s    645 | Empty       | 11 |         |    0 | 00/42F0               |                                                             
+  646 |  1 main_T0S09.s    646 | Code        | 11 |         |    2 | 00/42F0 : A9 AF       |                                  lda   #"/"                 ; "/"
+  647 |  1 main_T0S09.s    647 | Code        | 11 |         |    3 | 00/42F2 : 20 ED FD    |                                  jsr   {$FDED}              
+  648 |  1 main_T0S09.s    648 | Empty       | 11 |         |    0 | 00/42F5               |                                                             
+  649 |  1 main_T0S09.s    649 | Code        | 11 |         |    2 | 00/42F5 : A5 87       |                                  lda   {$87}                
+  650 |  1 main_T0S09.s    650 | Code        | 11 |         |    1 | 00/42F7 : AA          |                                  tax                        
+  651 |  1 main_T0S09.s    651 | Code        | 11 |         |    1 | 00/42F8 : CA          |                                  dex                        
+  652 |  1 main_T0S09.s    652 | Code        | 11 |         |    1 | 00/42F9 : 8A          |                                  txa                        
+  653 |  1 main_T0S09.s    653 | Code        | 11 |         |    3 | 00/42FA : 20 40 43    |                                  jsr   printInt8            
+  654 |  1 main_T0S09.s    654 | Empty       | 11 |         |    0 | 00/42FD               |                                                             
+  655 |  1 main_T0S09.s    655 | Code        | 11 |         |    2 | 00/42FD : A0 00       |                                  ldy   #$0                  
+  656 |  1 main_T0S09.s    656 | Code        | 11 |         |    2 | 00/42FF : A2 1B       |                                  ldx   #$1B                 
+  657 |  1 main_T0S09.s    657 | Code        | 11 |         |    3 | 00/4301 : 20 B8 08    |                                  jsr   {$08B8}              
+  658 |  1 main_T0S09.s    658 | Empty       | 11 |         |    0 | 00/4304               |                                                             
+  659 |  1 main_T0S09.s    659 | Code        | 11 |         |    2 | 00/4304 : A9 D0       |                                  lda   #"P"                 
+  660 |  1 main_T0S09.s    660 | Code        | 11 |         |    3 | 00/4306 : 20 ED FD    |                                  jsr   {$FDED}              
+  661 |  1 main_T0S09.s    661 | Empty       | 11 |         |    0 | 00/4309               |                                                             
+  662 |  1 main_T0S09.s    662 | Code        | 11 |         |    2 | 00/4309 : A5 88       |                                  lda   {$88}                
+  663 |  1 main_T0S09.s    663 | Code        | 11 |         |    3 | 00/430B : 20 22 43    |                                  jsr   printInt8_NoPad      
+  664 |  1 main_T0S09.s    664 | Empty       | 11 |         |    0 | 00/430E               |                                                             
+  665 |  1 main_T0S09.s    665 | Code        | 11 |         |    2 | 00/430E : A9 AF       |                                  lda   #"/"                 
+  666 |  1 main_T0S09.s    666 | Code        | 11 |         |    3 | 00/4310 : 20 ED FD    |                                  jsr   {$FDED}              
+  667 |  1 main_T0S09.s    667 | Empty       | 11 |         |    0 | 00/4313               |                                                             
+  668 |  1 main_T0S09.s    668 | Code        | 11 |         |    2 | 00/4313 : A5 89       |                                  lda   {$89}                
+  669 |  1 main_T0S09.s    669 | Code        | 11 |         |    3 | 00/4315 : 20 22 43    |                                  jsr   printInt8_NoPad      
+  670 |  1 main_T0S09.s    670 | Empty       | 11 |         |    0 | 00/4318               |                                                             
+  671 |  1 main_T0S09.s    671 | Code        | 11 |         |    2 | 00/4318 : A2 3F       |                                  ldx   #$3F                 
+  672 |  1 main_T0S09.s    672 | Code        | 11 |         |    2 | 00/431A : 86 32       |                                  stx   {$32}                
+  673 |  1 main_T0S09.s    673 | Code        | 11 |         |    3 | 00/431C : 20 0D 41    |                                  jsr   dispDataBlockImage   
+  674 |  1 main_T0S09.s    674 | Code        | 11 |         |    3 | 00/431F : 4C A6 42    |                                  jmp   mainDispatch         
+  675 |  1 main_T0S09.s    675 | Empty       | 11 |         |    0 | 00/4322               |                                                             
+  676 |  1 main_T0S09.s    676 | Comment     | 11 |         |    0 | 00/4322               | ;--------------------------------------------------------
+  677 |  1 main_T0S09.s    677 | Comment     | 11 |         |    0 | 00/4322               | ; Value is in A
+  678 |  1 main_T0S09.s    678 | Comment     | 11 |         |    0 | 00/4322               | ; printInt8_NoPad does not print dizaine number if 0
+  679 |  1 main_T0S09.s    679 | Comment     | 11 |         |    0 | 00/4322               | ; printInt8_SpcPad print " " if dizaine equal 0
+  680 |  1 main_T0S09.s    680 | Comment     | 11 |         |    0 | 00/4322               | ; printInt8 print double digit number
+  681 |  1 main_T0S09.s    681 | Comment     | 11 |         |    0 | 00/4322               | ;---------------------------------------------------------
+  682 |  1 main_T0S09.s    682 | Empty       | 11 |         |    0 | 00/4322               | printInt8_NoPad                                             
+  683 |  1 main_T0S09.s    683 | Code        | 11 |         |    3 | 00/4322 : 20 7B 44    |                                  jsr   hex2dec              
+  684 |  1 main_T0S09.s    684 | Code        | 11 |         |    1 | 00/4325 : 48          |                                  pha                        
+  685 |  1 main_T0S09.s    685 | Code        | 11 |         |    1 | 00/4326 : 98          |                                  tya                        
+  686 |  1 main_T0S09.s    686 | Code        | 11 |         |    2 | 00/4327 : F0 29       |                                  beq   printInt8_1          
+  687 |  1 main_T0S09.s    687 | Code        | 11 |         |    2 | 00/4329 : 09 B0       |                                  ora   #"0"                 
+  688 |  1 main_T0S09.s    688 | Code        | 11 |         |    3 | 00/432B : 20 F0 FD    |                                  jsr   {$FDF0}              
+  689 |  1 main_T0S09.s    689 | Code        | 11 |         |    3 | 00/432E : 4C 52 43    |                                  jmp   printInt8_1          
+  690 |  1 main_T0S09.s    690 | Empty       | 11 |         |    0 | 00/4331               |                                                             
+  691 |  1 main_T0S09.s    691 | Empty       | 11 |         |    0 | 00/4331               | printInt8_SpcPad                                            ; value in A
+  692 |  1 main_T0S09.s    692 | Code        | 11 |         |    3 | 00/4331 : 20 7B 44    |                                  jsr   hex2dec              
+  693 |  1 main_T0S09.s    693 | Code        | 11 |         |    1 | 00/4334 : 48          |                                  pha                        
+  694 |  1 main_T0S09.s    694 | Code        | 11 |         |    1 | 00/4335 : 98          |                                  tya                        
+  695 |  1 main_T0S09.s    695 | Code        | 11 |         |    2 | 00/4336 : F0 15       |                                  beq   printInt8_SPC        
+  696 |  1 main_T0S09.s    696 | Code        | 11 |         |    2 | 00/4338 : 09 B0       |                                  ora   #"0"                 
+  697 |  1 main_T0S09.s    697 | Code        | 11 |         |    3 | 00/433A : 20 F0 FD    |                                  jsr   {$FDF0}              
+  698 |  1 main_T0S09.s    698 | Code        | 11 |         |    3 | 00/433D : 4C 52 43    |                                  jmp   printInt8_1          
+  699 |  1 main_T0S09.s    699 | Empty       | 11 |         |    0 | 00/4340               |                                                             
+  700 |  1 main_T0S09.s    700 | Empty       | 11 |         |    0 | 00/4340               | printInt8                                                   ; value in A
+  701 |  1 main_T0S09.s    701 | Code        | 11 |         |    3 | 00/4340 : 20 7B 44    |                                  jsr   hex2dec              
+  702 |  1 main_T0S09.s    702 | Code        | 11 |         |    1 | 00/4343 : 48          |                                  pha                        
+  703 |  1 main_T0S09.s    703 | Code        | 11 |         |    1 | 00/4344 : 98          |                                  tya                        
+  704 |  1 main_T0S09.s    704 | Code        | 11 |         |    2 | 00/4345 : 09 B0       |                                  ora   #"0"                 
+  705 |  1 main_T0S09.s    705 | Code        | 11 |         |    3 | 00/4347 : 20 F0 FD    |                                  jsr   {$FDF0}              
+  706 |  1 main_T0S09.s    706 | Code        | 11 |         |    3 | 00/434A : 4C 52 43    |                                  jmp   printInt8_1          
+  707 |  1 main_T0S09.s    707 | Empty       | 11 |         |    0 | 00/434D               |                                                             
+  708 |  1 main_T0S09.s    708 | Empty       | 11 |         |    0 | 00/434D               | printInt8_SPC                                               
+  709 |  1 main_T0S09.s    709 | Code        | 11 |         |    2 | 00/434D : A9 A0       |                                  lda   #" "                 
+  710 |  1 main_T0S09.s    710 | Code        | 11 |         |    3 | 00/434F : 20 F0 FD    |                                  jsr   {$FDF0}              
+  711 |  1 main_T0S09.s    711 | Empty       | 11 |         |    0 | 00/4352               |                                                             
+  712 |  1 main_T0S09.s    712 | Empty       | 11 |         |    0 | 00/4352               | printInt8_1                                                 
+  713 |  1 main_T0S09.s    713 | Code        | 11 |         |    1 | 00/4352 : 68          |                                  pla                        
+  714 |  1 main_T0S09.s    714 | Code        | 11 |         |    1 | 00/4353 : 48          |                                  pha                        
+  715 |  1 main_T0S09.s    715 | Code        | 11 |         |    2 | 00/4354 : 09 B0       |                                  ora   #"0"                 
+  716 |  1 main_T0S09.s    716 | Code        | 11 |         |    3 | 00/4356 : 20 F0 FD    |                                  jsr   {$FDF0}              
+  717 |  1 main_T0S09.s    717 | Code        | 11 |         |    1 | 00/4359 : 68          |                                  pla                        
+  718 |  1 main_T0S09.s    718 | Code        | 11 |         |    1 | 00/435A : 60          |                                  rts                        
+  719 |  1 main_T0S09.s    719 | Empty       | 11 |         |    0 | 00/435B               |                                                             
+  720 |  1 main_T0S09.s    720 | Empty       | 11 |         |    0 | 00/435B               | incImageIndex                                               
+  721 |  1 main_T0S09.s    721 | Code        | 11 |         |    2 | 00/435B : A6 85       |                                  ldx   {$85}                
+  722 |  1 main_T0S09.s    722 | Code        | 11 |         |    2 | 00/435D : E0 55       |                                  cpx   #$255                
+  723 |  1 main_T0S09.s    723 | Code        | 11 |         |    2 | 00/435F : F0 03       |                                  beq   incImageIndex_0      
+  724 |  1 main_T0S09.s    724 | Code        | 11 |         |    1 | 00/4361 : E8          |                                  inx                        
+  725 |  1 main_T0S09.s    725 | Code        | 11 |         |    2 | 00/4362 : 86 85       |                                  stx   {$85}                
+  726 |  1 main_T0S09.s    726 | Empty       | 11 |         |    0 | 00/4364               |                                                             
+  727 |  1 main_T0S09.s    727 | Empty       | 11 |         |    0 | 00/4364               | incImageIndex_0                                             
+  728 |  1 main_T0S09.s    728 | Code        | 11 |         |    1 | 00/4364 : 60          |                                  rts                        
+  729 |  1 main_T0S09.s    729 | Empty       | 11 |         |    0 | 00/4365               |                                                             
+  730 |  1 main_T0S09.s    730 | Empty       | 11 |         |    0 | 00/4365               | decImageIndex                                               
+  731 |  1 main_T0S09.s    731 | Code        | 11 |         |    2 | 00/4365 : A6 85       |                                  ldx   {$85}                
+  732 |  1 main_T0S09.s    732 | Code        | 11 |         |    2 | 00/4367 : E0 00       |                                  cpx   #$0                  
+  733 |  1 main_T0S09.s    733 | Code        | 11 |         |    2 | 00/4369 : F0 03       |                                  beq   decImageIndex_0      
+  734 |  1 main_T0S09.s    734 | Code        | 11 |         |    1 | 00/436B : CA          |                                  dex                        
+  735 |  1 main_T0S09.s    735 | Code        | 11 |         |    2 | 00/436C : 86 85       |                                  stx   {$85}                
+  736 |  1 main_T0S09.s    736 | Empty       | 11 |         |    0 | 00/436E               |                                                             
+  737 |  1 main_T0S09.s    737 | Empty       | 11 |         |    0 | 00/436E               | decImageIndex_0                                             
+  738 |  1 main_T0S09.s    738 | Code        | 11 |         |    1 | 00/436E : 60          |                                  rts                        
+  739 |  1 main_T0S09.s    739 | Empty       | 11 |         |    0 | 00/436F               |                                                             
+  740 |  1 main_T0S09.s    740 | Comment     | 11 |         |    0 | 00/436F               |     ;----------------------------------------------
+  741 |  1 main_T0S09.s    741 | Comment     | 11 |         |    0 | 00/436F               |     ; Data Read / Write Routines
+  742 |  1 main_T0S09.s    742 | Comment     | 11 |         |    0 | 00/436F               |     ;----------------------------------------------
+  743 |  1 main_T0S09.s    743 | Empty       | 11 |         |    0 | 00/436F               |                                                             
+  744 |  1 main_T0S09.s    744 | Empty       | 11 |         |    0 | 00/436F               | reboot                                                      
+  745 |  1 main_T0S09.s    745 | Code        | 11 |         |    3 | 00/436F : 4C 00 C6    |                                  jmp   #$C600               
+  746 |  1 main_T0S09.s    746 | Code        | 11 |         |    1 | 00/4372 : 60          |                                  rts                        
+  747 |  1 main_T0S09.s    747 | Empty       | 11 |         |    0 | 00/4373               |                                                             
+  748 |  1 main_T0S09.s    748 | Empty       | 11 |         |    0 | 00/4373               | testR                                                       
+  749 |  1 main_T0S09.s    749 | Code        | 11 |         |    2 | 00/4373 : A2 0F       |                                  ldx   #$0F                 
+  750 |  1 main_T0S09.s    750 | Code        | 11 |         |    2 | 00/4375 : A0 0B       |                                  ldy   #$0B                 
+  751 |  1 main_T0S09.s    751 | Code        | 11 |         |    3 | 00/4377 : 20 B8 08    |                                  jsr   {$08B8}              
+  752 |  1 main_T0S09.s    752 | Empty       | 11 |         |    0 | 00/437A               |                                                             
+  753 |  1 main_T0S09.s    753 | Code        | 11 |         |    2 | 00/437A : A2 3F       |                                  ldx   #<_title             
+  754 |  1 main_T0S09.s    754 | Code        | 11 |         |    2 | 00/437C : A0 44       |                                  ldy   #>_title             
+  755 |  1 main_T0S09.s    755 | Empty       | 11 |         |    0 | 00/437E               |                                                             
+  756 |  1 main_T0S09.s    756 | Code        | 11 |         |    3 | 00/437E : 20 D5 08    |                                  jsr   {$08D5}              
+  757 |  1 main_T0S09.s    757 | Code        | 11 |         |    3 | 00/4381 : 20 93 43    |                                  jsr   readDataBlock        
+  758 |  1 main_T0S09.s    758 | Code        | 11 |         |    3 | 00/4384 : 20 B8 43    |                                  jsr   writeDataBlock       
+  759 |  1 main_T0S09.s    759 | Code        | 11 |         |    3 | 00/4387 : 20 CF 43    |                                  jsr   seekDrive            
+  760 |  1 main_T0S09.s    760 | Code        | 11 |         |    2 | 00/438A : A9 A4       |                                  lda   #"$"                 
+  761 |  1 main_T0S09.s    761 | Code        | 11 |         |    3 | 00/438C : 20 ED FD    |                                  jsr   {$FDED}              
+  762 |  1 main_T0S09.s    762 | Empty       | 11 |         |    0 | 00/438F               |                                                             
+  763 |  1 main_T0S09.s    763 | Code        | 11 |         |    3 | 00/438F : 20 E9 43    |                                  jsr   readKey              
+  764 |  1 main_T0S09.s    764 | Empty       | 11 |         |    0 | 00/4392               |                                                             
+  765 |  1 main_T0S09.s    765 | Code        | 11 |         |    1 | 00/4392 : 60          |                                  rts                        
+  766 |  1 main_T0S09.s    766 | Empty       | 11 |         |    0 | 00/4393               |                                                             
+  767 |  1 main_T0S09.s    767 | Empty       | 11 |         |    0 | 00/4393               | readDataBlock                                               
+  768 |  1 main_T0S09.s    768 | Empty       | 11 |         |    0 | 00/4393               |                                                             
+  769 |  1 main_T0S09.s    769 | Code        | 11 |         |    2 | 00/4393 : A9 01       |                                  lda   #$01                 ; 1 -> Read Command
+  770 |  1 main_T0S09.s    770 | Code        | 11 |         |    3 | 00/4395 : 8D 72 44    |                                  sta   ioCmd                
+  771 |  1 main_T0S09.s    771 | Empty       | 11 |         |    0 | 00/4398               |                                                             
+  772 |  1 main_T0S09.s    772 | Code        | 11 |         |    2 | 00/4398 : A9 02       |                                  lda   #$02                 
+  773 |  1 main_T0S09.s    773 | Code        | 11 |         |    3 | 00/439A : 8D 6A 44    |                                  sta   ioTrack              ; Track to read is 2
+  774 |  1 main_T0S09.s    774 | Empty       | 11 |         |    0 | 00/439D               |                                                             
+  775 |  1 main_T0S09.s    775 | Code        | 11 |         |    2 | 00/439D : A9 00       |                                  lda   #$00                 
+  776 |  1 main_T0S09.s    776 | Code        | 11 |         |    3 | 00/439F : 8D 6B 44    |                                  sta   ioSector             ; First block of 256 Bytes is at sector 0
+  777 |  1 main_T0S09.s    777 | Empty       | 11 |         |    0 | 00/43A2               |                                                             
+  778 |  1 main_T0S09.s    778 | Code        | 11 |         |    2 | 00/43A2 : A9 21       |                                  lda   #>{$2100}            ; set the data buffer to $2100 (high byte is only changed)
+  779 |  1 main_T0S09.s    779 | Code        | 11 |         |    3 | 00/43A4 : 8D 6F 44    |                                  sta   ioBuffer+1           
+  780 |  1 main_T0S09.s    780 | Empty       | 11 |         |    0 | 00/43A7               |                                                             
+  781 |  1 main_T0S09.s    781 | Code        | 11 |         |    3 | 00/43A7 : 20 DD 43    |                                  jsr   CALL_RWTS            
+  782 |  1 main_T0S09.s    782 | Empty       | 11 |         |    0 | 00/43AA               |                                                             
+  783 |  1 main_T0S09.s    783 | Code        | 11 |         |    2 | 00/43AA : A9 22       |                                  lda   #>{$2200}            ; 2nd Read data buffer is $2200, put a check on if it is need to do a 2nd read
+  784 |  1 main_T0S09.s    784 | Code        | 11 |         |    3 | 00/43AC : 8D 6F 44    |                                  sta   #ioBuffer+1          
+  785 |  1 main_T0S09.s    785 | Empty       | 11 |         |    0 | 00/43AF               |                                                             
+  786 |  1 main_T0S09.s    786 | Code        | 11 |         |    2 | 00/43AF : A9 01       |                                  lda   #$01                 ; 2nd block of 256 Bytes is at sector 1
+  787 |  1 main_T0S09.s    787 | Code        | 11 |         |    3 | 00/43B1 : 8D 6B 44    |                                  sta   ioSector             
+  788 |  1 main_T0S09.s    788 | Empty       | 11 |         |    0 | 00/43B4               |                                                             
+  789 |  1 main_T0S09.s    789 | Code        | 11 |         |    3 | 00/43B4 : 20 DD 43    |                                  jsr   CALL_RWTS            
+  790 |  1 main_T0S09.s    790 | Empty       | 11 |         |    0 | 00/43B7               |                                                             
+  791 |  1 main_T0S09.s    791 | Code        | 11 |         |    1 | 00/43B7 : 60          |                                  rts                        
+  792 |  1 main_T0S09.s    792 | Empty       | 11 |         |    0 | 00/43B8               |                                                             
+  793 |  1 main_T0S09.s    793 | Empty       | 11 |         |    0 | 00/43B8               | writeDataBlock                                              
+  794 |  1 main_T0S09.s    794 | Code        | 11 |         |    2 | 00/43B8 : A9 20       |                                  lda   #>{$2000}            
+  795 |  1 main_T0S09.s    795 | Code        | 11 |         |    3 | 00/43BA : 8D 6F 44    |                                  sta   ioBuffer+1           
+  796 |  1 main_T0S09.s    796 | Code        | 11 |         |    2 | 00/43BD : A9 03       |                                  lda   #$03                 
+  797 |  1 main_T0S09.s    797 | Code        | 11 |         |    3 | 00/43BF : 8D 6A 44    |                                  sta   ioTrack              
+  798 |  1 main_T0S09.s    798 | Code        | 11 |         |    2 | 00/43C2 : A9 00       |                                  lda   #$00                 
+  799 |  1 main_T0S09.s    799 | Code        | 11 |         |    3 | 00/43C4 : 8D 6B 44    |                                  sta   ioSector             ; Only block of 256 Bytes is at sector 0
+  800 |  1 main_T0S09.s    800 | Code        | 11 |         |    2 | 00/43C7 : A9 02       |                                  lda   #$02                 ; 2 -> Write Command
+  801 |  1 main_T0S09.s    801 | Code        | 11 |         |    3 | 00/43C9 : 8D 72 44    |                                  sta   ioCmd                
+  802 |  1 main_T0S09.s    802 | Code        | 11 |         |    3 | 00/43CC : 20 DD 43    |                                  jsr   CALL_RWTS            
+  803 |  1 main_T0S09.s    803 | Empty       | 11 |         |    0 | 00/43CF               |                                                             
+  804 |  1 main_T0S09.s    804 | Empty       | 11 |         |    0 | 00/43CF               | seekDrive                                                   
+  805 |  1 main_T0S09.s    805 | Code        | 11 |         |    2 | 00/43CF : A9 01       |                                  lda   #$01                 
+  806 |  1 main_T0S09.s    806 | Code        | 11 |         |    3 | 00/43D1 : 8D 6A 44    |                                  sta   ioTrack              
+  807 |  1 main_T0S09.s    807 | Code        | 11 |         |    2 | 00/43D4 : A9 02       |                                  lda   #$02                 ; 0 -> Seek Command
+  808 |  1 main_T0S09.s    808 | Code        | 11 |         |    3 | 00/43D6 : 8D 72 44    |                                  sta   ioCmd                
+  809 |  1 main_T0S09.s    809 | Code        | 11 |         |    3 | 00/43D9 : 20 DD 43    |                                  jsr   CALL_RWTS            
+  810 |  1 main_T0S09.s    810 | Code        | 11 |         |    1 | 00/43DC : 60          |                                  rts                        
+  811 |  1 main_T0S09.s    811 | Empty       | 11 |         |    0 | 00/43DD               | CALL_RWTS                                                   
+  812 |  1 main_T0S09.s    812 | Comment     | 11 |         |    0 | 00/43DD               |             ; RWTS is located at $3D00
+  813 |  1 main_T0S09.s    813 | Code        | 11 |         |    2 | 00/43DD : A9 00       |                                  lda   #$00                 
+  814 |  1 main_T0S09.s    814 | Code        | 11 |         |    2 | 00/43DF : 85 48       |                                  sta   $48                  
+  815 |  1 main_T0S09.s    815 | Code        | 11 |         |    2 | 00/43E1 : A0 66       |                                  ldy   #<iocb               
+  816 |  1 main_T0S09.s    816 | Code        | 11 |         |    2 | 00/43E3 : A9 44       |                                  lda   #>iocb               
+  817 |  1 main_T0S09.s    817 | Code        | 11 |         |    3 | 00/43E5 : 20 00 BD    |                                  JSR   {$BD00}              
+  818 |  1 main_T0S09.s    818 | Empty       | 11 |         |    0 | 00/43E8               |                                                             
+  819 |  1 main_T0S09.s    819 | Code        | 11 |         |    1 | 00/43E8 : 60          |                                  rts                        
+  820 |  1 main_T0S09.s    820 | Empty       | 11 |         |    0 | 00/43E9               |                                                             
+  821 |  1 main_T0S09.s    821 | Empty       | 11 |         |    0 | 00/43E9               | readKey                                                     
+  822 |  1 main_T0S09.s    822 | Code        | 11 |         |    3 | 00/43E9 : AD 00 C0    |                                  lda   $C000                ; Wait until a key is pressed
+  823 |  1 main_T0S09.s    823 | Code        | 11 |         |    2 | 00/43EC : 10 FB       |                                  bpl   readKey              
+  824 |  1 main_T0S09.s    824 | Code        | 11 |         |    3 | 00/43EE : 2C 10 C0    |                                  bit   $C010                
+  825 |  1 main_T0S09.s    825 | Code        | 11 |         |    1 | 00/43F1 : 60          |                                  rts                        
+  826 |  1 main_T0S09.s    826 | Empty       | 11 |         |    0 | 00/43F2               |                                                             
+  827 |  1 main_T0S09.s    827 | Empty       | 11 |         |    0 | 00/43F2               | _loading                                                    
+  828 |  1 main_T0S09.s    828 | Data        | 11 |         |    8 | 00/43F2 : CC CF C1 C4 |                                  asc   "LOADING:"           
+      |                        |             |    |         |      |           C9 CE C7 BA |
+  829 |  1 main_T0S09.s    829 | Data        | 11 |         |    1 | 00/43FA : 00          |                                  dfb   $00                  
+  830 |  1 main_T0S09.s    830 | Empty       | 11 |         |    0 | 00/43FB               |                                                             
+  831 |  1 main_T0S09.s    831 | Empty       | 11 |         |    0 | 00/43FB               | _error                                                      
+  832 |  1 main_T0S09.s    832 | Data        | 11 |         |    6 | 00/43FB : C5 D2 D2 CF |                                  asc   "ERROR:"             
+      |                        |             |    |         |      |           D2 BA       |
+  833 |  1 main_T0S09.s    833 | Data        | 11 |         |    1 | 00/4401 : 00          |                                  dfb   $00                  
+  834 |  1 main_T0S09.s    834 | Empty       | 11 |         |    0 | 00/4402               |                                                             
+  835 |  1 main_T0S09.s    835 | Empty       | 11 |         |    0 | 00/4402               | _error_10                                                   
+  836 |  1 main_T0S09.s    836 | Data        | 11 |         |   26 | 00/4402 : B1 B0 A0 D5 |                                  asc   "10 UNABLE TO GET DISK LIST"
+      |                        |             |    |         |      |           CE C1 C2 CC |
+      |                        |             |    |         |      |           C5 A0 D4 CF |
+      |                        |             |    |         |      |           A0 C7 C5 D4 |
+      |                        |             |    |         |      |           A0 C4 C9 D3 |
+      |                        |             |    |         |      |           CB A0 CC C9 |
+      |                        |             |    |         |      |           D3 D4       |
+  837 |  1 main_T0S09.s    837 | Data        | 11 |         |    1 | 00/441C : 00          |                                  dfb   $00                  
+  838 |  1 main_T0S09.s    838 | Empty       | 11 |         |    0 | 00/441D               |                                                             
+  839 |  1 main_T0S09.s    839 | Empty       | 11 |         |    0 | 00/441D               |                                                             
+  840 |  1 main_T0S09.s    840 | Empty       | 11 |         |    0 | 00/441D               | _pressanykey                                                
+  841 |  1 main_T0S09.s    841 | Data        | 11 |         |   27 | 00/441D : D0 D2 C5 D3 |                                  asc   "PRESS ANY <KEY> TO CONTINUE"
+      |                        |             |    |         |      |           D3 A0 C1 CE |
+      |                        |             |    |         |      |           D9 A0 BC CB |
+      |                        |             |    |         |      |           C5 D9 BE A0 |
+      |                        |             |    |         |      |           D4 CF A0 C3 |
+      |                        |             |    |         |      |           CF CE D4 C9 |
+      |                        |             |    |         |      |           CE D5 C5    |
+  842 |  1 main_T0S09.s    842 | Data        | 11 |         |    1 | 00/4438 : 00          |                                  dfb   $00                  
+  843 |  1 main_T0S09.s    843 | Empty       | 11 |         |    0 | 00/4439               |                                                             
+  844 |  1 main_T0S09.s    844 | Empty       | 11 |         |    0 | 00/4439               | _path                                                       
+  845 |  1 main_T0S09.s    845 | Data        | 11 |         |    5 | 00/4439 : C4 C9 D2 BA |                                  asc   "DIR:/"              
+      |                        |             |    |         |      |           AF          |
+  846 |  1 main_T0S09.s    846 | Data        | 11 |         |    1 | 00/443E : 00          |                                  dfb   $00                  
+  847 |  1 main_T0S09.s    847 | Empty       | 11 |         |    0 | 00/443F               |                                                             
+  848 |  1 main_T0S09.s    848 | Empty       | 11 |         |    0 | 00/443F               | _title                                                      
+  849 |  1 main_T0S09.s    849 | Data        | 11 |         |   10 | 00/443F : C2 CF CF D4 |                                  asc   "BOOTLOADER"         
+      |                        |             |    |         |      |           CC CF C1 C4 |
+      |                        |             |    |         |      |           C5 D2       |
+  850 |  1 main_T0S09.s    850 | Data        | 11 |         |    1 | 00/4449 : 00          |                                  dfb   $00                  
+  851 |  1 main_T0S09.s    851 | Empty       | 11 |         |    0 | 00/444A               |                                                             
+  852 |  1 main_T0S09.s    852 | Empty       | 11 |         |    0 | 00/444A               | _option                                                     
+  853 |  1 main_T0S09.s    853 | Data        | 11 |         |   27 | 00/444A : DB D2 DD C5 |                                  ASC   "[R]EFRESH [B]OOT [S]ETTINGS"
+      |                        |             |    |         |      |           C6 D2 C5 D3 |
+      |                        |             |    |         |      |           C8 A0 DB C2 |
+      |                        |             |    |         |      |           DD CF CF D4 |
+      |                        |             |    |         |      |           A0 DB D3 DD |
+      |                        |             |    |         |      |           C5 D4 D4 C9 |
+      |                        |             |    |         |      |           CE C7 D3    |
+  854 |  1 main_T0S09.s    854 | Data        | 11 |         |    1 | 00/4465 : 00          |                                  dfb   $00                  
+  855 |  1 main_T0S09.s    855 | Empty       | 11 |         |    0 | 00/4466               |                                                             
+  856 |  1 main_T0S09.s    856 | Data        | 11 |         |    1 | 00/4466 : 01          | iocb                             dfb   $01                  ;
+  857 |  1 main_T0S09.s    857 | Data        | 11 |         |    1 | 00/4467 : 60          | ioslot                           dfb   $60                  ; Slot number ex:60
+  858 |  1 main_T0S09.s    858 | Data        | 11 |         |    1 | 00/4468 : 01          |                                  dfb   $01                  ; Drive number $01
+  859 |  1 main_T0S09.s    859 | Data        | 11 |         |    1 | 00/4469 : FE          | ioVolume                         dfb   $FE                  ; Volume track expected ($00 everything)
+  860 |  1 main_T0S09.s    860 | Data        | 11 |         |    1 | 00/446A : 02          | ioTrack                          dfb   $02                  ; Track number 0x00 -> 0x22
+  861 |  1 main_T0S09.s    861 | Data        | 11 |         |    1 | 00/446B : 00          | ioSector                         dfb   $00                  ; Sector number 0x00 -> 0x0F
+  862 |  1 main_T0S09.s    862 | Data        | 11 |         |    2 | 00/446C : 77 44       | ioDct                            dfb   <dct,>dct            ; DCT LOW HIGH
+  863 |  1 main_T0S09.s    863 | Data        | 11 |         |    2 | 00/446E : 00 00       | ioBuffer                         dfb   $00,$00              ; Buffer to read/write Low / High
+  864 |  1 main_T0S09.s    864 | Data        | 11 |         |    1 | 00/4470 : 00          |                                  dfb   $00                  ; not used
+  865 |  1 main_T0S09.s    865 | Data        | 11 |         |    1 | 00/4471 : 01          | ioByte                           dfb   $01                  ; Byte Count $00 for 256
+  866 |  1 main_T0S09.s    866 | Data        | 11 |         |    1 | 00/4472 : 01          | ioCmd                            dfb   $01                  ; $OO -> SEEK, $01 -> READ, $02 -> WRITE, $04 -> FORMAT
+  867 |  1 main_T0S09.s    867 | Data        | 11 |         |    1 | 00/4473 : 00          | ioRet                            dfb   $00                  ; Return code
+  868 |  1 main_T0S09.s    868 | Data        | 11 |         |    3 | 00/4474 : FE 60 01    | ioLast                           dfb   $FE,$60,$01          
+  869 |  1 main_T0S09.s    869 | Empty       | 11 |         |    0 | 00/4477               |                                                             
+  870 |  1 main_T0S09.s    870 | Empty       | 11 |         |    0 | 00/4477               | dct                                                         
+  871 |  1 main_T0S09.s    871 | Data        | 11 |         |    4 | 00/4477 : 00 01 EF D8 |                                  dfb   $00,$01,$EF,$D8      
+  872 |  1 main_T0S09.s    872 | Empty       | 11 |         |    0 | 00/447B               |                                                             
+  873 |  1 main_T0S09.s    873 | Directive   | 11 |         |    0 | 00/447B               |                                  put   vibr_lib.s           
+  874 |  2   vibr_lib.s      1 | Empty       | 11 |         |    0 | 00/447B               |                                                             
+  875 |  2   vibr_lib.s      2 | Empty       | 11 |         |    0 | 00/447B               |                                                             
+  876 |  2   vibr_lib.s      3 | Equivalence | 11 |         |    0 | 00/447B               | calc_1_low                       EQU   $90                  
+  877 |  2   vibr_lib.s      4 | Equivalence | 11 |         |    0 | 00/447B               | calc_1_high                      EQU   $91                  
+  878 |  2   vibr_lib.s      5 | Empty       | 11 |         |    0 | 00/447B               |                                                             
+  879 |  2   vibr_lib.s      6 | Equivalence | 11 |         |    0 | 00/447B               | calc_2_low                       EQU   $92                  
+  880 |  2   vibr_lib.s      7 | Equivalence | 11 |         |    0 | 00/447B               | calc_2_high                      EQU   $93                  
+  881 |  2   vibr_lib.s      8 | Empty       | 11 |         |    0 | 00/447B               |                                                             
+  882 |  2   vibr_lib.s      9 | Equivalence | 11 |         |    0 | 00/447B               | calc_result_low                  EQU   $94                  ;
+  883 |  2   vibr_lib.s     10 | Equivalence | 11 |         |    0 | 00/447B               | calc_result_high                 EQU   $95                  ;
+  884 |  2   vibr_lib.s     11 | Empty       | 11 |         |    0 | 00/447B               |                                                             
+  885 |  2   vibr_lib.s     12 | Empty       | 11 |         |    0 | 00/447B               | hex2dec                                                     
+  886 |  2   vibr_lib.s     13 | Code        | 11 |         |    2 | 00/447B : A2 00       |                                  LDX   #0                   ; en A le nombre en hexadécimal
+  887 |  2   vibr_lib.s     14 | Code        | 11 |         |    2 | 00/447D : A0 00       |                                  LDY   #0                   
+  888 |  2   vibr_lib.s     15 | Code        | 11 |         |    2 | 00/447F : C9 C8       |                                  CMP   #200                 ; j'ajoute la gestion de 200
+  889 |  2   vibr_lib.s     16 | Code        | 11 |         |    2 | 00/4481 : 90 03       |                                  BCC   hexCENTAINE          
+  890 |  2   vibr_lib.s     17 | Code        | 11 |         |    1 | 00/4483 : E8          |                                  INX                        ; 240 - 100 = 140
+  891 |  2   vibr_lib.s     18 | Code        | 11 |         |    2 | 00/4484 : E9 64       |                                  SBC   #100                 ; c'est voulu pour passer une fois après
+  892 |  2   vibr_lib.s     19 | Empty       | 11 |         |    0 | 00/4486               | hexCENTAINE                                                 
+  893 |  2   vibr_lib.s     20 | Code        | 11 |         |    2 | 00/4486 : C9 64       |                                  CMP   #100                 
+  894 |  2   vibr_lib.s     21 | Code        | 11 |         |    2 | 00/4488 : 90 05       |                                  BCC   hexDIZAINE           
+  895 |  2   vibr_lib.s     22 | Code        | 11 |         |    1 | 00/448A : E8          |                                  INX                        
+  896 |  2   vibr_lib.s     23 | Code        | 11 |         |    2 | 00/448B : E9 64       |                                  SBC   #100                 
+  897 |  2   vibr_lib.s     24 | Code        | 11 |         |    2 | 00/448D : D0 F7       |                                  BNE   hexCENTAINE          
+  898 |  2   vibr_lib.s     25 | Empty       | 11 |         |    0 | 00/448F               | hexDIZAINE                                                  
+  899 |  2   vibr_lib.s     26 | Code        | 11 |         |    2 | 00/448F : C9 0A       |                                  CMP   #10                  
+  900 |  2   vibr_lib.s     27 | Code        | 11 |         |    2 | 00/4491 : 90 05       |                                  BCC   hexEND               
+  901 |  2   vibr_lib.s     28 | Code        | 11 |         |    1 | 00/4493 : C8          |                                  INY                        
+  902 |  2   vibr_lib.s     29 | Code        | 11 |         |    2 | 00/4494 : E9 0A       |                                  SBC   #10                  
+  903 |  2   vibr_lib.s     30 | Code        | 11 |         |    2 | 00/4496 : D0 F7       |                                  BNE   hexDIZAINE           
+  904 |  2   vibr_lib.s     31 | Empty       | 11 |         |    0 | 00/4498               | hexEND                                                      
+  905 |  2   vibr_lib.s     32 | Code        | 11 |         |    1 | 00/4498 : 60          |                                  RTS                        
+  906 |  2   vibr_lib.s     33 | Empty       | 11 |         |    0 | 00/4499               |                                                             
+  907 |  2   vibr_lib.s     34 | Empty       | 11 |         |    0 | 00/4499               | add16test                                                   
+  908 |  2   vibr_lib.s     35 | Code        | 11 |         |    2 | 00/4499 : A9 02       |                                  lda   #$02                 ; adding 02FF & 00EE => should give
+  909 |  2   vibr_lib.s     36 | Code        | 11 |         |    2 | 00/449B : 85 91       |                                  sta   {$91}                
+  910 |  2   vibr_lib.s     37 | Empty       | 11 |         |    0 | 00/449D               |                                                             
+  911 |  2   vibr_lib.s     38 | Code        | 11 |         |    2 | 00/449D : A9 FF       |                                  lda   #$ff                 
+  912 |  2   vibr_lib.s     39 | Code        | 11 |         |    2 | 00/449F : 85 90       |                                  sta   {$90}                
+  913 |  2   vibr_lib.s     40 | Empty       | 11 |         |    0 | 00/44A1               |                                                             
+  914 |  2   vibr_lib.s     41 | Code        | 11 |         |    2 | 00/44A1 : A9 00       |                                  lda   #$00                 
+  915 |  2   vibr_lib.s     42 | Code        | 11 |         |    2 | 00/44A3 : 85 93       |                                  sta   {$93}                
+  916 |  2   vibr_lib.s     43 | Empty       | 11 |         |    0 | 00/44A5               |                                                             
+  917 |  2   vibr_lib.s     44 | Code        | 11 |         |    2 | 00/44A5 : A9 EE       |                                  lda   #$ee                 
+  918 |  2   vibr_lib.s     45 | Code        | 11 |         |    2 | 00/44A7 : 85 92       |                                  sta   {$92}                
+  919 |  2   vibr_lib.s     46 | Empty       | 11 |         |    0 | 00/44A9               |                                                             
+  920 |  2   vibr_lib.s     47 | Code        | 11 |         |    3 | 00/44A9 : 20 CD 44    |                                  jsr   add_16B_16B          
+  921 |  2   vibr_lib.s     48 | Code        | 11 |         |    3 | 00/44AC : 20 E9 43    |                                  jsr   readKey              
+  922 |  2   vibr_lib.s     49 | Code        | 11 |         |    1 | 00/44AF : 60          |                                  rts                        
+  923 |  2   vibr_lib.s     50 | Empty       | 11 |         |    0 | 00/44B0               |                                                             
+  924 |  2   vibr_lib.s     51 | Empty       | 11 |         |    0 | 00/44B0               | mul8test                                                    
+  925 |  2   vibr_lib.s     52 | Code        | 11 |         |    2 | 00/44B0 : A9 02       |                                  lda   #$02                 ; adding 02FF & 00EE => should give
+  926 |  2   vibr_lib.s     53 | Code        | 11 |         |    2 | 00/44B2 : 85 90       |                                  sta   {$90}                
+  927 |  2   vibr_lib.s     54 | Empty       | 11 |         |    0 | 00/44B4               |                                                             
+  928 |  2   vibr_lib.s     55 | Code        | 11 |         |    2 | 00/44B4 : A9 FF       |                                  lda   #$ff                 
+  929 |  2   vibr_lib.s     56 | Code        | 11 |         |    2 | 00/44B6 : 85 92       |                                  sta   {$92}                
+  930 |  2   vibr_lib.s     57 | Empty       | 11 |         |    0 | 00/44B8               |                                                             
+  931 |  2   vibr_lib.s     58 | Code        | 11 |         |    3 | 00/44B8 : 20 DB 44    |                                  jsr   mult_8B_8B           
+  932 |  2   vibr_lib.s     59 | Empty       | 11 |         |    0 | 00/44BB               |                                                             
+  933 |  2   vibr_lib.s     60 | Code        | 11 |         |    3 | 00/44BB : 20 E9 43    |                                  jsr   readKey              
+  934 |  2   vibr_lib.s     61 | Empty       | 11 |         |    0 | 00/44BE               |                                                             
+  935 |  2   vibr_lib.s     62 | Code        | 11 |         |    1 | 00/44BE : 60          |                                  rts                        
+  936 |  2   vibr_lib.s     63 | Empty       | 11 |         |    0 | 00/44BF               |                                                             
+  937 |  2   vibr_lib.s     64 | Empty       | 11 |         |    0 | 00/44BF               | add_8B_8B                                                   
+  938 |  2   vibr_lib.s     65 | Code        | 11 |         |    1 | 00/44BF : 18          |                                  clc                        ;
+  939 |  2   vibr_lib.s     66 | Code        | 11 |         |    2 | 00/44C0 : A5 90       |                                  lda   {$90}                
+  940 |  2   vibr_lib.s     67 | Code        | 11 |         |    2 | 00/44C2 : 65 92       |                                  adc   {$92}                
+  941 |  2   vibr_lib.s     68 | Empty       | 11 |         |    0 | 00/44C4               |                                                             
+  942 |  2   vibr_lib.s     69 | Code        | 11 |         |    2 | 00/44C4 : 85 94       |                                  sta   {$94}                
+  943 |  2   vibr_lib.s     70 | Code        | 11 |         |    2 | 00/44C6 : A5 95       |                                  lda   {$95}                
+  944 |  2   vibr_lib.s     71 | Code        | 11 |         |    2 | 00/44C8 : 69 00       |                                  adc   #$00                 
+  945 |  2   vibr_lib.s     72 | Code        | 11 |         |    2 | 00/44CA : 85 95       |                                  sta   {$95}                
+  946 |  2   vibr_lib.s     73 | Code        | 11 |         |    1 | 00/44CC : 60          |                                  rts                        
+  947 |  2   vibr_lib.s     74 | Empty       | 11 |         |    0 | 00/44CD               |                                                             
+  948 |  2   vibr_lib.s     75 | Empty       | 11 |         |    0 | 00/44CD               | add_16B_16B                                                 
+  949 |  2   vibr_lib.s     76 | Code        | 11 |         |    1 | 00/44CD : 18          |                                  clc                        
+  950 |  2   vibr_lib.s     77 | Code        | 11 |         |    2 | 00/44CE : A5 90       |                                  lda   {$90}                
+  951 |  2   vibr_lib.s     78 | Code        | 11 |         |    2 | 00/44D0 : 65 92       |                                  adc   {$92}                
+  952 |  2   vibr_lib.s     79 | Empty       | 11 |         |    0 | 00/44D2               |                                                             
+  953 |  2   vibr_lib.s     80 | Code        | 11 |         |    2 | 00/44D2 : 85 94       |                                  sta   {$94}                
+  954 |  2   vibr_lib.s     81 | Empty       | 11 |         |    0 | 00/44D4               |                                                             
+  955 |  2   vibr_lib.s     82 | Code        | 11 |         |    2 | 00/44D4 : A5 91       |                                  lda   {$91}                
+  956 |  2   vibr_lib.s     83 | Code        | 11 |         |    2 | 00/44D6 : 65 93       |                                  adc   {$93}                
+  957 |  2   vibr_lib.s     84 | Empty       | 11 |         |    0 | 00/44D8               |                                                             
+  958 |  2   vibr_lib.s     85 | Code        | 11 |         |    2 | 00/44D8 : 85 95       |                                  sta   {$95}                
+  959 |  2   vibr_lib.s     86 | Code        | 11 |         |    1 | 00/44DA : 60          |                                  rts                        
+  960 |  2   vibr_lib.s     87 | Empty       | 11 |         |    0 | 00/44DB               |                                                             
+  961 |  2   vibr_lib.s     88 | Empty       | 11 |         |    0 | 00/44DB               |                                                             
+  962 |  2   vibr_lib.s     89 | Empty       | 11 |         |    0 | 00/44DB               |                                                             
+  963 |  2   vibr_lib.s     90 | Empty       | 11 |         |    0 | 00/44DB               |                                                             
+  964 |  2   vibr_lib.s     91 | Comment     | 11 |         |    0 | 00/44DB               | ; ***************************************************************************************
+  965 |  2   vibr_lib.s     92 | Comment     | 11 |         |    0 | 00/44DB               | ; On Entry:
+  966 |  2   vibr_lib.s     93 | Comment     | 11 |         |    0 | 00/44DB               | ;   factor1: multiplier
+  967 |  2   vibr_lib.s     94 | Comment     | 11 |         |    0 | 00/44DB               | ;   factor2: multiplicand
+  968 |  2   vibr_lib.s     95 | Comment     | 11 |         |    0 | 00/44DB               | ; On Exit:
+  969 |  2   vibr_lib.s     96 | Comment     | 11 |         |    0 | 00/44DB               | ;   factor1: low byte of product
+  970 |  2   vibr_lib.s     97 | Comment     | 11 |         |    0 | 00/44DB               | ;   A:       high byte of product
+  971 |  2   vibr_lib.s     98 | Empty       | 11 |         |    0 | 00/44DB               | mult_8B_8B                                                  
+  972 |  2   vibr_lib.s     99 | Code        | 11 |         |    2 | 00/44DB : A9 00       |                                  lda   #0                   
+  973 |  2   vibr_lib.s    100 | Code        | 11 |         |    2 | 00/44DD : A2 08       |                                  ldx   #8                   
+  974 |  2   vibr_lib.s    101 | Code        | 11 |         |    2 | 00/44DF : 46 90       |                                  lsr   {$90}                
+  975 |  2   vibr_lib.s    102 | Empty       | 11 |         |    0 | 00/44E1               |                                                             
+  976 |  2   vibr_lib.s    103 | Empty       | 11 |         |    0 | 00/44E1               | mult_8B_8B_loop                                             
+  977 |  2   vibr_lib.s    104 | Code        | 11 |         |    2 | 00/44E1 : 90 03       |                                  bcc   mult_8B_8B_noadd     
+  978 |  2   vibr_lib.s    105 | Code        | 11 |         |    1 | 00/44E3 : 18          |                                  clc                        
+  979 |  2   vibr_lib.s    106 | Code        | 11 |         |    2 | 00/44E4 : 65 92       |                                  adc   {$92}                
+  980 |  2   vibr_lib.s    107 | Empty       | 11 |         |    0 | 00/44E6               | mult_8B_8B_noadd                                            
+  981 |  2   vibr_lib.s    108 | Code        | 11 |         |    1 | 00/44E6 : 6A          |                                  ror                        
+  982 |  2   vibr_lib.s    109 | Code        | 11 |         |    2 | 00/44E7 : 66 90       |                                  ror   {$90}                
+  983 |  2   vibr_lib.s    110 | Empty       | 11 |         |    0 | 00/44E9               |                                                             
+  984 |  2   vibr_lib.s    111 | Code        | 11 |         |    1 | 00/44E9 : CA          |                                  dex                        
+  985 |  2   vibr_lib.s    112 | Code        | 11 |         |    2 | 00/44EA : D0 F5       |                                  bne   mult_8B_8B_loop      
+  986 |  2   vibr_lib.s    113 | Code        | 11 |         |    2 | 00/44EC : 85 95       |                                  sta   {$95}                
+  987 |  2   vibr_lib.s    114 | Code        | 11 |         |    2 | 00/44EE : A5 90       |                                  lda   {$90}                
+  988 |  2   vibr_lib.s    115 | Code        | 11 |         |    2 | 00/44F0 : 85 94       |                                  sta   {$94}                
+  989 |  2   vibr_lib.s    116 | Comment     | 11 |         |    0 | 00/44F2               | ;    sta factor2
+  990 |  2   vibr_lib.s    117 | Code        | 11 |         |    1 | 00/44F2 : 60          |                                  rts                        
+  991 |  2   vibr_lib.s    118 | Empty       | 11 |         |    0 | 00/44F3               |                                                             
+  992 |  2   vibr_lib.s    119 | Comment     | 11 |         |    0 | 00/44F3               | ; reminder on result
+  993 |  2   vibr_lib.s    120 | Comment     | 11 |         |    0 | 00/44F3               | ; quotient calc1
+  994 |  2   vibr_lib.s    121 | Empty       | 11 |         |    0 | 00/44F3               |                                                             
+  995 |  2   vibr_lib.s    122 | Empty       | 11 |         |    0 | 00/44F3               | div_16B_16B                                                 
+  996 |  2   vibr_lib.s    123 | Code        | 11 |         |    2 | 00/44F3 : A9 00       |                                  LDA   #0                   ;Initialize REM to 0
+  997 |  2   vibr_lib.s    124 | Code        | 11 |         |    2 | 00/44F5 : 85 95       |                                  STA   {$95}                
+  998 |  2   vibr_lib.s    125 | Code        | 11 |         |    2 | 00/44F7 : 85 94       |                                  STA   {$94}                
+  999 |  2   vibr_lib.s    126 | Code        | 11 |         |    2 | 00/44F9 : A2 10       |                                  LDX   #16                  ;There are 16 bits in NUM1
+ 1000 |  2   vibr_lib.s    127 | Empty       | 11 |         |    0 | 00/44FB               | div_l1                                                      
+ 1001 |  2   vibr_lib.s    128 | Code        | 11 |         |    2 | 00/44FB : 06 91       |                                  ASL   {$91}                ;Shift hi bit of NUM1 into REM
+ 1002 |  2   vibr_lib.s    129 | Code        | 11 |         |    2 | 00/44FD : 26 90       |                                  ROL   {$90}                ;(vacating the lo bit, which will be used for the quotient)
+ 1003 |  2   vibr_lib.s    130 | Code        | 11 |         |    2 | 00/44FF : 26 95       |                                  ROL   {$95}                
+ 1004 |  2   vibr_lib.s    131 | Code        | 11 |         |    2 | 00/4501 : 26 94       |                                  ROL   {$94}                
+ 1005 |  2   vibr_lib.s    132 | Code        | 11 |         |    2 | 00/4503 : A5 95       |                                  LDA   {$95}                
+ 1006 |  2   vibr_lib.s    133 | Code        | 11 |         |    1 | 00/4505 : 38          |                                  SEC                        ;Trial subtraction
+ 1007 |  2   vibr_lib.s    134 | Code        | 11 |         |    2 | 00/4506 : E5 93       |                                  SBC   {$93}                
+ 1008 |  2   vibr_lib.s    135 | Code        | 11 |         |    1 | 00/4508 : A8          |                                  TAY                        
+ 1009 |  2   vibr_lib.s    136 | Code        | 11 |         |    2 | 00/4509 : A5 94       |                                  LDA   {$94}                
+ 1010 |  2   vibr_lib.s    137 | Code        | 11 |         |    2 | 00/450B : E5 92       |                                  SBC   {$92}                
+ 1011 |  2   vibr_lib.s    138 | Code        | 11 |         |    2 | 00/450D : 90 06       |                                  BCC   div_l2               ;Did subtraction succeed?
+ 1012 |  2   vibr_lib.s    139 | Code        | 11 |         |    2 | 00/450F : 85 94       |                                  STA   {$94}                ;If yes, save it
+ 1013 |  2   vibr_lib.s    140 | Code        | 11 |         |    2 | 00/4511 : 84 95       |                                  STY   {$95}                
+ 1014 |  2   vibr_lib.s    141 | Code        | 11 |         |    2 | 00/4513 : E6 91       |                                  INC   {$91}                ;and record a 1 in the quotient
+ 1015 |  2   vibr_lib.s    142 | Empty       | 11 |         |    0 | 00/4515               | div_l2                                                      
+ 1016 |  2   vibr_lib.s    143 | Code        | 11 |         |    1 | 00/4515 : CA          |                                  DEX                        
+ 1017 |  2   vibr_lib.s    144 | Code        | 11 |         |    2 | 00/4516 : D0 E3       |                                  BNE   div_l1               
+ 1018 |  1 main_T0S09.s    874 | Empty       | 11 |         |    0 | 00/4518               |                                                             
+ 1019 |  1 main_T0S09.s    875 | Data        | 11 |         |    1 | 00/4518 : 00          | END                              DFB   $00                  
+ 1020 |  1 main_T0S09.s    876 | Empty       | 11 |         |    0 | 00/4519               |                                                             
+ 1021 |  1 main_T0S09.s    877 | Empty       | 11 |         |    0 | 00/4519               |                                                             
+ 1022 |  1 main_T0S09.s    878 | Empty       | 11 |         |    0 | 00/4519               |                                                             
+ 1023 |  1 main_T0S09.s    879 | Empty       | 11 |         |    0 | 00/4519               |                                                             
+------+------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------

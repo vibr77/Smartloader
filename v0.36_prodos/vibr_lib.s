@@ -8,6 +8,17 @@ calc_2_high     EQU $93
 
 calc_result_low      EQU $94         ;
 calc_result_high     EQU $95         ;
+
+str2UpperCase
+    pha
+    sbc     #$E0
+    bcs     str2UpperCase_1
+    pla
+    rts
+str2UpperCase_1
+    pla
+    and     #$DF
+    rts
     
 hex2dec    
     LDX    #0    ; en A le nombre en hexadécimal
@@ -60,7 +71,11 @@ mul8test
             jsr readKey
 
             rts
-            
+
+
+
+
+
 add_8B_8B
         clc                     ;
         lda calc_1_low
