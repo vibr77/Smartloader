@@ -85,7 +85,7 @@
    82 |  1      main_T0S0.s     81 | Empty       | 11 |         |    0 | 00/081F               | READNEXT                                       ;
    83 |  1      main_T0S0.s     82 | Empty       | 11 |         |    0 | 00/081F               |                                                
    84 |  1      main_T0S0.s     83 | Code        | 11 |         |    3 | 00/081F : AE B5 08    |                     ldx   READ_SECTOR          
-   85 |  1      main_T0S0.s     84 | Code        | 11 |         |    2 | 00/0822 : E0 0F       |                     cpx   #$0F                 ; check if sector from 0E -> 09 is done
+   85 |  1      main_T0S0.s     84 | Code        | 11 |         |    2 | 00/0822 : E0 10       |                     cpx   #$10                 ; check if sector from 0E -> 09 is done
    86 |  1      main_T0S0.s     85 | Code        | 11 |         |    2 | 00/0824 : F0 2F       |                     beq   START_PRG            ; then jump smartloader
    87 |  1      main_T0S0.s     86 | Code        | 11 |         |    3 | 00/0826 : EE B5 08    |                     INC   READ_SECTOR          
    88 |  1      main_T0S0.s     87 | Code        | 11 |         |    3 | 00/0829 : AE B4 08    |                     ldx   CURRSECTOR           
@@ -106,9 +106,9 @@
   103 |  1      main_T0S0.s    102 | Empty       | 11 |         |    0 | 00/0845               |                                                
   104 |  1      main_T0S0.s    103 | Code        | 11 |         |    3 | 00/0845 : 6C 3E 00    |                     jmp   ({$3E})              ; Call ROM to load more sectors
   105 |  1      main_T0S0.s    104 | Empty       | 11 |         |    0 | 00/0848               | LOAD_SML_SECT                                  
-  106 |  1      main_T0S0.s    105 | Code        | 11 |         |    2 | 00/0848 : A9 46       |                     lda   #$46                 
+  106 |  1      main_T0S0.s    105 | Code        | 11 |         |    2 | 00/0848 : A9 47       |                     lda   #$47                 
   107 |  1      main_T0S0.s    106 | Code        | 11 |         |    3 | 00/084A : 8D B7 08    |                     sta   LOADADDR+1           
-  108 |  1      main_T0S0.s    107 | Code        | 11 |         |    2 | 00/084D : A2 0E       |                     ldx   #$0E                 
+  108 |  1      main_T0S0.s    107 | Code        | 11 |         |    2 | 00/084D : A2 0F       |                     ldx   #$0F                 
   109 |  1      main_T0S0.s    108 | Code        | 11 |         |    3 | 00/084F : 8E B4 08    |                     stx   CURRSECTOR           
   110 |  1      main_T0S0.s    109 | Code        | 11 |         |    3 | 00/0852 : 4C 33 08    |                     jmp   PREP_CALL            
   111 |  1      main_T0S0.s    110 | Empty       | 11 |         |    0 | 00/0855               |                                                
@@ -118,135 +118,139 @@
   115 |  1      main_T0S0.s    114 | Empty       | 11 |         |    0 | 00/0858               | INIT_DISP                                      
   116 |  1      main_T0S0.s    115 | Code        | 11 |         |    3 | 00/0858 : 20 58 FC    |                     jsr   {$FC58}              
   117 |  1      main_T0S0.s    116 | Empty       | 11 |         |    0 | 00/085B               |                                                
-  118 |  1      main_T0S0.s    117 | Code        | 11 |         |    2 | 00/085B : A2 0F       |                     ldx   #$0F                 
-  119 |  1      main_T0S0.s    118 | Code        | 11 |         |    2 | 00/085D : A0 00       |                     ldy   #$00                 
-  120 |  1      main_T0S0.s    119 | Code        | 11 |         |    3 | 00/085F : 20 B8 08    |                     jsr   dispPositionCursor   
-  121 |  1      main_T0S0.s    120 | Empty       | 11 |         |    0 | 00/0862               |                                                
-  122 |  1      main_T0S0.s    121 | Code        | 11 |         |    2 | 00/0862 : A2 FF       |                     ldx   #$FF                 ; Normal charset
-  123 |  1      main_T0S0.s    122 | Code        | 11 |         |    2 | 00/0864 : 86 32       |                     stx   {$32}                ; store to zeropage
-  124 |  1      main_T0S0.s    123 | Empty       | 11 |         |    0 | 00/0866               |                                                
-  125 |  1      main_T0S0.s    124 | Code        | 11 |         |    2 | 00/0866 : A2 92       |                     ldx   #<_title             
-  126 |  1      main_T0S0.s    125 | Code        | 11 |         |    2 | 00/0868 : A0 08       |                     ldy   #>_title             
-  127 |  1      main_T0S0.s    126 | Code        | 11 |         |    3 | 00/086A : 20 D5 08    |                     jsr   printMsg             
-  128 |  1      main_T0S0.s    127 | Empty       | 11 |         |    0 | 00/086D               |                                                
-  129 |  1      main_T0S0.s    128 | Code        | 11 |         |    2 | 00/086D : A2 22       |                     ldx   #$22                 
-  130 |  1      main_T0S0.s    129 | Code        | 11 |         |    2 | 00/086F : A0 17       |                     ldy   #$17                 
-  131 |  1      main_T0S0.s    130 | Code        | 11 |         |    3 | 00/0871 : 20 B8 08    |                     jsr   dispPositionCursor   
-  132 |  1      main_T0S0.s    131 | Empty       | 11 |         |    0 | 00/0874               |                                                
-  133 |  1      main_T0S0.s    132 | Code        | 11 |         |    2 | 00/0874 : A2 9E       |                     ldx   #<_version           
-  134 |  1      main_T0S0.s    133 | Code        | 11 |         |    2 | 00/0876 : A0 08       |                     ldy   #>_version           
-  135 |  1      main_T0S0.s    134 | Code        | 11 |         |    3 | 00/0878 : 20 D5 08    |                     jsr   printMsg             
-  136 |  1      main_T0S0.s    135 | Empty       | 11 |         |    0 | 00/087B               |                                                
-  137 |  1      main_T0S0.s    136 | Code        | 11 |         |    2 | 00/087B : A2 00       |                     ldx   #$00                 
-  138 |  1      main_T0S0.s    137 | Code        | 11 |         |    2 | 00/087D : A0 01       |                     ldy   #$01                 
-  139 |  1      main_T0S0.s    138 | Code        | 11 |         |    3 | 00/087F : 20 B8 08    |                     jsr   dispPositionCursor   
-  140 |  1      main_T0S0.s    139 | Empty       | 11 |         |    0 | 00/0882               |                                                
-  141 |  1      main_T0S0.s    140 | Code        | 11 |         |    2 | 00/0882 : A0 28       |                     ldy   #$28                 
-  142 |  1      main_T0S0.s    141 | Code        | 11 |         |    3 | 00/0884 : 20 C1 08    |                     jsr   dispLine             
-  143 |  1      main_T0S0.s    142 | Empty       | 11 |         |    0 | 00/0887               |                                                
-  144 |  1      main_T0S0.s    143 | Code        | 11 |         |    2 | 00/0887 : A0 14       |                     ldy   #$14                 
-  145 |  1      main_T0S0.s    144 | Code        | 11 |         |    3 | 00/0889 : 20 B8 08    |                     jsr   dispPositionCursor   
-  146 |  1      main_T0S0.s    145 | Empty       | 11 |         |    0 | 00/088C               |                                                
-  147 |  1      main_T0S0.s    146 | Code        | 11 |         |    2 | 00/088C : A0 28       |                     ldy   #$28                 
-  148 |  1      main_T0S0.s    147 | Code        | 11 |         |    3 | 00/088E : 20 C1 08    |                     jsr   dispLine             
-  149 |  1      main_T0S0.s    148 | Empty       | 11 |         |    0 | 00/0891               |                                                
-  150 |  1      main_T0S0.s    149 | Code        | 11 |         |    1 | 00/0891 : 60          |                     rts                        
-  151 |  1      main_T0S0.s    150 | Empty       | 11 |         |    0 | 00/0892               | _title                                         
-  152 |  1      main_T0S0.s    151 | Data        | 11 |         |   11 | 00/0892 : D3 CD C1 D2 |                     asc   "SMARTLOADER"        
+  118 |  1      main_T0S0.s    117 | Comment     | 11 |         |    0 | 00/085B               |                 ;LDA     #$11                      ; Switch off 80 Col mode  TO BE TESTED
+  119 |  1      main_T0S0.s    118 | Comment     | 11 |         |    0 | 00/085B               |                 ;JSR     $FDED
+  120 |  1      main_T0S0.s    119 | Comment     | 11 |         |    0 | 00/085B               |                 ;ldx     $C00C                      ; 80 Col soft switch (off)
+  121 |  1      main_T0S0.s    120 | Empty       | 11 |         |    0 | 00/085B               |                                                
+  122 |  1      main_T0S0.s    121 | Code        | 11 |         |    2 | 00/085B : A2 0E       |                     ldx   #$0E                 
+  123 |  1      main_T0S0.s    122 | Code        | 11 |         |    2 | 00/085D : A0 00       |                     ldy   #$00                 
+  124 |  1      main_T0S0.s    123 | Code        | 11 |         |    3 | 00/085F : 20 B8 08    |                     jsr   dispPositionCursor   
+  125 |  1      main_T0S0.s    124 | Empty       | 11 |         |    0 | 00/0862               |                                                
+  126 |  1      main_T0S0.s    125 | Code        | 11 |         |    2 | 00/0862 : A2 FF       |                     ldx   #$FF                 ; Normal charset
+  127 |  1      main_T0S0.s    126 | Code        | 11 |         |    2 | 00/0864 : 86 32       |                     stx   {$32}                ; store to zeropage
+  128 |  1      main_T0S0.s    127 | Empty       | 11 |         |    0 | 00/0866               |                                                
+  129 |  1      main_T0S0.s    128 | Code        | 11 |         |    2 | 00/0866 : A2 92       |                     ldx   #<_title             
+  130 |  1      main_T0S0.s    129 | Code        | 11 |         |    2 | 00/0868 : A0 08       |                     ldy   #>_title             
+  131 |  1      main_T0S0.s    130 | Code        | 11 |         |    3 | 00/086A : 20 D5 08    |                     jsr   printMsg             
+  132 |  1      main_T0S0.s    131 | Empty       | 11 |         |    0 | 00/086D               |                                                
+  133 |  1      main_T0S0.s    132 | Code        | 11 |         |    2 | 00/086D : A2 22       |                     ldx   #$22                 
+  134 |  1      main_T0S0.s    133 | Code        | 11 |         |    2 | 00/086F : A0 17       |                     ldy   #$17                 
+  135 |  1      main_T0S0.s    134 | Code        | 11 |         |    3 | 00/0871 : 20 B8 08    |                     jsr   dispPositionCursor   
+  136 |  1      main_T0S0.s    135 | Empty       | 11 |         |    0 | 00/0874               |                                                
+  137 |  1      main_T0S0.s    136 | Code        | 11 |         |    2 | 00/0874 : A2 9E       |                     ldx   #<_version           
+  138 |  1      main_T0S0.s    137 | Code        | 11 |         |    2 | 00/0876 : A0 08       |                     ldy   #>_version           
+  139 |  1      main_T0S0.s    138 | Code        | 11 |         |    3 | 00/0878 : 20 D5 08    |                     jsr   printMsg             
+  140 |  1      main_T0S0.s    139 | Empty       | 11 |         |    0 | 00/087B               |                                                
+  141 |  1      main_T0S0.s    140 | Code        | 11 |         |    2 | 00/087B : A2 00       |                     ldx   #$00                 
+  142 |  1      main_T0S0.s    141 | Code        | 11 |         |    2 | 00/087D : A0 01       |                     ldy   #$01                 
+  143 |  1      main_T0S0.s    142 | Code        | 11 |         |    3 | 00/087F : 20 B8 08    |                     jsr   dispPositionCursor   
+  144 |  1      main_T0S0.s    143 | Empty       | 11 |         |    0 | 00/0882               |                                                
+  145 |  1      main_T0S0.s    144 | Code        | 11 |         |    2 | 00/0882 : A0 28       |                     ldy   #$28                 
+  146 |  1      main_T0S0.s    145 | Code        | 11 |         |    3 | 00/0884 : 20 C1 08    |                     jsr   dispLine             
+  147 |  1      main_T0S0.s    146 | Empty       | 11 |         |    0 | 00/0887               |                                                
+  148 |  1      main_T0S0.s    147 | Code        | 11 |         |    2 | 00/0887 : A0 14       |                     ldy   #$14                 
+  149 |  1      main_T0S0.s    148 | Code        | 11 |         |    3 | 00/0889 : 20 B8 08    |                     jsr   dispPositionCursor   
+  150 |  1      main_T0S0.s    149 | Empty       | 11 |         |    0 | 00/088C               |                                                
+  151 |  1      main_T0S0.s    150 | Code        | 11 |         |    2 | 00/088C : A0 28       |                     ldy   #$28                 
+  152 |  1      main_T0S0.s    151 | Code        | 11 |         |    3 | 00/088E : 20 C1 08    |                     jsr   dispLine             
+  153 |  1      main_T0S0.s    152 | Empty       | 11 |         |    0 | 00/0891               |                                                
+  154 |  1      main_T0S0.s    153 | Code        | 11 |         |    1 | 00/0891 : 60          |                     rts                        
+  155 |  1      main_T0S0.s    154 | Empty       | 11 |         |    0 | 00/0892               | _title                                         
+  156 |  1      main_T0S0.s    155 | Data        | 11 |         |   11 | 00/0892 : D3 CD C1 D2 |                     asc   "SMARTLOADER"        
       |                            |             |    |         |      |           D4 CC CF C1 |
       |                            |             |    |         |      |           C4 C5 D2    |
-  153 |  1      main_T0S0.s    152 | Data        | 11 |         |    1 | 00/089D : 00          |                     dfb   $00                  
-  154 |  1      main_T0S0.s    153 | Empty       | 11 |         |    0 | 00/089E               | _version                                       
-  155 |  1      main_T0S0.s    154 | Data        | 11 |         |    5 | 00/089E : F6 B0 AE B3 |                     asc   {"v0.37"}            
+  157 |  1      main_T0S0.s    156 | Data        | 11 |         |    1 | 00/089D : 00          |                     dfb   $00                  
+  158 |  1      main_T0S0.s    157 | Empty       | 11 |         |    0 | 00/089E               | _version                                       
+  159 |  1      main_T0S0.s    158 | Data        | 11 |         |    5 | 00/089E : F6 B0 AE B3 |                     asc   {"v0.37"}            
       |                            |             |    |         |      |           B7          |
-  156 |  1      main_T0S0.s    155 | Data        | 11 |         |    1 | 00/08A3 : 00          |                     dfb   $00                  
-  157 |  1      main_T0S0.s    156 | Empty       | 11 |         |    0 | 00/08A4               |                                                
-  158 |  1      main_T0S0.s    157 | Comment     | 11 |         |    0 | 00/08A4               | ;*  TABLE OF PHYSICAL BSECTR NUMBERS
-  159 |  1      main_T0S0.s    158 | Comment     | 11 |         |    0 | 00/08A4               | ;*  WHICH CORRESPOND TO THE LOGICAL
-  160 |  1      main_T0S0.s    159 | Comment     | 11 |         |    0 | 00/08A4               | ;*  BSECTRS 0-F ON TRACK ZERO...
+  160 |  1      main_T0S0.s    159 | Data        | 11 |         |    1 | 00/08A3 : 00          |                     dfb   $00                  
   161 |  1      main_T0S0.s    160 | Empty       | 11 |         |    0 | 00/08A4               |                                                
-  162 |  1      main_T0S0.s    161 | Empty       | 11 |         |    0 | 00/08A4               | TABLE                                          
-  163 |  1      main_T0S0.s    162 | Data        | 11 |         |    3 | 00/08A4 : 00 0D 0B    |                     dfb   00,13,11             ; 00->00,01->13,02->11
-  164 |  1      main_T0S0.s    163 | Data        | 11 |         |    3 | 00/08A7 : 09 07 05    |                     dfb   09,07,05             ; 03->09,04->07;05->05
-  165 |  1      main_T0S0.s    164 | Data        | 11 |         |    3 | 00/08AA : 03 01 0E    |                     dfb   03,01,14             ; 06->03,07->01,08->14
-  166 |  1      main_T0S0.s    165 | Data        | 11 |         |    3 | 00/08AD : 0C 0A 08    |                     dfb   12,10,08             ; 09->12,10->10,11->08
-  167 |  1      main_T0S0.s    166 | Data        | 11 |         |    4 | 00/08B0 : 06 04 02 0F |                     dfb   06,04,02,15          ; 12->6,13->04,14->02,15->15
-  168 |  1      main_T0S0.s    167 | Data        | 11 |         |    1 | 00/08B4 : 08          | CURRSECTOR          dfb   {$08}                ; 10 sectors to be loaded
-  169 |  1      main_T0S0.s    168 | Data        | 11 |         |    1 | 00/08B5 : 00          | READ_SECTOR         dfb   0                    ; Total sector Read
-  170 |  1      main_T0S0.s    169 | Data        | 11 |         |    2 | 00/08B6 : 00 BF       | LOADADDR            dfb   $00,{$BF}            
-  171 |  1      main_T0S0.s    170 | Empty       | 11 |         |    0 | 00/08B8               |                                                
-  172 |  1      main_T0S0.s    171 | Directive   | 11 |         |    0 | 00/08B8               |                     put   main_T0S0_disp.s     ; Load additionnal disp routine
-  173 |  2 main_T0S0_disp.s      1 | Equivalence | 11 |         |    0 | 00/08B8               | BELL                EQU   $FF3A                
-  174 |  2 main_T0S0_disp.s      2 | Equivalence | 11 |         |    0 | 00/08B8               | PREAD               EQU   $FB1E                
-  175 |  2 main_T0S0_disp.s      3 | Equivalence | 11 |         |    0 | 00/08B8               | CLRSCR              EQU   $FC58                
-  176 |  2 main_T0S0_disp.s      4 | Empty       | 11 |         |    0 | 00/08B8               |                                                
-  177 |  2 main_T0S0_disp.s      5 | Equivalence | 11 |         |    0 | 00/08B8               | COUT                EQU   $FDED                ; Apple II character out func.
-  178 |  2 main_T0S0_disp.s      6 | Equivalence | 11 |         |    0 | 00/08B8               | COUTD               EQU   $FDE2                
-  179 |  2 main_T0S0_disp.s      7 | Equivalence | 11 |         |    0 | 00/08B8               | COUT1               EQU   $FDF0                
-  180 |  2 main_T0S0_disp.s      8 | Empty       | 11 |         |    0 | 00/08B8               |                                                
-  181 |  2 main_T0S0_disp.s      9 | Equivalence | 11 |         |    0 | 00/08B8               | CURPOS              EQU   $FB5B                
-  182 |  2 main_T0S0_disp.s     10 | Equivalence | 11 |         |    0 | 00/08B8               | BASCLC              EQU   $FBC1                ; subroutine to position cursor
-  183 |  2 main_T0S0_disp.s     11 | Empty       | 11 |         |    0 | 00/08B8               |                                                
-  184 |  2 main_T0S0_disp.s     12 | Equivalence | 11 |         |    0 | 00/08B8               | BASL                EQU   $28                  
-  185 |  2 main_T0S0_disp.s     13 | Equivalence | 11 |         |    0 | 00/08B8               | BASH                EQU   $29                  
-  186 |  2 main_T0S0_disp.s     14 | Equivalence | 11 |         |    0 | 00/08B8               | CV                  EQU   $25                  ; Cursor position
-  187 |  2 main_T0S0_disp.s     15 | Equivalence | 11 |         |    0 | 00/08B8               | CH                  EQU   $24                  
-  188 |  2 main_T0S0_disp.s     16 | Empty       | 11 |         |    0 | 00/08B8               |                                                
-  189 |  2 main_T0S0_disp.s     17 | Equivalence | 11 |         |    0 | 00/08B8               | zpDispMask          EQU   $32                  ; INVERTED 0x7F NORMAL 0xFF
-  190 |  2 main_T0S0_disp.s     18 | Empty       | 11 |         |    0 | 00/08B8               |                                                
-  191 |  2 main_T0S0_disp.s     19 | Equivalence | 11 |         |    0 | 00/08B8               | zpPtr1              EQU   $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen
-  192 |  2 main_T0S0_disp.s     20 | Equivalence | 11 |         |    0 | 00/08B8               | zpPtr2              EQU   $83                  
-  193 |  2 main_T0S0_disp.s     21 | Empty       | 11 |         |    0 | 00/08B8               |                                                
-  194 |  2 main_T0S0_disp.s     22 | Empty       | 11 |         |    0 | 00/08B8               | dispPositionCursor                             
-  195 |  2 main_T0S0_disp.s     23 | Code        | 11 |         |    1 | 00/08B8 : 48          |                     pha                        ; push regA to stack
-  196 |  2 main_T0S0_disp.s     24 | Code        | 11 |         |    1 | 00/08B9 : 98          |                     tya                        
-  197 |  2 main_T0S0_disp.s     25 | Code        | 11 |         |    2 | 00/08BA : 86 24       |                     stx   {$24}                
-  198 |  2 main_T0S0_disp.s     26 | Code        | 11 |         |    3 | 00/08BC : 20 5B FB    |                     jsr   {$FB5B}              
-  199 |  2 main_T0S0_disp.s     27 | Code        | 11 |         |    1 | 00/08BF : 68          |                     pla                        ; pull regA from the stack
-  200 |  2 main_T0S0_disp.s     28 | Code        | 11 |         |    1 | 00/08C0 : 60          |                     rts                        
-  201 |  2 main_T0S0_disp.s     29 | Empty       | 11 |         |    0 | 00/08C1               |                                                
-  202 |  2 main_T0S0_disp.s     30 | Empty       | 11 |         |    0 | 00/08C1               | dispLine                                       
-  203 |  2 main_T0S0_disp.s     31 | Code        | 11 |         |    2 | 00/08C1 : A9 DF       |                     lda   #$DF                 
-  204 |  2 main_T0S0_disp.s     32 | Code        | 11 |         |    3 | 00/08C3 : 20 ED FD    |                     jsr   {$FDED}              
-  205 |  2 main_T0S0_disp.s     33 | Code        | 11 |         |    1 | 00/08C6 : 88          |                     dey                        
-  206 |  2 main_T0S0_disp.s     34 | Code        | 11 |         |    2 | 00/08C7 : D0 F8       |                     bne   dispLine             
-  207 |  2 main_T0S0_disp.s     35 | Code        | 11 |         |    1 | 00/08C9 : 60          |                     rts                        
-  208 |  2 main_T0S0_disp.s     36 | Empty       | 11 |         |    0 | 00/08CA               |                                                
-  209 |  2 main_T0S0_disp.s     37 | Empty       | 11 |         |    0 | 00/08CA               | str2UpperCase                                  
-  210 |  2 main_T0S0_disp.s     38 | Code        | 11 |         |    1 | 00/08CA : 48          |                     pha                        
-  211 |  2 main_T0S0_disp.s     39 | Code        | 11 |         |    2 | 00/08CB : E9 E0       |                     sbc   #$E0                 
-  212 |  2 main_T0S0_disp.s     40 | Code        | 11 |         |    2 | 00/08CD : B0 02       |                     bcs   str2UpperCase_1      
-  213 |  2 main_T0S0_disp.s     41 | Code        | 11 |         |    1 | 00/08CF : 68          |                     pla                        
-  214 |  2 main_T0S0_disp.s     42 | Code        | 11 |         |    1 | 00/08D0 : 60          |                     rts                        
-  215 |  2 main_T0S0_disp.s     43 | Empty       | 11 |         |    0 | 00/08D1               | str2UpperCase_1                                
-  216 |  2 main_T0S0_disp.s     44 | Code        | 11 |         |    1 | 00/08D1 : 68          |                     pla                        
-  217 |  2 main_T0S0_disp.s     45 | Code        | 11 |         |    2 | 00/08D2 : 29 DF       |                     and   #$DF                 
-  218 |  2 main_T0S0_disp.s     46 | Code        | 11 |         |    1 | 00/08D4 : 60          |                     rts                        
-  219 |  2 main_T0S0_disp.s     47 | Empty       | 11 |         |    0 | 00/08D5               |                                                
-  220 |  2 main_T0S0_disp.s     48 | Empty       | 11 |         |    0 | 00/08D5               | printMsg                                       
-  221 |  2 main_T0S0_disp.s     49 | Code        | 11 |         |    2 | 00/08D5 : 86 80       |                     stx   {$80}                
-  222 |  2 main_T0S0_disp.s     50 | Code        | 11 |         |    2 | 00/08D7 : 84 81       |                     sty   {$80}+1              
-  223 |  2 main_T0S0_disp.s     51 | Code        | 11 |         |    2 | 00/08D9 : A0 00       |                     ldy   #0                   
-  224 |  2 main_T0S0_disp.s     52 | Code        | 11 |         |    2 | 00/08DB : B1 80       |                     lda   ({$80}),Y            
-  225 |  2 main_T0S0_disp.s     53 | Code        | 11 |         |    2 | 00/08DD : F0 0B       |                     beq   printMsg_1           
-  226 |  2 main_T0S0_disp.s     54 | Empty       | 11 |         |    0 | 00/08DF               | printMsg_0                                     
-  227 |  2 main_T0S0_disp.s     55 | Code        | 11 |         |    3 | 00/08DF : 20 CA 08    |                     jsr   str2UpperCase        
-  228 |  2 main_T0S0_disp.s     56 | Code        | 11 |         |    3 | 00/08E2 : 20 F0 FD    |                     jsr   {$FDF0}              ; Char disp routine
-  229 |  2 main_T0S0_disp.s     57 | Code        | 11 |         |    1 | 00/08E5 : C8          |                     iny                        ; increase char position
-  230 |  2 main_T0S0_disp.s     58 | Code        | 11 |         |    2 | 00/08E6 : B1 80       |                     lda   ({$80}),Y            ; indirect zeropage addressing pointing to current char
-  231 |  2 main_T0S0_disp.s     59 | Code        | 11 |         |    2 | 00/08E8 : D0 F5       |                     bne   printMsg_0           ; no need of cmp 00 is current char is not 00 then loo
-  232 |  2 main_T0S0_disp.s     60 | Empty       | 11 |         |    0 | 00/08EA               | printMsg_1                                     
-  233 |  2 main_T0S0_disp.s     61 | Code        | 11 |         |    1 | 00/08EA : 60          |                     rts                        
-  234 |  1      main_T0S0.s    172 | Empty       | 11 |         |    0 | 00/08EB               | ozunid_2                                       
-  235 |  1      main_T0S0.s    172 | Equivalence | 11 |         |    0 | 00/08EB               | END                 EQU   ozunid_2             
-  236 |  1      main_T0S0.s    173 | Data        | 11 |         |   21 | 00/08EB : 00 00 00 00 |                     ds    $800+256-{ozunid_2},$0; padding to make it 256 (1 sector)
+  162 |  1      main_T0S0.s    161 | Comment     | 11 |         |    0 | 00/08A4               | ;*  TABLE OF PHYSICAL BSECTR NUMBERS
+  163 |  1      main_T0S0.s    162 | Comment     | 11 |         |    0 | 00/08A4               | ;*  WHICH CORRESPOND TO THE LOGICAL
+  164 |  1      main_T0S0.s    163 | Comment     | 11 |         |    0 | 00/08A4               | ;*  BSECTRS 0-F ON TRACK ZERO...
+  165 |  1      main_T0S0.s    164 | Empty       | 11 |         |    0 | 00/08A4               |                                                
+  166 |  1      main_T0S0.s    165 | Empty       | 11 |         |    0 | 00/08A4               | TABLE                                          
+  167 |  1      main_T0S0.s    166 | Data        | 11 |         |    3 | 00/08A4 : 00 0D 0B    |                     dfb   00,13,11             ; 00->00,01->13,02->11
+  168 |  1      main_T0S0.s    167 | Data        | 11 |         |    3 | 00/08A7 : 09 07 05    |                     dfb   09,07,05             ; 03->09,04->07;05->05
+  169 |  1      main_T0S0.s    168 | Data        | 11 |         |    3 | 00/08AA : 03 01 0E    |                     dfb   03,01,14             ; 06->03,07->01,08->14
+  170 |  1      main_T0S0.s    169 | Data        | 11 |         |    3 | 00/08AD : 0C 0A 08    |                     dfb   12,10,08             ; 09->12,10->10,11->08
+  171 |  1      main_T0S0.s    170 | Data        | 11 |         |    4 | 00/08B0 : 06 04 02 0F |                     dfb   06,04,02,15          ; 12->6,13->04,14->02,15->15
+  172 |  1      main_T0S0.s    171 | Data        | 11 |         |    1 | 00/08B4 : 08          | CURRSECTOR          dfb   {$08}                ; 10 sectors to be loaded
+  173 |  1      main_T0S0.s    172 | Data        | 11 |         |    1 | 00/08B5 : 00          | READ_SECTOR         dfb   0                    ; Total sector Read
+  174 |  1      main_T0S0.s    173 | Data        | 11 |         |    2 | 00/08B6 : 00 BF       | LOADADDR            dfb   $00,{$BF}            
+  175 |  1      main_T0S0.s    174 | Empty       | 11 |         |    0 | 00/08B8               |                                                
+  176 |  1      main_T0S0.s    175 | Directive   | 11 |         |    0 | 00/08B8               |                     put   main_T0S0_disp.s     ; Load additionnal disp routine
+  177 |  2 main_T0S0_disp.s      1 | Equivalence | 11 |         |    0 | 00/08B8               | BELL                EQU   $FF3A                
+  178 |  2 main_T0S0_disp.s      2 | Equivalence | 11 |         |    0 | 00/08B8               | PREAD               EQU   $FB1E                
+  179 |  2 main_T0S0_disp.s      3 | Equivalence | 11 |         |    0 | 00/08B8               | CLRSCR              EQU   $FC58                
+  180 |  2 main_T0S0_disp.s      4 | Empty       | 11 |         |    0 | 00/08B8               |                                                
+  181 |  2 main_T0S0_disp.s      5 | Equivalence | 11 |         |    0 | 00/08B8               | COUT                EQU   $FDED                ; Apple II character out func.
+  182 |  2 main_T0S0_disp.s      6 | Equivalence | 11 |         |    0 | 00/08B8               | COUTD               EQU   $FDE2                
+  183 |  2 main_T0S0_disp.s      7 | Equivalence | 11 |         |    0 | 00/08B8               | COUT1               EQU   $FDF0                
+  184 |  2 main_T0S0_disp.s      8 | Empty       | 11 |         |    0 | 00/08B8               |                                                
+  185 |  2 main_T0S0_disp.s      9 | Equivalence | 11 |         |    0 | 00/08B8               | CURPOS              EQU   $FB5B                
+  186 |  2 main_T0S0_disp.s     10 | Equivalence | 11 |         |    0 | 00/08B8               | BASCLC              EQU   $FBC1                ; subroutine to position cursor
+  187 |  2 main_T0S0_disp.s     11 | Empty       | 11 |         |    0 | 00/08B8               |                                                
+  188 |  2 main_T0S0_disp.s     12 | Equivalence | 11 |         |    0 | 00/08B8               | BASL                EQU   $28                  
+  189 |  2 main_T0S0_disp.s     13 | Equivalence | 11 |         |    0 | 00/08B8               | BASH                EQU   $29                  
+  190 |  2 main_T0S0_disp.s     14 | Equivalence | 11 |         |    0 | 00/08B8               | CV                  EQU   $25                  ; Cursor position
+  191 |  2 main_T0S0_disp.s     15 | Equivalence | 11 |         |    0 | 00/08B8               | CH                  EQU   $24                  
+  192 |  2 main_T0S0_disp.s     16 | Empty       | 11 |         |    0 | 00/08B8               |                                                
+  193 |  2 main_T0S0_disp.s     17 | Equivalence | 11 |         |    0 | 00/08B8               | zpDispMask          EQU   $32                  ; INVERTED 0x7F NORMAL 0xFF
+  194 |  2 main_T0S0_disp.s     18 | Empty       | 11 |         |    0 | 00/08B8               |                                                
+  195 |  2 main_T0S0_disp.s     19 | Equivalence | 11 |         |    0 | 00/08B8               | zpPtr1              EQU   $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen
+  196 |  2 main_T0S0_disp.s     20 | Equivalence | 11 |         |    0 | 00/08B8               | zpPtr2              EQU   $83                  
+  197 |  2 main_T0S0_disp.s     21 | Empty       | 11 |         |    0 | 00/08B8               |                                                
+  198 |  2 main_T0S0_disp.s     22 | Empty       | 11 |         |    0 | 00/08B8               | dispPositionCursor                             
+  199 |  2 main_T0S0_disp.s     23 | Code        | 11 |         |    1 | 00/08B8 : 48          |                     pha                        ; push regA to stack
+  200 |  2 main_T0S0_disp.s     24 | Code        | 11 |         |    1 | 00/08B9 : 98          |                     tya                        
+  201 |  2 main_T0S0_disp.s     25 | Code        | 11 |         |    2 | 00/08BA : 86 24       |                     stx   {$24}                
+  202 |  2 main_T0S0_disp.s     26 | Code        | 11 |         |    3 | 00/08BC : 20 5B FB    |                     jsr   {$FB5B}              
+  203 |  2 main_T0S0_disp.s     27 | Code        | 11 |         |    1 | 00/08BF : 68          |                     pla                        ; pull regA from the stack
+  204 |  2 main_T0S0_disp.s     28 | Code        | 11 |         |    1 | 00/08C0 : 60          |                     rts                        
+  205 |  2 main_T0S0_disp.s     29 | Empty       | 11 |         |    0 | 00/08C1               |                                                
+  206 |  2 main_T0S0_disp.s     30 | Empty       | 11 |         |    0 | 00/08C1               | dispLine                                       
+  207 |  2 main_T0S0_disp.s     31 | Code        | 11 |         |    2 | 00/08C1 : A9 DF       |                     lda   #$DF                 
+  208 |  2 main_T0S0_disp.s     32 | Code        | 11 |         |    3 | 00/08C3 : 20 ED FD    |                     jsr   {$FDED}              
+  209 |  2 main_T0S0_disp.s     33 | Code        | 11 |         |    1 | 00/08C6 : 88          |                     dey                        
+  210 |  2 main_T0S0_disp.s     34 | Code        | 11 |         |    2 | 00/08C7 : D0 F8       |                     bne   dispLine             
+  211 |  2 main_T0S0_disp.s     35 | Code        | 11 |         |    1 | 00/08C9 : 60          |                     rts                        
+  212 |  2 main_T0S0_disp.s     36 | Empty       | 11 |         |    0 | 00/08CA               |                                                
+  213 |  2 main_T0S0_disp.s     37 | Empty       | 11 |         |    0 | 00/08CA               | str2UpperCase                                  
+  214 |  2 main_T0S0_disp.s     38 | Code        | 11 |         |    1 | 00/08CA : 48          |                     pha                        
+  215 |  2 main_T0S0_disp.s     39 | Code        | 11 |         |    2 | 00/08CB : E9 E0       |                     sbc   #$E0                 
+  216 |  2 main_T0S0_disp.s     40 | Code        | 11 |         |    2 | 00/08CD : B0 02       |                     bcs   str2UpperCase_1      
+  217 |  2 main_T0S0_disp.s     41 | Code        | 11 |         |    1 | 00/08CF : 68          |                     pla                        
+  218 |  2 main_T0S0_disp.s     42 | Code        | 11 |         |    1 | 00/08D0 : 60          |                     rts                        
+  219 |  2 main_T0S0_disp.s     43 | Empty       | 11 |         |    0 | 00/08D1               | str2UpperCase_1                                
+  220 |  2 main_T0S0_disp.s     44 | Code        | 11 |         |    1 | 00/08D1 : 68          |                     pla                        
+  221 |  2 main_T0S0_disp.s     45 | Code        | 11 |         |    2 | 00/08D2 : 29 DF       |                     and   #$DF                 
+  222 |  2 main_T0S0_disp.s     46 | Code        | 11 |         |    1 | 00/08D4 : 60          |                     rts                        
+  223 |  2 main_T0S0_disp.s     47 | Empty       | 11 |         |    0 | 00/08D5               |                                                
+  224 |  2 main_T0S0_disp.s     48 | Empty       | 11 |         |    0 | 00/08D5               | printMsg                                       
+  225 |  2 main_T0S0_disp.s     49 | Code        | 11 |         |    2 | 00/08D5 : 86 80       |                     stx   {$80}                
+  226 |  2 main_T0S0_disp.s     50 | Code        | 11 |         |    2 | 00/08D7 : 84 81       |                     sty   {$80}+1              
+  227 |  2 main_T0S0_disp.s     51 | Code        | 11 |         |    2 | 00/08D9 : A0 00       |                     ldy   #0                   
+  228 |  2 main_T0S0_disp.s     52 | Code        | 11 |         |    2 | 00/08DB : B1 80       |                     lda   ({$80}),Y            
+  229 |  2 main_T0S0_disp.s     53 | Code        | 11 |         |    2 | 00/08DD : F0 0B       |                     beq   printMsg_1           
+  230 |  2 main_T0S0_disp.s     54 | Empty       | 11 |         |    0 | 00/08DF               | printMsg_0                                     
+  231 |  2 main_T0S0_disp.s     55 | Code        | 11 |         |    3 | 00/08DF : 20 CA 08    |                     jsr   str2UpperCase        
+  232 |  2 main_T0S0_disp.s     56 | Code        | 11 |         |    3 | 00/08E2 : 20 F0 FD    |                     jsr   {$FDF0}              ; Char disp routine
+  233 |  2 main_T0S0_disp.s     57 | Code        | 11 |         |    1 | 00/08E5 : C8          |                     iny                        ; increase char position
+  234 |  2 main_T0S0_disp.s     58 | Code        | 11 |         |    2 | 00/08E6 : B1 80       |                     lda   ({$80}),Y            ; indirect zeropage addressing pointing to current char
+  235 |  2 main_T0S0_disp.s     59 | Code        | 11 |         |    2 | 00/08E8 : D0 F5       |                     bne   printMsg_0           ; no need of cmp 00 is current char is not 00 then loo
+  236 |  2 main_T0S0_disp.s     60 | Empty       | 11 |         |    0 | 00/08EA               | printMsg_1                                     
+  237 |  2 main_T0S0_disp.s     61 | Code        | 11 |         |    1 | 00/08EA : 60          |                     rts                        
+  238 |  1      main_T0S0.s    176 | Empty       | 11 |         |    0 | 00/08EB               | ozunid_2                                       
+  239 |  1      main_T0S0.s    176 | Equivalence | 11 |         |    0 | 00/08EB               | END                 EQU   ozunid_2             
+  240 |  1      main_T0S0.s    177 | Data        | 11 |         |   21 | 00/08EB : 00 00 00 00 |                     ds    $800+256-{ozunid_2},$0; padding to make it 256 (1 sector)
       |                            |             |    |         |      |           00 00 00 00 |
       |                            |             |    |         |      |           00 00 00 00 |
       |                            |             |    |         |      |           00 00 00 00 |
       |                            |             |    |         |      |           00 00 00 00 |
       |                            |             |    |         |      |           00          |
-  237 |  1      main_T0S0.s    174 | Empty       | 11 |         |    0 | 00/0900               |                                                
-  238 |  1      main_T0S0.s    175 | Comment     | 11 |         |    0 | 00/0900               | ; Everything below this line should start at $900
-  239 |  1      main_T0S0.s    176 | Empty       | 11 |         |    0 | 00/0900               |                                                
-  240 |  1      main_T0S0.s    177 | Empty       | 11 |         |    0 | 00/0900               |                                                
+  241 |  1      main_T0S0.s    178 | Empty       | 11 |         |    0 | 00/0900               |                                                
+  242 |  1      main_T0S0.s    179 | Comment     | 11 |         |    0 | 00/0900               | ; Everything below this line should start at $900
+  243 |  1      main_T0S0.s    180 | Empty       | 11 |         |    0 | 00/0900               |                                                
+  244 |  1      main_T0S0.s    181 | Empty       | 11 |         |    0 | 00/0900               |                                                
 ------+----------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------

@@ -17,6 +17,7 @@ COUT1           EQU     $FDF0
 CTR             EQU     $08
 PTR             EQU     $06
 PRBYTE          EQU     $FDDA
+WAIT            EQU     $FCA8
 
 CURPOS          EQU     $FB5B
 BASCLC          EQU     $FBC1               ; subroutine to position cursor
@@ -51,6 +52,7 @@ zpMaxImgIndx    EQU    $87
 
 zpPageIndx      EQU    $88 
 zpMaxPageIndx   EQU    $89
+zpScratch       EQU    $90
 
 zpDispMask      EQU    $32                  ; INVERTED 0x7F NORMAL 0xFF
 
@@ -84,7 +86,7 @@ init_disp
             ldx     #<_path
             ldy     #>_path
             jsr     printMsg
-
+            ;jsr     readKey
             ldx     #$0
             ldy     #$17    
             jsr     dispPositionCursor
@@ -113,6 +115,7 @@ refresh
             sta     zpMaxPageIndx
 
 refresh_0                                             ; Display all image on screen
+            jsr     dispCurrentPath
             jsr     dispDataBlockImage                ; Display 1 line
             inc     zpImgIndx
             lda     zpImgIndx
@@ -125,8 +128,6 @@ refresh_1
             jsr     seekDrive
             jmp     mainDispatch
             
-
-
 refresh_err
             lda     #<_error_10
             sta     zpPtr2
@@ -143,6 +144,34 @@ refresh_err
 ; Input: zpPtr2 pointing to the right error message
 ; output: nothing  
 ;-----------------------------------------------------------------------------
+
+dispCurrentPath
+        ldx     #$05                                ; First Char is 5
+        ldy     #$16       
+        jsr     dispPositionCursor
+        
+        ldx     #$FF
+        stx     zpDispMask
+
+        ldx     #$06                                ; PATH Address is 0x2106 (RES_BLK)                   
+        ldy     #$21
+
+        stx     zpPtr1
+        sty     zpPtr1+1
+        ldy     #0
+        lda     (zpPtr1),Y
+        beq     dispCurrentPath_1
+dispCurrentPath_0
+        clc
+        adc     #$80
+        jsr     str2UpperCase
+        jsr     COUT1                           ; Char disp routine
+        iny                                     ; increase char position
+        lda     (zpPtr1),Y                      ; indirect zeropage addressing pointing to current char
+        bne     dispCurrentPath_0               ; no need of cmp 00 is current char is not 00 then loo
+dispCurrentPath_1
+        rts   
+        
 
 dispErrorMessage                   
         jsr     dispClearCenterBlock                ; Start clearing the central block
@@ -174,9 +203,49 @@ dispErrorMessage
         jsr readKey                                 ; wait for keypress
         rts                                         ; return to caller
 
+printMsgCentered
+
+    stx zpPtr1
+    sty zpPtr1+1
+    txa 
+    pha
+    tya
+    pha
+    ldy     #0
+    lda     (zpPtr1),Y
+    beq     printMsgCentered_1
+printMsgCentered_0
+    iny
+    ;iny                                     ; increase char position
+    lda     (zpPtr1),Y                      ; indirect zeropage addressing pointing to current char
+    bne     printMsgCentered_0
+    tya
+    sbc     #40
+    EOR     #$FF
+    lsr     a
+    tay
+    iny
+    lda     #" "
+printMsgCentered_A
+    jsr     COUT1
+    dey
+    bne     printMsgCentered_A 
+    pla
+    tay
+    pla
+    tax
+    ;jsr     printMsg
+printMsgCentered_1  
+    rts
+
+    
+       
 
 dispRWTSReturnCode    
     pha
+    ldx     #$FF
+    stx     zpDispMask
+    
     ldy     #$0                            ; Display the Key value on the top right of the screen
     ldx     #$0
     jsr     dispPositionCursor
@@ -200,6 +269,7 @@ dispClearCenterBlock
         ldx     #$FF
         stx     zpDispMask
         lda     #$0
+
 dispClearCenterBlock_0
         jsr     dispClearLineImage
         tax
@@ -256,23 +326,67 @@ dispClearLineImage_0
 dispImageAttr
     ldy     #$00
     lda     (zpPtr2),Y
-    cmp     #$01
-    bne     dispImageAttr_0
+    cmp     #$44                            ; "D" in ASCII
+    beq     dispImageAttr_D
+    
+    cmp     #$46                            ; "F" in ASCII
+    beq     dispImageAttr_F
 
+    cmp     #$4D                            ; "M" in ASCII
+    beq     dispImageAttr_M
+
+    cmp     #$54                            ; "T" in ASCII
+    beq     dispImageAttr_T
+    
+    cmp     #$45                            ; "E" in ASCII for Empty
+    beq     dispImageAttr_E
+
+    cmp     #$56                            ; "V" in ASCII for value
+    beq     dispImageAttr_V
+
+
+    jmp     dispImageAttr_end
+
+dispImageAttr_D
     lda     #$C4                            ; "D"
-    jsr     COUT1                            ; print
- 
+    jmp     dispImageAttr_end
+
+dispImageAttr_F
+
+    lda     #$AD                            ; "-"
+    jmp     dispImageAttr_end
+
+dispImageAttr_M
+
+    lda     #$A0                            ; " "
+    jmp     dispImageAttr_end
+
+dispImageAttr_E
+
+    lda     #$A0                            ; " "
+    jmp     dispImageAttr_end
+
+
+dispImageAttr_V
+
+    lda     #$A0                            ; " "
+    jmp     dispImageAttr_end
+
+dispImageAttr_T
+
+    ;lda     #$A0                            ; " "
+    ldx     zpPtr2
+    ldy     zpPtr2+1
+    jsr     printMsgCentered
+    rts
+    ;jmp     dispImageAttr_end
+
+dispImageAttr_end
+    jsr     COUT1                           ; print
     lda     #$A0                            ; "SPC"
-    jsr     COUT1                            ; print
+    jsr     COUT1                           ; print
     rts
 
-dispImageAttr_0
-
-    lda     #$AD                            ; "SPC"
-    jsr     COUT1                            ; print
-    lda     #$A0                            ; "SPC"
-    jsr     COUT1                            ; print
-    rts
 
 dispDataBlockImage
     
@@ -287,26 +401,69 @@ dispDataBlockImage
     jsr     dispPositionCursor
     jsr     dispImageAttr
 
-    ldy     #$01                              ; we start at 1 instead of 0 cause first char indicate type of file
+    ldy     #$01                            ; we start at 1 instead of 0 cause first char indicate type of file
     lda     (zpPtr2),Y
-            
-
+   
 dispDataBlockImage_1
+    clc                                     ; Clear the carry before adding
+    adc     #$80                            ; Add 128 to the char to transform it to Apple CharSet
     jsr     str2UpperCase                   ; shift to uppercase
     jsr     COUT1
     iny
     lda     (zpPtr2),Y                      ; indirect zeropage addressing pointing to current char
+    cmp     #$7C
+    beq     dispDataBlockImage_1_V
+    
+    cmp     #$00                        
     bne     dispDataBlockImage_1
     lda     #$A0                            ; SPACE
+    jmp     dispDataBlockImage_2
 
-dispDataBlockImage_2
+dispDataBlockImage_1_V                      ; dispValue the label has a separator "|"" the value is after it 
+    iny
+    tya                                     ; Save the value of Y into the stack,
+    pha                                     ; Y will be needed 3x times 
+    pha                                     ; push to the stack
+    pha
+    lda     #" "                            ; Pad with " " space til $18
+    jsr     dispDataBlockImage_2            ; it return here where normally it goes to the upper caller
+    pla                                     ; retrieve A from the stack ->Y
+    tay                                     ; Move A to Y
+
+dispDataBlockImage_1_V_1                    ; Counting the size of the value to pad to right
+    iny                                     ; The character after the separator |
+    lda     (zpPtr2),Y                      ; Relative adressing using zeropage
+    bne     dispDataBlockImage_1_V_1        ; Looking for the 0x0 char to mark the end of the string
+    sty     zpScratch                       ; Saving the value of Y index of the last char, 
+    pla                                     ; Retrieve the value of Y (start of the value string)
+
+    sbc     zpScratch                       ; substract scratchValue to A
+    eor     #$FF                            ; Get the positive value
+    sbc     #30                             ; Pad right at 30 char with a new substract
+    eor     #$FF                            ; get the positive value
+    tax                     
+    ldy     CV                              ; Get the current line index
+    jsr     dispPositionCursor              ; Set the display cursor (x,y)
+    pla                                     ; Get back A (Y start index position) 
+    tay
+    lda     (zpPtr2),Y
+
+dispDataBlockImage_1_V_2                    ; Display the value on screen
+    adc     #$80                            ; +128 to transform ASCII to Apple II charset
+    jsr     COUT1                           ; Print to screen
+    iny                                     ; Next char
+    lda     (zpPtr2),Y                      ;
+    bne     dispDataBlockImage_1_V_2        ; if char is 0x0 return to the caller
+    rts
+
+
+dispDataBlockImage_2                       ; Pads the label with space to position #29
     iny
     jsr     COUT1
     pha
     tya
-    sbc     #$18
+    sbc     #29
     pla
-
     bcc     dispDataBlockImage_2
     rts
 
@@ -459,6 +616,24 @@ pPreviousPage_0
 pPreviousPage_1
     jmp mainDispatch                                    ; loop back to mainDispatch
 
+pIsSelectableItem
+   
+    ;lda     zpImgIndx
+    jsr     getImageAddr
+    clc
+    ldy     #$0
+    lda     (zpPtr2),Y
+    cmp     #$54                            ; ASCII T
+    beq     pIsSelectableItem_1
+    cmp     #$45                            ; ASCII E 
+    beq     pIsSelectableItem_1
+    clc
+    rts
+
+pIsSelectableItem_1
+    sec
+    rts
+
 pKeyUp
     
     ldx     #$FF                            ; Change the current Image back to normal text
@@ -470,12 +645,21 @@ pKeyUp
     bne     pKeyUp_0
     
     ldx     zpMaxImgIndx                    ; zpImgIndx =7 rolling to 0
-    dex
+    dex     
     stx     zpImgIndx
+    txa
+    jsr     pIsSelectableItem
+    bcs     pKeyUp
+    
     jmp     mainDispatch_2
 
 pKeyUp_0
     jsr     decImageIndex                   ; decrement current Index
+    
+    lda     zpImgIndx
+    jsr     pIsSelectableItem
+    bcs     pKeyUp
+
     jmp     mainDispatch_2
 
 pKeydown
@@ -491,10 +675,16 @@ pKeydown
 
     ldx     #$0                             ; zpImgIndx =7 rolling to 0
     stx     zpImgIndx
+    txa         
+    jsr     pIsSelectableItem
+    bcs     pKeydown
     jmp     mainDispatch_2
 
 pKeydown_0
     jsr     incImageIndex
+    lda     zpImgIndx
+    jsr     pIsSelectableItem
+    bcs     pKeydown
     jmp     mainDispatch_2
 
 pSelectItem
@@ -528,41 +718,32 @@ pSelectItem
     inx                                         ; the first char is the type of the item will not display it     
     ldy     zpPtr2+1
 
-    jsr     printMsg
+    jsr     printAscii
 
     ldy     #$00
     lda     (zpPtr2),y                            ; A contains the type selected item
-
-    cmp     #$01                                ; it is a directory    
-    beq     pSelectItem_setCommandDirectory
-
-    cmp     #$00                                ; it is a file
-    beq     pSelectItem_setCommandFile
-
-pSelectItem_setCommandDirectory
     
+    pha
+    jsr     pSelectItem_setCommand
+    cmp     #$44                                ; 0x44 = "D" ASCII it is a directory    
+    bne     pSelectItem_1
+    
+    jmp     refresh                             ; it is equal this is a directory
+
+pSelectItem_1
+    cmp     #$46                                ; 0x46 = "F" ASCII it is a file
+    bne     pSelectItem_2
+    jmp     #$C600                              ; it is a file mount and then jump
+
+pSelectItem_2
+    jmp     refresh                                         ; we should never hit this point... but if no D or F 
+
+pSelectItem_setCommand    
     jsr     getImgPageIndx
     tay     
     ldx     #$10
     jsr     setCommand
-    
-    jmp     refresh
-
-pSelectItem_setCommandFile
-
-    jsr     getImgPageIndx
-    tay
-    ldx     #$02
-    jsr     setCommand
-    
-    ;Lets go Straight 
-    ;jsr     wait
-    jmp     #$C600                                    ; TODO put this variable according to the slot
-    
-pSelectItem_setCommandFile_err       
-    ;jsr dispErrorMsg
-    jsr readKey
-    jmp refresh
+    rts
 
 mainDispatch_selectItem
     jmp     pSelectItem
@@ -800,11 +981,14 @@ writeDataBlock
             lda     #$02                            ; 2 -> Write Command
             sta     ioCmd
             jsr     CALL_RWTS
+            ;jsr     readKey
+            rts
 
 seekDrive
             lda     #$01
             sta     ioTrack
-            lda     #$02                            ; 0 -> Seek Command
+            lda     #$02       
+                                 ; 0 -> Seek Command
             sta     ioCmd
             jsr     CALL_RWTS
             rts     
@@ -842,7 +1026,7 @@ _pressanykey
             dfb     $00
 
 _path
-            asc     "DIR:/"
+            asc     "PATH:/"
             dfb     $00
 
 _title       

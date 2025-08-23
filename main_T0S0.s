@@ -81,7 +81,7 @@ C1
 READNEXT                                          ;
                
                 ldx     READ_SECTOR
-                cpx     #$0F                      ; check if sector from 0E -> 09 is done
+                cpx     #$10                      ; check if sector from 0E -> 09 is done
                 beq     START_PRG                 ; then jump smartloader
                 INC     READ_SECTOR
                 ldx     CURRSECTOR
@@ -102,9 +102,9 @@ PREP_CALL                                         ; Preparation call for ROM Cal
                 
                 jmp     (BTEMP)                   ; Call ROM to load more sectors
 LOAD_SML_SECT                                          
-                lda     #$46
+                lda     #$47
                 sta     LOADADDR+1
-                ldx     #$0E
+                ldx     #$0F
                 stx     CURRSECTOR
                 jmp     PREP_CALL
 
@@ -113,8 +113,12 @@ START_PRG
 
 INIT_DISP
                 jsr     CLRSCR
+
+                ;LDA     #$11                      ; Switch off 80 Col mode  TO BE TESTED
+                ;JSR     $FDED
+                ;ldx     $C00C                      ; 80 Col soft switch (off)
                 
-                ldx     #$0F
+                ldx     #$0E
                 ldy     #$00    
                 jsr     dispPositionCursor
 

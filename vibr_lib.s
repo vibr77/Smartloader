@@ -142,3 +142,20 @@ div_l1
 div_l2
     DEX
     BNE div_l1
+
+printAscii
+    stx     zpPtr1
+    sty     zpPtr1+1
+    ldy     #0
+    lda     (zpPtr1),Y
+    beq     printAscii_1
+printAscii_0
+    clc                                     ; Clear the carry before adding
+    adc     #$80
+    jsr     str2UpperCase
+    jsr     COUT1                           ; Char disp routine
+    iny                                     ; increase char position
+    lda     (zpPtr1),Y                      ; indirect zeropage addressing pointing to current char
+    bne     printAscii_0                      ; no need of cmp 00 is current char is not 00 then loo
+printAscii_1
+    rts   

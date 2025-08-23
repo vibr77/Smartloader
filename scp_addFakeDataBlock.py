@@ -38,9 +38,50 @@ def buf2fil(destFile,buf,blockNumber):
      file.close
      return
 
-#buffer=bytearray()
+buffer=bytearray()
 #buffer=file2buf(sys.argv[1],buffer,176)
 
+bufz=bytearray(512)
+bufz.__init__(512)
+#s=Bits(bufz)  
+#s.pp()
+
+
+itemCount=5
+bufz=bytearray([ 0x20,                  # Return code
+                 itemCount,                  # Number of Item
+                 0x00,                  # current Page
+                 0x00,                  # MaxPage
+                 0x00,
+                 0x00                           
+                ])
+
+
+#tab=[   "TMAIN MENU","D.","D..","FLEMMINGS.WOZ","FCOMMANDO.DSK","FBOUNCING KAMUNGAS","FSPACE INVADERS",""]
+tab=["TMAIN MENU","E","MFAVORITE","VFILE MANAGER|1","VSETTINGS|123","MABOUT","",""]
+offset=32
+
+bufz[6:]=("MAIN MENU".ljust(23)).encode(encoding="utf-8")
+bufz.append(0)
+bufz.append(0)
+bufz.append(0)
+for i in range (0,itemCount+1):
+    pos=i*24+offset
+    print(i)
+    l=len(tab[i])
+    bufz[pos:]=(tab[i]).encode(encoding="utf-8")
+    for k in range(l,25):
+        bufz.append(0)
+   
+desired_length = 512
+padding_byte = b'\x00'
+while len(bufz) < desired_length:
+    bufz += padding_byte
+
+
+
+
+"""
 bufz=bytearray([
 0x20, 0x0F, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # 0000:0F
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # 0010
@@ -69,10 +110,12 @@ bufz=bytearray([
 0x00, 0xF0, 0xF2, 0xE9, 0xEE, 0xE3, 0xE5, 0xA0, 0xEF, 0xE6, 0xA0, 0xF0, 0xE5, 0xF2, 0xF3, 0xE9, # 0170
 0xE1, 0xA0, 0xF3, 0xE9, 0xE4, 0xE5, 0xA0, 0xE2, 0xA0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  # 0180
 ]);
+"""
 
 #buf2fil(sys.argv[2],buffer,176)
+
 blockOffset=int(sys.argv[2])
 buf2fil(sys.argv[1],bufz,blockOffset)
 
 s=Bits(bufz)  
-
+s.pp('bin8,hex',width=110)
