@@ -47,9 +47,9 @@ bufz.__init__(512)
 #s.pp()
 
 
-itemCount=5
+itemCount=7
 bufz=bytearray([ 0x20,                  # Return code
-                 itemCount,                  # Number of Item
+                 itemCount,             # Number of Item
                  0x00,                  # current Page
                  0x00,                  # MaxPage
                  0x00,
@@ -58,7 +58,7 @@ bufz=bytearray([ 0x20,                  # Return code
 
 
 #tab=[   "TMAIN MENU","D.","D..","FLEMMINGS.WOZ","FCOMMANDO.DSK","FBOUNCING KAMUNGAS","FSPACE INVADERS",""]
-tab=["TMAIN MENU","E","MFAVORITE","VFILE MANAGER|1","VSETTINGS|123","MABOUT","",""]
+tab=["TMAIN MENU","E","MFAVORITE","MFILE MANAGER","E ","VEMULATION|DISKII","MABOUT","",""]
 offset=32
 
 bufz[6:]=("MAIN MENU".ljust(23)).encode(encoding="utf-8")

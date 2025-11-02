@@ -48,7 +48,7 @@
    45 |  1      main_T0S0.s     45 | Directive   | 11 |         |    0 | 00/0800               |                     xc                         
    46 |  1      main_T0S0.s     46 | Directive   | 11 |         |    0 | 00/0800               |                     xc                         
    47 |  1      main_T0S0.s     47 | Empty       | 11 |         |    0 | 00/0800               |                                                
-   48 |  1      main_T0S0.s     48 | Equivalence | 11 |         |    0 | 00/0800               | VERSION             EQU   "v0.37"              
+   48 |  1      main_T0S0.s     48 | Equivalence | 11 |         |    0 | 00/0800               | VERSION             EQU   "v0.40"              
    49 |  1      main_T0S0.s     49 | Empty       | 11 |         |    0 | 00/0800               |                                                
    50 |  1      main_T0S0.s     50 | Empty       | 11 |         |    0 | 00/0800               | ozunid_1                                       
    51 |  1      main_T0S0.s     50 | Equivalence | 11 |         |    0 | 00/0800               | START               EQU   ozunid_1             
@@ -161,8 +161,8 @@
       |                            |             |    |         |      |           C4 C5 D2    |
   157 |  1      main_T0S0.s    156 | Data        | 11 |         |    1 | 00/089D : 00          |                     dfb   $00                  
   158 |  1      main_T0S0.s    157 | Empty       | 11 |         |    0 | 00/089E               | _version                                       
-  159 |  1      main_T0S0.s    158 | Data        | 11 |         |    5 | 00/089E : F6 B0 AE B3 |                     asc   {"v0.37"}            
-      |                            |             |    |         |      |           B7          |
+  159 |  1      main_T0S0.s    158 | Data        | 11 |         |    5 | 00/089E : F6 B0 AE B4 |                     asc   {"v0.40"}            
+      |                            |             |    |         |      |           B0          |
   160 |  1      main_T0S0.s    159 | Data        | 11 |         |    1 | 00/08A3 : 00          |                     dfb   $00                  
   161 |  1      main_T0S0.s    160 | Empty       | 11 |         |    0 | 00/08A4               |                                                
   162 |  1      main_T0S0.s    161 | Comment     | 11 |         |    0 | 00/08A4               | ;*  TABLE OF PHYSICAL BSECTR NUMBERS

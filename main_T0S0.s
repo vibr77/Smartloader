@@ -45,7 +45,7 @@
                 xc
                 xc
 
-VERSION         EQU      "v0.37"
+VERSION         EQU      "v0.41"
 
 START           EQU      *
 POINTA          EQU      $26

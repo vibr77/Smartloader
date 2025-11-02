@@ -19,14 +19,25 @@ CASM_SOURCES_S09 = 	./main_T0S09.s
 BUILD_DIR=	 		build
 
 #DOS_IMG=			img_DiversiDos41C
-DOS_IMG=			img_ProntoDos
-
+#DOS_IMG=			img_ProntoDos
+DOS_IMG=			img_ProntoDOS
 DSK_FILE= 			blank.dsk
 
+linux=1
+
 PYTHON= 			python3
+
+OS_NAME = $(shell uname -s | tr A-Z a-z)
+
+ifeq ($(OS_NAME),linux)
+AS=					../99.Merlin32Devlinux/src/merlin32
+else
 AS=					../99.Merlin32Dev/src/merlin32
+endif
+
 AS_ARG= 			-v
 AS_INCLUDES 		=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/Merlin32_v1.2_b1/Library
+SMARTDISK			=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio
 
 all:  | $(BUILD_DIR)
 	-killall "Virtual ]["
@@ -50,7 +61,13 @@ all:  | $(BUILD_DIR)
 
 	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S09).bin $(BUILD_DIR)/$(TARGET).dsk 9
 	$(PYTHON) scp_addFakeDataBlock.py $(BUILD_DIR)/$(TARGET).dsk 16
+	$(PYTHON) scp_extractBlock.py $(BUILD_DIR)/$(TARGET).dsk $(BUILD_DIR)/$(TARGET).bin 30 0
+	cp $(BUILD_DIR)/$(TARGET).bin $(SMARTDISK)/$(TARGET).bin
+ifneq ($(OS_NAME),linux)
 	-open -a "Virtual ][.app"
+endif
+
+# cd /home/vincent/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/90.Asmcode/01.smartloader
 	
 clean:
 	-rm -fR $(BUILD_DIR)

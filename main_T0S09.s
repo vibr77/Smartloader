@@ -40,6 +40,7 @@ str2UpperCase   EQU     $08CA                ; shift to uppercase
 
 CMD_BLK         EQU     $2000               ; Command Block
 RES_BLK         EQU     $2100               ; Result  Block
+EMUL_TYPE       EQU     $2300
 RES_BLK_P2      EQU     $2200               ; Result  Block
 
 cstMaxImgLen    EQU    #$10                 ; Constant Max Image Filename len
@@ -54,10 +55,16 @@ zpPageIndx      EQU    $88
 zpMaxPageIndx   EQU    $89
 zpScratch       EQU    $90
 
+
 zpDispMask      EQU    $32                  ; INVERTED 0x7F NORMAL 0xFF
 
 zpPtr1          EQU    $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen 
 zpPtr2          EQU    $83
+
+
+SPACEBAR         EQU    $20
+KEYPOLL        EQU    $C000
+
 
 
     ;----------------------------------------------
@@ -94,25 +101,135 @@ init_disp
             ldx     #<_option
             ldy     #>_option
             jsr     printMsg
+            ;jmp     refresh
+
+warmup
+            jsr     dispClearCenterBlock
+            jsr     readDataBlock
+            jsr     dispRWTSReturnCode
+            lda     RES_BLK                           ; First Bytes of RES_BLK indicate the return status code
+          
+            lda     RES_BLK+4
+            sta     EMUL_TYPE
+
+            jsr     seekDrive
+
+            ;ldx     #$15
+            ;jsr     setCommand
+            ;jsr     readKey
+            ;jmp     preboot
+            ldx     #$08
+            ldy     #$08    
+            jsr     dispPositionCursor
+            ldx     #<_pressanykey
+            ldy     #>_pressanykey
+            jsr     printMsg
+            ldx     #$08
+            ldy     #$09
+            jsr     dispPositionCursor
+
+            ldx     #$05
+            ldy     #$FF
+            sty     PTR
+            sty     PTR+1
+warmup_wait_1s
+            dec     PTR 
+            lda     PTR
+            cmp     #$00
+            bne     warmup_wait_1s
+            dec     PTR+1
+            lda     PTR+1
+            cmp     #$00
+            bne     warmup_wait_1s
+
+            ldy     #$FF
+            sty     PTR
+            sty     PTR+1
+            txa
+            adc     #$AF
+            jsr     COUT1
+            dex
+            
+            lda     $C000
+            and     #$80
+            beq     warmup_wait_next
+            jmp     refresh
+
+warmup_wait_next 
+            txa
+            bne     warmup_wait_1s
+            ldx     #$15
+            jsr     setCommand
+            
+            jmp     prewait_1s
 
 
 refresh
-            ;jmp     testR
+
+            jsr     dispClearCenterBlock
             jsr     readDataBlock
             jsr     dispRWTSReturnCode
-
+            ;jsr     readKey
             lda     RES_BLK                           ; First Bytes of RES_BLK indicate the return status code
+                                            ; transform to Apple charset
+            
             cmp     #$20                              ; If not 20 then raise an error
             bne     refresh_err                       ; Error to be diplayed
 
             lda     RES_BLK+1                         ; init zeroPage values
             sta     zpMaxImgIndx 
-
+            beq     refresh_err                      ; if zpMaxImgIndx eq 0 then we have a problem
             lda     RES_BLK+2
             sta     zpPageIndx
 
             lda     RES_BLK+3
             sta     zpMaxPageIndx
+
+            lda     RES_BLK+4
+            sta     EMUL_TYPE
+
+            lda     #$0
+            sta     zpImgIndx
+
+            ldy     #$0
+            ldx     #$22
+            jsr     dispPositionCursor
+
+            lda     #" "                            ; " "
+            jsr     COUT
+            lda     #" "                            ; " "
+            jsr     COUT
+
+            lda     #"/"                            ; "/"
+            jsr     COUT
+    
+            lda     #" "                            ; " "
+            jsr     COUT
+            lda     #" "                            ; " "
+            jsr     COUT
+            lda     #" "                            ; " "
+            jsr     COUT
+           
+
+            ldy     #$0
+            ldx     #$1B
+            jsr     dispPositionCursor
+
+            lda     #"P"
+            jsr     COUT
+
+            lda     zpPageIndx
+            jsr     j_printInt8_NoPad
+
+
+            lda     #"/"
+            jsr     COUT
+
+            lda     zpMaxPageIndx
+            jsr     j_printInt8_NoPad
+
+
+            
 
 refresh_0                                             ; Display all image on screen
             jsr     dispCurrentPath
@@ -128,6 +245,7 @@ refresh_1
             jsr     seekDrive
             jmp     mainDispatch
             
+            
 refresh_err
             lda     #<_error_10
             sta     zpPtr2
@@ -136,7 +254,10 @@ refresh_err
             jsr     dispErrorMessage                   ;
             jmp     refresh
 
+j_printInt8_NoPad
+            jmp printInt8_NoPad
 
+ 
 
 ;-----------------------------------------------------------------------------
 ; Routine: dispErrorMessage                                       
@@ -275,7 +396,7 @@ dispClearCenterBlock_0
         tax
         inx
         txa
-        cmp     #$0f
+        cmp     #$10
         bne     dispClearCenterBlock_0
         rts
 
@@ -318,7 +439,7 @@ dispClearLineImage
 dispClearLineImage_0
     jsr     COUT                            ; Print space (contained in A)
     inx                                     ; increment X
-    cpx     #$22                            ; 22-> 34 
+    cpx     #$26                            ; 22-> 34 
     bne     dispClearLineImage_0            ; Not equal we clear out the line
     pla                                     ; restore A from stack
     rts                                     ; return to caller
@@ -344,6 +465,9 @@ dispImageAttr
     cmp     #$56                            ; "V" in ASCII for value
     beq     dispImageAttr_V
 
+    cmp     #$58                            ; "V" in ASCII for value
+    beq     dispImageAttr_X
+
 
     jmp     dispImageAttr_end
 
@@ -368,6 +492,11 @@ dispImageAttr_E
 
 
 dispImageAttr_V
+
+    lda     #$A0                            ; " "
+    jmp     dispImageAttr_end
+
+dispImageAttr_X
 
     lda     #$A0                            ; " "
     jmp     dispImageAttr_end
@@ -465,6 +594,7 @@ dispDataBlockImage_2                       ; Pads the label with space to positi
     sbc     #29
     pla
     bcc     dispDataBlockImage_2
+ 
     rts
 
 
@@ -627,6 +757,8 @@ pIsSelectableItem
     beq     pIsSelectableItem_1
     cmp     #$45                            ; ASCII E 
     beq     pIsSelectableItem_1
+    cmp     #$58                            ; ASCII X 
+    beq     pIsSelectableItem_1
     clc
     rts
 
@@ -701,10 +833,12 @@ pSelectItem
     ldy     #>_loading
     jsr     printMsg
 
-    ldx     #$08
-    ldy     #$0A    
-    jsr     dispPositionCursor
-    
+    ;ldx     #$08
+    ;ldy     #$0A    
+    ;jsr     dispPositionCursor
+    lda     #" "
+    jsr     COUT1
+
     jsr     getImgPageIndx
     jsr     printInt8
 
@@ -713,18 +847,19 @@ pSelectItem
 
     lda     zpImgIndx     
     jsr     getImageAddr                        ; get the selected item address in the read data block 
+    ;jsr     readKey
+    ;ldx     zpPtr2                              ; zpPtr2 contains the address of the image address
+    ;inx                                         ; the first char is the type of the item will not display it     
+    ;ldy     zpPtr2+1
 
-    ldx     zpPtr2                              ; zpPtr2 contains the address of the image address
-    inx                                         ; the first char is the type of the item will not display it     
-    ldy     zpPtr2+1
-
-    jsr     printAscii
-
+    ;jsr     printAscii
+    ;jsr     readKey
     ldy     #$00
-    lda     (zpPtr2),y                            ; A contains the type selected item
+    lda     (zpPtr2),y                          ; A contains the type selected item
     
     pha
     jsr     pSelectItem_setCommand
+    pla
     cmp     #$44                                ; 0x44 = "D" ASCII it is a directory    
     bne     pSelectItem_1
     
@@ -733,10 +868,73 @@ pSelectItem
 pSelectItem_1
     cmp     #$46                                ; 0x46 = "F" ASCII it is a file
     bne     pSelectItem_2
-    jmp     #$C600                              ; it is a file mount and then jump
+
+                                                ; TODO add a condition to trigger C600 or C500 for Smartport
+    ;lda     EMUL_TYPE
+    ;adc     #$B0                                ; transform to Apple charset        
+    ;jsr     COUT1
+    ;jsr     COUT1
+    ;jsr     COUT1
+prewait_1s
+    ldy     #$FF
+    sty     PTR
+    sty     PTR+1
+wait_1s
+    dec     PTR 
+    lda     PTR
+    cmp     #$00
+    bne     wait_1s
+    dec     PTR+1
+    lda     PTR+1
+    cmp     #$00
+    bne     wait_1s
+
+    ;lda     EMUL_TYPE
+    ;adc     #$B0                                ; transform to Apple charset        
+    ;jsr     COUT1
+    ;jsr     COUT1
+    ;jsr     COUT1
+    
+preboot    
+    lda     EMUL_TYPE
+    cmp     #$00                                ; D0 = Disk Image .2mg .dsk etc...                                       
+    beq     pSelectDiskII
+    
+    cmp     #$01
+    beq     pSelectSmartport
 
 pSelectItem_2
-    jmp     refresh                                         ; we should never hit this point... but if no D or F 
+    jmp     refresh                             ; we should never hit this point... but if no D or F 
+
+pSelectDiskII
+    ;lda     EMUL_TYPE
+    ;adc     #$B0
+    ;jsr     COUT1
+    ;jsr     COUT1
+    ;jsr     COUT1
+
+    ;jsr     readKey
+    jmp     #$C600                              ; it is a file mount and then jump
+    
+pSelectSmartport
+
+    ;lda    $FBBF
+    ;jsr    printInt8
+    ;lda    $FBBF
+    ;jsr    printInt8
+    ;jsr    readKey
+    lda    $FBBF
+    cmp     #$00                            ; Check if we are on Apple IIGS
+    bne     not_iigs
+
+is_iigs
+
+    jmp     #$FAA6
+
+not_iigs
+
+    
+    jmp     #$C500
 
 pSelectItem_setCommand    
     jsr     getImgPageIndx
@@ -744,6 +942,13 @@ pSelectItem_setCommand
     ldx     #$10
     jsr     setCommand
     rts
+
+pKeyMain
+    ldx     #$09
+    ldx     #$09
+    jsr     setCommand
+    jmp     refresh
+
 
 mainDispatch_selectItem
     jmp     pSelectItem
@@ -766,6 +971,9 @@ mainDispatch_keyDown
 mainDispatch_keyUp
     jmp     pKeyUp
 
+mainDispatch_main
+    jmp     pKeyMain
+
 mainDispatch
     jsr     readKey
     jsr     mainDispatch_disp
@@ -773,7 +981,10 @@ mainDispatch
     cmp     #$D2                            ; KEY [R]
     beq     mainDispatch_refresh
 
-    cmp     #$C2                            ; KEY [R]
+    cmp     #$CD                            ; KEY [M]
+    beq     mainDispatch_main
+
+    cmp     #$C2                            ; KEY [B]
     beq     mainDispatch_reboot
 
     cmp     #$95
@@ -793,7 +1004,7 @@ mainDispatch
     
     jmp     mainDispatch
 
-mainDispatch_disp                                           ; Putting A containing the key value on the stack 
+mainDispatch_disp                           ; Putting A containing the key value on the stack 
     pha
     ldy     #$00                            ; Display the Key value on the top right of the screen
     ldx     #$06
@@ -848,12 +1059,15 @@ mainDispatch_2
 
     lda     zpMaxPageIndx
     jsr     printInt8_NoPad
+    ;jsr     COUT
     
     ldx     #$3F
     stx     zpDispMask
     jsr     dispDataBlockImage
     jmp     mainDispatch
 
+
+    
 ;--------------------------------------------------------
 ; Value is in A
 ; printInt8_NoPad does not print dizaine number if 0
@@ -869,7 +1083,7 @@ printInt8_NoPad
     jsr     COUT1
     jmp     printInt8_1
     
-printInt8_SpcPad                           ; value in A
+printInt8_SpcPad                ; value in A
     jsr     hex2dec
     pha
     tya
@@ -1034,7 +1248,7 @@ _title
             dfb     $00
 
 _option 
-            ASC     "[R]EFRESH [B]OOT [S]ETTINGS"
+            ASC     "[R]EFRESH [B]OOT [M]AIN"
             dfb     $00
 
 iocb        dfb     $01                            ;
