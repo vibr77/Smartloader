@@ -16,7 +16,7 @@ from bitstring import Bits, BitArray, BitStream, pack, options
 import sys
 
 
-def file2buf(NICname,buf,blockNumber):
+def file2bufX(NICname,buf,blockNumber):
     file = open(NICname, "rb")
     
     indx=0
@@ -75,4 +75,4 @@ bufz=bytearray([
 buf2fil(sys.argv[2],bufz,176)
 
 s=Bits(bufz)  
-#s.pp()
+s.pp()

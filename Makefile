@@ -30,9 +30,9 @@ PYTHON= 			python3
 OS_NAME = $(shell uname -s | tr A-Z a-z)
 
 ifeq ($(OS_NAME),linux)
-AS=					../99.Merlin32Devlinux/src/merlin32
+AS=					Merlin32
 else
-AS=					../99.Merlin32Dev/src/merlin32
+AS=					Merlin32
 endif
 
 AS_ARG= 			-v
@@ -40,7 +40,7 @@ AS_INCLUDES 		=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/Mer
 SMARTDISK			=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio
 
 all:  | $(BUILD_DIR)
-	-killall "Virtual ]["
+	-#killall "Virtual ]["
 	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S0)
 	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S09)
 
@@ -62,7 +62,7 @@ all:  | $(BUILD_DIR)
 	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S09).bin $(BUILD_DIR)/$(TARGET).dsk 9
 	$(PYTHON) scp_addFakeDataBlock.py $(BUILD_DIR)/$(TARGET).dsk 16
 	$(PYTHON) scp_extractBlock.py $(BUILD_DIR)/$(TARGET).dsk $(BUILD_DIR)/$(TARGET).bin 30 0
-	cp $(BUILD_DIR)/$(TARGET).bin $(SMARTDISK)/$(TARGET).bin
+	#cp $(BUILD_DIR)/$(TARGET).bin $(SMARTDISK)/$(TARGET).bin
 ifneq ($(OS_NAME),linux)
 	-open -a "Virtual ][.app"
 endif
