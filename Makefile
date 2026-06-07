@@ -15,6 +15,7 @@ TARGET_S09= 		$(TARGET)_s09
 
 CASM_SOURCES_S0 = 	./main_T0S0.s
 CASM_SOURCES_S09 = 	./main_T0S09.s 
+CREATE_TS09_SECT0 = ./create_main_T0S09_SECT0
 
 BUILD_DIR=	 		build
 
@@ -42,7 +43,7 @@ SMARTDISK			=~/Documents/AppleIIDiskIIStm32F411/
 all:  | $(BUILD_DIR)
 	-#killall "Virtual ]["
 	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S0)
-	./create_main_T0S09_SECT0
+	$(CREATE_TS09_SECT0)
 	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S09)
 
 	mv $(TARGET_S0).bin $(BUILD_DIR)/$(TARGET_S0).bin
