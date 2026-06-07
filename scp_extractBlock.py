@@ -60,9 +60,9 @@ dst=sys.argv[2]
 fromFile=sys.argv[1]
 
 print()
-print("-------------------------------------------------------------------------------")
-print(f"SCRIPT: Extract {blocknum} blocks from file {fromFile} to file {dst}")
-print("-------------------------------------------------------------------------------")
+print("---------------------------------------------------------------------------------------------------------")
+print(f"SCRIPT: Extract {blocknum} blocks from file {fromFile} to file {dst} offset {offset} ")
+print("---------------------------------------------------------------------------------------------------------")
 
 src=file2buffer(fromFile,src,blocknum,offset)
 buffer2file(dst,src,0)
