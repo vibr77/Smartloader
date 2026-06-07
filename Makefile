@@ -37,11 +37,12 @@ endif
 
 AS_ARG= 			-v
 AS_INCLUDES 		=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/Merlin32_v1.2_b1/Library
-SMARTDISK			=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio
+SMARTDISK			=~/Documents/AppleIIDiskIIStm32F411/
 
 all:  | $(BUILD_DIR)
 	-#killall "Virtual ]["
 	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S0)
+	./create_main_T0S09_SECT0
 	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S09)
 
 	mv $(TARGET_S0).bin $(BUILD_DIR)/$(TARGET_S0).bin
@@ -49,7 +50,7 @@ all:  | $(BUILD_DIR)
 
 	mv $(TARGET_S0).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_S0)_Symbols_.txt 			
 	mv $(TARGET_S09).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_S09)_Symbols.txt
-	-mv _FileInformation.txt $(BUILD_DIR)/
+	mv _FileInformation.txt $(BUILD_DIR)/
 
 	mv $(TARGET_S0).bin_Symbols.txt $(BUILD_DIR)/$(TARGET_S0)_lbl.txt 			
 	mv $(TARGET_S09).bin_Symbols.txt $(BUILD_DIR)/$(TARGET_S09)_lbl.txt
@@ -62,7 +63,7 @@ all:  | $(BUILD_DIR)
 	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S09).bin $(BUILD_DIR)/$(TARGET).dsk 9
 	$(PYTHON) scp_addFakeDataBlock.py $(BUILD_DIR)/$(TARGET).dsk 16
 	$(PYTHON) scp_extractBlock.py $(BUILD_DIR)/$(TARGET).dsk $(BUILD_DIR)/$(TARGET).bin 30 0
-	#cp $(BUILD_DIR)/$(TARGET).bin $(SMARTDISK)/$(TARGET).bin
+	cp $(BUILD_DIR)/$(TARGET).bin $(SMARTDISK)/$(TARGET).bin
 ifneq ($(OS_NAME),linux)
 	-open -a "Virtual ][.app"
 endif

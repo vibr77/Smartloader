@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+awk '{FS=";"} /;printMsg;|;dispPositionCursor;|;str2UpperCase;/ { printf("%s EQU $%s\n", $6,substr($5,4))}' smartloader_s0.bin_Symbols.txt > main_T0S09_SECT0.s
+
+exit 0

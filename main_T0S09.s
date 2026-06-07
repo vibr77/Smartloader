@@ -28,9 +28,6 @@ CV              EQU     $25                 ; Cursor position
 CH              EQU     $24 
 RWTS            EQU     $BD00
 
-printMsg        EQU     $08D5
-dispPositionCursor EQU  $08B8
-str2UpperCase   EQU     $08CA                ; shift to uppercase
 
 
 
@@ -1269,8 +1266,8 @@ dct
             dfb     $00,$01,$EF,$D8
 
             put     vibr_lib.s
+            put     main_T0S09_SECT0.s
 
-END        DFB      $00
 
 
 
