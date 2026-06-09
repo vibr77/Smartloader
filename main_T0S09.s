@@ -8,6 +8,7 @@ DEBUG   =   0
     xc
     xc
 
+BSLOT           EQU     $2B                      ; Boot slot
 BELL            EQU     $FF3A     
 PREAD           EQU     $FB1E
 CLRSCR          EQU     $FC58
@@ -70,10 +71,12 @@ KEYPOLL        EQU    $C000
 init
 
 
-
 init_value
+            lda     BSLOT
+            sta     ioSlot
+
             ldx     #$00
-            
+
             stx     zpImgIndx
             stx     zpPrevImgIndx
             stx     zpMaxImgIndx
@@ -82,6 +85,12 @@ init_value
             stx     zpMaxPageIndx
 
 init_disp
+            ;ldx     #$22
+            ;ldy     #$17    
+            ;jsr     dispPositionCursor
+
+            ;lda     BSLOT
+            ;jsr     printByte
 
             ldx     #$00
             ldy     #$16    
@@ -1249,8 +1258,8 @@ _option
             dfb     $00
 
 iocb        dfb     $01                            ;
-ioslot      dfb     $60                            ; Slot number ex:60
-            dfb     $01                            ; Drive number $01 
+ioSlot      dfb     $60                            ; Slot number ex:60
+iodrive     dfb     $01                            ; Drive number $01 
 ioVolume    dfb     $FE                            ; Volume track expected ($00 everything)
 ioTrack     dfb     $02                            ; Track number 0x00 -> 0x22
 ioSector    dfb     $00                            ; Sector number 0x00 -> 0x0F
@@ -1267,7 +1276,8 @@ dct
 
             put     vibr_lib.s
             put     main_T0S09_SECT0.s
-
+            put     printbyte.s
+        
 
 
 

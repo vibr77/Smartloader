@@ -29,7 +29,7 @@ dispPositionCursor
 
 dispLine
     lda     #$DF
-    jsr     COUT
+    jsr     COUT1
     dey
     bne dispLine
     rts

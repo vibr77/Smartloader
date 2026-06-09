@@ -1,0 +1,22 @@
+printByte
+	PHA
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	JSR PRINTHEX
+	PLA
+	AND #$0F
+	JSR PRINTHEX
+	RTS
+
+PRINTHEX
+	CMP #10
+	BCC DIGIT
+	ADC #6        ; ajustement A-F
+DIGIT
+	adc #'0'
+	jsr COUT1
+	RTS
+
+

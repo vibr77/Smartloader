@@ -37,7 +37,7 @@ AS=					Merlin32
 endif
 
 AS_ARG= 			-v
-AS_INCLUDES 		=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/Merlin32_v1.2_b1/Library
+AS_INCLUDES 		=~/tools/Merlin32_v1.2_b2/Library/
 SMARTDISK			=~/Documents/AppleIIDiskIIStm32F411/
 
 all:  | $(BUILD_DIR)
