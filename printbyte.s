@@ -1,20 +1,20 @@
-printByte
+dispByte
 	PHA
 	LSR A
 	LSR A
 	LSR A
 	LSR A
-	JSR PRINTHEX
+	JSR _printHex
 	PLA
 	AND #$0F
-	JSR PRINTHEX
+	JSR _printHex
 	RTS
 
-PRINTHEX
+_printHex
 	CMP #10
-	BCC DIGIT
+	BCC _digit
 	ADC #6        ; ajustement A-F
-DIGIT
+_digit
 	adc #'0'
 	jsr COUT1
 	RTS

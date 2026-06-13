@@ -73,9 +73,10 @@ NBSECTORS       EQU      16
     ; Init
     ;----------------------------------------------
 init
-            jsr     BEEP
-            jsr     readKey
-            jsr     CLRSCR
+            ;jsr     BEEP
+            ;jsr     readKey
+            ;jsr     CLRSCR
+            ;brk
             ldx     #$00
             ldy     #$01    
             jsr     dispPositionCursor
@@ -91,50 +92,28 @@ init_value
             ldx     #NBSECTORS                    ; lecture 16 secteurs
             stx     CURRSECTOR
             lda     #>PRGJMP               ; set the data buffer to $4200 (high byte is only changed)
-            sta     ioBuffer+1
+            sta     where
 :loop                                   ; corriger les bugs dessous..
             lda     #NBSECTORS
             sec
             sbc     CURRSECTOR
             jsr     dispHexByte
-            tax
-            lda     TABLE,X
             sta     ioSector
+            lda     where
+            sta     ioBuffer+1
             jsr     readDataBlock 
-            inc     ioSector
-            inc     ioBuffer+1
+            inc     where
             dec     CURRSECTOR
-            beq     :loop
-
+            bne     :loop
             jmp     PRGJMP
 
+where       db      0
 
 readDataBlock
             
             lda     #$01                    ; 1 -> Read Command
             sta     ioCmd
-            
-            ;lda     #$03
-            ;sta     ioTrack                 ; Track to read is 2
-            
-            ;lda     #$00
-            ;sta     ioSector                ; First block of 256 Bytes is at sector 0
-            
             jsr     CALL_RWTS
-
-            rts
-
-writeDataBlock
-            lda     #>CMD_BLK
-            sta     ioBuffer+1
-            lda     #$03
-            sta     ioTrack
-            lda     #$00
-            sta     ioSector                ; Only block of 256 Bytes is at sector 0
-            lda     #$02                            ; 2 -> Write Command
-            sta     ioCmd
-            jsr     CALL_RWTS
-            ;jsr     readKey
             rts
 
 seekDrive
