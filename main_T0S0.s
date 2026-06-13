@@ -66,7 +66,7 @@ TRACK           EQU      $41                      ; Track number (used by Cx000)
                 dfb     01                        ; <!> Needed by thre boot rom
 
                 ;jsr     BEEP
-                jsr     keypress
+                ;jsr     keypress
                 lda     CURRSECTOR                ; Sector to be loaded 
                 cmp     #$08                      ; 08 means we are at the begining and we starts by init the display
                 bne     C1
@@ -121,7 +121,7 @@ LOAD_SML_SECT
                 jmp     PREP_CALL
 
 START_PRG       ;jsr     BEEP
-                brk
+                ;brk
                 jmp     PRGJMP                    ; OFF TO LOOADER!
 
 INIT_DISP

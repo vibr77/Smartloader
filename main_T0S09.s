@@ -4,7 +4,7 @@
 
 DEBUG   =   0
 
-    org       $4000
+    org       $4200
     xc
     xc
 
@@ -70,7 +70,7 @@ KEYPOLL        EQU    $C000
     ;----------------------------------------------
 init
 
-
+            ;brk
 init_value
             lda     BSLOT
             sta     ioSlot
@@ -83,7 +83,20 @@ init_value
 
             stx     zpPageIndx
             stx     zpMaxPageIndx
+            ldx     #$08
+            ldy     #$08    
+            jsr     dispPositionCursor
+            ldx     #<_pressanykey
+            ldy     #>_pressanykey
+            jsr     printMsg
 
+            ldx     #$22
+            ldy     #$17    
+            jsr     dispPositionCursor
+
+            ;lda     BSLOT
+            ;jsr     dispByte
+            ;jsr     readKey
 init_disp
             ;ldx     #$22
             ;ldy     #$17    
@@ -118,7 +131,7 @@ warmup
             lda     RES_BLK+4
             sta     EMUL_TYPE
 
-            jsr     seekDrive
+            ;jsr     seekDriveTrack02
 
             ;ldx     #$15
             ;jsr     setCommand
@@ -248,7 +261,7 @@ refresh_0                                             ; Display all image on scr
             sta     zpImgIndx
 
 refresh_1
-            jsr     seekDrive
+            ;jsr     seekDriveTrack01
             jmp     mainDispatch
             
             
@@ -1099,12 +1112,14 @@ printInt8_SpcPad                ; value in A
     jmp     printInt8_1
 
 printInt8                       ; value in A
-    jsr     hex2dec
-    pha
-    tya  
-    ora     #"0"
-    jsr     COUT1
-    jmp     printInt8_1
+;    jsr     dispByte
+;    rts
+     jsr     hex2dec
+     pha
+     tya  
+     ora     #"0"
+     jsr     COUT1
+     jmp     printInt8_1
 
 printInt8_SPC
     lda  #" "
@@ -1146,32 +1161,11 @@ reboot
     jmp     #$C600
     rts
 
-testR    
-            ldx     #$0F
-            ldy     #$0B    
-            jsr     dispPositionCursor
-            
-            ldx     #<_title
-            ldy     #>_title
-
-            jsr     printMsg
-            jsr     readDataBlock
-            jsr     writeDataBlock
-            jsr     seekDrive
-            lda     #"$"
-            jsr     COUT    
-
-            jsr     readKey
-
-            rts
-
 readDataBlock
-            
+            jsr      seekDriveTrack02
+
             lda     #$01                    ; 1 -> Read Command
             sta     ioCmd
-            
-            lda     #$02
-            sta     ioTrack                 ; Track to read is 2
             
             lda     #$00
             sta     ioSector                ; First block of 256 Bytes is at sector 0
@@ -1192,10 +1186,11 @@ readDataBlock
             rts
 
 writeDataBlock
+            jsr     seekDriveTrack03
+            
             lda     #>CMD_BLK
             sta     ioBuffer+1
-            lda     #$03
-            sta     ioTrack
+
             lda     #$00
             sta     ioSector                ; Only block of 256 Bytes is at sector 0
             lda     #$02                            ; 2 -> Write Command
@@ -1204,21 +1199,40 @@ writeDataBlock
             ;jsr     readKey
             rts
 
-seekDrive
+seekDriveTrack01
             lda     #$01
             sta     ioTrack
-            lda     #$02       
-                                 ; 0 -> Seek Command
+            lda     #$0
+            sta     ioCmd
+            jsr     CALL_RWTS
+            rts  
+
+seekDriveTrack02
+            lda     #$02
+            sta     ioTrack
+            lda     #$0
             sta     ioCmd
             jsr     CALL_RWTS
             rts     
+
+seekDriveTrack03
+            lda     #$03
+            sta     ioTrack
+            lda     #$0
+            sta     ioCmd
+            jsr     CALL_RWTS
+            rts     
+
 CALL_RWTS
             ; RWTS is located at $3D00
-            lda     #$00
-            sta     $48
             ldy     #<iocb
             lda     #>iocb
             JSR     RWTS
+            ;beneath dos page 6-5 $48 doit être mis a 0 appel chaque apple de RWTS
+            pha
+            lda     #$00
+            sta     $48
+            pla
             
             rts
 
@@ -1276,7 +1290,7 @@ dct
 
             put     vibr_lib.s
             put     main_T0S09_SECT0.s
-            put     printbyte.s
+            ;put     printbyte.s
         
 
 

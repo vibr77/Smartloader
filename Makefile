@@ -12,9 +12,11 @@
 TARGET=				smartloader
 TARGET_S0=  		$(TARGET)_s0
 TARGET_S09= 		$(TARGET)_s09
+TARGET_S2= 		$(TARGET)_s2
 
 CASM_SOURCES_S0 = 	./main_T0S0.s
 CASM_SOURCES_S09 = 	./main_T0S09.s 
+CASM_SOURCES_S2 = 	./main_T0S2.s 
 CREATE_TS09_SECT0 = ./create_main_T0S09_SECT0
 
 BUILD_DIR=	 		build
@@ -45,9 +47,11 @@ all:  | $(BUILD_DIR)
 	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S0)
 	$(CREATE_TS09_SECT0)
 	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S09)
+	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S2)
 
 	mv $(TARGET_S0).bin $(BUILD_DIR)/$(TARGET_S0).bin
 	mv $(TARGET_S09).bin $(BUILD_DIR)/$(TARGET_S09).bin
+	mv $(TARGET_S2).bin $(BUILD_DIR)/$(TARGET_S2).bin
 
 	mv $(TARGET_S0).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_S0)_Symbols_.txt 			
 	mv $(TARGET_S09).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_S09)_Symbols.txt
@@ -61,9 +65,10 @@ all:  | $(BUILD_DIR)
 	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(DOS_IMG).bin $(BUILD_DIR)/$(TARGET).dsk 1
 	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S0).bin $(BUILD_DIR)/$(TARGET).dsk 0
 
-	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S09).bin $(BUILD_DIR)/$(TARGET).dsk 9
+	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S09).bin $(BUILD_DIR)/$(TARGET).dsk 16
+	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S2).bin $(BUILD_DIR)/$(TARGET).dsk 9
 	$(PYTHON) scp_addFakeDataBlock.py $(BUILD_DIR)/$(TARGET).dsk 16
-	$(PYTHON) scp_extractBlock.py $(BUILD_DIR)/$(TARGET).dsk $(BUILD_DIR)/$(TARGET).bin 30 0
+	$(PYTHON) scp_extractBlock.py $(BUILD_DIR)/$(TARGET).dsk $(BUILD_DIR)/$(TARGET).bin 48 0
 	cp $(BUILD_DIR)/$(TARGET).bin $(SMARTDISK)/$(TARGET).bin
 ifneq ($(OS_NAME),linux)
 	-open -a "Virtual ][.app"
