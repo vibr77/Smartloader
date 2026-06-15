@@ -985,13 +985,19 @@ mainDispatch
     
     cmp     #$D2                            ; KEY [R]
     beq     mainDispatch_refresh
+    cmp     #$F2                            ; KEY [r]
+    beq     mainDispatch_refresh
 
     cmp     #$CD                            ; KEY [M]
+    beq     mainDispatch_main
+    cmp     #$ED                            ; KEY [m]
     beq     mainDispatch_main
 
     cmp     #$C2                            ; KEY [B]
     beq     mainDispatch_reboot
-
+    cmp     #$E2
+    beq     mainDispatch_reboot             ; KEY [b]
+    
     cmp     #$95
     beq     mainDispatch_nextPage           ; KEY right arrow
 
