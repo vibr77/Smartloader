@@ -41,6 +41,8 @@ CMD_BLK         EQU     $2100               ; Command Block
 RES_BLK         EQU     $4200               ; Result  Block
 EMUL_TYPE       EQU     $2300
 RES_BLK_P2      EQU     $2200               ; Result  Block
+SETNORM         EQU     $FE84
+SETINV          EQU     $FE80
 
 cstMaxImgLen    EQU    #$10                 ; Constant Max Image Filename len
 cstLineOffset   EQU    #$04
@@ -73,10 +75,7 @@ NBSECTORS       EQU      16
     ; Init
     ;----------------------------------------------
 init
-            ;jsr     BEEP
-            ;jsr     readKey
-            ;jsr     CLRSCR
-            ;brk
+            jsr     SETNORM
             ldx     #$00
             ldy     #$01    
             jsr     dispPositionCursor
@@ -93,11 +92,25 @@ init_value
             stx     CURRSECTOR
             lda     #>PRGJMP               ; set the data buffer to $4200 (high byte is only changed)
             sta     where
+
+            ldx     #$08
+            ldy     #$09    
+            jsr     dispPositionCursor
+            ldx     #<_loading
+            ldy     #>_loading
+            jsr     printMsg
+
+
 :loop                                   ; corriger les bugs dessous..
             lda     #NBSECTORS
             sec
             sbc     CURRSECTOR
-            jsr     dispHexByte
+
+            ldy     #$09
+            ldx     _loading_size  
+            jsr     dispPositionCursor
+
+            jsr     dispByte
             sta     ioSector
             lda     where
             sta     ioBuffer+1
@@ -140,28 +153,6 @@ readKey
             bit     $C010
             rts 
 
-dispHexByte
-	PHA
-        pha
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	JSR _printByteHex
-	PLA
-	AND #$0F
-	JSR _printByteHex
-       pla
-	RTS
-
-_printByteHex
-	CMP #10
-	BCC _digit
-	ADC #6        ; ajustement A-F
-_digit
-	adc #'0'
-	jsr COUT1
-	RTS
 
 iocb        dfb     $01                            ;
 ioSlot      dfb     $60                            ; Slot number ex:60
@@ -177,6 +168,11 @@ ioCmd       dfb     $01                            ; $OO -> SEEK, $01 -> READ, $
 ioRet       dfb     $00                            ; Return code
 ioLast      dfb     $FE,$60,$01
 CURRSECTOR  dfb     16
+_loading    asc     "LOADING: "
+_loading_end            dfb     0
+_loading_size dfb  8 + _loading_end - _loading 
+
+
 dct 
             dfb     $00,$01,$EF,$D8
 TABLE
@@ -189,7 +185,7 @@ TABLE
 
             ;put     vibr_lib.s
             put     main_T0S09_SECT0.s
-            ;put     printbyte.s
+            put     printbyte.s
         
 
 

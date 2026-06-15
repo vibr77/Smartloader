@@ -68,7 +68,7 @@ all:  | $(BUILD_DIR)
 	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S09).bin $(BUILD_DIR)/$(TARGET).dsk 16
 	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S2).bin $(BUILD_DIR)/$(TARGET).dsk 9
 	$(PYTHON) scp_addFakeDataBlock.py $(BUILD_DIR)/$(TARGET).dsk 16
-	$(PYTHON) scp_extractBlock.py $(BUILD_DIR)/$(TARGET).dsk $(BUILD_DIR)/$(TARGET).bin 48 0
+	$(PYTHON) scp_extractBlock.py $(BUILD_DIR)/$(TARGET).dsk $(BUILD_DIR)/$(TARGET).bin 30 0
 	cp $(BUILD_DIR)/$(TARGET).bin $(SMARTDISK)/$(TARGET).bin
 ifneq ($(OS_NAME),linux)
 	-open -a "Virtual ][.app"

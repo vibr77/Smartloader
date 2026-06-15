@@ -49,6 +49,8 @@
 VERSION         EQU      "v.fat"
 
 START           EQU      *
+SETNORM         EQU      $FE84
+SETINV          EQU      $FE80
 BEEP            EQU      $FBDD
 KYBD            EQU      $C000
 STROBE          EQU      $C010
@@ -65,8 +67,7 @@ TRACK           EQU      $41                      ; Track number (used by Cx000)
 
                 dfb     01                        ; <!> Needed by thre boot rom
 
-                ;jsr     BEEP
-                ;jsr     keypress
+                jsr     SETNORM
                 lda     CURRSECTOR                ; Sector to be loaded 
                 cmp     #$08                      ; 08 means we are at the begining and we starts by init the display
                 bne     C1
@@ -99,10 +100,6 @@ SUITE
                 dec     CURRSECTOR                ; ONE LESS BELL TO ANSWER..
 
 PREP_CALL                                         ; Preparation call for ROM Call to load sectors 
-                ;phx
-                ;txa
-                ;jsr     dispHexByte
-                ;plx
                 lda     TABLE,X                   ; GET PHYSICAL BSECTR NUMBER
                 sta     BSECTR                    ; AND SET FOR BOOT PROM READ
                 
@@ -120,8 +117,7 @@ LOAD_SML_SECT
                 ;brk
                 jmp     PREP_CALL
 
-START_PRG       ;jsr     BEEP
-                ;brk
+START_PRG   
                 jmp     PRGJMP                    ; OFF TO LOOADER!
 
 INIT_DISP
@@ -169,31 +165,8 @@ INIT_DISP
 
                 rts
 
-;dispHexByte
-;	PHA
-;        pha
-;	LSR A
-;	LSR A
-;	LSR A
-;	LSR A
-;	JSR _printByteHex
-;	PLA
-;	AND #$0F
-;	JSR _printByteHex
- ;       pla
-;	RTS
-
-;_printByteHex
-;	CMP #10
-;	BCC _digit
-;	ADC #6        ; ajustement A-F
-;_digit
-;	adc #'0'
-;	jsr COUT1
-;	RTS
-
 _title       
-                asc     "S"
+                asc     "SmartLoader"
                 dfb     $00
 _version
                 asc     VERSION
@@ -204,6 +177,7 @@ keypress
                 bcc     keypress
                 sta     STROBE
                 rts
+
 ;*  TABLE OF PHYSICAL BSECTR NUMBERS
 ;*  WHICH CORRESPOND TO THE LOGICAL
 ;*  BSECTRS 0-F ON TRACK ZERO...

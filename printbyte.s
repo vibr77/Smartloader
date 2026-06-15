@@ -1,5 +1,6 @@
 dispByte
 	PHA
+	PHA
 	LSR A
 	LSR A
 	LSR A
@@ -8,6 +9,7 @@ dispByte
 	PLA
 	AND #$0F
 	JSR _printHex
+	PLA
 	RTS
 
 _printHex
@@ -15,7 +17,7 @@ _printHex
 	BCC _digit
 	ADC #6        ; ajustement A-F
 _digit
-	adc #'0'
+	adc #$B0
 	jsr COUT1
 	RTS
 

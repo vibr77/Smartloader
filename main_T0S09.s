@@ -83,28 +83,8 @@ init_value
 
             stx     zpPageIndx
             stx     zpMaxPageIndx
-            ;ldx     #$08
-            ;ldy     #$08    
-            ;jsr     dispPositionCursor
-            ;ldx     #<_pressanykey
-            ;ldy     #>_pressanykey
-            ;jsr     printMsg
 
-            ;ldx     #$22
-            ;ldy     #$17    
-            ;jsr     dispPositionCursor
-
-            ;lda     BSLOT
-            ;jsr     dispByte
-            ;jsr     readKey
 init_disp
-            ;ldx     #$22
-            ;ldy     #$17    
-            ;jsr     dispPositionCursor
-
-            ;lda     BSLOT
-            ;jsr     printByte
-
             ldx     #$00
             ldy     #$16    
             jsr     dispPositionCursor
@@ -131,12 +111,6 @@ warmup
             lda     RES_BLK+4
             sta     EMUL_TYPE
 
-            ;jsr     seekDriveTrack02
-
-            ;ldx     #$15
-            ;jsr     setCommand
-            ;jsr     readKey
-            ;jmp     preboot
             ldx     #$08
             ldy     #$08    
             jsr     dispPositionCursor
@@ -193,9 +167,8 @@ refresh
             jsr     dispClearCenterBlock
             jsr     readDataBlock
             jsr     dispRWTSReturnCode
-            ;jsr     readKey
             lda     RES_BLK                           ; First Bytes of RES_BLK indicate the return status code
-                                            ; transform to Apple charset
+                                                      ; transform to Apple charset
             
             cmp     #$20                              ; If not 20 then raise an error
             bne     refresh_err                       ; Error to be diplayed
@@ -939,8 +912,15 @@ pSelectDiskII
 
     ;jsr     readKey
     ; c600 ? et si slot different..
-    jmp     #$C600                              ; it is a file mount and then jump
-    
+    ;jmp     #$C600                              ; it is a file mount and then jump
+    lda     BSLOT                     ; GET BOOT BSLOT
+    lsr     A                         ; CONVERT TO CX00
+    lsr     A
+    lsr     A
+    lsr     A
+    ora     #$C0
+    sta     BTEMP+1
+    jmp     (BTEMP)    
 pSelectSmartport
 
     ;lda    $FBBF
@@ -1118,8 +1098,6 @@ printInt8_SpcPad                ; value in A
     jmp     printInt8_1
 
 printInt8                       ; value in A
-;    jsr     dispByte
-;    rts
      jsr     hex2dec
      pha
      tya  
@@ -1202,7 +1180,6 @@ writeDataBlock
             lda     #$02                            ; 2 -> Write Command
             sta     ioCmd
             jsr     CALL_RWTS
-            ;jsr     readKey
             rts
 
 seekDriveTrack01
@@ -1290,7 +1267,7 @@ ioByte      dfb     $01                            ; Byte Count $00 for 256
 ioCmd       dfb     $01                            ; $OO -> SEEK, $01 -> READ, $02 -> WRITE, $04 -> FORMAT
 ioRet       dfb     $00                            ; Return code
 ioLast      dfb     $FE,$60,$01
-
+BTEMP       dfb     0,0,                           ; adresse de la boot rom
 dct 
             dfb     $00,$01,$EF,$D8
 
