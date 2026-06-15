@@ -12,8 +12,8 @@ BSLOT           EQU     $2B                      ; Boot slot
 BELL            EQU     $FF3A     
 PREAD           EQU     $FB1E
 CLRSCR          EQU     $FC58
-COUT            EQU     $FDED               ; Apple II character out func.
-COUTD           EQU     $FDE2
+;COUT            EQU     $FDED               ; Apple II character out func.
+;COUTD           EQU     $FDE2
 COUT1           EQU     $FDF0
 CTR             EQU     $08
 PTR             EQU     $06
@@ -70,7 +70,7 @@ KEYPOLL        EQU    $C000
     ;----------------------------------------------
 init
 
-            ;brk
+            sei
 init_value
             lda     BSLOT
             sta     ioSlot
@@ -83,16 +83,16 @@ init_value
 
             stx     zpPageIndx
             stx     zpMaxPageIndx
-            ldx     #$08
-            ldy     #$08    
-            jsr     dispPositionCursor
-            ldx     #<_pressanykey
-            ldy     #>_pressanykey
-            jsr     printMsg
+            ;ldx     #$08
+            ;ldy     #$08    
+            ;jsr     dispPositionCursor
+            ;ldx     #<_pressanykey
+            ;ldy     #>_pressanykey
+            ;jsr     printMsg
 
-            ldx     #$22
-            ldy     #$17    
-            jsr     dispPositionCursor
+            ;ldx     #$22
+            ;ldy     #$17    
+            ;jsr     dispPositionCursor
 
             ;lda     BSLOT
             ;jsr     dispByte
@@ -126,8 +126,8 @@ warmup
             jsr     dispClearCenterBlock
             jsr     readDataBlock
             jsr     dispRWTSReturnCode
-            lda     RES_BLK                           ; First Bytes of RES_BLK indicate the return status code
-          
+
+            ;lda     RES_BLK                           ; First Bytes of RES_BLK indicate the return status code
             lda     RES_BLK+4
             sta     EMUL_TYPE
 
@@ -143,6 +143,7 @@ warmup
             ldx     #<_pressanykey
             ldy     #>_pressanykey
             jsr     printMsg
+            
             ldx     #$08
             ldy     #$09
             jsr     dispPositionCursor
@@ -151,9 +152,13 @@ warmup
             ldy     #$FF
             sty     PTR
             sty     PTR+1
+
 warmup_wait_1s
+            
             dec     PTR 
             lda     PTR
+            
+            
             cmp     #$00
             bne     warmup_wait_1s
             dec     PTR+1
@@ -215,19 +220,19 @@ refresh
             jsr     dispPositionCursor
 
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
 
             lda     #"/"                            ; "/"
-            jsr     COUT
+            jsr     COUT1
     
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
            
 
             ldy     #$0
@@ -235,14 +240,14 @@ refresh
             jsr     dispPositionCursor
 
             lda     #"P"
-            jsr     COUT
+            jsr     COUT1
 
             lda     zpPageIndx
             jsr     j_printInt8_NoPad
 
 
             lda     #"/"
-            jsr     COUT
+            jsr     COUT1
 
             lda     zpMaxPageIndx
             jsr     j_printInt8_NoPad
@@ -391,9 +396,9 @@ dispRWTSReturnCode
     jsr     dispPositionCursor
     
     lda     #$C5                            ; "E"
-    jsr     COUT
+    jsr     COUT1
     lda     ioRet
-    jsr     PRBYTE    ;Print error code
+    jsr     dispByte    ;Print error code
     
     pla
 
@@ -456,7 +461,7 @@ dispClearLineImage
     ldx     #$00                            ; Position 0 
 
 dispClearLineImage_0
-    jsr     COUT                            ; Print space (contained in A)
+    jsr     COUT1                           ; Print space (contained in A)
     inx                                     ; increment X
     cpx     #$26                            ; 22-> 34 
     bne     dispClearLineImage_0            ; Not equal we clear out the line
@@ -933,6 +938,7 @@ pSelectDiskII
     ;jsr     COUT1
 
     ;jsr     readKey
+    ; c600 ? et si slot different..
     jmp     #$C600                              ; it is a file mount and then jump
     
 pSelectSmartport
@@ -1032,7 +1038,7 @@ mainDispatch_disp                           ; Putting A containing the key value
     ldx     #$FF                            ; add Inverse Mask    
     stx     zpDispMask   
 
-    jsr     PRBYTE
+    jsr     dispByte
     
     ldx     #$7F                            ; add Inverse Mask
     stx     zpDispMask   
@@ -1055,7 +1061,7 @@ mainDispatch_2
     jsr     printInt8
 
     lda     #"/"                            ; "/"
-    jsr     COUT
+    jsr     COUT1
     
     lda     zpMaxImgIndx
     tax
@@ -1068,17 +1074,17 @@ mainDispatch_2
     jsr     dispPositionCursor
 
     lda     #"P"
-    jsr     COUT
+    jsr     COUT1
 
     lda     zpPageIndx
     jsr     printInt8_NoPad
 
     lda     #"/"
-    jsr     COUT
+    jsr     COUT1
 
     lda     zpMaxPageIndx
     jsr     printInt8_NoPad
-    ;jsr     COUT
+    ;jsr     COUT1
     
     ldx     #$3F
     stx     zpDispMask
@@ -1290,7 +1296,7 @@ dct
 
             put     vibr_lib.s
             put     main_T0S09_SECT0.s
-            ;put     printbyte.s
+            put     printbyte.s
         
 
 
