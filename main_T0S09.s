@@ -1278,7 +1278,7 @@ dct
             dfb     $00,$01,$EF,$D8
 
             put     vibr_lib.s
-            put     main_T0S09_SECT0.s
+            put     main_T0S09_EXTERNAL_REFS.s
             put     printbyte.s
         
 

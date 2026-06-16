@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# création d'un fichier des adresses des routines définies dans boot/t0s0
+# pour éviter une référence directe en hexa
+
+awk '{FS=";"} /;printMsg;|;dispPositionCursor;|;str2UpperCase;/ { printf("%s EQU $%s\n", $6,substr($5,4))}' smartloader_s0.bin_Symbols.txt > main_T0S09_EXTERNAL_REFS.s
+
+exit 0
