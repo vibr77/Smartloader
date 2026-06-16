@@ -1148,8 +1148,14 @@ decImageIndex_0
     ;----------------------------------------------
 
 reboot
-    jmp     #$C600
-    rts
+    lda     BSLOT                     ; GET BOOT BSLOT
+    lsr     A                         ; CONVERT TO CX00
+    lsr     A
+    lsr     A
+    lsr     A
+    ora     #$C0
+    sta     BTEMP+1
+    jmp     (BTEMP)    
 
 readDataBlock
             jsr      seekDriveTrack02
