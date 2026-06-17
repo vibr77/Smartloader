@@ -8,8 +8,8 @@
 
 ; Bootloader of the Smartloader:
 ; Source Files:
-;   main_T0S0.s
-;   main_T0S0_disp.s
+;   boot1.s
+;   disp.s
 ; the first byte (value $01) is used by the boot rom
 ; the bootloader starts at $801
 ; The first step is to build the display
@@ -37,7 +37,7 @@
 ; [+] Code refactoring
 
 
-                DSK      smartloader_s0.bin
+                DSK      boot1.bin
 		lst	on
                 TYP      BIN
                 MX       %11
@@ -192,7 +192,7 @@ CURRSECTOR      dfb     START_SECTOR              ; 10 sectors to be loaded
 READ_SECTORS    dfb     0                         ; Total sector Read
 LOADADDR        dfb     $00,RWTS_LOC_HI
 
-                put     main_T0S0_disp.s          ; Load additionnal disp routine
+                put     disp.s          ; Load additionnal disp routine
 END             EQU     *
                 ds      $800+256-END,$0           ; padding to make it 256 (1 sector)
 

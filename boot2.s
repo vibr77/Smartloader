@@ -1,4 +1,4 @@
-    DSK smartloader_s2.bin
+    DSK boot2.bin
     TYP BIN
     mx  %11
 
@@ -9,24 +9,7 @@ DEBUG   =   0
     xc
 
 BSLOT           EQU     $2B                      ; Boot slot
-BELL            EQU     $FF3A     
-PREAD           EQU     $FB1E
-CLRSCR          EQU     $FC58
-COUT            EQU     $FDED               ; Apple II character out func.
-COUTD           EQU     $FDE2
-COUT1           EQU     $FDF0
-CTR             EQU     $08
-PTR             EQU     $06
-PRBYTE          EQU     $FDDA
-WAIT            EQU     $FCA8
 
-CURPOS          EQU     $FB5B
-BASCLC          EQU     $FBC1               ; subroutine to position cursor
-
-BASL            EQU     $28
-BASH            EQU     $29
-CV              EQU     $25                 ; Cursor position
-CH              EQU     $24 
 RWTS            EQU     $BD00
 PRGJMP          EQU     $4200                    ; After the sector copy to memory, jmp to program entry point
 
@@ -37,37 +20,8 @@ PRGJMP          EQU     $4200                    ; After the sector copy to memo
     ; Zero Page & CST definition
     ;----------------------------------------------
 
-CMD_BLK         EQU     $2100               ; Command Block
-RES_BLK         EQU     $4200               ; Result  Block
-EMUL_TYPE       EQU     $2300
-RES_BLK_P2      EQU     $2200               ; Result  Block
 SETNORM         EQU     $FE84
 SETINV          EQU     $FE80
-
-cstMaxImgLen    EQU    #$10                 ; Constant Max Image Filename len
-cstLineOffset   EQU    #$04
-cstMaxItemPPage EQU    #$10                 ; 16 item per page 
-
-zpImgIndx       EQU    $85                  ; Current ImageIndex
-zpPrevImgIndx   EQU    $86
-zpMaxImgIndx    EQU    $87
-
-zpPageIndx      EQU    $88 
-zpMaxPageIndx   EQU    $89
-zpScratch       EQU    $90
-
-
-zpDispMask      EQU    $32                  ; INVERTED 0x7F NORMAL 0xFF
-
-zpPtr1          EQU    $80                  ; 80/81 2 Bytes Addr ptr for DisplayMsg on Screen 
-zpPtr2          EQU    $83
-
-
-SPACEBAR         EQU    $20
-KEYPOLL        EQU    $C000
-
-BEEP            EQU      $FBDD
-KYBD            EQU      $C000
 
 NBSECTORS       EQU      16
 
@@ -184,7 +138,7 @@ TABLE
 
 
             ;put     vibr_lib.s
-            put     main_T0S09_SECT0.s
+            put     disp.s
             put     printbyte.s
         
 
