@@ -1,0 +1,4 @@
+.*
+BOOT1_EXTERNAL_REFS.s
+*.fat
+build/*
