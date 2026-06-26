@@ -147,13 +147,15 @@ start_0
     ldy     #>_title
     jsr     printMsg
 
-    ldx     #$22
+    ldx     #$21
     ldy     #$17    
     jsr     dispPositionCursor
 
     ldx     #<_version
     ldy     #>_version
     jsr     printMsg
+    ;lda     diskSlot
+    ;jsr     printByte
 
     ldx     #$00
     ldy     #$01    
@@ -923,9 +925,33 @@ reboot
     jmp     #$C600
     rts
 
+;printByte
+;		PHA
+;
+;		LSR A
+;		LSR A
+;		LSR A
+;		LSR A
+;		JSR PRINTHEX
+;
+;		PLA
+;		AND #$0F
+;		JSR PRINTHEX
+;		RTS
+;
+;PRINTHEX
+;		CMP #10
+;		BCC DIGIT
+;		ADC #6        ; ajustement A-F
+;
+;DIGIT
+;		ADC		#'0'
+;		jsr		COUT1
+;		RTS
+
 _title       
-    ASC     "SMARTLOADER"
-    dfb     $00
+	ASC     "SMARTLOADER"
+	dfb     $00
 _version
     ASC     "v0.36"
     dfb     $00

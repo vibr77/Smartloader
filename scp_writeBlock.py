@@ -39,10 +39,10 @@ def file2buffer(filename,buffer):
     
     while data:										# tant qu'il y a des blocks
         buffer[indx*256:(indx+1)*256]=data
-        data = file.read(256)
         dlen=len(data)
         blen=len(buffer)
         print("     block:"+repr(indx)+", buffer size:"+repr(blen)+", block size:"+repr(dlen))
+        data = file.read(256)
         indx=indx+1
         if indx>16:
             break
@@ -65,6 +65,7 @@ print("bootloader size:"+repr(blen))
 sectorNum=blen//256
 if blen % 256:
 	sectorNum+=1
+print("bootloader nb sectors:"+repr(sectorNum))
 
 startSector=int(sys.argv[3])
 

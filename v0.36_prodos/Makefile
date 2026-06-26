@@ -18,9 +18,9 @@ PO_FILE_DEST = smartloader.po
 PO_VOL_NAME= blank
 
 AS=Merlin32
-CADIUS_PATH=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/cadius-1.4.5
+CADIUS_PATH=/home/francis/tools/bin
 CADIUS=cadius
-CP2_PATH=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/cp2_1
+CP2_PATH=/home/francis/tools/cp2_1.2.0
 CP2=cp2
 
 F_AUX=0x2000
@@ -33,13 +33,14 @@ ARG= -v
 AS_INCLUDES =~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/Merlin32_v1.2_b1/Library
 
 all:  | $(BUILD_DIR)
-	-killall "Virtual ]["
+	-#killall "Virtual ]["
 	$(AS) -v $(AS_INCLUDES) $(CASM_SOURCES)
 	-mv $(TARGET) $(BUILD_DIR)/$(TARGET)
 	-mv $(TARGET)_Symbols.txt $(BUILD_DIR)/$(TARGET)_Symbols.txt
 	-make addfile
-	-python3 dump_block_B0.py build/dump_b0.po ./build/smartloader.po
-	-open -a "Virtual ][.app"
+	 ls $(BUILD_DIR)
+	#python3 dump_block_B0.py build/dump_b0.po ./build/smartloader.po
+	-#open -a "Virtual ][.app"
 
 addfile:
 	-cp $(PO_FILE) $(BUILD_DIR)/$(PO_FILE_DEST)

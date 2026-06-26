@@ -1,18 +1,19 @@
-    DSK smartloader_s09.bin
+    DSK smartloader.bin
     TYP BIN
     mx  %11
 
 DEBUG   =   0
 
-    org       $4000
+    org       $4200
     xc
     xc
 
+BSLOT           EQU     $2B                      ; Boot slot
 BELL            EQU     $FF3A     
 PREAD           EQU     $FB1E
 CLRSCR          EQU     $FC58
-COUT            EQU     $FDED               ; Apple II character out func.
-COUTD           EQU     $FDE2
+;COUT            EQU     $FDED               ; Apple II character out func.
+;COUTD           EQU     $FDE2
 COUT1           EQU     $FDF0
 CTR             EQU     $08
 PTR             EQU     $06
@@ -28,9 +29,6 @@ CV              EQU     $25                 ; Cursor position
 CH              EQU     $24 
 RWTS            EQU     $BD00
 
-printMsg        EQU     $08D5
-dispPositionCursor EQU  $08B8
-str2UpperCase   EQU     $08CA                ; shift to uppercase
 
 
 
@@ -72,11 +70,13 @@ KEYPOLL        EQU    $C000
     ;----------------------------------------------
 init
 
-
-
+            sei
 init_value
+            lda     BSLOT
+            sta     ioSlot
+
             ldx     #$00
-            
+
             stx     zpImgIndx
             stx     zpPrevImgIndx
             stx     zpMaxImgIndx
@@ -85,7 +85,6 @@ init_value
             stx     zpMaxPageIndx
 
 init_disp
-
             ldx     #$00
             ldy     #$16    
             jsr     dispPositionCursor
@@ -107,23 +106,18 @@ warmup
             jsr     dispClearCenterBlock
             jsr     readDataBlock
             jsr     dispRWTSReturnCode
-            lda     RES_BLK                           ; First Bytes of RES_BLK indicate the return status code
-          
+
+            ;lda     RES_BLK                           ; First Bytes of RES_BLK indicate the return status code
             lda     RES_BLK+4
             sta     EMUL_TYPE
 
-            jsr     seekDrive
-
-            ;ldx     #$15
-            ;jsr     setCommand
-            ;jsr     readKey
-            ;jmp     preboot
             ldx     #$08
             ldy     #$08    
             jsr     dispPositionCursor
             ldx     #<_pressanykey
             ldy     #>_pressanykey
             jsr     printMsg
+            
             ldx     #$08
             ldy     #$09
             jsr     dispPositionCursor
@@ -132,9 +126,13 @@ warmup
             ldy     #$FF
             sty     PTR
             sty     PTR+1
+
 warmup_wait_1s
+            
             dec     PTR 
             lda     PTR
+            
+            
             cmp     #$00
             bne     warmup_wait_1s
             dec     PTR+1
@@ -169,9 +167,8 @@ refresh
             jsr     dispClearCenterBlock
             jsr     readDataBlock
             jsr     dispRWTSReturnCode
-            ;jsr     readKey
             lda     RES_BLK                           ; First Bytes of RES_BLK indicate the return status code
-                                            ; transform to Apple charset
+                                                      ; transform to Apple charset
             
             cmp     #$20                              ; If not 20 then raise an error
             bne     refresh_err                       ; Error to be diplayed
@@ -196,19 +193,19 @@ refresh
             jsr     dispPositionCursor
 
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
 
             lda     #"/"                            ; "/"
-            jsr     COUT
+            jsr     COUT1
     
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
             lda     #" "                            ; " "
-            jsr     COUT
+            jsr     COUT1
            
 
             ldy     #$0
@@ -216,14 +213,14 @@ refresh
             jsr     dispPositionCursor
 
             lda     #"P"
-            jsr     COUT
+            jsr     COUT1
 
             lda     zpPageIndx
             jsr     j_printInt8_NoPad
 
 
             lda     #"/"
-            jsr     COUT
+            jsr     COUT1
 
             lda     zpMaxPageIndx
             jsr     j_printInt8_NoPad
@@ -242,7 +239,7 @@ refresh_0                                             ; Display all image on scr
             sta     zpImgIndx
 
 refresh_1
-            jsr     seekDrive
+            ;jsr     seekDriveTrack01
             jmp     mainDispatch
             
             
@@ -372,9 +369,9 @@ dispRWTSReturnCode
     jsr     dispPositionCursor
     
     lda     #$C5                            ; "E"
-    jsr     COUT
+    jsr     COUT1
     lda     ioRet
-    jsr     PRBYTE    ;Print error code
+    jsr     dispByte    ;Print error code
     
     pla
 
@@ -437,7 +434,7 @@ dispClearLineImage
     ldx     #$00                            ; Position 0 
 
 dispClearLineImage_0
-    jsr     COUT                            ; Print space (contained in A)
+    jsr     COUT1                           ; Print space (contained in A)
     inx                                     ; increment X
     cpx     #$26                            ; 22-> 34 
     bne     dispClearLineImage_0            ; Not equal we clear out the line
@@ -914,8 +911,16 @@ pSelectDiskII
     ;jsr     COUT1
 
     ;jsr     readKey
-    jmp     #$C600                              ; it is a file mount and then jump
-    
+    ; c600 ? et si slot different..
+    ;jmp     #$C600                              ; it is a file mount and then jump
+    lda     BSLOT                     ; GET BOOT BSLOT
+    lsr     A                         ; CONVERT TO CX00
+    lsr     A
+    lsr     A
+    lsr     A
+    ora     #$C0
+    sta     BTEMP+1
+    jmp     (BTEMP)    
 pSelectSmartport
 
     ;lda    $FBBF
@@ -980,13 +985,19 @@ mainDispatch
     
     cmp     #$D2                            ; KEY [R]
     beq     mainDispatch_refresh
+    cmp     #$F2                            ; KEY [r]
+    beq     mainDispatch_refresh
 
     cmp     #$CD                            ; KEY [M]
+    beq     mainDispatch_main
+    cmp     #$ED                            ; KEY [m]
     beq     mainDispatch_main
 
     cmp     #$C2                            ; KEY [B]
     beq     mainDispatch_reboot
-
+    cmp     #$E2
+    beq     mainDispatch_reboot             ; KEY [b]
+    
     cmp     #$95
     beq     mainDispatch_nextPage           ; KEY right arrow
 
@@ -1013,7 +1024,7 @@ mainDispatch_disp                           ; Putting A containing the key value
     ldx     #$FF                            ; add Inverse Mask    
     stx     zpDispMask   
 
-    jsr     PRBYTE
+    jsr     dispByte
     
     ldx     #$7F                            ; add Inverse Mask
     stx     zpDispMask   
@@ -1036,7 +1047,7 @@ mainDispatch_2
     jsr     printInt8
 
     lda     #"/"                            ; "/"
-    jsr     COUT
+    jsr     COUT1
     
     lda     zpMaxImgIndx
     tax
@@ -1049,17 +1060,17 @@ mainDispatch_2
     jsr     dispPositionCursor
 
     lda     #"P"
-    jsr     COUT
+    jsr     COUT1
 
     lda     zpPageIndx
     jsr     printInt8_NoPad
 
     lda     #"/"
-    jsr     COUT
+    jsr     COUT1
 
     lda     zpMaxPageIndx
     jsr     printInt8_NoPad
-    ;jsr     COUT
+    ;jsr     COUT1
     
     ldx     #$3F
     stx     zpDispMask
@@ -1093,12 +1104,12 @@ printInt8_SpcPad                ; value in A
     jmp     printInt8_1
 
 printInt8                       ; value in A
-    jsr     hex2dec
-    pha
-    tya  
-    ora     #"0"
-    jsr     COUT1
-    jmp     printInt8_1
+     jsr     hex2dec
+     pha
+     tya  
+     ora     #"0"
+     jsr     COUT1
+     jmp     printInt8_1
 
 printInt8_SPC
     lda  #" "
@@ -1137,35 +1148,20 @@ decImageIndex_0
     ;----------------------------------------------
 
 reboot
-    jmp     #$C600
-    rts
-
-testR    
-            ldx     #$0F
-            ldy     #$0B    
-            jsr     dispPositionCursor
-            
-            ldx     #<_title
-            ldy     #>_title
-
-            jsr     printMsg
-            jsr     readDataBlock
-            jsr     writeDataBlock
-            jsr     seekDrive
-            lda     #"$"
-            jsr     COUT    
-
-            jsr     readKey
-
-            rts
+    lda     BSLOT                     ; GET BOOT BSLOT
+    lsr     A                         ; CONVERT TO CX00
+    lsr     A
+    lsr     A
+    lsr     A
+    ora     #$C0
+    sta     BTEMP+1
+    jmp     (BTEMP)    
 
 readDataBlock
-            
+            jsr      seekDriveTrack02
+
             lda     #$01                    ; 1 -> Read Command
             sta     ioCmd
-            
-            lda     #$02
-            sta     ioTrack                 ; Track to read is 2
             
             lda     #$00
             sta     ioSector                ; First block of 256 Bytes is at sector 0
@@ -1186,33 +1182,52 @@ readDataBlock
             rts
 
 writeDataBlock
+            jsr     seekDriveTrack03
+            
             lda     #>CMD_BLK
             sta     ioBuffer+1
-            lda     #$03
-            sta     ioTrack
+
             lda     #$00
             sta     ioSector                ; Only block of 256 Bytes is at sector 0
             lda     #$02                            ; 2 -> Write Command
             sta     ioCmd
             jsr     CALL_RWTS
-            ;jsr     readKey
             rts
 
-seekDrive
+seekDriveTrack01
             lda     #$01
             sta     ioTrack
-            lda     #$02       
-                                 ; 0 -> Seek Command
+            lda     #$0
+            sta     ioCmd
+            jsr     CALL_RWTS
+            rts  
+
+seekDriveTrack02
+            lda     #$02
+            sta     ioTrack
+            lda     #$0
             sta     ioCmd
             jsr     CALL_RWTS
             rts     
+
+seekDriveTrack03
+            lda     #$03
+            sta     ioTrack
+            lda     #$0
+            sta     ioCmd
+            jsr     CALL_RWTS
+            rts     
+
 CALL_RWTS
             ; RWTS is located at $3D00
-            lda     #$00
-            sta     $48
             ldy     #<iocb
             lda     #>iocb
             JSR     RWTS
+            ;beneath dos page 6-5 $48 doit être mis a 0 appel chaque apple de RWTS
+            pha
+            lda     #$00
+            sta     $48
+            pla
             
             rts
 
@@ -1252,8 +1267,8 @@ _option
             dfb     $00
 
 iocb        dfb     $01                            ;
-ioslot      dfb     $60                            ; Slot number ex:60
-            dfb     $01                            ; Drive number $01 
+ioSlot      dfb     $60                            ; Slot number ex:60
+iodrive     dfb     $01                            ; Drive number $01 
 ioVolume    dfb     $FE                            ; Volume track expected ($00 everything)
 ioTrack     dfb     $02                            ; Track number 0x00 -> 0x22
 ioSector    dfb     $00                            ; Sector number 0x00 -> 0x0F
@@ -1264,13 +1279,14 @@ ioByte      dfb     $01                            ; Byte Count $00 for 256
 ioCmd       dfb     $01                            ; $OO -> SEEK, $01 -> READ, $02 -> WRITE, $04 -> FORMAT
 ioRet       dfb     $00                            ; Return code
 ioLast      dfb     $FE,$60,$01
-
+BTEMP       dfb     0,0,                           ; adresse de la boot rom
 dct 
             dfb     $00,$01,$EF,$D8
 
             put     vibr_lib.s
-
-END        DFB      $00
+            put     BOOT1_EXTERNAL_REFS.s
+            put     printbyte.s
+        
 
 
 

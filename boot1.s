@@ -8,8 +8,8 @@
 
 ; Bootloader of the Smartloader:
 ; Source Files:
-;   main_T0S0.s
-;   main_T0S0_disp.s
+;   boot1.s
+;   disp.s
 ; the first byte (value $01) is used by the boot rom
 ; the bootloader starts at $801
 ; The first step is to build the display
@@ -37,7 +37,8 @@
 ; [+] Code refactoring
 
 
-                DSK      smartloader_s0.bin
+                DSK      boot1.bin
+		lst	on
                 TYP      BIN
                 MX       %11
 
@@ -45,29 +46,38 @@
                 xc
                 xc
 
-VERSION         EQU      "v0.41"
+VERSION         EQU      "v.fat"
 
 START           EQU      *
+SETNORM         EQU      $FE84
+SETINV          EQU      $FE80
+BEEP            EQU      $FBDD
+KYBD            EQU      $C000
+STROBE          EQU      $C010
 POINTA          EQU      $26
 BSLOT           EQU      $2B                      ; Boot slot
 BSECTR          EQU      $3D                      ; LAST BSECTR READ
 BTEMP           EQU      $3E                      ; ADDRESS BTEMP
-BRETRY          EQU      $5C                      ; OFFSET TO READER
+BRENTRY         EQU      $5C                      ; OFFSET TO READER (DISK II ROM)
 START_SECTOR    EQU      $08                      ; First sector to read moving downward
 END_SECTOR      EQU      $00                      ; Last sector to read
 PRGJMP          EQU      $4000                    ; After the sector copy to memory, jmp to program entry point
 RWTS_LOC_HI     EQU      $BF                      ; High adress of RWTS target location ($BF00)
+TRACK           EQU      $41                      ; Track number (used by Cx000)
 
                 dfb     01                        ; <!> Needed by thre boot rom
+
+                jsr     SETNORM
                 lda     CURRSECTOR                ; Sector to be loaded 
                 cmp     #$08                      ; 08 means we are at the begining and we starts by init the display
                 bne     C1
                 jsr     INIT_DISP                 ; Display the screen mask and then load the sectors
 C1
                 lda     POINTA+1                  ; WHERE DID BSECTR GET LOADED?
-                cmp     #09                       ; (AT 0800)?
+                cmp     #09                       ; (AT 0800, The address was incremented after reading the sector) 
                 bne     READNEXT                  ; =>NO. WE'RE LOADING SOMETHING
-;
+
+                ; calcul de l'adresse de la routine de lecture d'un secteur de la prom de boot
                 lda     BSLOT                     ; GET BOOT BSLOT
                 lsr     A                         ; CONVERT TO CX00
                 lsr     A
@@ -75,17 +85,16 @@ C1
                 lsr     A
                 ora     #$C0
                 sta     BTEMP+1
-                lda     #BRETRY                   ; PROM ROUTINE OFFSET
+                lda     #BRENTRY                   ; PROM ROUTINE OFFSET
                 sta     BTEMP
-
 READNEXT                                          ;
-               
-                ldx     READ_SECTOR
-                cpx     #$10                      ; check if sector from 0E -> 09 is done
+                ldx     READ_SECTORS
+                cpx     #$0A                      ; c-> 8 + 2 secteurs
                 beq     START_PRG                 ; then jump smartloader
-                INC     READ_SECTOR
+SUITE
+                INC     READ_SECTORS
                 ldx     CURRSECTOR
-                cpx     #END_SECTOR               ; finish DOS RWTS ? 
+                cpx     #END_SECTOR               ; finish DOS RWTS si = 0? 
                 beq     LOAD_SML_SECT             ; if yes then load smartloader sectors
                 
                 dec     CURRSECTOR                ; ONE LESS BELL TO ANSWER..
@@ -97,18 +106,18 @@ PREP_CALL                                         ; Preparation call for ROM Cal
                 lda     LOADADDR+1                ; GET LOAD ADDRESS
                 sta     POINTA+1                  ; FOR BSECTR READ
                 dec     LOADADDR+1                ; MOVE LOAD ADDRESS DOWN A PAGE
-                ldx     BSLOT                     ; RESTORE BSLOT NUMBER
-                lda     CURRSECTOR
-                
+                ldx     BSLOT                     ; RESTORE BSLOT NUMBER                     
                 jmp     (BTEMP)                   ; Call ROM to load more sectors
-LOAD_SML_SECT                                          
-                lda     #$47
+LOAD_SML_SECT
+                lda     #$41                      ; boot2 4000 - 41ff
                 sta     LOADADDR+1
-                ldx     #$0F
+                ldx     #$0A                      ; boot2 commence  9 - a
                 stx     CURRSECTOR
+                dec     CURRSECTOR
+                ;brk
                 jmp     PREP_CALL
 
-START_PRG
+START_PRG   
                 jmp     PRGJMP                    ; OFF TO LOOADER!
 
 INIT_DISP
@@ -150,13 +159,24 @@ INIT_DISP
                 ldy     #$28
                 jsr     dispLine
 
+                ldx     #$00
+                ldy     #$00    
+                jsr     dispPositionCursor
+
                 rts
+
 _title       
-                asc     "SMARTLOADER"
+                asc     "SmartLoader"
                 dfb     $00
 _version
                 asc     VERSION
                 dfb     $00 
+keypress
+                lda     KYBD
+                cmp     #$80
+                bcc     keypress
+                sta     STROBE
+                rts
 
 ;*  TABLE OF PHYSICAL BSECTR NUMBERS
 ;*  WHICH CORRESPOND TO THE LOGICAL
@@ -169,10 +189,10 @@ TABLE
                 dfb     12,10,08                  ; 09->12,10->10,11->08
                 dfb     06,04,02,15               ; 12->6,13->04,14->02,15->15
 CURRSECTOR      dfb     START_SECTOR              ; 10 sectors to be loaded
-READ_SECTOR     dfb     0                         ; Total sector Read
+READ_SECTORS    dfb     0                         ; Total sector Read
 LOADADDR        dfb     $00,RWTS_LOC_HI
 
-                put     main_T0S0_disp.s          ; Load additionnal disp routine
+                put     disp.s          ; Load additionnal disp routine
 END             EQU     *
                 ds      $800+256-END,$0           ; padding to make it 256 (1 sector)
 

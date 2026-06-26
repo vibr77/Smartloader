@@ -57,11 +57,12 @@ src=bytearray()
 blocknum=int(sys.argv[3])
 offset=int(sys.argv[4])*256
 dst=sys.argv[2]
+fromFile=sys.argv[1]
 
 print()
-print("-------------------------------------------------------------------------------")
-print("SCRIPT: Init Blank dsk file")
-print("-------------------------------------------------------------------------------")
+print("---------------------------------------------------------------------------------------------------------")
+print(f"SCRIPT: Extract {blocknum} blocks from file {fromFile} to file {dst} offset {offset} ")
+print("---------------------------------------------------------------------------------------------------------")
 
-src=file2buffer(sys.argv[1],src,blocknum,offset)
+src=file2buffer(fromFile,src,blocknum,offset)
 buffer2file(dst,src,0)

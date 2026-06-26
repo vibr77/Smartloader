@@ -2,8 +2,8 @@ BELL            EQU     $FF3A
 PREAD           EQU     $FB1E
 CLRSCR          EQU     $FC58
 
-COUT            EQU     $FDED               ; Apple II character out func.
-COUTD           EQU     $FDE2
+;COUT            EQU     $FDED               ; Apple II character out func.
+;COUTD           EQU     $FDE2
 COUT1           EQU     $FDF0
 
 CURPOS          EQU     $FB5B
@@ -29,7 +29,7 @@ dispPositionCursor
 
 dispLine
     lda     #$DF
-    jsr     COUT
+    jsr     COUT1
     dey
     bne dispLine
     rts

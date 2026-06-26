@@ -10,13 +10,20 @@ From version 0.37, The smartloader uses:
 - Fast RWTS, non standard DOS3.3c (sector 01 to 08)
 - Smartloader (sector 09 to 0E)
 
+From FAT version
+ - boot1 -> loads RWTS and boot2
+ - boot2 -> loads smartloader
+ 
 Memory location:
 
-- $800 Bootloader with disp routine used by the smartloader (unsed space by bootloader are used to store routine)
-- $4000 Smartloader entry point
+- $800  Bootloader with disp routine used by the smartloader (unsed space by bootloader are used to store routine)
+- $4000 boot2 entry point
+- $4200 smartloader entry point
 - $2000-$20FF 256 Bytes block to send command to SmartDisk
 - $2100-$22FF 512 Bytes block to receive information from SmartDisk
 
+- track 0 boot0 1 sector, rwts 8 sectors, boot1 7 sectors
+- track 1 smartloader 16 sectors
 - Track 2 is to receive information
 - Track 3 is to send command to SmartDisk II
 

@@ -10,11 +10,14 @@
 # target
 ######################################
 TARGET=				smartloader
-TARGET_S0=  		$(TARGET)_s0
-TARGET_S09= 		$(TARGET)_s09
+TARGET_BOOT1=  		boot1
+TARGET_SMARTLOADER= 		smartloader
+TARGET_BOOT2= 		boot2
 
-CASM_SOURCES_S0 = 	./main_T0S0.s
-CASM_SOURCES_S09 = 	./main_T0S09.s 
+CASM_SOURCES_BOOT1 = 	./boot1.s
+CASM_SOURCES_SMARTLOADER = 	./smartloader.s 
+CASM_SOURCES_BOOT2 = 	./boot2.s 
+CREATE_SMARTLOADER_EXTERNAL_REFS = ./create_SMARTLOADER_EXTERNAL_REFS
 
 BUILD_DIR=	 		build
 
@@ -30,36 +33,42 @@ PYTHON= 			python3
 OS_NAME = $(shell uname -s | tr A-Z a-z)
 
 ifeq ($(OS_NAME),linux)
-AS=					../99.Merlin32Devlinux/src/merlin32
+AS=					Merlin32
 else
-AS=					../99.Merlin32Dev/src/merlin32
+AS=					Merlin32
 endif
 
 AS_ARG= 			-v
-AS_INCLUDES 		=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/devenvtool/Merlin32_v1.2_b1/Library
-SMARTDISK			=~/SynologyDrive/20.Pro/41.TechProjects/02.Apple_II/06.Apple_SDISK_II/AppleIISDiskII_stm32f411_sdio
+AS_INCLUDES 		=~/tools/Merlin32_v1.2_b2/Library/
+SMARTDISK			=~/Documents/AppleIIDiskIIStm32F411/
 
 all:  | $(BUILD_DIR)
-	-killall "Virtual ]["
-	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S0)
-	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_S09)
+	-#killall "Virtual ]["
+	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_BOOT1)
+	$(CREATE_SMARTLOADER_EXTERNAL_REFS)
+	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_SMARTLOADER)
+	$(AS) $(AS_ARG) $(AS_INCLUDES) $(CASM_SOURCES_BOOT2)
 
-	mv $(TARGET_S0).bin $(BUILD_DIR)/$(TARGET_S0).bin
-	mv $(TARGET_S09).bin $(BUILD_DIR)/$(TARGET_S09).bin
+	mv $(TARGET_BOOT1).bin $(BUILD_DIR)/$(TARGET_BOOT1).bin
+	mv $(TARGET_SMARTLOADER).bin $(BUILD_DIR)/$(TARGET_SMARTLOADER).bin
+	mv $(TARGET_BOOT2).bin $(BUILD_DIR)/$(TARGET_BOOT2).bin
 
-	mv $(TARGET_S0).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_S0)_Symbols_.txt 			
-	mv $(TARGET_S09).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_S09)_Symbols.txt
-	-mv _FileInformation.txt $(BUILD_DIR)/
+	mv $(TARGET_BOOT1).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_BOOT1)_Symbols_.txt 			
+	mv $(TARGET_BOOT2).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_BOOT2)_Symbols_.txt 			
+	mv $(TARGET_SMARTLOADER).bin_S01_Segment1_Output.txt $(BUILD_DIR)/$(TARGET_SMARTLOADER)_Symbols.txt
+	mv _FileInformation.txt $(BUILD_DIR)/
 
-	mv $(TARGET_S0).bin_Symbols.txt $(BUILD_DIR)/$(TARGET_S0)_lbl.txt 			
-	mv $(TARGET_S09).bin_Symbols.txt $(BUILD_DIR)/$(TARGET_S09)_lbl.txt
+	mv $(TARGET_BOOT1).bin_Symbols.txt $(BUILD_DIR)/$(TARGET_BOOT1)_lbl.txt 			
+	mv $(TARGET_BOOT2).bin_Symbols.txt $(BUILD_DIR)/$(TARGET_BOOT2)_lbl.txt 			
+	mv $(TARGET_SMARTLOADER).bin_Symbols.txt $(BUILD_DIR)/$(TARGET_SMARTLOADER)_lbl.txt
 	$(PYTHON) scp_initBlankDsk.py $(BUILD_DIR)/$(TARGET).dsk
 #	cp $(DSK_FILE) $(BUILD_DIR)/$(TARGET).dsk
 	$(PYTHON) scp_extractBlock.py $(DOS_IMG).dsk $(BUILD_DIR)/$(DOS_IMG).bin 6 2
 	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(DOS_IMG).bin $(BUILD_DIR)/$(TARGET).dsk 1
-	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S0).bin $(BUILD_DIR)/$(TARGET).dsk 0
+	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_BOOT1).bin $(BUILD_DIR)/$(TARGET).dsk 0
 
-	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_S09).bin $(BUILD_DIR)/$(TARGET).dsk 9
+	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_SMARTLOADER).bin $(BUILD_DIR)/$(TARGET).dsk 16
+	$(PYTHON) scp_writeBlock.py $(BUILD_DIR)/$(TARGET_BOOT2).bin $(BUILD_DIR)/$(TARGET).dsk 9
 	$(PYTHON) scp_addFakeDataBlock.py $(BUILD_DIR)/$(TARGET).dsk 16
 	$(PYTHON) scp_extractBlock.py $(BUILD_DIR)/$(TARGET).dsk $(BUILD_DIR)/$(TARGET).bin 30 0
 	cp $(BUILD_DIR)/$(TARGET).bin $(SMARTDISK)/$(TARGET).bin
